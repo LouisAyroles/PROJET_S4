@@ -2,9 +2,22 @@
 #include <stdlib.h>
 
 
+// typedef struct virtual_disk_s {
+//     int number_of_files;
+//     super_block_t super_block;
+//     inode_table_t inodes;// tableau
+//     int ndisk;
+//     enum raid raidmode; // type de RAID
+//     FILE **storage; //tab[NUMBER_OF_DISKS];
+// } virtual_disk_t;
+
 void init_disk_raid5(virtual_disk_t *diskRaid)
 
-int compute_nblock(int n)
+///\brief calcule le nombre de blocs pour stocker n octets
+int compute_nblock(int n, int nbDisk)
+{
+    return (n/4+(!(n%4 == 0)));
+}
 
 void write_block(virtual_disk_t RAID5, block_t entrant, uint pos, int idDisk)
 
