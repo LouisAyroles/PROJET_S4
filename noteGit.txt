@@ -15,3 +15,6 @@ git checkout [nomBranche] = se déplacer dans la bonne branche pour faire un pus
 
 5
 git push = Confirmer les modifications et ecrasements des fichiers de la branche
+
+6
+git pull = mettre a jour les fichiers localement
