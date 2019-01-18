@@ -1,17 +1,16 @@
+    I: Petit guide (pour ajouter ses modifications à une branche via le terminal)
 
-Petit guide pour ajouter ses modifications à une branche via le terminal:
+1   git status = Verifie que tous les fichiers locaux sont mis à jour sur le git
 
-1
-git status = Verifie que tous les fichiers locaux sont mis à jour sur le git
+2   git add *|[nomFichier1] [...] = ajoute tous les fichiers sur git
 
-2
-git add *|[nomFichier1] [...] = ajoute tous les fichiers sur git
+3   git commit -m "[message]" = envoie les fichiers pour confirmation
 
-3
-git commit -m "[message]" = envoie les fichiers pour confirmation
+4   git checkout [nomBranche] = se déplacer dans la bonne branche pour faire un push
 
-4
-git checkout [nomBranche] = se déplacer dans la bonne branche pour faire un push
+5   git push = Confirmer les modifications et ecrasements des fichiers de la branche
 
-5
-git push = Confirmer les modifications et ecrasements des fichiers de la branche
+6   git pull = mettre a jour les fichiers localement
+
+
+Liens: http://rogerdudler.github.io/git-guide/index.fr.html
