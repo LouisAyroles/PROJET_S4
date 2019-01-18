@@ -14,6 +14,7 @@ int compute_nblock(int n)
         nbBlocks += 1;
     }
     return nbBlocks;
+    //Magnifique
 }
 
 void write_block(virtual_disk_t RAID5, block_t entrant, uint pos, int idDisk)
