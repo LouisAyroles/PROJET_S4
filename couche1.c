@@ -4,7 +4,11 @@
 
 void init_disk_raid5(virtual_disk_t *diskRaid)
 
+///\brief calcule le nombre de blocs pour coder "n" octets
 int compute_nblock(int n)
+{
+    return (n/4+(n%4!=0));
+}
 
 void write_block(virtual_disk_t RAID5, block_t entrant, uint pos, int idDisk)
 
