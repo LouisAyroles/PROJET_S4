@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "raid_defines.h"
-
-void init_disk_raid5(virtual_disk_t *diskRaid){
-
+virtual_disk_t *r5Disk;
+void init_disk_raid5(const char * repertoire){
+	r5Disk=malloc(sizeof(virtual_disk_t));
+	r5Disk->ndisk=4;
+	r5Disk->raidmode=CINQ;
+	r5Disk->storage=malloc(r5Disk->ndisk*sizeof(FILE *));
+	//Ouverture des fichiers de disque
 }
 
 ///\brief calcule le nombre de blocs pour coder "n" octets
@@ -28,3 +32,8 @@ int read_block(virtual_disk_t RAID5, block_t *recup, uint pos, int idDisk);
 void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
 
 void affichageBlockHexa(block_t donnees, FILE *output);
+
+void main(void){
+	init_disk_raid5();
+	exit(0);
+}
