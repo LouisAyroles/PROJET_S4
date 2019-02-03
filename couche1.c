@@ -1,20 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "raid_defines.h"
-#include <sys/types.h>
-#include <dirent.h>
-#include <ftw.h>
 #include <string.h>
+#include <fts.h>
+
+//Global raid disk variable 
 virtual_disk_t *r5Disk;
+
 void init_disk_raid5(const char * repertoire){
 	r5Disk=malloc(sizeof(virtual_disk_t));
 	r5Disk->ndisk=4;
 	r5Disk->raidmode=CINQ;
 	r5Disk->storage=malloc(r5Disk->ndisk*sizeof(FILE *));
 	//Ouverture des fichiers de disque
-	for(int i=0;i<r5Disk->ndisk;i++){
-		//Itérer sur les fichiers se trouvant dans le dossier de raid
-	}	
+	//A réparer et rendre modulaire
+	r5Disk->storage[0]=fopen("./RAIDFILES/d0","r");
+	r5Disk->storage[1]=fopen("./RAIDFILES/d1","r");
+	r5Disk->storage[2]=fopen("./RAIDFILES/d2","r");
+        r5Disk->storage[3]=fopen("./RAIDFILES/d3","r");
 }
 
 void info_disque(){
@@ -22,7 +25,7 @@ void info_disque(){
 	for(int i=0;i<r5Disk->ndisk;i++){
 		if(r5Disk->storage[i]==NULL){
 			printf("Null pointer\n");
-		}
+		}else{printf("Valid pointer\n");}
 	}
 }
 
@@ -52,5 +55,6 @@ void affichageBlockHexa(block_t donnees, FILE *output);
 void main(void){
 	init_disk_raid5("./RAIDFILES");
 	info_disque();
+
 	exit(0);
 }
