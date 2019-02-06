@@ -57,14 +57,10 @@ void init_disk_raid5(const char * repertoire){
   * @return void
 **/
 void turn_off_disk_raid5(const char * repertoire){
-    size_t lengthRep = strlen(repertoire);
-    char *nomDisque = malloc(sizeof(char)*lengthRep+10);
-    add_finChemin(repertoire, nomDisque, lengthRep);
     for (int i = 0; i < r5Disk->ndisk; i++){
-        nomDisque[lengthRep+2] = i + '0';
-        r5Disk->storage[i]=fclose(nomDisque);
-        free(r5Disk->storage[i]);
+        fclose(r5Disk->storage[i]);
     }
+    free(r5Disk->storage);
     free(r5Disk);
 }
 
@@ -132,6 +128,7 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
 
 ///\brief utiliser "fseek", "fwrite" et "fread"
 void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
+
 
 void affichageBlockHexa(block_t donnees, FILE *output);
 
