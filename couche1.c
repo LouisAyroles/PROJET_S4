@@ -80,6 +80,9 @@ int compute_nblock(int n)
     //Magnifique
 }
 
+void write_block(virtual_disk_t *RAID5, block_t entrant, uint pos, int idDisk){
+    RAID5->storage[idDisk] = entrant;
+}
 
 ///\brief renvoie un code d'erreur si echec de lecture
 int read_block(virtual_disk_t RAID5, block_t *recup, uint pos, int idDisk);
