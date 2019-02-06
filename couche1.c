@@ -136,18 +136,18 @@ void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *outpu
   fprintf(output,"---Block:");
   block_t monBloc;
   read_block(RAID5, &monBloc, pos, idDisk);
-//  for (int i = 0; i < BLOCK_SIZE; i++){
-//    fprintf(output, "%c", monBloc.data[i]);
-//  }
+  for (int i = 0; i < BLOCK_SIZE; i++){
+    fprintf(output, "%c", monBloc.data[i]);
+  }
   fprintf(output,"\n\n");
 }
 
 int main(void){
 	init_disk_raid5("./RAIDFILES");
 	info_disque();
-  turn_off_disk_raid5("./RAIDFILES");
   for(int i=0;i<4;i++){
     affichageBlockHexa(r5Disk,i,0, stdout);
   }
+  turn_off_disk_raid5("./RAIDFILES");
 	exit(0);
 }
