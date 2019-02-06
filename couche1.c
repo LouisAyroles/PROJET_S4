@@ -5,6 +5,7 @@
 #include <fts.h>
 #include <errno.h>
 
+
 /**
  * \file couche1.c
  * \brief Programme couche1 du raid5.
@@ -32,9 +33,9 @@ void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
 }
 
 /**
-Initialise la variable globale r5Disk
-@param chaine de char (repertoire cible)
-@return void
+  * Initialise la variable globale r5Disk
+  * @param chaine de char (repertoire cible)
+  * @return void
 **/
 void init_disk_raid5(const char * repertoire){
     size_t lengthRep = strlen(repertoire);
@@ -50,6 +51,11 @@ void init_disk_raid5(const char * repertoire){
     }
 }
 
+/**
+  * Ferme les fichiers ouverts et sauvegarde le super block?
+  * @param chaine de char (repertoire cible)
+  * @return void
+**/
 void turn_off_disk_raid5(const char * repertoire){
     size_t lengthRep = strlen(repertoire);
     char *nomDisque = malloc(sizeof(char)*lengthRep+10);
@@ -62,7 +68,12 @@ void turn_off_disk_raid5(const char * repertoire){
     free(r5Disk);
 }
 
-void info_disque(){
+/**
+  * Affiche des infos sur les disques ouverts
+  * @param void
+  * @return void
+**/
+void info_disque(void){
 	printf("---- Informations sur le disque raid ----\nNombre de disques physiques : %d\nMode de raid : %d\n",r5Disk->ndisk ,r5Disk->raidmode);
 	for(int i=0;i<r5Disk->ndisk;i++){
 		if(r5Disk->storage[i]==NULL){
@@ -71,7 +82,11 @@ void info_disque(){
 	}
 }
 
-///\brief calcule le nombre de blocs pour coder "n" octets
+/**
+  * \brief calcule le nombre de blocs pour coder "n" octets
+  * @param integer
+  * @return integer
+**/
 int compute_nblock(int n)
 {
     int nbBlocks;
@@ -81,17 +96,41 @@ int compute_nblock(int n)
         nbBlocks += 1;
     }
     return nbBlocks;
-    //WOAW
 }
 
-void write_block(virtual_disk_t *RAID5, block_t entrant, uint pos, int idDisk){
-  fwrite(&entrant, sizeof(block_t), 1, RAID5);
-  RAID5->storage[idDisk] = entrant;
+/** \brief
+  * Ecrit un bloc à la position pos sur le disque
+  * @param virtual_disk_t
+  * @param block_t
+  * @param uint
+  * @param integer
+  * @return void
+**/
+void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
+  fwrite(entrant, sizeof(block_t), 1, RAID5->storage[idDisk]);
 }
 
-///\brief renvoie un code d'erreur si echec de lecture
-int read_block(virtual_disk_t RAID5, block_t *recup, uint pos, int idDisk);
 
+
+/** \brief
+  * Lit un bloc à la position pos sur le disque
+  * @param virtual_disk_t
+  * @param block_t
+  * @param uint
+  * @param integer
+  * @return integer
+**/
+int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
+  size_t lu = fread(recup, sizeof(block_t), 1, RAID5->storage[idDisk]);
+  if (lu != )
+}
+
+size_t fread (const void *ptr, size_t size, size_t nmemb, FILE *stream);
+
+
+size = 1
+liste *l=&test
+liste test= [1,1,5,4,8]
 ///\brief utiliser "fseek", "fwrite" et "fread"
 void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
 
