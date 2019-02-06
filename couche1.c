@@ -131,23 +131,64 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
 ///\brief utiliser "fseek", "fwrite" et "fread"
 void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
 
+void bitToHexa(block_t monBloc, char* nbHexa){
+  int nb = 0;
+  if(monBloc.data[BLOCK_SIZE-1]){
+      nb+=8;
+  }
+  if(monBloc.data[BLOCK_SIZE-2]){
+      nb+=4;
+  }
+  if(monBloc.data[BLOCK_SIZE-3]){
+      nb+=2;
+  }
+  if(monBloc.data[BLOCK_SIZE-4]){
+      nb+=1;
+  }
+  switch(nb){
+    case 10 : *nbHexa='A';
+              break;
+    case 11:  *nbHexa='B';
+              break;
+    case 12 : *nbHexa='C';
+              break;
+    case 13 : *nbHexa='D';
+              break;
+    case 14 : *nbHexa='E';
+              break;
+    case 15 : *nbHexa='F';
+              break;
+    default:  *nbHexa=nb+'0';
+  }
+}
 
 void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
   fprintf(output,"---Block:\n");
   block_t monBloc;
+  char nbHexa;
   read_block(RAID5, &monBloc, pos, idDisk);
-  for (int i = 0; i < BLOCK_SIZE; i++){
+  /*for (int i = 0; i < BLOCK_SIZE; i++){
     fprintf(output, "%d", monBloc.data[i]);
-  }
+  }*/
+  bitToHexa(monBloc, &nbHexa);
+  fprintf(output, "%c", nbHexa);
   fprintf(output,"\n\n");
 }
+
+
 
 int main(void){
 	init_disk_raid5("./RAIDFILES");
 	info_disque();
+  block_t ecrire;
+  for (int i=0; i< 4; i++){
+    ecrire.data[i]=1;
+  }
+  write_block(r5Disk, &ecrire, 0, 0);
   for(int i=0;i<4;i++){
     affichageBlockHexa(r5Disk,i,0, stdout);
   }
+  //system("hexdump ./RAIDFILES/d0");
   turn_off_disk_raid5("./RAIDFILES");
 	exit(0);
 }
