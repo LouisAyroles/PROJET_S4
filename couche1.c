@@ -107,6 +107,7 @@ int compute_nblock(int n)
   * @return void
 **/
 void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
+  fseek(RAID5[idDisk], (long)pos, SEEK_SET);
   fwrite(entrant, sizeof(block_t), 1, RAID5->storage[idDisk]);
 }
 
@@ -121,16 +122,14 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
   * @return integer
 **/
 int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
+  fseek(RAID5[idDisk], (long) pos, SEEK_SET);
   size_t lu = fread(recup, sizeof(block_t), 1, RAID5->storage[idDisk]);
-  if (lu != )
+  if (lu != sizeof(block_t)) {
+    return 1;
+  }
+  return 0;
 }
 
-size_t fread (const void *ptr, size_t size, size_t nmemb, FILE *stream);
-
-
-size = 1
-liste *l=&test
-liste test= [1,1,5,4,8]
 ///\brief utiliser "fseek", "fwrite" et "fread"
 void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
 
