@@ -103,7 +103,7 @@ int compute_nblock(int n)
   * @return void
 **/
 void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
-  fseek(RAID5[idDisk], (long)pos, SEEK_SET);
+  fseek(RAID5->storage[idDisk], (long)pos, SEEK_SET);
   fwrite(entrant, sizeof(block_t), 1, RAID5->storage[idDisk]);
 }
 
@@ -118,7 +118,7 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
   * @return integer
 **/
 int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
-  fseek(RAID5[idDisk], (long) pos, SEEK_SET);
+  fseek(RAID5->storage[idDisk], (long) pos, SEEK_SET);
   size_t lu = fread(recup, sizeof(block_t), 1, RAID5->storage[idDisk]);
   if (lu != sizeof(block_t)) {
     return 1;
