@@ -133,11 +133,11 @@ void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
 
 
 void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
-  fprintf(output,"---Block:");
+  fprintf(output,"---Block:\n");
   block_t monBloc;
   read_block(RAID5, &monBloc, pos, idDisk);
   for (int i = 0; i < BLOCK_SIZE; i++){
-    fprintf(output, "%c", monBloc.data[i]);
+    fprintf(output, "%d", monBloc.data[i]);
   }
   fprintf(output,"\n\n");
 }
