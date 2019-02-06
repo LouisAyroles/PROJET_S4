@@ -189,7 +189,6 @@ int main(void){
   block_t ecrire;
   for (int i=0; i< 4; i++){
     ecrire.data[i]=rand()%2;
-    printf("%c\n",ecrire.data[i]);
   }
   write_block(r5Disk, &ecrire, 0, 0);
   for(int i=0;i<4;i++){
