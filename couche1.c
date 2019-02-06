@@ -20,6 +20,9 @@
 
 /** \brief
   * Copie la chaine "repertoire" dans nomDisque en y ajoutant "/d0\0"
+  * @param : chaine de char (repertoire)
+  * @param : chaine de char (disk)
+  * @param : size_t
   * @return void
 **/
 void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
@@ -32,7 +35,8 @@ void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
 
 /** \brief
   * Initialise la variable globale r5Disk
-  * @param chaine de char (repertoire cible)
+  * @param : chaine de char (repertoire cible)
+  * @param : virtual_disk_t
   * @return void
 **/
 void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
@@ -53,7 +57,8 @@ void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
 
 /** \brief
   * Ferme les fichiers ouverts et sauvegarde le super block?
-  * @param chaine de char (repertoire cible)
+  * @param : chaine de char (repertoire cible)
+  * @param : virtual_disk_t
   * @return void
 **/
 void turn_off_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
@@ -66,8 +71,8 @@ void turn_off_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
 
 /** \brief
   * Affiche des infos sur les disques ouverts
-  * @param void
-  * @return void
+  * @param : virtual_disk_t
+  * @return : void
 **/
 void info_disque(virtual_disk_t *r5Disk){
 	printf("---- Informations sur le disque raid ----\nNombre de disques physiques : %d\nMode de raid : %d\n",r5Disk->ndisk ,r5Disk->raidmode);
@@ -97,9 +102,9 @@ int compute_nblock(int n)
 /** \brief
   * Ecrit un bloc à la position pos sur le disque
   * @param virtual_disk_t
-  * @param block_t
-  * @param uint
-  * @param integer
+  * @param block_t (à ecrire)
+  * @param uint (position à laquelle on ecrit)
+  * @param integer (n° disk)
   * @return void
 **/
 void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
@@ -118,9 +123,9 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
 /** \brief
   * Lit un bloc à la position pos sur le disque
   * @param virtual_disk_t
-  * @param block_t
-  * @param uint
-  * @param integer
+  * @param block_t (à lire)
+  * @param uint (position à laquelle on lit)
+  * @param integer (n° disk)
   * @return integer
 **/
 int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
@@ -133,13 +138,30 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
   return 0;
 }
 
-///\brief utiliser "fseek", "fwrite" et "fread"
-void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
+/** \brief
+  * Repare un bloc erroné suite à un echec de lecture 
+  * @param virtual_disk_t
+  * @param uint 
+  * @param integer (n° disk)
+  * @return void
+**/
+void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
+  block_t monBloc;
+  for(int i = 0; i < RAID5->nbdisk; i++)
+  {
+    for(int j = 0; j < 4; j++)
+    {
+      //xor(a,b,c,d)= 1 ssi une seule des 4 variables est à 1.
+    }
+    
+  }
+  
+}
 
 /** \brief
   * prend un tableau de 4 bits (char) et le transforme en Hexadecimal
-  * @param : block_t Contien le tableau de bits
-  * @param : char* Caractere dans lequel on met l'hexa
+  * @param : block_t (Contient le tableau de bits)
+  * @param : char* (Caractere dans lequel on met l'hexa)
   * @return : void
 **/
 void bitToHexa(block_t monBloc, char* nbHexa){
@@ -173,9 +195,12 @@ void bitToHexa(block_t monBloc, char* nbHexa){
   }
 }
 
-/** brief
+/** \brief
   * affiche un bloc de donnees en hexadecimal
-  * @param:
+  * @param : virtual_disk_t
+  * @param : integer (n° disk)
+  * @param : integer (posit° de ce qu'on veut afficher)
+  * @return : void
 **/
 void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
   fprintf(output,"---Block:\n");
