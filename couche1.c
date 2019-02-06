@@ -3,22 +3,31 @@
 #include "raid_defines.h"
 #include <string.h>
 #include <fts.h>
+#include <errno.h>
 
 //Global raid disk variable 
 virtual_disk_t *r5Disk;
 
 void init_disk_raid5(const char * repertoire){
+    size_t lengthRep = strlen(repertoire);
+    char *nomDisque = malloc(sizeof(char)*lengthRep+10);
+    strcpy(nomDisque, repertoire);
+    nomDisque[lengthRep] = '/';
+    nomDisque[lengthRep+1] = 'd';
+    nomDisque[lengthRep+2] = '0';
+    nomDisque[lengthRep+3] = '\0';
 	r5Disk=malloc(sizeof(virtual_disk_t));
 	r5Disk->ndisk=4;
 	r5Disk->raidmode=CINQ;
 	r5Disk->storage=malloc(r5Disk->ndisk*sizeof(FILE *));
 	//Ouverture des fichiers de disque
 	//A réparer et rendre modulaire
-	r5Disk->storage[0]=fopen("./RAIDFILES/d0","r");
-	r5Disk->storage[1]=fopen("./RAIDFILES/d1","r");
-	r5Disk->storage[2]=fopen("./RAIDFILES/d2","r");
-        r5Disk->storage[3]=fopen("./RAIDFILES/d3","r");
+    for (int i = 0; i < r5Disk->ndisk; i++){
+        nomDisque[lengthRep+2] = i + '0';
+        r5Disk->storage[i]=fopen(nomDisque,"r");
+    }
 }
+
 
 void info_disque(){
 	printf("---- Informations sur le disque raid ----\nNombre de disques physiques : %d\nMode de raid : %d\n",r5Disk->ndisk ,r5Disk->raidmode);
@@ -52,9 +61,8 @@ void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
 
 void affichageBlockHexa(block_t donnees, FILE *output);
 
-void main(void){
+int main(void){
 	init_disk_raid5("./RAIDFILES");
 	info_disque();
-
 	exit(0);
 }
