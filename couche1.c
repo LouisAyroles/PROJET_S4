@@ -20,18 +20,22 @@
 virtual_disk_t *r5Disk;
 
 /**
-
-@param void
-@return void
+  * Copie la chaine "repertoire" dans nomDisque en y ajoutant "/d0\0"
+  * @return void
 **/
 void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
-    strcpy(nomDisque, repertoire);
+    strcpy(nomDisque, repertoire);    // strcpy: fonction copiant la chaine repertoire dans nomDisque
     nomDisque[lengthRep] = '/';
     nomDisque[lengthRep+1] = 'd';
     nomDisque[lengthRep+2] = '0';
     nomDisque[lengthRep+3] = '\0';
 }
 
+/**
+Initialise la variable globale r5Disk
+@param chaine de char (repertoire cible)
+@return void
+**/
 void init_disk_raid5(const char * repertoire){
     size_t lengthRep = strlen(repertoire);
     char *nomDisque = malloc(sizeof(char)*lengthRep+10);  //Creation d'une chaine pouvant contenir [repertoire]+10 caracteres
@@ -77,11 +81,12 @@ int compute_nblock(int n)
         nbBlocks += 1;
     }
     return nbBlocks;
-    //Magnifique
+    //WOAW
 }
 
 void write_block(virtual_disk_t *RAID5, block_t entrant, uint pos, int idDisk){
-    RAID5->storage[idDisk] = entrant;
+  fwrite(&entrant, sizeof(block_t), 1, RAID5);
+  RAID5->storage[idDisk] = entrant;
 }
 
 ///\brief renvoie un code d'erreur si echec de lecture
