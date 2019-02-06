@@ -51,6 +51,8 @@ void init_disk_raid5(const char * repertoire){
     }
 }
 
+
+
 /**
   * Ferme les fichiers ouverts et sauvegarde le super block?
   * @param chaine de char (repertoire cible)
@@ -130,11 +132,21 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
 void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
 
 
-void affichageBlockHexa(block_t donnees, FILE *output);
+void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
+  fprintf(output,"---Block:");
+  block_t monBloc;
+  read_block(RAID5, &monBloc, pos, idDisk);
+  for (int i = 0; i < BLOCK_SIZE; i++){
+    fprintf(output, "%c", monBloc.data[i]);
+  }
+}
 
 int main(void){
 	init_disk_raid5("./RAIDFILES");
 	info_disque();
   turn_off_disk_raid5("./RAIDFILES");
+  for(int i=0;i<4;i++){
+    affichageBlockHexa(r5Disk,i,0, stdout);
+  }
 	exit(0);
 }
