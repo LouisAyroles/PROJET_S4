@@ -18,7 +18,7 @@
  *
  */
 
-/**
+/** \brief
   * Copie la chaine "repertoire" dans nomDisque en y ajoutant "/d0\0"
   * @return void
 **/
@@ -30,7 +30,7 @@ void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
     nomDisque[lengthRep+3] = '\0';
 }
 
-/**
+/** \brief
   * Initialise la variable globale r5Disk
   * @param chaine de char (repertoire cible)
   * @return void
@@ -51,7 +51,7 @@ void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
 
 
 
-/**
+/** \brief
   * Ferme les fichiers ouverts et sauvegarde le super block?
   * @param chaine de char (repertoire cible)
   * @return void
@@ -64,7 +64,7 @@ void turn_off_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
     free(r5Disk);
 }
 
-/**
+/** \brief
   * Affiche des infos sur les disques ouverts
   * @param void
   * @return void
@@ -78,8 +78,8 @@ void info_disque(virtual_disk_t *r5Disk){
 	}
 }
 
-/**
-  * \brief calcule le nombre de blocs pour coder "n" octets
+/** \brief
+  * calcule le nombre de blocs pour coder "n" octets
   * @param integer
   * @return integer
 **/
@@ -136,6 +136,12 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
 ///\brief utiliser "fseek", "fwrite" et "fread"
 void block_repair(virtual_disk_t RAID5, uint pos, int idDisk);
 
+/** \brief
+  * prend un tableau de 4 bits (char) et le transforme en Hexadecimal
+  * @param : block_t Contien le tableau de bits
+  * @param : char* Caractere dans lequel on met l'hexa
+  * @return : void
+**/
 void bitToHexa(block_t monBloc, char* nbHexa){
   int nb = 0;
   if(monBloc.data[BLOCK_SIZE-1]){
@@ -167,14 +173,15 @@ void bitToHexa(block_t monBloc, char* nbHexa){
   }
 }
 
+/** brief
+  * affiche un bloc de donnees en hexadecimal
+  * @param:
+**/
 void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
   fprintf(output,"---Block:\n");
   block_t monBloc;
   char nbHexa;
   read_block(RAID5, &monBloc, pos, idDisk);
-  /*for (int i = 0; i < BLOCK_SIZE; i++){
-    fprintf(output, "%d", monBloc.data[i]);
-  }*/
   bitToHexa(monBloc, &nbHexa);
   fprintf(output, "%c", nbHexa);
   fprintf(output,"\n\n");
