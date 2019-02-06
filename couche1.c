@@ -28,6 +28,21 @@ void init_disk_raid5(const char * repertoire){
     }
 }
 
+void turn_off_disk_raid5(const char * repertoire){
+    size_t lengthRep = strlen(repertoire);
+    char *nomDisque = malloc(sizeof(char)*lengthRep+10);
+    strcpy(nomDisque, repertoire);
+    nomDisque[lengthRep] = '/';
+    nomDisque[lengthRep+1] = 'd';
+    nomDisque[lengthRep+2] = '0';
+    nomDisque[lengthRep+3] = '\0';
+    for (int i = 0; i < r5Disk->ndisk; i++){
+        nomDisque[lengthRep+2] = i + '0';
+        r5Disk->storage[i]=fclose(nomDisque);
+        free(r5Disk->storage[i]);
+    }
+    free(r5Disk);
+} 
 
 void info_disque(){
 	printf("---- Informations sur le disque raid ----\nNombre de disques physiques : %d\nMode de raid : %d\n",r5Disk->ndisk ,r5Disk->raidmode);
@@ -51,7 +66,6 @@ int compute_nblock(int n)
     //Magnifique
 }
 
-void write_block(virtual_disk_t RAID5, block_t entrant, uint pos, int idDisk);
 
 ///\brief renvoie un code d'erreur si echec de lecture
 int read_block(virtual_disk_t RAID5, block_t *recup, uint pos, int idDisk);
