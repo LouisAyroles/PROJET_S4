@@ -45,7 +45,7 @@ void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
     r5Disk->storage=malloc(r5Disk->ndisk*sizeof(FILE *));
     for (int i = 0; i < r5Disk->ndisk; i++){
         nomDisque[lengthRep+2] = i + '0';         //Transforme le i en caractere et le met dans le "/di"
-        r5Disk->storage[i]=fopen(nomDisque,"r");  //Ouvre le fichier "disque"
+        r5Disk->storage[i]=fopen(nomDisque,"r+w");  //Ouvre le fichier "disque" EN READ/WRITE
     }
 }
 
@@ -126,6 +126,7 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
 int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
   fseek(RAID5->storage[idDisk], (long) pos, SEEK_SET);
   size_t lu = fread(recup->data, 1, 4, RAID5->storage[idDisk]);
+  perror("Debugging read:");
   if (lu != sizeof(block_t)) {
     return 1;
   }
@@ -188,7 +189,7 @@ int main(void){
   block_t ecrire;
   for (int i=0; i< 4; i++){
     ecrire.data[i]=rand()%2;
-    //printf("%c\n",ecrire.data[i]);
+    printf("%c\n",ecrire.data[i]);
   }
   write_block(r5Disk, &ecrire, 0, 0);
   for(int i=0;i<4;i++){
