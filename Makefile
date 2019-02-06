@@ -1,12 +1,18 @@
 CC=gcc
-CFLAGS=-I -g
-EXECS = couche1.o
+CFLAGS=-W -Wall -pedantic
+LDFLAGS=
+EXEC=couche1
 
-all : $(EXECS)
+all: $(EXEC)
 
-clean :
-		rm -rf ./*.o
+couche1: couche1.c couche1.h
+	$(CC) -o $@ $^ $(LDFLAGS)
 
-couche1.o : couche1.c
-%.o : %.c
-	$(CC) -c $< -o $@ $(CFLAGS)
+%.o: %.c
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+clean:
+	rm -rf *.o
+
+mrproper: clean
+	rm -rf $(EXEC)
