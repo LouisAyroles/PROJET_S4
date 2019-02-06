@@ -106,7 +106,7 @@ int compute_nblock(int n)
 **/
 void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
   fseek(RAID5->storage[idDisk], (long)pos, SEEK_SET);
-  fwrite(entrant, sizeof(block_t), 1, RAID5->storage[idDisk]);
+  fwrite(entrant->data, sizeof(block_t), 1, RAID5->storage[idDisk]);
 }
 
 
@@ -121,7 +121,7 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
 **/
 int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
   fseek(RAID5->storage[idDisk], (long) pos, SEEK_SET);
-  size_t lu = fread(recup, sizeof(block_t), 1, RAID5->storage[idDisk]);
+  size_t lu = fread(recup->data, 1, 4, RAID5->storage[idDisk]);
   if (lu != sizeof(block_t)) {
     return 1;
   }
@@ -136,9 +136,10 @@ void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *outpu
   fprintf(output,"---Block:");
   block_t monBloc;
   read_block(RAID5, &monBloc, pos, idDisk);
-  for (int i = 0; i < BLOCK_SIZE; i++){
-    fprintf(output, "%c", monBloc.data[i]);
-  }
+//  for (int i = 0; i < BLOCK_SIZE; i++){
+//    fprintf(output, "%c", monBloc.data[i]);
+//  }
+  fprintf(output,"\n\n");
 }
 
 int main(void){
