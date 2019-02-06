@@ -4,6 +4,7 @@
 #include <string.h>
 #include <fts.h>
 #include <errno.h>
+#include <time.h>
 
 
 /**
@@ -16,9 +17,6 @@
  * Programme de la couche 1 du raid5.
  *
  */
-
-//Global raid disk variable
-virtual_disk_t *r5Disk;
 
 /**
   * Copie la chaine "repertoire" dans nomDisque en y ajoutant "/d0\0"
@@ -37,11 +35,11 @@ void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
   * @param chaine de char (repertoire cible)
   * @return void
 **/
-void init_disk_raid5(const char * repertoire){
+void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
     size_t lengthRep = strlen(repertoire);
     char *nomDisque = malloc(sizeof(char)*lengthRep+10);  //Creation d'une chaine pouvant contenir [repertoire]+10 caracteres
     add_finChemin(repertoire, nomDisque, lengthRep);
-    r5Disk=malloc(sizeof(virtual_disk_t));
+    //r5Disk=malloc(sizeof(virtual_disk_t));
     r5Disk->ndisk=4;
     r5Disk->raidmode=CINQ;
     r5Disk->storage=malloc(r5Disk->ndisk*sizeof(FILE *));
@@ -58,7 +56,7 @@ void init_disk_raid5(const char * repertoire){
   * @param chaine de char (repertoire cible)
   * @return void
 **/
-void turn_off_disk_raid5(const char * repertoire){
+void turn_off_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
     for (int i = 0; i < r5Disk->ndisk; i++){
         fclose(r5Disk->storage[i]);
     }
@@ -71,7 +69,7 @@ void turn_off_disk_raid5(const char * repertoire){
   * @param void
   * @return void
 **/
-void info_disque(void){
+void info_disque(virtual_disk_t *r5Disk){
 	printf("---- Informations sur le disque raid ----\nNombre de disques physiques : %d\nMode de raid : %d\n",r5Disk->ndisk ,r5Disk->raidmode);
 	for(int i=0;i<r5Disk->ndisk;i++){
 		if(r5Disk->storage[i]==NULL){
@@ -106,7 +104,13 @@ int compute_nblock(int n)
 **/
 void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
   fseek(RAID5->storage[idDisk], (long)pos, SEEK_SET);
-  fwrite(entrant->data, sizeof(block_t), 1, RAID5->storage[idDisk]);
+  for (int i = 0; i < BLOCK_SIZE; i++){
+    fprintf(stdout, "%d:%d\n", i, entrant->data[i]);
+  }
+  int retour=-1;
+  retour=fwrite(entrant->data, 1, 4, RAID5->storage[idDisk]);
+  perror("Debugging fwrite:");
+  printf("write:%d\n",retour);
 }
 
 
@@ -175,20 +179,22 @@ void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *outpu
   fprintf(output,"\n\n");
 }
 
-
-
 int main(void){
-	init_disk_raid5("./RAIDFILES");
-	info_disque();
+  virtual_disk_t *r5Disk;
+  r5Disk=malloc(sizeof(virtual_disk_t));
+  srand(time(NULL));
+	init_disk_raid5("./RAIDFILES", r5Disk);
+	info_disque(r5Disk);
   block_t ecrire;
   for (int i=0; i< 4; i++){
-    ecrire.data[i]=1;
+    ecrire.data[i]=rand()%2;
+    //printf("%c\n",ecrire.data[i]);
   }
   write_block(r5Disk, &ecrire, 0, 0);
   for(int i=0;i<4;i++){
-    affichageBlockHexa(r5Disk,i,0, stdout);
+    affichageBlockHexa(r5Disk,i,0,stdout);
   }
   //system("hexdump ./RAIDFILES/d0");
-  turn_off_disk_raid5("./RAIDFILES");
+  turn_off_disk_raid5("./RAIDFILES", r5Disk);
 	exit(0);
 }
