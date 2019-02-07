@@ -166,7 +166,7 @@ void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
   * @return int
 **/
 int xor(virtual_disk_t *RAID5, int *tab){
-  for(int i = 0; i < (RAID5->ndisk-1); i++)
+  for(int i = 0; i < (RAID5->ndisk); i++)
   {
     tab[0]=tab[0] ^ tab[i];
   }
