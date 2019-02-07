@@ -242,7 +242,8 @@ int main(void){
 	info_disque(r5Disk);
   block_t ecrire;
   for (int i=0; i< 4; i++){
-    ecrire.data[i]=rand()%2;
+    //On est sur deux digits hexa pour write , on peut se permettre de mettre un modulo 255
+    ecrire.data[i]=rand()%255;
   }
   write_block(r5Disk, &ecrire, 0, 0);
   /*for(int i=0;i<4;i++){
@@ -253,7 +254,7 @@ int main(void){
   }*/
   affichageDisque(r5Disk,0,stdout);
   printf("\n\n");
-  system("hexdump ./RAIDFILES/d0");
+  system("hexdump -x ./RAIDFILES/d0");
   turn_off_disk_raid5("./RAIDFILES", r5Disk);
 	exit(0);
 }
