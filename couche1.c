@@ -146,16 +146,31 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
   * @return void
 **/
 void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
-  block_t monBloc;
-  for(int i = 0; i < RAID5->nbdisk; i++)
+  //convertir l'hexa en bits ou recuperer les bits de chaque bloc directement
+  //creer un tableau de taille nbdisk qui recevra les iemes bits de chaque disk
+  //creer un tableau de 32 cases qui va recevoir les bits reparés
+  for(int i = 0; i < 32; i++)
   {
-    for(int j = 0; j < 4; j++)
+    for(int j = 0; j < RAID5->ndisk; j++)
     {
-      //xor(a,b,c,d)= 1 ssi une seule des 4 variables est à 1.
+      // ieme[j]=  bit du disk j
     }
-    
+    //repare[i]=xor(RAID5,ieme)
   }
-  
+}
+
+/** \brief
+  * Prend un tableau d'int (representant des bits) et renvoie le xor de ces valeurs
+  * @param virtual_disk_t
+  * @param integer (nb disk)
+  * @return int
+**/
+int xor(virtual_disk_t *RAID5, int *tab){
+  for(int i = 0; i < (RAID5->ndisk-1); i++)
+  {
+    tab[0]=tab[0] ^ tab[i];
+  }
+  return tab[0];
 }
 
 /** \brief
