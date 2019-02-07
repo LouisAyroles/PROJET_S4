@@ -252,7 +252,8 @@ int main(void){
     printf("\n");
   }*/
   affichageDisque(r5Disk,0,stdout);
-  //system("hexdump ./RAIDFILES/d0");
+  printf("\n\n");
+  system("hexdump ./RAIDFILES/d0");
   turn_off_disk_raid5("./RAIDFILES", r5Disk);
 	exit(0);
 }
