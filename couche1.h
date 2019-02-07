@@ -1,6 +1,8 @@
 #ifndef COUCHE1_H
 #define COUCHE1_H
 
+#include "raid_defines.h"
+
 void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep);
 void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk);
 void turn_off_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk);

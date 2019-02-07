@@ -115,7 +115,7 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
   int retour=-1;
   retour=fwrite(entrant->data, 1, 4, RAID5->storage[idDisk]);
   perror("Debugging fwrite:");
-  printf("write:%d\n",retour);
+  printf("written:%d elements\n",retour);
 }
 
 
@@ -131,7 +131,7 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
 int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
   fseek(RAID5->storage[idDisk], (long) pos, SEEK_SET);
   size_t lu = fread(recup->data, 1, 4, RAID5->storage[idDisk]);
-  perror("Debugging read:");
+  //perror("Debugging read:");
   if (lu != sizeof(block_t)) {
     return 1;
   }
@@ -139,23 +139,23 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
 }
 
 /** \brief
-  * Repare un bloc erroné suite à un echec de lecture 
+  * Repare un bloc erroné suite à un echec de lecture
   * @param virtual_disk_t
-  * @param uint 
+  * @param uint
   * @param integer (n° disk)
   * @return void
 **/
 void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
   block_t monBloc;
-  for(int i = 0; i < RAID5->nbdisk; i++)
+  for(int i = 0; i < RAID5->ndisk; i++)
   {
     for(int j = 0; j < 4; j++)
     {
       //xor(a,b,c,d)= 1 ssi une seule des 4 variables est à 1.
     }
-    
+
   }
-  
+
 }
 
 /** \brief
@@ -203,13 +203,20 @@ void bitToHexa(block_t monBloc, char* nbHexa){
   * @return : void
 **/
 void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
-  fprintf(output,"---Block:\n");
+  //fprintf(output,"");
   block_t monBloc;
   char nbHexa;
   read_block(RAID5, &monBloc, pos, idDisk);
   bitToHexa(monBloc, &nbHexa);
-  fprintf(output, "%c", nbHexa);
-  fprintf(output,"\n\n");
+  fprintf(output, "[%c]", nbHexa);
+  //fprintf(output,"\n\n");
+}
+
+void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
+  for(int i=0;i<8;i++){
+    affichageBlockHexa(RAID5,idDisk,i,stdout);
+  }
+  printf("\n");
 }
 
 int main(void){
@@ -223,9 +230,13 @@ int main(void){
     ecrire.data[i]=rand()%2;
   }
   write_block(r5Disk, &ecrire, 0, 0);
-  for(int i=0;i<4;i++){
-    affichageBlockHexa(r5Disk,i,0,stdout);
-  }
+  /*for(int i=0;i<4;i++){
+    for(int z=0;z<8;z++){
+        affichageBlockHexa(r5Disk,i,z,stdout);
+    }
+    printf("\n");
+  }*/
+  affichageDisque(r5Disk,0,stdout);
   //system("hexdump ./RAIDFILES/d0");
   turn_off_disk_raid5("./RAIDFILES", r5Disk);
 	exit(0);
