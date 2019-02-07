@@ -5,7 +5,7 @@ EXEC=couche1
 
 all: $(EXEC)
 
-couche1: couche1.c couche1.h
+couche1: couche1.c couche1.h raid_defines.h
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
