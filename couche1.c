@@ -7,6 +7,7 @@
 #include <time.h>
 
 
+
 /**
  * \file couche1.c
  * \brief Programme couche1 du raid5.
@@ -32,6 +33,7 @@ void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
     nomDisque[lengthRep+2] = '0';
     nomDisque[lengthRep+3] = '\0';
 }
+
 
 /** \brief
   * Initialise la variable globale r5Disk
@@ -75,7 +77,7 @@ void turn_off_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
   * @return : void
 **/
 void info_disque(virtual_disk_t *r5Disk){
-	printf("---- Informations sur le disque raid ----\nNombre de disques physiques : %d\nMode de raid : %d\n",r5Disk->ndisk ,r5Disk->raidmode);
+	printf("---- Informations sur le disque raid ----\nNombre de disques physiques : %d\nMode de raid : %s\n",r5Disk->ndisk ,nomRaid[r5Disk->raidmode]);
 	for(int i=0;i<r5Disk->ndisk;i++){
 		if(r5Disk->storage[i]==NULL){
 			printf("Null pointer\n");
@@ -130,7 +132,7 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
 **/
 int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
   fseek(RAID5->storage[idDisk], (long) pos, SEEK_SET);
-  size_t lu = fread(recup->data, 1, BLOCK_SIZE, RAID5->storage[idDisk]);
+  size_t lu = fread(recup->data, 1, 4, RAID5->storage[idDisk]);
   //perror("Debugging read:");
   if (lu != sizeof(block_t)) {
     return 1;
@@ -228,7 +230,7 @@ void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *outpu
 }
 
 void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
-  for(int i=0;i<32;i++){
+  for(int i=0;i<8;i++){
     affichageBlockHexa(RAID5,idDisk,i,stdout);
   }
   printf("\n");
@@ -241,9 +243,8 @@ int main(void){
 	init_disk_raid5("./RAIDFILES", r5Disk);
 	info_disque(r5Disk);
   block_t ecrire;
-  for (int i=0; i<4; i++){
-    //On est sur deux digits hexa pour write , on peut se permettre de mettre un modulo 255
-    ecrire.data[i]=rand()%255;
+  for (int i=0; i< 4; i++){
+    ecrire.data[i]=rand()%2;
   }
   write_block(r5Disk, &ecrire, 0, 0);
   /*for(int i=0;i<4;i++){
@@ -253,8 +254,7 @@ int main(void){
     printf("\n");
   }*/
   affichageDisque(r5Disk,0,stdout);
-  printf("\n\n");
-  system("hexdump -x ./RAIDFILES/d0");
+  //system("hexdump ./RAIDFILES/d0");
   turn_off_disk_raid5("./RAIDFILES", r5Disk);
 	exit(0);
 }
