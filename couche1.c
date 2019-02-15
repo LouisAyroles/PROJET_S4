@@ -82,7 +82,7 @@ void info_disque(virtual_disk_t *r5Disk){
 	for(int i=0;i<r5Disk->ndisk;i++){
 		if(r5Disk->storage[i]==NULL){
 			printf("Null pointer\n");
-		}else{printf("Valid pointer\n");}
+		}else{printf("Valid pointer disque d%d\n", i);}
 	}
 }
 
@@ -112,11 +112,8 @@ int compute_nblock(int n)
 **/
 void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
   fseek(RAID5->storage[idDisk], (long)pos, SEEK_SET);
-  for (int i = 0; i < BLOCK_SIZE; i++){
-    fprintf(stdout, "%d:%d\n", i, entrant->data[i]);
-  }
   int retour=-1;
-  retour=fwrite(entrant->data, 1, 4, RAID5->storage[idDisk]);
+  retour=fwrite(entrant->data, 1, BLOCK_SIZE, RAID5->storage[idDisk]);
   //perror("Debugging fwrite:");
   //printf("written:%d elements\n",retour);
 }
@@ -239,7 +236,7 @@ void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *outpu
   for(int i=0; i<BLOCK_SIZE*2; i++){
     fprintf(output, "[%c]", nbHexa[i]);
   }
-  fprintf(output,"\n\n");
+  fprintf(output,"\n");
 }
 
 void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
@@ -267,6 +264,7 @@ int main(void){
   for(int i = 0; i<8; i++){
     printf("%c", hexa[i]); // resultat attendu: 2A 8C 27 83
   }
+  printf("\n");
   affichageBlockHexa(r5Disk,0,4,stdout);
   //affichageDisque(r5Disk,0,stdout);
   //system("hexdump ./RAIDFILES/d0");
