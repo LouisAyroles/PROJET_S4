@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "raid_defines.h"
+#include "couche1.h"
 #include <string.h>
 #include <fts.h>
 #include <errno.h>
@@ -116,8 +117,8 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
   }
   int retour=-1;
   retour=fwrite(entrant->data, 1, 4, RAID5->storage[idDisk]);
-  perror("Debugging fwrite:");
-  printf("written:%d elements\n",retour);
+  //perror("Debugging fwrite:");
+  //printf("written:%d elements\n",retour);
 }
 
 
@@ -176,39 +177,50 @@ int xor(virtual_disk_t *RAID5, int *tab){
 }
 
 /** \brief
-  * prend un tableau de 4 bits (char) et le transforme en Hexadecimal
+  * prend un tableau de 4 octets (char) et le transforme en Hexadecimal
+  * assert(monBloc[i]<256);
   * @param : block_t (Contient le tableau de bits)
   * @param : char* (Caractere dans lequel on met l'hexa)
   * @return : void
 **/
-void bitToHexa(block_t monBloc, char* nbHexa){
-  int nb = 0;
-  if(monBloc.data[BLOCK_SIZE-1]){
-      nb+=8;
+void octetsToHexa(block_t monBloc, char* nbHexa){
+  char reste, diviseur;
+  for (int i = 0; i < BLOCK_SIZE; i++){
+    diviseur = monBloc.data[i] / 16;
+    reste = monBloc.data[i] % 16;
+    nbHexa[2*i+1]=conversionHexa(reste);
+    nbHexa[2*i]=conversionHexa(diviseur);
+    // QUESTION: Dans quel sens on ecrit dans le tableau d'hexadecimal?
+    // Comme je l'ai fait ça ecrit dans la case 0 et 1 l'hexadecimal de l'octet
+    // 0, 2 et 3 l'hexadecimal de l'octet 1, etc... en mettant en premier l'hexa
+    // des bits de poids fort.
+    // Comme ça quand on print de 0 à BLOCK_SIZE*2 (le nombre de chiffre en
+    // hexadecimal pour ecrire BLOCK_SIZE octets) ça affiche dans le sens de
+    // lecture.
   }
-  if(monBloc.data[BLOCK_SIZE-2]){
-      nb+=4;
-  }
-  if(monBloc.data[BLOCK_SIZE-3]){
-      nb+=2;
-  }
-  if(monBloc.data[BLOCK_SIZE-4]){
-      nb+=1;
-  }
-  switch(nb){
-    case 10 : *nbHexa='A';
-              break;
-    case 11:  *nbHexa='B';
-              break;
-    case 12 : *nbHexa='C';
-              break;
-    case 13 : *nbHexa='D';
-              break;
-    case 14 : *nbHexa='E';
-              break;
-    case 15 : *nbHexa='F';
-              break;
-    default:  *nbHexa=nb+'0';
+}
+
+/** \brief
+  * transforme un nombre en son chiffre en hexa
+  * @param : nb4bits, la valeur de 4 bits en entier
+  * @return : le chiffre en hexadecimal
+**/
+char conversionHexa(char nb4bits){
+  switch(nb4bits){
+    case 10:
+      return 'A';
+    case 11:
+      return 'B';
+    case 12:
+      return 'C';
+    case 13:
+      return 'D';
+    case 14:
+      return 'E';
+    case 15:
+      return 'F';
+    default:
+      return nb4bits+'0';
   }
 }
 
@@ -220,13 +232,14 @@ void bitToHexa(block_t monBloc, char* nbHexa){
   * @return : void
 **/
 void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
-  //fprintf(output,"");
   block_t monBloc;
-  char nbHexa;
+  char nbHexa[BLOCK_SIZE*2];
   read_block(RAID5, &monBloc, pos, idDisk);
-  bitToHexa(monBloc, &nbHexa);
-  fprintf(output, "[%c]", nbHexa);
-  //fprintf(output,"\n\n");
+  octetsToHexa(monBloc, nbHexa);
+  for(int i=0; i<BLOCK_SIZE*2; i++){
+    fprintf(output, "[%c]", nbHexa[i]);
+  }
+  fprintf(output,"\n\n");
 }
 
 void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
@@ -238,22 +251,24 @@ void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
 
 int main(void){
   virtual_disk_t *r5Disk;
+  char hexa[10];
   r5Disk=malloc(sizeof(virtual_disk_t));
   srand(time(NULL));
 	init_disk_raid5("./RAIDFILES", r5Disk);
 	info_disque(r5Disk);
-  block_t ecrire;
-  for (int i=0; i< 4; i++){
-    ecrire.data[i]=rand()%2;
+  block_t ecrire, lire;
+  ecrire.data[0] = 42;
+  ecrire.data[1] = 140;
+  ecrire.data[2] = 39;
+  ecrire.data[3] = 131;
+  write_block(r5Disk, &ecrire, 4, 0);
+  read_block(r5Disk, &lire, 4, 0);
+  octetsToHexa(lire, hexa);
+  for(int i = 0; i<8; i++){
+    printf("%c", hexa[i]); // resultat attendu: 2A 8C 27 83
   }
-  write_block(r5Disk, &ecrire, 0, 0);
-  /*for(int i=0;i<4;i++){
-    for(int z=0;z<8;z++){
-        affichageBlockHexa(r5Disk,i,z,stdout);
-    }
-    printf("\n");
-  }*/
-  affichageDisque(r5Disk,0,stdout);
+  affichageBlockHexa(r5Disk,0,4,stdout);
+  //affichageDisque(r5Disk,0,stdout);
   //system("hexdump ./RAIDFILES/d0");
   turn_off_disk_raid5("./RAIDFILES", r5Disk);
 	exit(0);
