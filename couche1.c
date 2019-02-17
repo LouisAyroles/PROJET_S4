@@ -311,5 +311,5 @@ int couche1(void){
   affichageBlockHexa(r5Disk,0,4,stdout);
   affichageDisque(r5Disk,0,stdout);
   turn_off_disk_raid5("./RAIDFILES", r5Disk);
-	exit(0);
+	return 0;
 }
