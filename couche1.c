@@ -6,6 +6,7 @@
 #include <fts.h>
 #include <errno.h>
 #include <time.h>
+#include <stdbool.h>
 
 
 
@@ -145,6 +146,8 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
   * @param integer (n° disk)
   * @return void
 **/
+
+/*
 void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
   //convertir l'hexa en bits ou recuperer les bits de chaque bloc directement
   //creer un tableau de taille nbdisk qui recevra les iemes bits de chaque disk
@@ -158,6 +161,47 @@ void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
     //repare[i]=xor(RAID5,ieme)
   }
 }
+*/
+void xorbl(block_t *xa,block_t *xb,block_t *destination){
+  for(int i=0;i<BLOCK_SIZE;i++){
+    destination->data[i]=(xa->data[i])^(xb->data[i]);
+  }
+}
+
+void block_repair(virtual_disk_t *RAID5,uint pos,int idDisk){
+  uint iterateur=0;
+  bool initialisation=false;
+  block_t repare;
+  block_t xorblock;
+  while(iterateur<(RAID5->ndisk)){
+    if(iterateur!=idDisk){
+      if(!initialisation){
+        read_block(RAID5,&repare,pos,iterateur);
+        initialisation=true;
+      }
+      else{
+        read_block(RAID5,&xorblock,pos,iterateur);
+        xorbl(&repare,&xorblock,&repare);
+      }
+    }
+    iterateur++;
+  }
+}
+/*
+void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
+  //convertir l'hexa en bits ou recuperer les bits de chaque bloc directement
+  //creer un tableau de taille nbdisk qui recevra les iemes bits de chaque disk
+  //creer un tableau de 32 cases qui va recevoir les bits reparés
+  for(int i = 0; i < 32; i++)
+  {
+    for(int j = 0; j < RAID5->ndisk; j++)
+    {
+      // ieme[j]=  bit du disk j
+    }
+    //repare[i]=xor(RAID5,ieme)
+  }
+}
+*/
 
 /** \brief
   * Prend un tableau d'int (representant des bits) et renvoie le xor de ces valeurs
@@ -266,8 +310,7 @@ int main(void){
   }
   printf("\n");
   affichageBlockHexa(r5Disk,0,4,stdout);
-  //affichageDisque(r5Disk,0,stdout);
-  //system("hexdump ./RAIDFILES/d0");
+  affichageDisque(r5Disk,0,stdout);
   turn_off_disk_raid5("./RAIDFILES", r5Disk);
 	exit(0);
 }
