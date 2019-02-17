@@ -8,8 +8,6 @@
 #include <time.h>
 #include <stdbool.h>
 
-
-
 /**
  * \file couche1.c
  * \brief Programme couche1 du raid5.
@@ -215,6 +213,7 @@ int xor(virtual_disk_t *RAID5, int *tab){
     tab[0]=tab[0] ^ tab[i];
   }
   return tab[0];
+
 }
 
 /** \brief
