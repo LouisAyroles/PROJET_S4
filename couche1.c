@@ -289,7 +289,7 @@ void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
   printf("\n");
 }
 
-int main(void){
+int couche1(void){
   virtual_disk_t *r5Disk;
   char hexa[10];
   r5Disk=malloc(sizeof(virtual_disk_t));
