@@ -16,6 +16,18 @@
 typedef unsigned int uint; // même taille que int
 typedef unsigned char uchar; // 8 bits = octet
 enum raid {ZERO,UN,CINQ,ZERO_UN,UN_ZERO,CINQUANTE,CENT};
+static char nomRaid[7][10] = {"ZERO","UN","CINQ","ZERO_UN","UN_ZERO","CINQUANTE","CENT"};
+
+struct {
+   unsigned char bit0 : 1;
+   unsigned char bit1;
+   unsigned char bit2;
+   unsigned char bit3;
+   unsigned char bit4;
+   unsigned char bit5;
+   unsigned char bit6;
+   unsigned char bit7;
+} octet;
 
 /* Type of a block of data */
 typedef struct block_s{
@@ -47,7 +59,7 @@ typedef struct virtual_disk_s {
     inode_table_t inodes;// tableau
     int ndisk;
     enum raid raidmode; // type de RAID
-    FILE **storage; //tab[NUMBER_OF_DISKS];
+    FILE **storage; // tab[NUMBER_OF_DISKS]
 } virtual_disk_t;
 
 //=======================================================
