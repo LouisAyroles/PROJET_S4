@@ -20,6 +20,20 @@ int compute_nstripe(virtual_disk_t *r5Disk,int nblocks){
   return (nblocks/(r5Disk->ndisk))+1;
 }
 
+/** \brief
+  * Calcule le bloc de parité d'une stripe
+  * @param : virtual_disk_t *, stripe_t *,int
+  * @return block_t
+**/
+block_t compute_parity(virtual_disk_t *r5,stripe_t *tocompute,int indice_parité){
+  block_t retour=tocompute->stripe[(indice_parité+1)%(tocompute->nblocks)];
+  for(int i=0;i<tocompute->nblocks;i++){
+    if(i!=indice_parité && i!=((indice_parité+1)%(tocompute->nblocks))){
+      retour=xorbl(&retour,&(tocompute->stripe[i]),&retour);
+      }
+    }
+  }
+}
 
 
 void main(void){
