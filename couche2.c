@@ -15,9 +15,12 @@
    * @param : Nombre de blocs (int)
    * @return Nombre de bandes (int)
  **/
-int compute_nstripe(int nblocks){
-
+int compute_nstripe(virtual_disk_t *r5Disk,int nblocks){
+  //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques
+  return (nblocks/(r5Disk->ndisk))+1;
 }
+
+
 
 void main(void){
   couche1();
