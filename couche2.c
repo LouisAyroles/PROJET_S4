@@ -30,9 +30,18 @@ block_t compute_parity(virtual_disk_t *r5,stripe_t *tocompute,int indice_parité
   for(int i=0;i<tocompute->nblocks;i++){
     if(i!=indice_parité && i!=((indice_parité+1)%(tocompute->nblocks))){
       retour=xorbl(&retour,&(tocompute->stripe[i]),&retour);
-      }
     }
   }
+  return retour;
+}
+
+/** \brief
+  * Calcule la position du block de parité d'une stripe
+  * @param : virtual_disk_t , int
+  * @return int
+**/
+int parity_index(virtual_disk_t *r5,int numbd){
+  return ((r5->ndisk)-numbd-1)
 }
 
 
