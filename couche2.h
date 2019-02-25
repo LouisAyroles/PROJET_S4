@@ -4,7 +4,7 @@
 #define COUCHE2_H
 
 int compute_nstripe(int nblocks);
-block_t compute_parity(virtual_disk_t *r5,stripe_t *tocompute,int indice_parité);
+block_t compute_parity(virtual_disk_t *r5,stripe_t *tocompute,int indice_parite);
 int parity_index(virtual_disk_t *r5,int numbd);
 void write_stripe(virtual_disk_t *r5,stripe_t *ecrite);
 void write_chunk(virtual_disk_t *r5,char *buffer,int n);

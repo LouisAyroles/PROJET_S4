@@ -14,6 +14,7 @@ void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk);
 void octetsToHexa(block_t monBloc, char* nbHexa);
 void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output);
 char conversionHexa(char nb4bits);
+void xorbl(block_t *xa,block_t *xb,block_t *destination);
 int couche1(void);
 
 #endif
