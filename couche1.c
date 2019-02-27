@@ -137,13 +137,13 @@ int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
   return 0;
 }
 
-/** \brief
-  * Repare un bloc erroné suite à un echec de lecture
-  * @param virtual_disk_t
-  * @param uint
-  * @param integer (n° disk)
-  * @return void
-**/
+
+void xorbl(block_t *xa,block_t *xb,block_t *destination){
+  for(int i=0;i<BLOCK_SIZE;i++){
+    destination->data[i]=(xa->data[i])^(xb->data[i]);
+  }
+}
+
 
 /*
 void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
@@ -160,12 +160,6 @@ void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
   }
 }
 */
-void xorbl(block_t *xa,block_t *xb,block_t *destination){
-  for(int i=0;i<BLOCK_SIZE;i++){
-    destination->data[i]=(xa->data[i])^(xb->data[i]);
-  }
-}
-
 void block_repair(virtual_disk_t *RAID5,uint pos,int idDisk){
   uint iterateur=0;
   bool initialisation=false;
@@ -185,36 +179,8 @@ void block_repair(virtual_disk_t *RAID5,uint pos,int idDisk){
     iterateur++;
   }
 }
-/*
-void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
-  //convertir l'hexa en bits ou recuperer les bits de chaque bloc directement
-  //creer un tableau de taille nbdisk qui recevra les iemes bits de chaque disk
-  //creer un tableau de 32 cases qui va recevoir les bits reparés
-  for(int i = 0; i < 32; i++)
-  {
-    for(int j = 0; j < RAID5->ndisk; j++)
-    {
-      // ieme[j]=  bit du disk j
-    }
-    //repare[i]=xor(RAID5,ieme)
-  }
-}
-*/
 
-/** \brief
-  * Prend un tableau d'int (representant des bits) et renvoie le xor de ces valeurs
-  * @param virtual_disk_t
-  * @param integer (nb disk)
-  * @return int
-**/
-int xor(virtual_disk_t *RAID5, int *tab){
-  for(int i = 0; i < (RAID5->ndisk); i++)
-  {
-    tab[0]=tab[0] ^ tab[i];
-  }
-  return tab[0];
 
-}
 
 /** \brief
   * prend un tableau de 4 octets (char) et le transforme en Hexadecimal
@@ -230,13 +196,6 @@ void octetsToHexa(block_t monBloc, char* nbHexa){
     reste = monBloc.data[i] % 16;
     nbHexa[2*i+1]=conversionHexa(reste);
     nbHexa[2*i]=conversionHexa(diviseur);
-    // QUESTION: Dans quel sens on ecrit dans le tableau d'hexadecimal?
-    // Comme je l'ai fait ça ecrit dans la case 0 et 1 l'hexadecimal de l'octet
-    // 0, 2 et 3 l'hexadecimal de l'octet 1, etc... en mettant en premier l'hexa
-    // des bits de poids fort.
-    // Comme ça quand on print de 0 à BLOCK_SIZE*2 (le nombre de chiffre en
-    // hexadecimal pour ecrire BLOCK_SIZE octets) ça affiche dans le sens de
-    // lecture.
   }
 }
 
