@@ -15,10 +15,12 @@
    * @param : Nombre de blocs (int)
    * @return Nombre de bandes (int)
  **/
-int compute_nstripe(virtual_disk_t *r5Disk,int nblocks){
-  //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques
-  return (nblocks/(r5Disk->ndisk))+1;
-}
+ int compute_nstripe(virtual_disk_t *r5Disk,int nblocks){
+   //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques Nop ?
+   //une bande = n blocs, avec n-1 blocs de données et 1 bloc de parité
+   //Une bande contient donc n-1 bloc des n blocs de données à stocker
+   return (nblocks/((r5Disk->ndisk)-1))+(nblocks%((r5Disk->ndisk)-1) == 0);
+ }
 
 /** \brief
   * Calcule le bloc de parité d'une stripe
