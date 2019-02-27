@@ -40,15 +40,15 @@ block_t compute_parity(virtual_disk_t *r5, stripe_t *tocompute, int indice_parit
 
 /** \brief
   * Calcule la position du block de parité d'une stripe
-  * @param : virtual_disk_t , int
+  * @param : virtual_disk_t , int numero de la bande dans la liste du raid
   * @return int
 **/
 int compute_parity_index(virtual_disk_t *r5,int numbd){
   //Il peut y avoir plus de ndisk bandes si le fichier est grand
   //if (numbd % ndisk == 0){
-  //  return 0;
+  //  return r5->ndisk-1;
   //}
-  //return ((r5->ndisk)-(numbd%ndisk);
+  //return ((r5->ndisk-1)-(numbd%ndisk);
   return ((r5->ndisk)-numbd-1);
 }
 
@@ -64,10 +64,10 @@ void write_stripe(virtual_disk_t *r5,stripe_t *ecrire,uint pos){
 }
 
 // Bande gérée dynamiquement ????
-void init_bande(stripe_t *bande){
-  bande = malloc(sizeof(stripe_t));
-  bande->nblocks = NB_DISK;
-  bande->stripe = malloc(sizeof(block_t)*NB_DISK);
+bande *init_bande(stripe_t *bande){
+  *bande = malloc(sizeof(stripe_t));
+  *bande->nblocks = NB_DISK;
+  *bande->stripe = malloc(sizeof(block_t)*NB_DISK);
   return bande;
 }
 
@@ -88,7 +88,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   int nbBandes = compute_nstripe(nbBlocks);
   int pos = 0;
   block_t bloc[nbBlocks];
-  stripe_t bande;
+  stripe_t *bande;
   for(int i = 0; i<nbBlocks; i++){
     for(int j = 0; j<BLOCK_SIZE; j++){
       if (pos<n){
@@ -102,20 +102,45 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   }
   //Pos sert maintenant de numdeParité pour les bandes.
   pos = 0;
-  init_bande(&bande);
-  for(int i = 0; i < nbBandes; i++){
-    pos = compute_parity_index(r5, i);
-    for(int j = 0; j < r5->ndisk - 1){
+  init_bande(bande);
+  for(int i = 0; i < nbBandes; i++){   //On parcourt le nbBandes
+    pos = compute_parity_index(r5, i); //On recupere l'indice de parite
+    for(int j = 0; j < r5->ndisk - 1){ //On ajoute à la bande les blocs
         if (j != pos){
-          bande->stripe[j]=bloc[(i*3)+j];
-        }
+          bande->stripe[j]=bloc[(i*3)+j]; // ajout de bloc de donnees
+        } // Fin IF
         else{
-          band->stripe[j] = compute_parity(r5, bande, pos);
-        }
-    }
-  }
+          band->stripe[j] = compute_parity(r5, bande, pos); // ajout parite
+        } // Fin ELSE
+    } // Fin FOR j
+    write_stripe(r5, bande, startBlock*4); // ecriture de la bande sur disque
+    startBlock+=1;  // Decalage du block de depart de un block
+  } // Fin FOR i
+  delete_bande(&bande);
 }
 
+
+/** \brief
+  * fonction de test pour write_chunk
+  * NON TESTE
+**/
+void cmd_test1(virtual_disk_t *r5){
+  uint startBlock = 0;
+  int n = 256;
+  char *buffer;
+  buffer = (char*)malloc(sizeof(char)*256);
+  for (int i = 0; i < n; i++){
+    buffer[i] = i;
+  }
+  write_chunk(r5, buffer, n, startBlock);
+  free(buffer);
+}
+
+void read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
+  for(int i=0;i<r5->ndisk;i++){
+    read_block(r5, &(lire->stripe[i]), pos, i);
+  }
+}
 
 
 void main(void){
