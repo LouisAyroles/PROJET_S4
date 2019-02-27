@@ -1,7 +1,9 @@
 CC=gcc
 CFLAGS=-W -Wall -pedantic
 LDFLAGS=
-EXEC = couche2
+EXEC = couche2\
+			 cmd_test1\
+			 cmd_format
 
 all: $(EXEC)
 
