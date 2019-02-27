@@ -17,7 +17,7 @@
    * @return Nombre de bandes (int)
  **/
  int compute_nstripe(virtual_disk_t *r5Disk,int nblocks){
-   //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques Nop ?
+   //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques
    //une bande = n blocs, avec n-1 blocs de données et 1 bloc de parité
    //Une bande contient donc n-1 bloc des n blocs de données à stocker
    return (nblocks/((r5Disk->ndisk)-1))+(nblocks%((r5Disk->ndisk)-1) == 0);
@@ -142,6 +142,22 @@ void read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
   }
 }
 
+
+// PAS FINI, FATIGUE
+char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
+  uint nbBlocks = compute_nblock(n), pos = 0, nBande;
+  char* buffer;
+  stripe_t *bande;
+  init_bande(bande);
+  buffer = (char*)malloc(sizeof(char)*n);
+  for (int i = 0; i < n; i+=4){
+    nBande = start_block/r5->ndisk-1;
+    pos = compute_parity_index(r5, nBande);
+    start_block%r5->ndisk!=pos
+    start_block+=1;
+  }
+  delete_bande(&bande);
+}
 
 void main(void){
   couche1();
