@@ -44,6 +44,17 @@ int parity_index(virtual_disk_t *r5,int numbd){
   return ((r5->ndisk)-numbd-1);
 }
 
+/** \brief
+  * Ecrit une stripe a la position passée en argument sur le raid passé en argument
+  * @param : virtual_disk_t ,stripe_t ,int
+  * @return void
+**/
+void write_stripe(virtual_disk_t *r5,stripe_t *ecrire,uint pos){
+  for(int i=0;i<r5->ndisk;i++){
+    write_block(r5, ecrire->stripe[i], pos, i);
+  }
+}
+
 
 void main(void){
   couche1();
