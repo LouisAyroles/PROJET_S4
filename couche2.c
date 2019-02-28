@@ -1,5 +1,6 @@
 #include "couche1.h"
 #include "couche2.h"
+#include <stdlib.h>
 /**
  * \file couche2.c
  * \brief Programme couche2 du raid5.
@@ -64,18 +65,18 @@ void write_stripe(virtual_disk_t *r5,stripe_t *ecrire,uint pos){
 }
 
 // Bande gérée dynamiquement ????
-stripe_t *init_bande(stripe_t *bande){
-  *bande = malloc(sizeof(stripe_t));
-  *bande->nblocks = NB_DISK;
-  *bande->stripe = malloc(sizeof(block_t)*NB_DISK);
+stripe_t *init_bande(virtual_disk_t *r5){
+  stripe_t *bande = malloc(sizeof(stripe_t));
+  bande->nblocks = r5->ndisk;
+  bande->stripe = malloc(sizeof(block_t)*r5->ndisk);
   return bande;
 }
 
 // ???
-void delete_bande(stripe_t **bande){
-  free(*bande->stripe);
-  free(*bande);
-  *bande = NULL;
+void delete_bande(stripe_t *bande){
+  free(bande->stripe);
+  free(bande);
+  bande = NULL;
 }
 
 /** \brief
@@ -83,9 +84,10 @@ void delete_bande(stripe_t **bande){
   * @param : virtual_disk_t ,stripe_t ,int
   * @return void
 **/
+
 void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   int nbBlocks = compute_nblock(n);
-  int nbBandes = compute_nstripe(nbBlocks);
+  int nbBandes = compute_nstripe(r5,nbBlocks);
   int pos = 0;
   block_t bloc[nbBlocks];
   stripe_t *bande;
@@ -136,29 +138,28 @@ void cmd_test1(virtual_disk_t *r5){
   free(buffer);
 }
 
-/*
+
 void read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
   for(int i=0;i<r5->ndisk;i++){
     read_block(r5, &(lire->stripe[i]), pos, i);
   }
 }
-*/
+
 
 
 // PAS FINI, FATIGUE
 char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
   uint nbBlocks = compute_nblock(n), pos = 0, nBande;
   char* buffer;
-  stripe_t *bande;
-  init_bande(bande);
+  stripe_t *bande=init_bande(r5);
   buffer = (char*)malloc(sizeof(char)*n);
   for (int i = 0; i < n; i+=4){
     nBande = start_block/r5->ndisk-1;
     pos = compute_parity_index(r5, nBande);
-    start_block%r5->ndisk!=pos
+    start_block%r5->ndisk!=pos;
     start_block+=1;
   }
-  delete_bande(&bande);
+  delete_bande(bande);
 }
 
 void main(void){
