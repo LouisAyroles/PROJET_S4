@@ -20,7 +20,7 @@
    //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques
    //une bande = n blocs, avec n-1 blocs de données et 1 bloc de parité
    //Une bande contient donc n-1 bloc des n blocs de données à stocker
-   return (nblocks/((r5Disk->ndisk)-1))+(nblocks%((r5Disk->ndisk)-1) == 0);
+   return ((nblocks/((r5Disk->ndisk)-1))+(nblocks%((r5Disk->ndisk)-1) == 0));
  }
 
 /** \brief
@@ -64,7 +64,7 @@ void write_stripe(virtual_disk_t *r5,stripe_t *ecrire,uint pos){
 }
 
 // Bande gérée dynamiquement ????
-bande *init_bande(stripe_t *bande){
+stripe_t *init_bande(stripe_t *bande){
   *bande = malloc(sizeof(stripe_t));
   *bande->nblocks = NB_DISK;
   *bande->stripe = malloc(sizeof(block_t)*NB_DISK);
@@ -136,11 +136,13 @@ void cmd_test1(virtual_disk_t *r5){
   free(buffer);
 }
 
+/*
 void read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
   for(int i=0;i<r5->ndisk;i++){
     read_block(r5, &(lire->stripe[i]), pos, i);
   }
 }
+*/
 
 
 // PAS FINI, FATIGUE
