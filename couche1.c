@@ -63,7 +63,7 @@ void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
   * @param : virtual_disk_t
   * @return void
 **/
-void turn_off_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
+void turn_off_disk_raid5(virtual_disk_t *r5Disk){
     for (int i = 0; i < r5Disk->ndisk; i++){
         fclose(r5Disk->storage[i]);
     }
@@ -238,12 +238,13 @@ void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *outpu
   for(int i=0; i<BLOCK_SIZE*2; i++){
     fprintf(output, "[%c]", nbHexa[i]);
   }
-  fprintf(output,"\n");
+  //fprintf(output,"\n");
 }
 
 void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
-  for(int i=0;i<8;i++){
+  for(int i=0;i<=16;i=i+4){
     affichageBlockHexa(RAID5,idDisk,i,stdout);
+    printf("\n");
   }
   printf("\n");
 }
@@ -267,8 +268,11 @@ int couche1(void){
     printf("%c", hexa[i]); // resultat attendu: 2A 8C 27 83
   }
   printf("\n");
-  affichageBlockHexa(r5Disk,0,4,stdout);
+  //affichageBlockHexa(r5Disk,0,4,stdout);
   affichageDisque(r5Disk,0,stdout);
-  turn_off_disk_raid5("./RAIDFILES", r5Disk);
+  //affichageDisque(r5Disk,1,stdout);
+  //affichageDisque(r5Disk,2,stdout);
+  //affichageDisque(r5Disk,3,stdout);
+  turn_off_disk_raid5(r5Disk);
 	return 0;
 }

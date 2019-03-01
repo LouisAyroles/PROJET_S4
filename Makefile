@@ -2,13 +2,9 @@ CC=gcc
 CFLAGS=-W -Wall -pedantic
 LDFLAGS=
 EXEC = couche2\
-			 cmd_test1\
 			 cmd_format
 
 all: $(EXEC)
-
-cmd_test1: couche1.c couche1.h couche2.c couche2.h raid_defines.h
-	$(CC) -o $@ $^ $(LDFLAGS)
 
 couche1: couche1.c couche1.h raid_defines.h
 	$(CC) -o $@ $^ $(LDFLAGS)

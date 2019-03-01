@@ -1,6 +1,7 @@
 #include "couche1.h"
 #include "couche2.h"
 #include <stdlib.h>
+
 /**
  * \file couche2.c
  * \brief Programme couche2 du raid5.
@@ -119,21 +120,28 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   delete_bande(bande);
 }
 
+void afficher_raid(virtual_disk_t *r5){
+  for(int z=0;z<=16;z=z+4){
+    for(int i=0;i<r5->ndisk;i++){
+      affichageBlockHexa(r5,i,z,stdout);
+      printf(" ");
+    }
+    printf("\n");
+  }
+}
 
 /** \brief
   * fonction de test pour write_chunk
   * NON TESTE
 **/
 void cmd_test1(virtual_disk_t *r5){
-  uint startBlock = 0;
-  int n = 256;
-  char *buffer;
-  buffer = (char*)malloc(sizeof(char)*256);
-  for (int i = 0; i < n; i++){
-    buffer[i] = i;
+  unsigned char buffer[256];
+  afficher_raid(r5);
+  for(int i=0;i<256;i++){
+    buffer[i]=i;
   }
-  write_chunk(r5, buffer, n, startBlock);
-  free(buffer);
+  write_chunk(r5,buffer,256,0);
+  turn_off_disk_raid5(r5);
 }
 
 
@@ -161,5 +169,8 @@ char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
 }
 
 void main(void){
-  couche1();
+  //couche1();
+  virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
+  init_disk_raid5("./RAIDFILES",r5d);
+  cmd_test1(r5d);
 }
