@@ -84,41 +84,39 @@ void delete_bande(stripe_t *bande){
   * @param : virtual_disk_t ,stripe_t ,int
   * @return void
 **/
-
 void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   int nbBlocks = compute_nblock(n);
   int nbBandes = compute_nstripe(r5,nbBlocks);
   int pos = 0;
   block_t bloc[nbBlocks];
-  stripe_t *bande;
   for(int i = 0; i<nbBlocks; i++){
     for(int j = 0; j<BLOCK_SIZE; j++){
       if (pos<n){
-        bloc[i][j] = char[pos];
+        bloc[i].data[j] = buffer[pos];
         pos++;
       }
       else{
-        block[i][j] = 0;
+        bloc[i].data[j] = 0;
       }
     }
   }
   //Pos sert maintenant de numdeParité pour les bandes.
   pos = 0;
-  init_bande(bande);
+  stripe_t *bande=init_bande(r5);
   for(int i = 0; i < nbBandes; i++){   //On parcourt le nbBandes
     pos = compute_parity_index(r5, i); //On recupere l'indice de parite
-    for(int j = 0; j < r5->ndisk - 1){ //On ajoute à la bande les blocs
+    for(int j = 0; j < r5->ndisk - 1 ; j++){ //On ajoute à la bande les blocs
         if (j != pos){
           bande->stripe[j]=bloc[(i*3)+j]; // ajout de bloc de donnees
         } // Fin IF
         else{
-          band->stripe[j] = compute_parity(r5, bande, pos); // ajout parite
+          bande->stripe[j] = compute_parity(r5, bande, pos); // ajout parite
         } // Fin ELSE
     } // Fin FOR j
     write_stripe(r5, bande, startBlock*4); // ecriture de la bande sur disque
     startBlock+=1;  // Decalage du block de depart de un block
   } // Fin FOR i
-  delete_bande(&bande);
+  delete_bande(bande);
 }
 
 
