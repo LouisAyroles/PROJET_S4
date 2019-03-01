@@ -1,6 +1,7 @@
 #include "couche1.h"
 #include "couche2.h"
 #include <stdlib.h>
+#include <math.h>
 
 /**
  * \file couche2.c
@@ -51,7 +52,7 @@ int compute_parity_index(virtual_disk_t *r5,int numbd){
   //  return r5->ndisk-1;
   //}
   //return ((r5->ndisk-1)-(numbd%ndisk);
-  return ((r5->ndisk)-numbd-1);
+  return abs(((r5->ndisk)-numbd-1)%(r5->ndisk));
 }
 
 /** \brief
@@ -106,14 +107,17 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   stripe_t *bande=init_bande(r5);
   for(int i = 0; i < nbBandes; i++){   //On parcourt le nbBandes
     pos = compute_parity_index(r5, i); //On recupere l'indice de parite
-    for(int j = 0; j < r5->ndisk - 1 ; j++){ //On ajoute à la bande les blocs
+    printf("%d\n",pos);
+    int x=0;
+    for(int j = 0; j <= r5->ndisk - 1 ; j++){ //On ajoute à la bande les blocs
         if (j != pos){
-          bande->stripe[j]=bloc[(i*3)+j]; // ajout de bloc de donnees
+          bande->stripe[j]=bloc[(i*3)+j-x]; // ajout de bloc de donnees
         } // Fin IF
         else{
-          bande->stripe[j] = compute_parity(r5, bande, pos); // ajout parite
-        } // Fin ELSE
+          x=1;
+        }
     } // Fin FOR j
+    bande->stripe[pos] = compute_parity(r5, bande, pos);
     write_stripe(r5, bande, startBlock*4); // ecriture de la bande sur disque
     startBlock+=1;  // Decalage du block de depart de un block
   } // Fin FOR i
@@ -121,7 +125,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
 }
 
 void afficher_raid(virtual_disk_t *r5){
-  for(int z=0;z<=16;z=z+4){
+  for(int z=0;z<=84;z=z+4){
     for(int i=0;i<r5->ndisk;i++){
       affichageBlockHexa(r5,i,z,stdout);
       printf(" ");
@@ -135,12 +139,15 @@ void afficher_raid(virtual_disk_t *r5){
   * NON TESTE
 **/
 void cmd_test1(virtual_disk_t *r5){
+  printf("Test de compute parity\n");
   unsigned char buffer[256];
   afficher_raid(r5);
   for(int i=0;i<256;i++){
     buffer[i]=i;
   }
   write_chunk(r5,buffer,256,0);
+  printf("\n\n");
+  afficher_raid(r5);
   turn_off_disk_raid5(r5);
 }
 
