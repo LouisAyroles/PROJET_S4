@@ -107,7 +107,6 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   stripe_t *bande=init_bande(r5);
   for(int i = 0; i < nbBandes; i++){   //On parcourt le nbBandes
     pos = compute_parity_index(r5, i); //On recupere l'indice de parite
-    printf("%d\n",pos);
     int x=0;
     for(int j = 0; j <= r5->ndisk - 1 ; j++){ //On ajoute à la bande les blocs
         if (j != pos){
@@ -124,13 +123,19 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   delete_bande(bande);
 }
 
-void afficher_raid(virtual_disk_t *r5){
-  for(int z=0;z<=84;z=z+4){
+int afficher_raid(virtual_disk_t *r5){
+  int retour=0;
+  int z=0;
+  while(retour!=1){
     for(int i=0;i<r5->ndisk;i++){
-      affichageBlockHexa(r5,i,z,stdout);
+      retour=affichageBlockHexa(r5,i,z,stdout);
+      if(retour==1){
+        return(1);
+      }
       printf(" ");
     }
     printf("\n");
+    z=z+4;
   }
 }
 
@@ -152,9 +157,13 @@ void cmd_test1(virtual_disk_t *r5){
 }
 
 
-void read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
+int read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
+  int retour=0;
   for(int i=0;i<r5->ndisk;i++){
-    read_block(r5, &(lire->stripe[i]), pos, i);
+    retour=read_block(r5, &(lire->stripe[i]), pos, i);
+    if(retour){
+      printf("Erreur lecture , arrêt\n");
+    }
   }
 }
 

@@ -230,15 +230,21 @@ char conversionHexa(char nb4bits){
   * @param : integer (posit° de ce qu'on veut afficher)
   * @return : void
 **/
-void affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
+int affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
   block_t monBloc;
   char nbHexa[BLOCK_SIZE*2];
-  read_block(RAID5, &monBloc, pos, idDisk);
-  octetsToHexa(monBloc, nbHexa);
-  for(int i=0; i<BLOCK_SIZE*2; i++){
-    fprintf(output, "[%c]", nbHexa[i]);
+  int retour;
+  retour=read_block(RAID5, &monBloc, pos, idDisk);
+  if(retour!=1){
+    octetsToHexa(monBloc, nbHexa);
+    for(int i=0; i<BLOCK_SIZE*2; i++){
+      fprintf(output, "[%c]", nbHexa[i]);
+    }
+    return 0;
   }
-  //fprintf(output,"\n");
+  else{
+    return 1;
+  }
 }
 
 void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
