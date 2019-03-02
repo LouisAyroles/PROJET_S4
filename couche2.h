@@ -11,7 +11,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock);
 char *read_chunk(virtual_disk_t *r5, uint start_block, int n);
 void delete_bande(stripe_t *bande);
 stripe_t *init_bande();
-void read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos);
+int read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos);
 void cmd_test1(virtual_disk_t *r5);
 
 #endif

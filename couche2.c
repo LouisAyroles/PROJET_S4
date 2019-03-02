@@ -66,7 +66,7 @@ void write_stripe(virtual_disk_t *r5,stripe_t *ecrire,uint pos){
   }
 }
 
-// Bande gérée dynamiquement ????
+
 stripe_t *init_bande(virtual_disk_t *r5){
   stripe_t *bande = malloc(sizeof(stripe_t));
   bande->nblocks = r5->ndisk;
@@ -74,11 +74,34 @@ stripe_t *init_bande(virtual_disk_t *r5){
   return bande;
 }
 
-// ???
+/** \brief
+  * Libere la mémoir réservée par une bande
+  * @param : stripe_t *
+  * @return void
+**/
 void delete_bande(stripe_t *bande){
   free(bande->stripe);
   free(bande);
   bande = NULL;
+}
+
+/** \brief
+  * Affiche une bande
+  * @param : virtual_disk_t ,stripe_t
+  * @return void
+**/
+void print_stripe(virtual_disk_t *r5,stripe_t *stripe){
+  block_t current;
+  char nbHexa[BLOCK_SIZE*2];
+  for(int i=0;i<r5->ndisk;i++){
+    current=stripe->stripe[i];
+    octetsToHexa(current, nbHexa);
+    for(int i=0; i<BLOCK_SIZE*2; i++){
+      fprintf(stdout, "[%c]", nbHexa[i]);
+    }
+    printf(" ");
+  }
+  printf("\n");
 }
 
 /** \brief
@@ -105,7 +128,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   //Pos sert maintenant de numdeParité pour les bandes.
   pos = 0;
   stripe_t *bande=init_bande(r5);
-  for(int i = 0; i < nbBandes; i++){   //On parcourt le nbBandes
+  for(int i = 0; i <= nbBandes; i++){   //On parcourt le nbBandes
     pos = compute_parity_index(r5, i); //On recupere l'indice de parite
     int x=0;
     for(int j = 0; j <= r5->ndisk - 1 ; j++){ //On ajoute à la bande les blocs
@@ -123,7 +146,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   delete_bande(bande);
 }
 
-int afficher_raid(virtual_disk_t *r5){
+int afficher_raid_hexa(virtual_disk_t *r5){
   int retour=0;
   int z=0;
   while(retour!=1){
@@ -140,23 +163,48 @@ int afficher_raid(virtual_disk_t *r5){
 }
 
 /** \brief
+  * affiche les disques du raid en valeurs décimales
+  * @param : virtual_disk_t *
+  * @return int
+**/
+int afficher_raid_decimal(virtual_disk_t *r5){
+  int retour=0;
+  int z=0;
+  while(retour!=1){
+    for(int i=0;i<r5->ndisk;i++){
+      retour=affichageBlockDecimal(r5,i,z,stdout);
+      if(retour==1){
+        return(1);
+      }
+      printf(" ");
+    }
+    printf("\n");
+    z=z+4;
+  }
+}
+
+
+/** \brief
   * fonction de test pour write_chunk
-  * NON TESTE
+  * @param virtual_disk_t *
 **/
 void cmd_test1(virtual_disk_t *r5){
-  printf("Test de compute parity\n");
   unsigned char buffer[256];
-  afficher_raid(r5);
+  afficher_raid_decimal(r5);
   for(int i=0;i<256;i++){
     buffer[i]=i;
   }
   write_chunk(r5,buffer,256,0);
   printf("\n\n");
-  afficher_raid(r5);
-  turn_off_disk_raid5(r5);
+  afficher_raid_decimal(r5);
 }
 
 
+/** \brief
+  * Lis une bande a partir de la position passée en parametre
+  * @param : virtual_disk_t *,stripe_t *, uint
+  * @return int
+**/
 int read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
   int retour=0;
   for(int i=0;i<r5->ndisk;i++){
@@ -167,21 +215,57 @@ int read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
   }
 }
 
+/** \brief
+  * Fonction de test pour read_chunk
+  * @param : virtual_disk_t *
+  * @return void
+**/
+void cmd_test2(virtual_disk_t *r5){
+  unsigned char buffer[256];
+  afficher_raid_hexa(r5);
+  read_chunk(r5,0,256);
+  printf("\n\n");
+  turn_off_disk_raid5(r5);
+}
 
 
-// PAS FINI, FATIGUE
 char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
-  uint nbBlocks = compute_nblock(n), pos = 0, nBande;
-  char* buffer;
-  stripe_t *bande=init_bande(r5);
+  uint nbBlocks = compute_nblock(n);
+  unsigned char *buffer=malloc(sizeof(unsigned char)*n);
+  int indice_buffer=0;
+  int current=start_block;
+  block_t *blc=malloc(sizeof(struct block_s));
   buffer = (char*)malloc(sizeof(char)*n);
-  for (int i = 0; i < n; i+=4){
-    nBande = start_block/r5->ndisk-1;
-    pos = compute_parity_index(r5, nBande);
-    start_block%r5->ndisk!=pos;
-    start_block+=1;
+  char nbHexa[BLOCK_SIZE*2];
+  unsigned char shuffle;
+  while((uint) current<=start_block+nbBlocks+nbBlocks/3-1){
+    if((current-start_block)%r5->ndisk!=compute_parity_index(r5,(current-current%4)/4)){
+      if(current%4==0){
+        read_block(r5,blc,current,0);
+      }
+      else if(current%4==1){
+        read_block(r5,blc,current-1,1);
+      }
+      else if(current%4==2){
+        read_block(r5,blc,current-2,2);
+      }
+      else if(current%4==3){
+        read_block(r5,blc,current-3,3);
+      }
+      octetsToHexa(*blc, nbHexa);
+      for(int i=0; i<BLOCK_SIZE*2; i=i+2){
+        shuffle=conversionDec(nbHexa[i+1]);
+        shuffle=shuffle+16*conversionDec(nbHexa[i]);
+        buffer[indice_buffer]=shuffle;
+        indice_buffer=indice_buffer+1;
+      }
+    }
+    else{
+      //printf("Ligne : %d , parité : %d , numbloc : %d\n",(current-current%4)/4,compute_parity_index(r5,(current-current%4)/4),current-start_block);
+    }
+    current=current+1;
   }
-  delete_bande(bande);
+  return buffer;
 }
 
 void main(void){
@@ -189,4 +273,6 @@ void main(void){
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   init_disk_raid5("./RAIDFILES",r5d);
   cmd_test1(r5d);
+  printf("\nCMD_TEST2\n");
+  cmd_test2(r5d);
 }

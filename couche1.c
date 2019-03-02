@@ -223,6 +223,47 @@ char conversionHexa(char nb4bits){
   }
 }
 
+int conversionDec(int nb4bits){
+  switch(nb4bits){
+    case 48:
+      return 0;
+    case 49:
+      return 1;
+    case 50:
+      return 2;
+    case 51:
+      return 3;
+    case 52:
+      return 4;
+    case 53:
+      return 5;
+    case 54:
+      return 6;
+    case 55:
+      return 7;
+    case 56:
+      return 8;
+    case 57:
+      return 9;
+    case 65:
+      return 10;
+    case 66:
+      return 11;
+    case 67:
+      return 12;
+    case 68:
+      return 13;
+    case 69:
+      return 14;
+    case 70:
+      return 15;
+    default:
+      return nb4bits+'0';
+  }
+}
+
+
+
 /** \brief
   * affiche un bloc de donnees en hexadecimal
   * @param : virtual_disk_t
@@ -239,6 +280,26 @@ int affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output
     octetsToHexa(monBloc, nbHexa);
     for(int i=0; i<BLOCK_SIZE*2; i++){
       fprintf(output, "[%c]", nbHexa[i]);
+    }
+    return 0;
+  }
+  else{
+    return 1;
+  }
+}
+
+int affichageBlockDecimal(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
+  block_t monBloc;
+  char nbHexa[BLOCK_SIZE*2];
+  int retour;
+  retour=read_block(RAID5, &monBloc, pos, idDisk);
+  unsigned char shuffle;
+  if(retour!=1){
+    octetsToHexa(monBloc, nbHexa);
+    for(int i=0; i<BLOCK_SIZE*2; i=i+2){
+      shuffle=conversionDec(nbHexa[i+1]);
+      shuffle=shuffle+16*conversionDec(nbHexa[i]);
+      fprintf(output, "[%d]", shuffle);
     }
     return 0;
   }
