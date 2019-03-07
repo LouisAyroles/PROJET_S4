@@ -47,12 +47,11 @@ block_t compute_parity(virtual_disk_t *r5, stripe_t *tocompute, int indice_parit
   * @return int
 **/
 int compute_parity_index(virtual_disk_t *r5,int numbd){
-  //Il peut y avoir plus de ndisk bandes si le fichier est grand
-  //if (numbd % ndisk == 0){
-  //  return r5->ndisk-1;
-  //}
-  //return ((r5->ndisk-1)-(numbd%ndisk);
-  return abs(((r5->ndisk)-numbd-1)%(r5->ndisk));
+  if (numbd % r5->ndisk == 0){
+    return r5->ndisk-1;
+  }
+  return ((r5->ndisk-1)-(numbd%r5->ndisk));
+  //return abs(((r5->ndisk)-numbd-1)%(r5->ndisk));
 }
 
 /** \brief
@@ -60,7 +59,7 @@ int compute_parity_index(virtual_disk_t *r5,int numbd){
   * @param : virtual_disk_t ,stripe_t ,int
   * @return void
 **/
-void write_stripe(virtual_disk_t *r5,stripe_t *ecrire,uint pos){
+void write_stripe(virtual_disk_t *r5, stripe_t *ecrire, uint pos){
   for(int i=0;i<r5->ndisk;i++){
     write_block(r5, &(ecrire->stripe[i]), pos, i);
   }
@@ -79,10 +78,10 @@ stripe_t *init_bande(virtual_disk_t *r5){
   * @param : stripe_t *
   * @return void
 **/
-void delete_bande(stripe_t *bande){
-  free(bande->stripe);
-  free(bande);
-  bande = NULL;
+void delete_bande(stripe_t **bande){
+  free((*bande)->stripe);
+  free(*bande);
+  *bande = NULL;
 }
 
 /** \brief
@@ -133,7 +132,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
     int x=0;
     for(int j = 0; j <= r5->ndisk - 1 ; j++){ //On ajoute à la bande les blocs
         if (j != pos){
-          bande->stripe[j]=bloc[(i*3)+j-x]; // ajout de bloc de donnees
+          bande->stripe[j]=bloc[(i*(r5->ndisk - 1))+j-x]; // ajout de bloc de donnees
         } // Fin IF
         else{
           x=1;
@@ -143,7 +142,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
     write_stripe(r5, bande, startBlock*4); // ecriture de la bande sur disque
     startBlock+=1;  // Decalage du block de depart de un block
   } // Fin FOR i
-  delete_bande(bande);
+  delete_bande(&bande);
 }
 
 int afficher_raid_hexa(virtual_disk_t *r5){
@@ -152,14 +151,15 @@ int afficher_raid_hexa(virtual_disk_t *r5){
   while(retour!=1){
     for(int i=0;i<r5->ndisk;i++){
       retour=affichageBlockHexa(r5,i,z,stdout);
-      if(retour==1){
-        return(1);
+      if(retour){
+        return(retour);
       }
       printf(" ");
     }
     printf("\n");
     z=z+4;
   }
+  return 0;
 }
 
 /** \brief
@@ -173,14 +173,15 @@ int afficher_raid_decimal(virtual_disk_t *r5){
   while(retour!=1){
     for(int i=0;i<r5->ndisk;i++){
       retour=affichageBlockDecimal(r5,i,z,stdout);
-      if(retour==1){
-        return(1);
+      if(retour){
+        return(retour);
       }
       printf(" ");
     }
     printf("\n");
     z=z+4;
   }
+  return 0;
 }
 
 
@@ -196,7 +197,7 @@ void cmd_test1(virtual_disk_t *r5){
   }
   write_chunk(r5,buffer,256,0);
   printf("\n\n");
-  afficher_raid_decimal(r5);
+  afficher_raid_hexa(r5);
 }
 
 
@@ -211,8 +212,10 @@ int read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
     retour=read_block(r5, &(lire->stripe[i]), pos, i);
     if(retour){
       printf("Erreur lecture , arrêt\n");
+      return 1;
     }
   }
+  return 0;
 }
 
 /** \brief
@@ -223,50 +226,53 @@ int read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
 void cmd_test2(virtual_disk_t *r5){
   unsigned char buffer[256];
   afficher_raid_hexa(r5);
-  read_chunk(r5,0,256);
+  read_chunk(r5,0,48);
   printf("\n\n");
   turn_off_disk_raid5(r5);
 }
 
+/** \brief
+  * Fonction retournant le num de la bande actuelle
+  * @param : virtual_disk_t * le systeme
+  * @param : int le numéro du block actuel
+  * @return : int le numero de la bande
+**/
+int compute_num_bande(virtual_disk_t *r5,int nbloc){
+  return nbloc/r5->ndisk;
+}
 
+/** \brief
+  * Fonction de lecture de tableau de char
+  * @param : virtual_disk_t * , uint , int
+  * @return char *
+**/
 char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
   uint nbBlocks = compute_nblock(n);
   unsigned char *buffer=malloc(sizeof(unsigned char)*n);
   int indice_buffer=0;
   int current=start_block;
+  int nbBlocksLus = 0;              /*Nombre de Blocks effectivement lus (sans lire les blocs de parité)*/
   block_t *blc=malloc(sizeof(struct block_s));
-  buffer = (char*)malloc(sizeof(char)*n);
-  char nbHexa[BLOCK_SIZE*2];
-  unsigned char shuffle;
-  while((uint) current<=start_block+nbBlocks+nbBlocks/3-1){
-    if((current-start_block)%r5->ndisk!=compute_parity_index(r5,(current-current%4)/4)){
-      if(current%4==0){
-        read_block(r5,blc,current,0);
-      }
-      else if(current%4==1){
-        read_block(r5,blc,current-1,1);
-      }
-      else if(current%4==2){
-        read_block(r5,blc,current-2,2);
-      }
-      else if(current%4==3){
-        read_block(r5,blc,current-3,3);
-      }
-      octetsToHexa(*blc, nbHexa);
-      for(int i=0; i<BLOCK_SIZE*2; i=i+2){
-        shuffle=conversionDec(nbHexa[i+1]);
-        shuffle=shuffle+16*conversionDec(nbHexa[i]);
-        buffer[indice_buffer]=shuffle;
+  printf("Lecture de chunk : [start]:%d ,[end]:%d ,[size]:%d\n",start_block,start_block+n,compute_nblock(n));
+  while((uint) nbBlocksLus<nbBlocks){
+    printf("\nCurrent block :%d\n",current);
+    if(current%(r5->ndisk)!=compute_parity_index(r5, compute_num_bande(r5,current))){
+      printf("Reading position %d at disk %d\n",(current/4)*4,current%r5->ndisk);
+      read_block(r5,blc,(current/4)*4,current%r5->ndisk);
+      for(int i=0; i<BLOCK_SIZE; i++){
+        buffer[indice_buffer]=blc->data[i];
+        printf("%d ",blc->data[i]);
         indice_buffer=indice_buffer+1;
       }
+      nbBlocksLus++;
     }
-    else{
-      //printf("Ligne : %d , parité : %d , numbloc : %d\n",(current-current%4)/4,compute_parity_index(r5,(current-current%4)/4),current-start_block);
-    }
-    current=current+1;
+    current++;
   }
+  free(blc);
   return buffer;
 }
+
+
 
 void main(void){
   //couche1();
