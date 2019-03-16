@@ -3,28 +3,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-inode_t read_inode(virtual_disk_t *r5Disk, uint pos){
 
-}
-
-inode_table_t read_inodes_table(virtual_disk_t *r5Disk){
+void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
   stripe_t *bandesLues;
-  inode_table_t tableI;
   int nbBandes = compute_nstripe(r5Disk, INODE_SIZE);
-  bandesLues = (stripe_t*)malloc(sizeof(stripe_t)*nbBandes);
-
-  /**
-   * Inutiles ?
-   *for(int i = 0; i < r5Disk -> ndisk; i++){
-   * fseek(r5Disk->storage[i], INODES_START, SEEK_SET);
-   *}
-   **/
-   for (int i = 0; i<nbBandes; i++){
-  /*Retour de fonction ?*/read_stripe(r5, &bandesLues[i], INODES_START+(BLOCK_SIZE*i));
-  // Position en bande ou en octets ?
+  bandesLues = (stripe_t *) malloc(sizeof(stripe_t)*nbBandes);
+  for(int i = 0; i<nbBandes; i++){
+    &bandesLues[i] = init_bande();
   }
-
-  free(bandesLues);
+  for (int i = 0; i<INODE_TABLE_SIZE; i++){
+    //Faire l'inode à chaque tour de i
+    for (int j = 0; j<nbBandes; j++){
+      //BLOCK_SIZE*i*nbBandes*r5->ndisk = taille d'un inode sur disque * i
+      //BLOCK_SIZE*j*r5Disk->ndisk = j * taille d'une bande
+      read_stripe(r5Disk, &bandesLues[j], INODES_START+(BLOCK_SIZE*j*r5Disk->ndisk)+(BLOCK_SIZE*i*nbBandes*r5Disk->ndisk));
+    }
+    for(int k = 0; k<BLOCK_SIZE*r5Disk->ndisk; k++){
+      table[i]->filename[k] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[k/BLOCK_SIZE]->data[k%BLOCK_SIZE];
+    }
+  }
 }
 
 
