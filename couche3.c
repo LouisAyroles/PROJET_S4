@@ -3,20 +3,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct inode_s{
-  char filename[FILENAME_MAX_SIZE]; // dont '\0'
-  uint size; // du fichier en octets
-  uint nblock; // nblock du fichier = (size+BLOCK_SIZE-1)/BLOCK_SIZE ?
-  uint first_byte; // start block number on the virtual disk
-} inode_t;
 
 void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
-  stripe_t *bandesLues;
+  stripe_t *bandesLues, *marqueur;
   int nbBandes = compute_nstripe(r5Disk, INODE_SIZE);
   char conversion[4];
   bandesLues = (stripe_t *) malloc(sizeof(stripe_t)*nbBandes);
+  marqueur = bandesLues;
   for(int i = 0; i<nbBandes; i++){
-    &bandesLues[i] = init_bande();
+    marqueur = init_bande();
+    marqueur+=1;
   }
   for (int i = 0; i<INODE_TABLE_SIZE; i++){
     //Faire l'inode à chaque tour de i
@@ -33,7 +29,7 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
     //Recup du filename (pas de conversion)
     for(int k = 0; k<BLOCK_SIZE*r5Disk->ndisk*2; k++){ //k allant de 0 à (2bandes/octets)-1
                                                       //avec BLOCK_SIZE = 4 et ndisk =4; 0<=k<32
-      table[i]->filename[k] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%r5Disk->ndisk]->data[k%BLOCK_SIZE];
+      table[i]->filename[k] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)].stripe[(k/BLOCK_SIZE)%r5Disk->ndisk].data[k%BLOCK_SIZE];
       //k/(BLOCK_SIZE*r5Disk->ndisk) = indice de bande (0 puis 1)
       //(k/BLOCK_SIZE)%r5Disk->ndisk] = indice de block dans la bande (0-4)
       //k%BLOCK_SIZE = indice de l'octet dans le block (0-4)
@@ -41,7 +37,7 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
 
     //Recup de la size (conversion int)
     for (int k = BLOCK_SIZE*r5Disk->ndisk*2; k < (BLOCK_SIZE*r5Disk->ndisk*2)+4; k++){
-      conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%r5Disk->ndisk]->data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
+      conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)].stripe[(k/BLOCK_SIZE)%r5Disk->ndisk].data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
     }
     memcpy(&(table[i]->size), conversion, sizeof(table[i]->size));
     //Ou memcpy(&(table[i]->size), bandesLues[BLOCK_SIZE*r5Disk->ndisk*2/(BLOCK_SIZE*r5Disk->ndisk)]->
@@ -50,13 +46,13 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
 
     //Recup du nblock(conversion int)
     for (int k = (BLOCK_SIZE*r5Disk->ndisk*2)+4; k < (BLOCK_SIZE*r5Disk->ndisk*2)+8; k++){
-      conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%r5Disk->ndisk]->data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
+      conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)].stripe[(k/BLOCK_SIZE)%r5Disk->ndisk].data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
     }
     memcpy(&(table[i]->nblock), conversion, sizeof(table[i]->nblock));
 
     //Recup du first_byte(conversion int)
     for (int k = (BLOCK_SIZE*r5Disk->ndisk*2)+8; k < (BLOCK_SIZE*r5Disk->ndisk*2)+12; k++){
-      conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%r5Disk->ndisk]->data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
+      conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)].stripe[(k/BLOCK_SIZE)%r5Disk->ndisk].data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
     }
     memcpy(&(table[i]->first_byte), conversion, sizeof(table[i]->first_byte));
   }
