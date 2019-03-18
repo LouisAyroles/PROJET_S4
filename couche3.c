@@ -85,7 +85,7 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
     /*ecriture du filename*/
     poswrite = i*sizeof(inode_t);
     for (j = 0; j < FILENAME_MAX_SIZE; j++) {
-        buffer[poswrite+j]=inode[i].filename;
+        buffer[poswrite+j]=inode[i].filename[j];
     }
 
     /*ecriture de la size*/
@@ -114,7 +114,7 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
 }
 
 
-void delete_inodes_table(virtual_disk_t *r5Disk, int numInode){
+void delete_inode(virtual_disk_t *r5Disk, int numInode){
   for (int i = numInode; i < (r5Disk->number_of_files-numInode); i++) {
       r5Disk->inodes[i]=r5Disk->inodes[i+1];
   }
