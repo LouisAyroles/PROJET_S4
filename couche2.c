@@ -144,6 +144,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   } // Fin FOR i
   delete_bande(&bande);
 }
+/*pas pris en compte l'eventualité de commencer au milieu d'une bande*/
 
 int afficher_raid_hexa(virtual_disk_t *r5){
   int retour=0;
