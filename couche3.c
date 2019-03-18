@@ -56,6 +56,11 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
     }
     memcpy(&(table[i]->first_byte), conversion, sizeof(table[i]->first_byte));
   }
+  for(int i = 0; i<nbBandes; i++){
+    delete_bande(&marqueur);
+    marqueur-=1;
+  }
+  free(bandesLues); //??
 }
 
 
