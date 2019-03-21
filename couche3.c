@@ -115,14 +115,15 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
 
 
 void delete_inode(virtual_disk_t *r5Disk, int numInode){
-  for (int i = numInode; i < (r5Disk->number_of_files-numInode); i++) {
+  for (int i = numInode; i < (r5Disk->number_of_files); i++) {
       r5Disk->inodes[i]=r5Disk->inodes[i+1];
   }
-  r5Disk->number_of_files = r5Disk->number_of_files-1; //peut etre deja fait avant?
+  r5Disk->number_of_files = r5Disk->number_of_files-1;
 }
 
 
 int get_unused_inodes(virtual_disk_t *r5Disk){
+
   return (r5Disk->number_of_files)+1; //Qu'est ce qu'on retourne s'il n'y a plus de place?
 }
 
