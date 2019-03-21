@@ -274,12 +274,12 @@ char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
 }
 
 
-
-void main(void){
+int couche2(void){
   //couche1();
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   init_disk_raid5("./RAIDFILES",r5d);
   cmd_test1(r5d);
   printf("\nCMD_TEST2\n");
   cmd_test2(r5d);
+  return 0;
 }

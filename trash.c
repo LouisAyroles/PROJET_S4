@@ -95,3 +95,16 @@ char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
   return buffer;
 }
 */
+
+struct dirent *lecture;
+char *nomFichiers;
+int nbDisk = 0;
+nomFichiers = (char*)malloc(sizeof(nomFichiers)*10);
+rep = opendir(nomRep);
+while((lecture = readdir(rep))){
+  nomFichiers[nbDisk] = lecture->d_name;
+  nbDisk+=1;
+}
+r5Disk = (virtual_disk_t*)malloc(sizeof(virtual_disk_t));
+
+  DIR *rep;
