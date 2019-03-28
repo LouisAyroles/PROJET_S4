@@ -95,8 +95,8 @@ void print_stripe(virtual_disk_t *r5,stripe_t *stripe){
   for(int i=0;i<r5->ndisk;i++){
     current=stripe->stripe[i];
     octetsToHexa(current, nbHexa);
-    for(int i=0; i<BLOCK_SIZE*2; i++){
-      fprintf(stdout, "[%c]", nbHexa[i]);
+    for(int j=0; j<BLOCK_SIZE*2; j++){
+      fprintf(stdout, "[%c]", nbHexa[j]);
     }
     printf(" ");
   }

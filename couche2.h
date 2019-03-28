@@ -10,9 +10,10 @@ void write_stripe(virtual_disk_t *r5,stripe_t *ecrire,uint pos);
 void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock);
 char *read_chunk(virtual_disk_t *r5, uint start_block, int n);
 void delete_bande(stripe_t **bande);
-stripe_t *init_bande();
+stripe_t *init_bande(virtual_disk_t *r5);
 int read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos);
 void cmd_test1(virtual_disk_t *r5);
 int couche2(void);
+void print_stripe(virtual_disk_t *r5,stripe_t *stripe);
 
 #endif
