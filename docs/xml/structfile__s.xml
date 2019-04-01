@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structfile__s" kind="struct" language="C++" prot="public">
+    <compoundname>file_s</compoundname>
+    <includes refid="raid__defines_8h" local="no">raid_defines.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfile__s_1a22d26304a3b3aca97e6311f6939dd1bf" prot="public" static="no" mutable="no">
+        <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+        <definition>uint size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="raid_defines.h" line="63" column="1" bodyfile="raid_defines.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfile__s_1a5f05d979f42df3908fb0f491f6c65256" prot="public" static="no" mutable="no">
+        <type><ref refid="raid__defines_8h_1a65f85814a8290f9797005d3b28e7e5fc" kindref="member">uchar</ref></type>
+        <definition>uchar data[MAX_FILE_SIZE]</definition>
+        <argsstring>[MAX_FILE_SIZE]</argsstring>
+        <name>data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="raid_defines.h" line="64" column="1" bodyfile="raid_defines.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="raid_defines.h" line="62" column="1" bodyfile="raid_defines.h" bodystart="62" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structfile__s_1a5f05d979f42df3908fb0f491f6c65256" prot="public" virt="non-virtual"><scope>file_s</scope><name>data</name></member>
+      <member refid="structfile__s_1a22d26304a3b3aca97e6311f6939dd1bf" prot="public" virt="non-virtual"><scope>file_s</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

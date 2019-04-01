@@ -1,0 +1,495 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="couche2_8h" kind="file" language="C++">
+    <compoundname>couche2.h</compoundname>
+    <includes refid="couche1_8h" local="yes">couche1.h</includes>
+    <includedby refid="couche2_8c" local="yes">couche2.c</includedby>
+    <includedby refid="couche3_8h" local="yes">couche3.h</includedby>
+    <includedby refid="couche3_8c" local="yes">couche3.c</includedby>
+    <incdepgraph>
+      <node id="36">
+        <label>couche2.h</label>
+        <link refid="couche2_8h"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>raid_defines.h</label>
+        <link refid="raid__defines_8h"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>couche1.h</label>
+        <link refid="couche1_8h"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="41">
+        <label>couche2.c</label>
+        <link refid="couche2_8c"/>
+      </node>
+      <node id="40">
+        <label>couche2.h</label>
+        <link refid="couche2_8h"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>couche3.c</label>
+        <link refid="couche3_8c"/>
+      </node>
+      <node id="42">
+        <label>couche3.h</label>
+        <link refid="couche3_8h"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="couche2_8h_1a3e5eab04f9ea03705105756c7b8c0782" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int compute_nstripe</definition>
+        <argsstring>(virtual_disk_t *r5Disk, int nblocks)</argsstring>
+        <name>compute_nstripe</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nblocks</declname>
+        </param>
+        <briefdescription>
+<para>Retourne le nombre de bandes necessaires pour écrire n blocs. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nombre de blocs (int) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nombre de bandes (int) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="6" column="1" bodyfile="couche2.c" bodystart="23" bodyend="28"/>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <referencedby refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</referencedby>
+        <referencedby refid="couche3_8h_1a4655c5b4ff56a089ebb3d5436aa3109f" compoundref="couche3_8c" startline="57" endline="129">read_inodes_table</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1a9e6de3169d502aae6d8117e1e6ab03a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref></type>
+        <definition>block_t compute_parity</definition>
+        <argsstring>(virtual_disk_t *r5, stripe_t *tocompute, int indice_parite)</argsstring>
+        <name>compute_parity</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1acfaa25ade17f36b058f738bded61819a" kindref="member">stripe_t</ref> *</type>
+          <declname>tocompute</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>indice_parite</declname>
+        </param>
+        <briefdescription>
+<para>Calcule le bloc de parité d&apos;une stripe. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t *, stripe_t *,int </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>block_t </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="7" column="1" bodyfile="couche2.c" bodystart="35" bodyend="43"/>
+        <references refid="structstripe__s_1a16ff6d534dd4944c7fc544e4247e5ff1" compoundref="raid__defines_8h" startline="59">stripe_s::stripe</references>
+        <references refid="structstripe__s_1a076c8e8b7f7acccc46cd356bd8776b26" compoundref="raid__defines_8h" startline="58">stripe_s::nblocks</references>
+        <references refid="couche1_8c_1a69d295ba0ccd1a14fbc7ef4dd2c3a5c9" compoundref="couche1_8c" startline="141" endline="145">xorbl</references>
+        <referencedby refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1a70860f329dcd21100a6648089f864ed0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int compute_parity_index</definition>
+        <argsstring>(virtual_disk_t *r5, int numbd)</argsstring>
+        <name>compute_parity_index</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>numbd</declname>
+        </param>
+        <briefdescription>
+<para>Calcule la position du block de parité d&apos;une stripe. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t , int numero de la bande dans la liste du raid </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>int </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="8" column="1" bodyfile="couche2.c" bodystart="50" bodyend="56"/>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <referencedby refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</referencedby>
+        <referencedby refid="couche2_8h_1a1868b67f893921ee137623a23e4b6dd8" compoundref="couche2_8c" startline="251" endline="275">read_chunk</referencedby>
+        <referencedby refid="couche3_8h_1afb633869cb6423375c1b26936806d6e7" compoundref="couche3_8c" startline="137" endline="185">write_inodes_table</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1a5033c8eea4a4da6a76284e361f13240d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void write_stripe</definition>
+        <argsstring>(virtual_disk_t *r5, stripe_t *ecrire, uint pos)</argsstring>
+        <name>write_stripe</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1acfaa25ade17f36b058f738bded61819a" kindref="member">stripe_t</ref> *</type>
+          <declname>ecrire</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit une stripe a la position passée en argument sur le raid passé en argument. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t ,stripe_t ,int </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="9" column="1" bodyfile="couche2.c" bodystart="63" bodyend="67"/>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="couche1_8c_1adb4607cf11ffed5c89fc0f4682bf6079" compoundref="couche1_8c" startline="112" endline="118">write_block</references>
+        <references refid="structstripe__s_1a16ff6d534dd4944c7fc544e4247e5ff1" compoundref="raid__defines_8h" startline="59">stripe_s::stripe</references>
+        <referencedby refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void write_chunk</definition>
+        <argsstring>(virtual_disk_t *r5, char *buffer, int n, uint startBlock)</argsstring>
+        <name>write_chunk</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>startBlock</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit une stripe a la position passée en argument sur le raid passé en argument. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t ,stripe_t ,int </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="10" column="1" bodyfile="couche2.c" bodystart="112" bodyend="147"/>
+        <references refid="couche1_8c_1a9cd7d6dccecc07ca1b67fd05c7928ee3" compoundref="couche1_8c" startline="93" endline="102">compute_nblock</references>
+        <references refid="couche2_8c_1a3e5eab04f9ea03705105756c7b8c0782" compoundref="couche2_8c" startline="23" endline="28">compute_nstripe</references>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <references refid="couche2_8c_1ab6170c9cc6975d296a0bccfea207d415" compoundref="couche2_8c" startline="70" endline="75">init_bande</references>
+        <references refid="couche2_8c_1a70860f329dcd21100a6648089f864ed0" compoundref="couche2_8c" startline="50" endline="56">compute_parity_index</references>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="structstripe__s_1a16ff6d534dd4944c7fc544e4247e5ff1" compoundref="raid__defines_8h" startline="59">stripe_s::stripe</references>
+        <references refid="couche2_8c_1a9e6de3169d502aae6d8117e1e6ab03a0" compoundref="couche2_8c" startline="35" endline="43">compute_parity</references>
+        <references refid="couche2_8c_1a5033c8eea4a4da6a76284e361f13240d" compoundref="couche2_8c" startline="63" endline="67">write_stripe</references>
+        <references refid="couche2_8c_1adf66b9197c93775a6c1dba723ba92a07" compoundref="couche2_8c" startline="82" endline="86">delete_bande</references>
+        <referencedby refid="couche2_8h_1abc2b7fd9807ede9a34e0d2bea6e9521c" compoundref="couche2_8c" startline="194" endline="203">cmd_test1</referencedby>
+        <referencedby refid="couche3_8h_1afb633869cb6423375c1b26936806d6e7" compoundref="couche3_8c" startline="137" endline="185">write_inodes_table</referencedby>
+        <referencedby refid="couche3_8h_1a380acc8c8a85a041ecae9a995cf0a490" compoundref="couche3_8c" startline="269" endline="313">write_super_block</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1a1868b67f893921ee137623a23e4b6dd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* read_chunk</definition>
+        <argsstring>(virtual_disk_t *r5, uint start_block, int n)</argsstring>
+        <name>read_chunk</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>start_block</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Fonction de lecture de tableau de char. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t * , uint , int </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>char * </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="11" column="1" bodyfile="couche2.c" bodystart="251" bodyend="275"/>
+        <references refid="couche1_8c_1a9cd7d6dccecc07ca1b67fd05c7928ee3" compoundref="couche1_8c" startline="93" endline="102">compute_nblock</references>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="couche2_8c_1a70860f329dcd21100a6648089f864ed0" compoundref="couche2_8c" startline="50" endline="56">compute_parity_index</references>
+        <references refid="couche2_8c_1a1365b1597af91528776b50b5bc418a08" compoundref="couche2_8c" startline="242" endline="244">compute_num_bande</references>
+        <references refid="couche1_8c_1a4ba30a1143e543d465725eb0f151c6a2" compoundref="couche1_8c" startline="130" endline="138">read_block</references>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <referencedby refid="couche2_8c_1a2c76b4c3607585f36f7e7653fb96d633" compoundref="couche2_8c" startline="228" endline="234">cmd_test2</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1adf66b9197c93775a6c1dba723ba92a07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_bande</definition>
+        <argsstring>(stripe_t **bande)</argsstring>
+        <name>delete_bande</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1acfaa25ade17f36b058f738bded61819a" kindref="member">stripe_t</ref> **</type>
+          <declname>bande</declname>
+        </param>
+        <briefdescription>
+<para>Libere la mémoir réservée par une bande. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stripe_t * </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="12" column="1" bodyfile="couche2.c" bodystart="82" bodyend="86"/>
+        <referencedby refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</referencedby>
+        <referencedby refid="couche3_8h_1a4655c5b4ff56a089ebb3d5436aa3109f" compoundref="couche3_8c" startline="57" endline="129">read_inodes_table</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1ab6170c9cc6975d296a0bccfea207d415" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="raid__defines_8h_1acfaa25ade17f36b058f738bded61819a" kindref="member">stripe_t</ref> *</type>
+        <definition>stripe_t* init_bande</definition>
+        <argsstring>(virtual_disk_t *r5)</argsstring>
+        <name>init_bande</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="13" column="1" bodyfile="couche2.c" bodystart="70" bodyend="75"/>
+        <references refid="structstripe__s_1a076c8e8b7f7acccc46cd356bd8776b26" compoundref="raid__defines_8h" startline="58">stripe_s::nblocks</references>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="structstripe__s_1a16ff6d534dd4944c7fc544e4247e5ff1" compoundref="raid__defines_8h" startline="59">stripe_s::stripe</references>
+        <referencedby refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</referencedby>
+        <referencedby refid="couche3_8h_1a4655c5b4ff56a089ebb3d5436aa3109f" compoundref="couche3_8c" startline="57" endline="129">read_inodes_table</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1aea9498cb46077bb21181922c96e8329f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int read_stripe</definition>
+        <argsstring>(virtual_disk_t *r5, stripe_t *lire, uint pos)</argsstring>
+        <name>read_stripe</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1acfaa25ade17f36b058f738bded61819a" kindref="member">stripe_t</ref> *</type>
+          <declname>lire</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>Lis une bande a partir de la position passée en parametre. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t *,stripe_t *, uint </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>int </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="14" column="1" bodyfile="couche2.c" bodystart="211" bodyend="221"/>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="couche1_8c_1a4ba30a1143e543d465725eb0f151c6a2" compoundref="couche1_8c" startline="130" endline="138">read_block</references>
+        <references refid="structstripe__s_1a16ff6d534dd4944c7fc544e4247e5ff1" compoundref="raid__defines_8h" startline="59">stripe_s::stripe</references>
+        <referencedby refid="couche3_8h_1a846a550008b03ec52ba64c30d614d08b" compoundref="couche3_8c" startline="25" endline="49">read_super_block</referencedby>
+        <referencedby refid="couche3_8h_1a4655c5b4ff56a089ebb3d5436aa3109f" compoundref="couche3_8c" startline="57" endline="129">read_inodes_table</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1abc2b7fd9807ede9a34e0d2bea6e9521c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmd_test1</definition>
+        <argsstring>(virtual_disk_t *r5)</argsstring>
+        <name>cmd_test1</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <briefdescription>
+<para>fonction de test pour write_chunk </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>virtual_disk_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>* </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="15" column="1" bodyfile="couche2.c" bodystart="194" bodyend="203"/>
+        <references refid="couche2_8c_1a5e216cfa058baf4a67b6fc96773fe095" compoundref="couche2_8c" startline="172" endline="187">afficher_raid_decimal</references>
+        <references refid="couche2_8c_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</references>
+        <references refid="couche2_8c_1a37df3c8400bc0d4673471a52757d023a" compoundref="couche2_8c" startline="150" endline="165">afficher_raid_hexa</references>
+        <referencedby refid="couche2_8h_1a38818187df03f330b062dcc1b3cf78df" compoundref="couche2_8c" startline="278" endline="286">couche2</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1a38818187df03f330b062dcc1b3cf78df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int couche2</definition>
+        <argsstring>(void)</argsstring>
+        <name>couche2</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="16" column="1" bodyfile="couche2.c" bodystart="278" bodyend="286"/>
+        <references refid="couche1_8c_1a745e214ead4cfa64503c1be97c30d25a" compoundref="couche1_8c" startline="44" endline="56">init_disk_raid5</references>
+        <references refid="couche2_8c_1abc2b7fd9807ede9a34e0d2bea6e9521c" compoundref="couche2_8c" startline="194" endline="203">cmd_test1</references>
+        <references refid="couche2_8c_1a2c76b4c3607585f36f7e7653fb96d633" compoundref="couche2_8c" startline="228" endline="234">cmd_test2</references>
+      </memberdef>
+      <memberdef kind="function" id="couche2_8h_1a2fa67e5d44f8746a06cc56ef2876c45e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_stripe</definition>
+        <argsstring>(virtual_disk_t *r5, stripe_t *stripe)</argsstring>
+        <name>print_stripe</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1acfaa25ade17f36b058f738bded61819a" kindref="member">stripe_t</ref> *</type>
+          <declname>stripe</declname>
+        </param>
+        <briefdescription>
+<para>Affiche une bande. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t ,stripe_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche2.h" line="17" column="1" bodyfile="couche2.c" bodystart="93" bodyend="105"/>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="structstripe__s_1a16ff6d534dd4944c7fc544e4247e5ff1" compoundref="raid__defines_8h" startline="59">stripe_s::stripe</references>
+        <references refid="couche1_8c_1a1fc20a5afdea4eec626e52a499ff46cd" compoundref="couche1_8c" startline="192" endline="200">octetsToHexa</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="couche1_8h" kindref="compound">couche1.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>COUCHE2_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>COUCHE2_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1a3e5eab04f9ea03705105756c7b8c0782" kindref="member">compute_nstripe</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nblocks);</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><ref refid="structblock__s" kindref="compound">block_t</ref><sp/><ref refid="couche2_8h_1a9e6de3169d502aae6d8117e1e6ab03a0" kindref="member">compute_parity</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5,<sp/><ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>*tocompute,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>indice_parite);</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1a70860f329dcd21100a6648089f864ed0" kindref="member">compute_parity_index</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>numbd);</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1a5033c8eea4a4da6a76284e361f13240d" kindref="member">write_stripe</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5,<ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>*ecrire,<ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>pos);</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" kindref="member">write_chunk</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buffer,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>startBlock);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="couche2_8h_1a1868b67f893921ee137623a23e4b6dd8" kindref="member">read_chunk</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>start_block,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1adf66b9197c93775a6c1dba723ba92a07" kindref="member">delete_bande</ref>(<ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>**bande);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>*<ref refid="couche2_8h_1ab6170c9cc6975d296a0bccfea207d415" kindref="member">init_bande</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1aea9498cb46077bb21181922c96e8329f" kindref="member">read_stripe</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5,<sp/><ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>*lire,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>pos);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1abc2b7fd9807ede9a34e0d2bea6e9521c" kindref="member">cmd_test1</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1a38818187df03f330b062dcc1b3cf78df" kindref="member">couche2</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche2_8h_1a2fa67e5d44f8746a06cc56ef2876c45e" kindref="member">print_stripe</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5,<ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>*stripe);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="couche2.h"/>
+  </compounddef>
+</doxygen>

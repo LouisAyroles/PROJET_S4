@@ -1,0 +1,295 @@
+\hypertarget{raid__defines_8h}{}\section{raid\+\_\+defines.\+h File Reference}
+\label{raid__defines_8h}\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for raid\+\_\+defines.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{raid__defines_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{raid__defines_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structblock__s}{block\+\_\+s}
+\item 
+struct \hyperlink{structinode__s}{inode\+\_\+s}
+\item 
+struct \hyperlink{structsuper__block__s}{super\+\_\+block\+\_\+s}
+\item 
+struct \hyperlink{structvirtual__disk__s}{virtual\+\_\+disk\+\_\+s}
+\item 
+struct \hyperlink{structstripe__s}{stripe\+\_\+s}
+\item 
+struct \hyperlink{structfile__s}{file\+\_\+s}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{raid__defines_8h_a8a9dac7f648d09d16b17ff585c9f2efe}{E\+R\+R\+E\+UR}~-\/1
+\item 
+\#define \hyperlink{raid__defines_8h_ad51ded0bbd705f02f73fc60c0b721ced}{B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}~4
+\item 
+\#define \hyperlink{raid__defines_8h_a24c1405225e4ce27b24bcf4f32f4ff0e}{F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE}~32
+\item 
+\#define \hyperlink{raid__defines_8h_a649ad5274d988d17a275a3cead056746}{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+ZE}~(50$\ast$1024)
+\item 
+\#define \hyperlink{raid__defines_8h_a6c041fac527c965e3db582c4c19c1ab4}{I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}~10
+\item 
+\#define \hyperlink{raid__defines_8h_aa24597a54a085c6c2c33b64138f09eff}{M\+A\+X\+\_\+\+M\+SG}~1024
+\item 
+\#define \hyperlink{raid__defines_8h_a42178fcae46f09d3c91ca3da27188231}{S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}~4
+\item 
+\#define \hyperlink{raid__defines_8h_a1a1399be80da10bab823671e773453bb}{I\+N\+O\+D\+E\+S\+\_\+\+S\+T\+A\+RT}~\hyperlink{raid__defines_8h_a42178fcae46f09d3c91ca3da27188231}{S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}$\ast$\hyperlink{raid__defines_8h_ad51ded0bbd705f02f73fc60c0b721ced}{B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}+1
+\item 
+\#define \hyperlink{raid__defines_8h_a34a3a3e2e3a4bd30b993bce5b19f3d73}{I\+N\+O\+D\+E\+\_\+\+S\+I\+ZE}~11
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned int \hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}
+\item 
+typedef unsigned char \hyperlink{raid__defines_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}
+\item 
+typedef struct \hyperlink{structblock__s}{block\+\_\+s} \hyperlink{raid__defines_8h_a9497df9c1d65b018066a9760da7be4e6}{block\+\_\+t}
+\item 
+typedef struct \hyperlink{structinode__s}{inode\+\_\+s} \hyperlink{raid__defines_8h_aecc98d5532293d656a2a4f8c09b31af0}{inode\+\_\+t}
+\item 
+typedef \hyperlink{raid__defines_8h_aecc98d5532293d656a2a4f8c09b31af0}{inode\+\_\+t} \hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t}\mbox{[}\hyperlink{raid__defines_8h_a6c041fac527c965e3db582c4c19c1ab4}{I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}\mbox{]}
+\item 
+typedef struct \hyperlink{structsuper__block__s}{super\+\_\+block\+\_\+s} \hyperlink{raid__defines_8h_a5b2244b463782d93e6dfc058790cb9eb}{super\+\_\+block\+\_\+t}
+\item 
+typedef struct \hyperlink{structvirtual__disk__s}{virtual\+\_\+disk\+\_\+s} \hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t}
+\item 
+typedef struct \hyperlink{structstripe__s}{stripe\+\_\+s} \hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t}
+\item 
+typedef struct \hyperlink{structfile__s}{file\+\_\+s} \hyperlink{raid__defines_8h_ab997eba9ca6001274a2916a7518ddca5}{file\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6e}{raid} \{ \newline
+\hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eae117e3533122c80b262257b49b21cddf}{Z\+E\+RO}, 
+\hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea84d559f3e898f067d4529c5eb3ab5a61}{UN}, 
+\hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eae2996d8da47978a309deebde23aec4ab}{C\+I\+NQ}, 
+\hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea1b4aedfb0f4ef011d964bcf01befdeaa}{Z\+E\+R\+O\+\_\+\+UN}, 
+\newline
+\hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eaee746b0b3b0072f79606f2bd004621cc}{U\+N\+\_\+\+Z\+E\+RO}, 
+\hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea2226995f0db9d32c88c3c3bf7ba47482}{C\+I\+N\+Q\+U\+A\+N\+TE}, 
+\hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eaf59ee3d128b9d3f5d89bc37bff97b5ab}{C\+E\+NT}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{raid__defines_8h_ad51ded0bbd705f02f73fc60c0b721ced}\label{raid__defines_8h_ad51ded0bbd705f02f73fc60c0b721ced}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE@{B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}}
+\index{B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE@{B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}{BLOCK\_SIZE}}
+{\footnotesize\ttfamily \#define B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE~4}
+
+
+
+Definition at line 7 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_a8a9dac7f648d09d16b17ff585c9f2efe}\label{raid__defines_8h_a8a9dac7f648d09d16b17ff585c9f2efe}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!E\+R\+R\+E\+UR@{E\+R\+R\+E\+UR}}
+\index{E\+R\+R\+E\+UR@{E\+R\+R\+E\+UR}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{E\+R\+R\+E\+UR}{ERREUR}}
+{\footnotesize\ttfamily \#define E\+R\+R\+E\+UR~-\/1}
+
+
+
+Definition at line 6 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_a24c1405225e4ce27b24bcf4f32f4ff0e}\label{raid__defines_8h_a24c1405225e4ce27b24bcf4f32f4ff0e}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE@{F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE}}
+\index{F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE@{F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE}{FILENAME\_MAX\_SIZE}}
+{\footnotesize\ttfamily \#define F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE~32}
+
+
+
+Definition at line 8 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_a34a3a3e2e3a4bd30b993bce5b19f3d73}\label{raid__defines_8h_a34a3a3e2e3a4bd30b993bce5b19f3d73}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!I\+N\+O\+D\+E\+\_\+\+S\+I\+ZE@{I\+N\+O\+D\+E\+\_\+\+S\+I\+ZE}}
+\index{I\+N\+O\+D\+E\+\_\+\+S\+I\+ZE@{I\+N\+O\+D\+E\+\_\+\+S\+I\+ZE}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+O\+D\+E\+\_\+\+S\+I\+ZE}{INODE\_SIZE}}
+{\footnotesize\ttfamily \#define I\+N\+O\+D\+E\+\_\+\+S\+I\+ZE~11}
+
+
+
+Definition at line 14 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_a6c041fac527c965e3db582c4c19c1ab4}\label{raid__defines_8h_a6c041fac527c965e3db582c4c19c1ab4}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE@{I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}}
+\index{I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE@{I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}{INODE\_TABLE\_SIZE}}
+{\footnotesize\ttfamily \#define I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE~10}
+
+
+
+Definition at line 10 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_a1a1399be80da10bab823671e773453bb}\label{raid__defines_8h_a1a1399be80da10bab823671e773453bb}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!I\+N\+O\+D\+E\+S\+\_\+\+S\+T\+A\+RT@{I\+N\+O\+D\+E\+S\+\_\+\+S\+T\+A\+RT}}
+\index{I\+N\+O\+D\+E\+S\+\_\+\+S\+T\+A\+RT@{I\+N\+O\+D\+E\+S\+\_\+\+S\+T\+A\+RT}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+O\+D\+E\+S\+\_\+\+S\+T\+A\+RT}{INODES\_START}}
+{\footnotesize\ttfamily \#define I\+N\+O\+D\+E\+S\+\_\+\+S\+T\+A\+RT~\hyperlink{raid__defines_8h_a42178fcae46f09d3c91ca3da27188231}{S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}$\ast$\hyperlink{raid__defines_8h_ad51ded0bbd705f02f73fc60c0b721ced}{B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}+1}
+
+
+
+Definition at line 13 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_a649ad5274d988d17a275a3cead056746}\label{raid__defines_8h_a649ad5274d988d17a275a3cead056746}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+ZE@{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+ZE}}
+\index{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+ZE@{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+ZE}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+ZE}{MAX\_FILE\_SIZE}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+F\+I\+L\+E\+\_\+\+S\+I\+ZE~(50$\ast$1024)}
+
+
+
+Definition at line 9 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_aa24597a54a085c6c2c33b64138f09eff}\label{raid__defines_8h_aa24597a54a085c6c2c33b64138f09eff}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!M\+A\+X\+\_\+\+M\+SG@{M\+A\+X\+\_\+\+M\+SG}}
+\index{M\+A\+X\+\_\+\+M\+SG@{M\+A\+X\+\_\+\+M\+SG}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+M\+SG}{MAX\_MSG}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+M\+SG~1024}
+
+
+
+Definition at line 11 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_a42178fcae46f09d3c91ca3da27188231}\label{raid__defines_8h_a42178fcae46f09d3c91ca3da27188231}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE@{S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}}
+\index{S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE@{S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE}{SUPER\_BLOCK\_SIZE}}
+{\footnotesize\ttfamily \#define S\+U\+P\+E\+R\+\_\+\+B\+L\+O\+C\+K\+\_\+\+S\+I\+ZE~4}
+
+
+
+Definition at line 12 of file raid\+\_\+defines.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{raid__defines_8h_a9497df9c1d65b018066a9760da7be4e6}\label{raid__defines_8h_a9497df9c1d65b018066a9760da7be4e6}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!block\+\_\+t@{block\+\_\+t}}
+\index{block\+\_\+t@{block\+\_\+t}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{block\+\_\+t}{block\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structblock__s}{block\+\_\+s}  \hyperlink{raid__defines_8h_a9497df9c1d65b018066a9760da7be4e6}{block\+\_\+t}}
+
+\mbox{\Hypertarget{raid__defines_8h_ab997eba9ca6001274a2916a7518ddca5}\label{raid__defines_8h_ab997eba9ca6001274a2916a7518ddca5}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!file\+\_\+t@{file\+\_\+t}}
+\index{file\+\_\+t@{file\+\_\+t}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{file\+\_\+t}{file\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structfile__s}{file\+\_\+s}  \hyperlink{raid__defines_8h_ab997eba9ca6001274a2916a7518ddca5}{file\+\_\+t}}
+
+\mbox{\Hypertarget{raid__defines_8h_aecc98d5532293d656a2a4f8c09b31af0}\label{raid__defines_8h_aecc98d5532293d656a2a4f8c09b31af0}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!inode\+\_\+t@{inode\+\_\+t}}
+\index{inode\+\_\+t@{inode\+\_\+t}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{inode\+\_\+t}{inode\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structinode__s}{inode\+\_\+s}  \hyperlink{raid__defines_8h_aecc98d5532293d656a2a4f8c09b31af0}{inode\+\_\+t}}
+
+\mbox{\Hypertarget{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}\label{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!inode\+\_\+table\+\_\+t@{inode\+\_\+table\+\_\+t}}
+\index{inode\+\_\+table\+\_\+t@{inode\+\_\+table\+\_\+t}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{inode\+\_\+table\+\_\+t}{inode\_table\_t}}
+{\footnotesize\ttfamily typedef \hyperlink{raid__defines_8h_aecc98d5532293d656a2a4f8c09b31af0}{inode\+\_\+t} inode\+\_\+table\+\_\+t\mbox{[}\hyperlink{raid__defines_8h_a6c041fac527c965e3db582c4c19c1ab4}{I\+N\+O\+D\+E\+\_\+\+T\+A\+B\+L\+E\+\_\+\+S\+I\+ZE}\mbox{]}}
+
+
+
+Definition at line 37 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}\label{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!stripe\+\_\+t@{stripe\+\_\+t}}
+\index{stripe\+\_\+t@{stripe\+\_\+t}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{stripe\+\_\+t}{stripe\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structstripe__s}{stripe\+\_\+s}  \hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t}}
+
+\mbox{\Hypertarget{raid__defines_8h_a5b2244b463782d93e6dfc058790cb9eb}\label{raid__defines_8h_a5b2244b463782d93e6dfc058790cb9eb}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!super\+\_\+block\+\_\+t@{super\+\_\+block\+\_\+t}}
+\index{super\+\_\+block\+\_\+t@{super\+\_\+block\+\_\+t}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{super\+\_\+block\+\_\+t}{super\_block\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structsuper__block__s}{super\+\_\+block\+\_\+s}  \hyperlink{raid__defines_8h_a5b2244b463782d93e6dfc058790cb9eb}{super\+\_\+block\+\_\+t}}
+
+\mbox{\Hypertarget{raid__defines_8h_a65f85814a8290f9797005d3b28e7e5fc}\label{raid__defines_8h_a65f85814a8290f9797005d3b28e7e5fc}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!uchar@{uchar}}
+\index{uchar@{uchar}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{uchar}{uchar}}
+{\footnotesize\ttfamily typedef unsigned char \hyperlink{raid__defines_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar}}
+
+
+
+Definition at line 17 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}\label{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!uint@{uint}}
+\index{uint@{uint}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{uint}{uint}}
+{\footnotesize\ttfamily typedef unsigned int \hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}
+
+
+
+Definition at line 16 of file raid\+\_\+defines.\+h.
+
+\mbox{\Hypertarget{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}\label{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!virtual\+\_\+disk\+\_\+t@{virtual\+\_\+disk\+\_\+t}}
+\index{virtual\+\_\+disk\+\_\+t@{virtual\+\_\+disk\+\_\+t}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{virtual\+\_\+disk\+\_\+t}{virtual\_disk\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structvirtual__disk__s}{virtual\+\_\+disk\+\_\+s}  \hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t}}
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6e}\label{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6e}} 
+\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!raid@{raid}}
+\index{raid@{raid}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}
+\subsubsection{\texorpdfstring{raid}{raid}}
+{\footnotesize\ttfamily enum \hyperlink{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6e}{raid}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Z\+E\+RO@{Z\+E\+RO}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!Z\+E\+RO@{Z\+E\+RO}}}\mbox{\Hypertarget{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eae117e3533122c80b262257b49b21cddf}\label{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eae117e3533122c80b262257b49b21cddf}} 
+Z\+E\+RO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UN@{UN}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!UN@{UN}}}\mbox{\Hypertarget{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea84d559f3e898f067d4529c5eb3ab5a61}\label{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea84d559f3e898f067d4529c5eb3ab5a61}} 
+UN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+I\+NQ@{C\+I\+NQ}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!C\+I\+NQ@{C\+I\+NQ}}}\mbox{\Hypertarget{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eae2996d8da47978a309deebde23aec4ab}\label{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eae2996d8da47978a309deebde23aec4ab}} 
+C\+I\+NQ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Z\+E\+R\+O\+\_\+\+UN@{Z\+E\+R\+O\+\_\+\+UN}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!Z\+E\+R\+O\+\_\+\+UN@{Z\+E\+R\+O\+\_\+\+UN}}}\mbox{\Hypertarget{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea1b4aedfb0f4ef011d964bcf01befdeaa}\label{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea1b4aedfb0f4ef011d964bcf01befdeaa}} 
+Z\+E\+R\+O\+\_\+\+UN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{U\+N\+\_\+\+Z\+E\+RO@{U\+N\+\_\+\+Z\+E\+RO}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!U\+N\+\_\+\+Z\+E\+RO@{U\+N\+\_\+\+Z\+E\+RO}}}\mbox{\Hypertarget{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eaee746b0b3b0072f79606f2bd004621cc}\label{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eaee746b0b3b0072f79606f2bd004621cc}} 
+U\+N\+\_\+\+Z\+E\+RO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+I\+N\+Q\+U\+A\+N\+TE@{C\+I\+N\+Q\+U\+A\+N\+TE}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!C\+I\+N\+Q\+U\+A\+N\+TE@{C\+I\+N\+Q\+U\+A\+N\+TE}}}\mbox{\Hypertarget{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea2226995f0db9d32c88c3c3bf7ba47482}\label{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6ea2226995f0db9d32c88c3c3bf7ba47482}} 
+C\+I\+N\+Q\+U\+A\+N\+TE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+E\+NT@{C\+E\+NT}!raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}}\index{raid\+\_\+defines.\+h@{raid\+\_\+defines.\+h}!C\+E\+NT@{C\+E\+NT}}}\mbox{\Hypertarget{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eaf59ee3d128b9d3f5d89bc37bff97b5ab}\label{raid__defines_8h_a7a2279e0841d50aa8e976d3bb0eb3a6eaf59ee3d128b9d3f5d89bc37bff97b5ab}} 
+C\+E\+NT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 18 of file raid\+\_\+defines.\+h.
+

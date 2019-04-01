@@ -1,0 +1,719 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="couche3_8c" kind="file" language="C++">
+    <compoundname>couche3.c</compoundname>
+    <includes refid="couche3_8h" local="yes">couche3.h</includes>
+    <includes refid="couche2_8h" local="yes">couche2.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">dirent.h</includes>
+    <incdepgraph>
+      <node id="46">
+        <label>couche2.h</label>
+        <link refid="couche2_8h"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>stdlib.h</label>
+      </node>
+      <node id="44">
+        <label>couche3.c</label>
+        <link refid="couche3_8c"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>couche3.h</label>
+        <link refid="couche3_8h"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>raid_defines.h</label>
+        <link refid="raid__defines_8h"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>string.h</label>
+      </node>
+      <node id="47">
+        <label>couche1.h</label>
+        <link refid="couche1_8h"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>stdio.h</label>
+      </node>
+      <node id="52">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="couche3_8c_1a846a550008b03ec52ba64c30d614d08b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void read_super_block</definition>
+        <argsstring>(virtual_disk_t *r5Disk, super_block_t *superblock)</argsstring>
+        <name>read_super_block</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a5b2244b463782d93e6dfc058790cb9eb" kindref="member">super_block_t</ref> *</type>
+          <declname>superblock</declname>
+        </param>
+        <briefdescription>
+<para>Lecture du superbloc. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t , super_block_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="25" column="1" bodyfile="couche3.c" bodystart="25" bodyend="49"/>
+        <references refid="raid__defines_8h_1a42178fcae46f09d3c91ca3da27188231" compoundref="raid__defines_8h" startline="12">SUPER_BLOCK_SIZE</references>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="couche2_8c_1aea9498cb46077bb21181922c96e8329f" compoundref="couche2_8c" startline="211" endline="221">read_stripe</references>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" compoundref="raid__defines_8h" startline="40">super_block_s::raid_type</references>
+        <references refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" compoundref="raid__defines_8h" startline="41">super_block_s::nb_blocks_used</references>
+        <references refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" compoundref="raid__defines_8h" startline="42">super_block_s::first_free_byte</references>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1a4655c5b4ff56a089ebb3d5436aa3109f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void read_inodes_table</definition>
+        <argsstring>(virtual_disk_t *r5Disk, inode_table_t *table)</argsstring>
+        <name>read_inodes_table</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>Lecture de la table d&apos;inodes. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t ,inode_table_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>: void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="57" column="1" bodyfile="couche3.c" bodystart="57" bodyend="129"/>
+        <references refid="couche2_8c_1a3e5eab04f9ea03705105756c7b8c0782" compoundref="couche2_8c" startline="23" endline="28">compute_nstripe</references>
+        <references refid="raid__defines_8h_1a34a3a3e2e3a4bd30b993bce5b19f3d73" compoundref="raid__defines_8h" startline="14">INODE_SIZE</references>
+        <references refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" compoundref="raid__defines_8h" startline="8">FILENAME_MAX_SIZE</references>
+        <references refid="couche2_8c_1ab6170c9cc6975d296a0bccfea207d415" compoundref="couche2_8c" startline="70" endline="75">init_bande</references>
+        <references refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" compoundref="raid__defines_8h" startline="10">INODE_TABLE_SIZE</references>
+        <references refid="couche2_8c_1aea9498cb46077bb21181922c96e8329f" compoundref="couche2_8c" startline="211" endline="221">read_stripe</references>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="couche2_8c_1adf66b9197c93775a6c1dba723ba92a07" compoundref="couche2_8c" startline="82" endline="86">delete_bande</references>
+        <referencedby refid="couche3_8h_1a8b166f8b0246d1f42f44204edb5f52a6" compoundref="couche3_8c" startline="249" endline="261">cmd_dump_inode</referencedby>
+        <referencedby refid="couche3_8h_1a380acc8c8a85a041ecae9a995cf0a490" compoundref="couche3_8c" startline="269" endline="313">write_super_block</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1afb633869cb6423375c1b26936806d6e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void write_inodes_table</definition>
+        <argsstring>(virtual_disk_t *r5Disk, inode_table_t inode)</argsstring>
+        <name>write_inodes_table</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref></type>
+          <declname>inode</declname>
+        </param>
+        <briefdescription>
+<para>Ecriture de la table d&apos;inodes. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t ,inode_table_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>: void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="137" column="1" bodyfile="couche3.c" bodystart="137" bodyend="185"/>
+        <references refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" compoundref="raid__defines_8h" startline="10">INODE_TABLE_SIZE</references>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="couche1_8c_1a9cd7d6dccecc07ca1b67fd05c7928ee3" compoundref="couche1_8c" startline="93" endline="102">compute_nblock</references>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="couche2_8c_1a70860f329dcd21100a6648089f864ed0" compoundref="couche2_8c" startline="50" endline="56">compute_parity_index</references>
+        <references refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" compoundref="raid__defines_8h" startline="8">FILENAME_MAX_SIZE</references>
+        <references refid="couche2_8c_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</references>
+        <referencedby refid="couche3_8c_1acdef7a1fd863a6d3770c1268cb06add3" compoundref="couche3_8c" startline="332" endline="343">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1a6a398a72bff8e6d5c8d8974883356d4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_inode</definition>
+        <argsstring>(virtual_disk_t *r5Disk, int numInode)</argsstring>
+        <name>delete_inode</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>numInode</declname>
+        </param>
+        <briefdescription>
+<para>Supression d&apos;inode. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="192" column="1" bodyfile="couche3.c" bodystart="192" bodyend="201"/>
+        <references refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" compoundref="raid__defines_8h" startline="47">virtual_disk_s::number_of_files</references>
+        <references refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" compoundref="raid__defines_8h" startline="49">virtual_disk_s::inodes</references>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1a86d9f9c0fd3952761a6879b691c30395" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int get_nb_files</definition>
+        <argsstring>(inode_table_t tab)</argsstring>
+        <name>get_nb_files</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref></type>
+          <declname>tab</declname>
+        </param>
+        <briefdescription>
+<para>Retourne le nombre de fichiers dans la table d&apos;inodes. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>inode_table_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nombre de fichiers (int) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="208" column="1" bodyfile="couche3.c" bodystart="208" bodyend="215"/>
+        <references refid="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" compoundref="couche3_8c" startline="222" endline="230">get_unused_inodes</references>
+        <referencedby refid="couche3_8h_1a8b166f8b0246d1f42f44204edb5f52a6" compoundref="couche3_8c" startline="249" endline="261">cmd_dump_inode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int get_unused_inodes</definition>
+        <argsstring>(inode_table_t tab)</argsstring>
+        <name>get_unused_inodes</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref></type>
+          <declname>tab</declname>
+        </param>
+        <briefdescription>
+<para>Retourne le nombre de fichiers inutilisés dans la table d&apos;inodes. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>inode_table_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nombre de fichiers (int) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="222" column="1" bodyfile="couche3.c" bodystart="222" bodyend="230"/>
+        <references refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" compoundref="raid__defines_8h" startline="10">INODE_TABLE_SIZE</references>
+        <referencedby refid="couche3_8h_1a86d9f9c0fd3952761a6879b691c30395" compoundref="couche3_8c" startline="208" endline="215">get_nb_files</referencedby>
+        <referencedby refid="couche3_8h_1a380acc8c8a85a041ecae9a995cf0a490" compoundref="couche3_8c" startline="269" endline="313">write_super_block</referencedby>
+        <referencedby refid="couche3_8c_1a39f901f28789cfa88375d1e5c5e1e734" compoundref="couche3_8c" startline="320" endline="330">first_free_byte</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1a5752b9deb83c0babc0443ca5c771e196" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="raid__defines_8h_1aecc98d5532293d656a2a4f8c09b31af0" kindref="member">inode_t</ref></type>
+        <definition>inode_t init_inode</definition>
+        <argsstring>(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start)</argsstring>
+        <name>init_inode</name>
+        <param>
+          <type>char</type>
+          <declname>nomFichier</declname>
+          <array>[FILENAME_MAX_SIZE]</array>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>taille</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>start</declname>
+        </param>
+        <briefdescription>
+<para>Initialisation d&apos;une inode. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>nom_de_fichier (char *),taille (uint),debut (uint) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>inode_t </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="237" column="1" bodyfile="couche3.c" bodystart="237" bodyend="245"/>
+        <references refid="structinode__s_1a620f1f08587e3ad63c74a9fb90bb9be8" compoundref="raid__defines_8h" startline="29">inode_s::filename</references>
+        <references refid="structinode__s_1a22d26304a3b3aca97e6311f6939dd1bf" compoundref="raid__defines_8h" startline="30">inode_s::size</references>
+        <references refid="structinode__s_1afe7beb909cfc74858acbb6c26d5d0e00" compoundref="raid__defines_8h" startline="31">inode_s::nblock</references>
+        <references refid="couche1_8c_1a9cd7d6dccecc07ca1b67fd05c7928ee3" compoundref="couche1_8c" startline="93" endline="102">compute_nblock</references>
+        <references refid="structinode__s_1a4513cc558a2d925cd5b3023ea6b3ba62" compoundref="raid__defines_8h" startline="32">inode_s::first_byte</references>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1a8b166f8b0246d1f42f44204edb5f52a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmd_dump_inode</definition>
+        <argsstring>(char *nomRep, virtual_disk_t *r5Disk)</argsstring>
+        <name>cmd_dump_inode</name>
+        <param>
+          <type>char *</type>
+          <declname>nomRep</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="249" column="1" bodyfile="couche3.c" bodystart="249" bodyend="261"/>
+        <references refid="couche3_8c_1a4655c5b4ff56a089ebb3d5436aa3109f" compoundref="couche3_8c" startline="57" endline="129">read_inodes_table</references>
+        <references refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" compoundref="raid__defines_8h" startline="47">virtual_disk_s::number_of_files</references>
+        <references refid="couche3_8c_1a86d9f9c0fd3952761a6879b691c30395" compoundref="couche3_8c" startline="208" endline="215">get_nb_files</references>
+        <references refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" compoundref="raid__defines_8h" startline="49">virtual_disk_s::inodes</references>
+        <referencedby refid="couche3_8c_1acdef7a1fd863a6d3770c1268cb06add3" compoundref="couche3_8c" startline="332" endline="343">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1a380acc8c8a85a041ecae9a995cf0a490" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void write_super_block</definition>
+        <argsstring>(virtual_disk_t *r5Disk)</argsstring>
+        <name>write_super_block</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <briefdescription>
+<para>Ecriture du superbloc. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="269" column="1" bodyfile="couche3.c" bodystart="269" bodyend="313"/>
+        <references refid="couche3_8c_1a4655c5b4ff56a089ebb3d5436aa3109f" compoundref="couche3_8c" startline="57" endline="129">read_inodes_table</references>
+        <references refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" compoundref="raid__defines_8h" startline="49">virtual_disk_s::inodes</references>
+        <references refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" compoundref="raid__defines_8h" startline="48">virtual_disk_s::super_block</references>
+        <references refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" compoundref="raid__defines_8h" startline="41">super_block_s::nb_blocks_used</references>
+        <references refid="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" compoundref="couche3_8c" startline="222" endline="230">get_unused_inodes</references>
+        <references refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" compoundref="raid__defines_8h" startline="42">super_block_s::first_free_byte</references>
+        <references refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" compoundref="raid__defines_8h" startline="40">super_block_s::raid_type</references>
+        <references refid="structvirtual__disk__s_1a207dd070642dde7ad48f8bb8b622f893" compoundref="raid__defines_8h" startline="51">virtual_disk_s::raidmode</references>
+        <references refid="couche2_8c_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</references>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1a39f901f28789cfa88375d1e5c5e1e734" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void first_free_byte</definition>
+        <argsstring>(virtual_disk_t *r5Disk)</argsstring>
+        <name>first_free_byte</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <briefdescription>
+<para>Ecriture de la position du premier octet libre dans le r5Disk. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="320" column="1" bodyfile="couche3.c" bodystart="320" bodyend="330"/>
+        <references refid="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" compoundref="couche3_8c" startline="222" endline="230">get_unused_inodes</references>
+        <references refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" compoundref="raid__defines_8h" startline="49">virtual_disk_s::inodes</references>
+        <references refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" compoundref="raid__defines_8h" startline="48">virtual_disk_s::super_block</references>
+        <references refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" compoundref="raid__defines_8h" startline="42">super_block_s::first_free_byte</references>
+      </memberdef>
+      <memberdef kind="function" id="couche3_8c_1acdef7a1fd863a6d3770c1268cb06add3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche3.c" line="332" column="1" bodyfile="couche3.c" bodystart="332" bodyend="343"/>
+        <references refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" compoundref="raid__defines_8h" startline="10">INODE_TABLE_SIZE</references>
+        <references refid="structinode__s_1a4513cc558a2d925cd5b3023ea6b3ba62" compoundref="raid__defines_8h" startline="32">inode_s::first_byte</references>
+        <references refid="couche1_8c_1a745e214ead4cfa64503c1be97c30d25a" compoundref="couche1_8c" startline="44" endline="56">init_disk_raid5</references>
+        <references refid="couche3_8c_1afb633869cb6423375c1b26936806d6e7" compoundref="couche3_8c" startline="137" endline="185">write_inodes_table</references>
+        <references refid="couche3_8c_1a8b166f8b0246d1f42f44204edb5f52a6" compoundref="couche3_8c" startline="249" endline="261">cmd_dump_inode</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Programme couche3 du raid5. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>Groupe14 </para></simplesect>
+<simplesect kind="version"><para>0.1 </para></simplesect>
+<simplesect kind="date"><para>01 avril 2019</para></simplesect>
+Programme de la couche 2 du raid5. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="couche3_8h" kindref="compound">couche3.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="couche2_8h" kindref="compound">couche2.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;dirent.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="couche3_8h_1a846a550008b03ec52ba64c30d614d08b" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1a846a550008b03ec52ba64c30d614d08b" kindref="member">read_super_block</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>,<sp/><ref refid="structsuper__block__s" kindref="compound">super_block_t</ref><sp/>*superblock){</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;read_super_block\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nbBandes<sp/>=<sp/><ref refid="raid__defines_8h_1a42178fcae46f09d3c91ca3da27188231" kindref="member">SUPER_BLOCK_SIZE</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>*bandesLues;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>conversion[<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>];</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>bandesLues<sp/>=<sp/>(<ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>*)<sp/>malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structstripe__s" kindref="compound">stripe_t</ref>)*nbBandes);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j&lt;nbBandes;<sp/>j++){</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="couche2_8c_1aea9498cb46077bb21181922c96e8329f" kindref="member">read_stripe</ref>(r5Disk,<sp/>&amp;bandesLues[j],<sp/><ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*j*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6e" kindref="member">raid</ref>);<sp/>i++){</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>conversion[i%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>]<sp/>=<sp/>bandesLues[i/(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>)].stripe[(i/<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)%r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>].data[i%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>];</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>memcpy(&amp;(superblock-&gt;<ref refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" kindref="member">raid_type</ref>),<sp/>conversion,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(superblock-&gt;<ref refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" kindref="member">raid_type</ref>));</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6e" kindref="member">raid</ref>);<sp/>i<sp/>&lt;<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6e" kindref="member">raid</ref>)+</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/>i++){</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>conversion[i%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>]<sp/>=<sp/>bandesLues[i/(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>)].stripe[(i/<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)%r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>].data[i%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>];</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>memcpy(&amp;(superblock-&gt;<ref refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kindref="member">nb_blocks_used</ref>),<sp/>conversion,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(superblock-&gt;<ref refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kindref="member">nb_blocks_used</ref>));</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6e" kindref="member">raid</ref>)+</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);<sp/>i<sp/>&lt;<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6e" kindref="member">raid</ref>)+(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)*2);<sp/>i++){</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>conversion[i%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>]<sp/>=<sp/>bandesLues[i/(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>)].stripe[(i/<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)%r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>].data[i%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>];</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>memcpy(&amp;(superblock-&gt;<ref refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kindref="member">first_free_byte</ref>),<sp/>conversion,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(superblock-&gt;<ref refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kindref="member">first_free_byte</ref>));</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="couche3_8h_1a4655c5b4ff56a089ebb3d5436aa3109f" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1a4655c5b4ff56a089ebb3d5436aa3109f" kindref="member">read_inodes_table</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>,<sp/><ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref><sp/>*table){</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;read_inodes_table\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>**bandesLues;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nbBandes<sp/>=<sp/><ref refid="couche2_8c_1a3e5eab04f9ea03705105756c7b8c0782" kindref="member">compute_nstripe</ref>(r5Disk,<sp/><ref refid="raid__defines_8h_1a34a3a3e2e3a4bd30b993bce5b19f3d73" kindref="member">INODE_SIZE</ref>),<sp/>k;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>conversion[4];</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buffer<sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">)<sp/>*<sp/><ref refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" kindref="member">FILENAME_MAX_SIZE</ref>);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>bandesLues<sp/>=<sp/>(<ref refid="structstripe__s" kindref="compound">stripe_t</ref><sp/>**)<sp/>malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structstripe__s" kindref="compound">stripe_t</ref>)*nbBandes);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;nbBandes;<sp/>i++){</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>bandesLues[i]<sp/>=<sp/><ref refid="couche2_8c_1ab6170c9cc6975d296a0bccfea207d415" kindref="member">init_bande</ref>(r5Disk);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;<ref refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" kindref="member">INODE_TABLE_SIZE</ref>-1;<sp/>i++){</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Faire<sp/>l&apos;inode<sp/>à<sp/>chaque<sp/>tour<sp/>de<sp/>i</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>LECTURE<sp/>DES<sp/>BANDES<sp/>CONSTITUANTS<sp/>L&apos;INODE<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j&lt;nbBandes;<sp/>j++){<sp/></highlight><highlight class="comment">//Ici<sp/>on<sp/>lit<sp/>toutes<sp/>les<sp/>bandes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//BLOCK_SIZE*i*nbBandes*r5-&gt;ndisk<sp/>=<sp/>taille<sp/>d&apos;un<sp/>inode<sp/>sur<sp/>disque<sp/>*<sp/>i</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//BLOCK_SIZE*j*r5Disk-&gt;ndisk<sp/>=<sp/>j<sp/>*<sp/>taille<sp/>d&apos;une<sp/>bande</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="couche2_8c_1aea9498cb46077bb21181922c96e8329f" kindref="member">read_stripe</ref>(r5Disk,<sp/>bandesLues[j],<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>+(j*<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)+(BLOCK_SIZE*nbBandes*i));</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>RECUPERATION<sp/>DES<sp/>INFOS<sp/>DEPUIS<sp/>LES<sp/>BANDES<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//printf(&quot;Bande<sp/>1:\n&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//print_stripe(r5Disk<sp/>,<sp/>bandesLues[0]);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//printf(&quot;Bande<sp/>2:\n&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//print_stripe(r5Disk<sp/>,<sp/>bandesLues[1]);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Recup<sp/>du<sp/>filename<sp/>(pas<sp/>de<sp/>conversion)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;DEBUG<sp/>retour<sp/>:<sp/>contenu<sp/>du<sp/>filename<sp/>n°<sp/>%d:<sp/>\n&quot;</highlight><highlight class="normal">,i);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(k<sp/>=<sp/>0;<sp/>k<sp/>&lt;<sp/><ref refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" kindref="member">FILENAME_MAX_SIZE</ref>;<sp/>k++){<sp/></highlight><highlight class="comment">//k<sp/>allant<sp/>de<sp/>0<sp/>à<sp/>(2bandes/octets)-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//avec<sp/>BLOCK_SIZE<sp/>=<sp/>4<sp/>et<sp/>ndisk<sp/>=4;<sp/>0&lt;=k&lt;32</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;BandesLues<sp/>=<sp/>%d,<sp/>stripe<sp/>=<sp/>%d,<sp/>data<sp/>=<sp/>%d,<sp/>ndisk=%d,<sp/>k=%d,<sp/>i<sp/>=<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>k/(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>),<sp/>(k/<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)%r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>,<sp/>k%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>,<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>,<sp/>k,<sp/>i);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>buffer[k]<sp/>=<sp/>bandesLues[k/(BLOCK_SIZE*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>)]-&gt;stripe[(k/BLOCK_SIZE)%(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>)].data[k%BLOCK_SIZE];</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;Modified\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>table[i]-&gt;filename[k]<sp/>=<sp/>buffer[k];</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//table[i]-&gt;filename[k]<sp/>=<sp/>bandesLues[k/(BLOCK_SIZE*r5Disk-&gt;ndisk)]-&gt;stripe[(k/BLOCK_SIZE)%(r5Disk-&gt;ndisk)].data[k%BLOCK_SIZE];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//test-&gt;stripe<sp/>=<sp/>bandesLues[k/(BLOCK_SIZE*r5Disk-&gt;ndisk)]-&gt;stripe[(k/BLOCK_SIZE)%(r5Disk-&gt;ndisk)];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//printf(&quot;file<sp/>=<sp/>bande<sp/>?<sp/>%d\n\n&quot;,<sp/>table[i]-&gt;filename[k]<sp/>==<sp/>bandesLues[k/(BLOCK_SIZE*r5Disk-&gt;ndisk)]-&gt;stripe[(k/BLOCK_SIZE)%(r5Disk-&gt;ndisk)].data[k%BLOCK_SIZE]);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//k/(BLOCK_SIZE*r5Disk-&gt;ndisk)<sp/>=<sp/>indice<sp/>de<sp/>bande<sp/>(0<sp/>puis<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//(k/BLOCK_SIZE)%r5Disk-&gt;ndisk]<sp/>=<sp/>indice<sp/>de<sp/>block<sp/>dans<sp/>la<sp/>bande<sp/>(0-4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//k%BLOCK_SIZE<sp/>=<sp/>indice<sp/>de<sp/>l&apos;octet<sp/>dans<sp/>le<sp/>block<sp/>(0-4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\ncontenu<sp/>du<sp/>filename<sp/>n°<sp/>%d:<sp/>\n&quot;</highlight><highlight class="normal">,i);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(k<sp/>=<sp/>0;<sp/>k<sp/>&lt;<sp/><ref refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" kindref="member">FILENAME_MAX_SIZE</ref>;<sp/>k++){</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;|%d|&quot;</highlight><highlight class="normal">,table[i]-&gt;filename[k]);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;OUT\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Recup<sp/>de<sp/>la<sp/>size<sp/>(conversion<sp/>int)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(k<sp/>=<sp/><ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>*2;<sp/>k<sp/>&lt;<sp/>(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>*2)+4;<sp/>k++){</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>conversion[k%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>]<sp/>=<sp/>bandesLues[k/(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>)]-&gt;stripe[(k/<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)%r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>].data[k%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>];<sp/></highlight><highlight class="comment">//Prob<sp/>si<sp/>on<sp/>change<sp/>BLOCK_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(&amp;(table[i]-&gt;size),<sp/>conversion,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(table[i]-&gt;size));</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Ou<sp/>memcpy(&amp;(table[i]-&gt;size),<sp/>bandesLues[BLOCK_SIZE*r5Disk-&gt;ndisk*2/(BLOCK_SIZE*r5Disk-&gt;ndisk)]-&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//stripe[(BLOCK_SIZE*r5Disk-&gt;ndisk*2/BLOCK_SIZE)%r5Disk-&gt;ndisk]-&gt;data[BLOCK_SIZE*r5Disk-&gt;ndisk*2%BLOCK_SIZE],</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//sizeof(table[i]-&gt;size));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Recup<sp/>du<sp/>nblock(conversion<sp/>int)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(k<sp/>=<sp/>(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>*2)+4;<sp/>k<sp/>&lt;<sp/>(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>*2)+8;<sp/>k++){</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>conversion[k%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>]<sp/>=<sp/>bandesLues[k/(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>)]-&gt;stripe[(k/<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)%r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>].data[k%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>];<sp/></highlight><highlight class="comment">//Prob<sp/>si<sp/>on<sp/>change<sp/>BLOCK_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(&amp;(table[i]-&gt;nblock),<sp/>conversion,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(table[i]-&gt;nblock));</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Recup<sp/>du<sp/>first_byte(conversion<sp/>int)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(k<sp/>=<sp/>(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>*2)+8;<sp/>k<sp/>&lt;<sp/>(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>*2)+12;<sp/>k++){</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>conversion[k%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>]<sp/>=<sp/>bandesLues[k/(<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>)]-&gt;stripe[(k/<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)%r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>].data[k%<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>];<sp/></highlight><highlight class="comment">//Prob<sp/>si<sp/>on<sp/>change<sp/>BLOCK_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(&amp;(table[i]-&gt;first_byte),<sp/>conversion,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(table[i]-&gt;first_byte));</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;memucypyOUT\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;nbBandes;<sp/>i++){</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="couche2_8c_1adf66b9197c93775a6c1dba723ba92a07" kindref="member">delete_bande</ref>(&amp;bandesLues[i]);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>free(bandesLues);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="couche3_8h_1afb633869cb6423375c1b26936806d6e7" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1afb633869cb6423375c1b26936806d6e7" kindref="member">write_inodes_table</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>,<sp/><ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref><sp/>inode){</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;write_inodes_table\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>noBande=0;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buffer<sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structinode__s" kindref="compound">inode_t</ref>)*<ref refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" kindref="member">INODE_TABLE_SIZE</ref>);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>temp[4];</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size,<sp/>nblock,<sp/>first_byte,<sp/>poswrite;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pos<sp/>=<sp/><ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>*<ref refid="couche1_8c_1a9cd7d6dccecc07ca1b67fd05c7928ee3" kindref="member">compute_nblock</ref>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structsuper__block__s" kindref="compound">super_block_t</ref>));</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>blockDebutInode<sp/>=<sp/>pos<sp/>/<sp/><ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>;<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*=<sp/>dernier<sp/>block<sp/>du<sp/>SUPERBLOCK*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(blockDebutInode&gt;=r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>){<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*rajoute<sp/>le<sp/>bloc<sp/>de<sp/>parité*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>blockDebutInode++;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>noBande<sp/>=<sp/>blockDebutInode/r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>blockDebutInode<sp/>=<sp/>blockDebutInode%r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>;<sp/></highlight><highlight class="comment">/*=<sp/>premier<sp/>block<sp/>de<sp/>l&apos;inode*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(blockDebutInode<sp/>==<sp/><ref refid="couche2_8c_1a70860f329dcd21100a6648089f864ed0" kindref="member">compute_parity_index</ref>(r5Disk<sp/>,noBande))<sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>blockDebutInode++;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*construction<sp/>du<sp/>buffer*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" kindref="member">INODE_TABLE_SIZE</ref>;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ecriture<sp/>du<sp/>filename*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>poswrite<sp/>=<sp/>i*</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="raid__defines_8h_1aecc98d5532293d656a2a4f8c09b31af0" kindref="member">inode_t</ref>);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/><ref refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" kindref="member">FILENAME_MAX_SIZE</ref>;<sp/>j++)<sp/>{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer[poswrite+j]=inode[i].filename[j];</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ecriture<sp/>de<sp/>la<sp/>size*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>poswrite<sp/>+=<sp/><ref refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" kindref="member">FILENAME_MAX_SIZE</ref>;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+3]<sp/>=<sp/>(inode[i].size&gt;&gt;24)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+2]<sp/>=<sp/>(inode[i].size&gt;&gt;16)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+1]<sp/>=<sp/>(inode[i].size&gt;&gt;8)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite]<sp/>=<sp/>inode[i].size<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ecriture<sp/>du<sp/>nblock*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>poswrite+=4;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+3]<sp/>=<sp/>(inode[i].nblock&gt;&gt;24)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+2]<sp/>=<sp/>(inode[i].nblock&gt;&gt;16)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+1]<sp/>=<sp/>(inode[i].nblock&gt;&gt;8)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite]<sp/>=<sp/>inode[i].nblock<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ecriture<sp/>du<sp/>first_byte*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>poswrite+=4;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+3]<sp/>=<sp/>(inode[i].first_byte&gt;&gt;24)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+2]<sp/>=<sp/>(inode[i].first_byte&gt;&gt;16)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+1]<sp/>=<sp/>(inode[i].first_byte&gt;&gt;8)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite]<sp/>=<sp/>inode[i].first_byte<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><ref refid="couche2_8c_1a7ba1127dd9f6b03cbef1c8974790d3c6" kindref="member">write_chunk</ref>(r5Disk,<sp/>buffer,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structinode__s" kindref="compound">inode_t</ref>)*INODE_TABLE_SIZE,<sp/>noBande*r5Disk-&gt;<ref refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kindref="member">ndisk</ref>+blockDebutInode);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192" refid="couche3_8h_1a6a398a72bff8e6d5c8d8974883356d4f" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1a6a398a72bff8e6d5c8d8974883356d4f" kindref="member">delete_inode</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>numInode){</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;delete_inode\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(numInode<sp/>&lt;=<sp/>r5Disk-&gt;number_of_files){</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>numInode+1;<sp/>i<sp/>&lt;<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" kindref="member">number_of_files</ref>);<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i-1]=r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i];</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[r5Disk-&gt;<ref refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" kindref="member">number_of_files</ref>-1].first_byte=0;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" kindref="member">number_of_files</ref><sp/>=<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" kindref="member">number_of_files</ref>-1;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="201"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208" refid="couche3_8h_1a86d9f9c0fd3952761a6879b691c30395" refkind="member"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1a86d9f9c0fd3952761a6879b691c30395" kindref="member">get_nb_files</ref>(<ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref><sp/>tab){</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;get_nb_files\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/><ref refid="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" kindref="member">get_unused_inodes</ref>(tab);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>==<sp/>-1){</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>10;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222" refid="couche3_8h_1aaaa754526fd451aaf44a805cc9f08d30" refkind="member"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" kindref="member">get_unused_inodes</ref>(<ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref><sp/>tab){</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;get_unused_inodes\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" kindref="member">INODE_TABLE_SIZE</ref>;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(tab[i].first_byte<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237" refid="couche3_8h_1a5752b9deb83c0babc0443ca5c771e196" refkind="member"><highlight class="normal"><ref refid="structinode__s" kindref="compound">inode_t</ref><sp/><ref refid="couche3_8c_1a5752b9deb83c0babc0443ca5c771e196" kindref="member">init_inode</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>nomFichier[<ref refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" kindref="member">FILENAME_MAX_SIZE</ref>],<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>taille,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>start){</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;init_inode\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><ref refid="structinode__s" kindref="compound">inode_t</ref><sp/>result;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/>strcpy(result.<ref refid="structinode__s_1a620f1f08587e3ad63c74a9fb90bb9be8" kindref="member">filename</ref>,<sp/>nomFichier);<sp/></highlight><highlight class="comment">//<sp/>==32octets</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/>result.<ref refid="structinode__s_1a22d26304a3b3aca97e6311f6939dd1bf" kindref="member">size</ref><sp/>=<sp/>taille;<sp/></highlight><highlight class="comment">//<sp/>==<sp/>4octets</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/>result.<ref refid="structinode__s_1afe7beb909cfc74858acbb6c26d5d0e00" kindref="member">nblock</ref><sp/>=<sp/><ref refid="couche1_8c_1a9cd7d6dccecc07ca1b67fd05c7928ee3" kindref="member">compute_nblock</ref>(result.<ref refid="structinode__s_1a22d26304a3b3aca97e6311f6939dd1bf" kindref="member">size</ref>);<sp/></highlight><highlight class="comment">//<sp/>==<sp/>4octets</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/>result.<ref refid="structinode__s_1a4513cc558a2d925cd5b3023ea6b3ba62" kindref="member">first_byte</ref><sp/>=<sp/>start;<sp/></highlight><highlight class="comment">//<sp/>==<sp/>4<sp/>octets</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight><highlight class="comment">//<sp/>1<sp/>block<sp/>=<sp/>4<sp/>octets<sp/><sp/>--&gt;<sp/><sp/>un<sp/>Inode<sp/>=<sp/>(32+4*3)/4<sp/>blocks</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---&gt;<sp/>Inode<sp/>=<sp/>11<sp/>blocks</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249" refid="couche3_8h_1a8b166f8b0246d1f42f44204edb5f52a6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1a8b166f8b0246d1f42f44204edb5f52a6" kindref="member">cmd_dump_inode</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*nomRep,<sp/><ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>){</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;Dump_inode\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref><sp/>*table=malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref>));</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><ref refid="couche3_8c_1a4655c5b4ff56a089ebb3d5436aa3109f" kindref="member">read_inodes_table</ref>(r5Disk,<sp/>table);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" kindref="member">number_of_files</ref><sp/>=<sp/><ref refid="couche3_8c_1a86d9f9c0fd3952761a6879b691c30395" kindref="member">get_nb_files</ref>(*table);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>files<sp/>:<sp/>%d\n&quot;</highlight><highlight class="normal">,r5Disk-&gt;<ref refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" kindref="member">number_of_files</ref>);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" kindref="member">number_of_files</ref>);<sp/>i++){</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;fichier<sp/>n°%d<sp/>:\n%s\n&quot;</highlight><highlight class="normal">,<sp/>i<sp/>,r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].filename);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;%d<sp/>octets\n&quot;</highlight><highlight class="normal">,<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].size);</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;%d<sp/>blocks\n&quot;</highlight><highlight class="normal">,<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].nblock);</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;commence<sp/>a<sp/>l&apos;octet<sp/>%d\n\n&quot;</highlight><highlight class="normal">,<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].first_byte);</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="261"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269" refid="couche3_8h_1a380acc8c8a85a041ecae9a995cf0a490" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1a380acc8c8a85a041ecae9a995cf0a490" kindref="member">write_super_block</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>){</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;write_super_block\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>lastfirstbyte=0;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>lastindice=0;</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>poswrite=0;</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buffer<sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structsuper__block__s" kindref="compound">super_block_t</ref>));</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*Init<sp/>du<sp/>superblock*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><ref refid="couche3_8c_1a4655c5b4ff56a089ebb3d5436aa3109f" kindref="member">read_inodes_table</ref>(r5Disk,<sp/>&amp;(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>));</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kindref="member">nb_blocks_used</ref>=0;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" kindref="member">get_unused_inodes</ref>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>);<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kindref="member">nb_blocks_used</ref><sp/>+=<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].nblock;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].first_byte<sp/>&gt;<sp/>lastfirstbyte)<sp/>{</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>lastfirstbyte<sp/>=<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].first_byte;</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>lastindice=i;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kindref="member">first_free_byte</ref>=<sp/>lastfirstbyte<sp/>+<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[lastindice].size;</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" kindref="member">raid_type</ref><sp/>=<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a207dd070642dde7ad48f8bb8b622f893" kindref="member">raidmode</ref>;</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*Transformation<sp/>des<sp/>int<sp/>en<sp/>char<sp/>pour<sp/>ecriture<sp/>sur<sp/>le<sp/>disque*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ecriture<sp/>de<sp/>l&apos;enum*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+3]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" kindref="member">raid_type</ref>&gt;&gt;24)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+2]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" kindref="member">raid_type</ref>&gt;&gt;16)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+1]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" kindref="member">raid_type</ref>&gt;&gt;8)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite]<sp/>=<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" kindref="member">raid_type</ref><sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ecriture<sp/>de<sp/>nb_block_used*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/>poswrite+=4;</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+3]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kindref="member">nb_blocks_used</ref>&gt;&gt;24)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+2]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kindref="member">nb_blocks_used</ref>&gt;&gt;16)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+1]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kindref="member">nb_blocks_used</ref>&gt;&gt;8)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite]<sp/>=<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kindref="member">nb_blocks_used</ref><sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ecriture<sp/>de<sp/>first_free_byte*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/>poswrite+=4;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+3]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kindref="member">first_free_byte</ref>&gt;&gt;24)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+2]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kindref="member">first_free_byte</ref>&gt;&gt;16)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite+1]<sp/>=<sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kindref="member">first_free_byte</ref>&gt;&gt;8)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer[poswrite]<sp/>=<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kindref="member">first_free_byte</ref><sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Ecriture<sp/>du<sp/>Superblock*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="couche2_8c_1a7ba1127dd9f6b03cbef1c8974790d3c6" kindref="member">write_chunk</ref>(r5Disk,<sp/>buffer,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structsuper__block__s" kindref="compound">super_block_t</ref>),<sp/>0);</highlight></codeline>
+<codeline lineno="313"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320" refid="couche3_8c_1a39f901f28789cfa88375d1e5c5e1e734" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1a39f901f28789cfa88375d1e5c5e1e734" kindref="member">first_free_byte</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>){</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;first_free_byte\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>lastfirstbyte=0,<sp/>lastindice=0;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" kindref="member">get_unused_inodes</ref>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>);<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].first_byte<sp/>&gt;<sp/>lastfirstbyte)<sp/>{</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lastfirstbyte<sp/>=<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[i].first_byte;</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lastindice=i;</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kindref="member">super_block</ref>.<ref refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kindref="member">first_free_byte</ref><sp/>=<sp/>lastfirstbyte<sp/>+<sp/>r5Disk-&gt;<ref refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kindref="member">inodes</ref>[lastindice].size;</highlight></codeline>
+<codeline lineno="330"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight></codeline>
+<codeline lineno="332" refid="couche3_8c_1acdef7a1fd863a6d3770c1268cb06add3" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche3_8c_1acdef7a1fd863a6d3770c1268cb06add3" kindref="member">main</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//couche2();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*r5d=malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref>));</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><ref refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kindref="member">inode_table_t</ref><sp/>inodes;</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;<ref refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" kindref="member">INODE_TABLE_SIZE</ref>;<sp/>i++){</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/>inodes[i].<ref refid="structinode__s_1a4513cc558a2d925cd5b3023ea6b3ba62" kindref="member">first_byte</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><ref refid="couche1_8c_1a745e214ead4cfa64503c1be97c30d25a" kindref="member">init_disk_raid5</ref>(</highlight><highlight class="stringliteral">&quot;./RAIDFILES&quot;</highlight><highlight class="normal">,r5d);</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><ref refid="couche3_8c_1afb633869cb6423375c1b26936806d6e7" kindref="member">write_inodes_table</ref>(r5d,<sp/>inodes);</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\nCMD_DUMP_INODE\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><ref refid="couche3_8c_1a8b166f8b0246d1f42f44204edb5f52a6" kindref="member">cmd_dump_inode</ref>(</highlight><highlight class="stringliteral">&quot;RAIDFILES&quot;</highlight><highlight class="normal">,<sp/>r5d);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="couche3.c"/>
+  </compounddef>
+</doxygen>

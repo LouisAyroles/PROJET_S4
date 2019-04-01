@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="trash_8c" kind="file" language="C++">
+    <compoundname>trash.c</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="trash_8c_1a526bedc4819858b14e925ad8c477d6bd" prot="public" static="no" mutable="no">
+        <type>struct dirent *</type>
+        <definition>struct dirent* lecture</definition>
+        <argsstring></argsstring>
+        <name>lecture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trash.c" line="99" column="1" bodyfile="trash.c" bodystart="99" bodyend="-1"/>
+        <referencedby refid="trash_8c_1afd7857f9e20617aaaa8f148b23880152" compoundref="trash_8c" startline="104" endline="107">while</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="trash_8c_1aa4c8df49f5a01b1cd7b8ae95891828a9" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>nomFichiers</definition>
+        <argsstring></argsstring>
+        <name>nomFichiers</name>
+        <initializer>= (char*)malloc(sizeof(nomFichiers)*10)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trash.c" line="100" column="1" bodyfile="trash.c" bodystart="100" bodyend="-1"/>
+        <referencedby refid="trash_8c_1afd7857f9e20617aaaa8f148b23880152" compoundref="trash_8c" startline="104" endline="107">while</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="trash_8c_1aa84bf96622d78b0b6586f240fd760a86" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int nbDisk</definition>
+        <argsstring></argsstring>
+        <name>nbDisk</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trash.c" line="101" column="1" bodyfile="trash.c" bodystart="101" bodyend="-1"/>
+        <referencedby refid="trash_8c_1afd7857f9e20617aaaa8f148b23880152" compoundref="trash_8c" startline="104" endline="107">while</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="trash_8c_1a5db236caf6ff346c5084e3ca6c1a4d0b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>DIR * rep</definition>
+        <argsstring></argsstring>
+        <name>rep</name>
+        <initializer>= opendir(nomRep)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trash.c" line="103" column="1" bodyfile="trash.c" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>r5Disk</definition>
+        <argsstring></argsstring>
+        <name>r5Disk</name>
+        <initializer>= (<ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref>*)malloc(sizeof(<ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref>))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trash.c" line="108" column="1" bodyfile="trash.c" bodystart="108" bodyend="-1"/>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="trash_8c_1a218b1461a6308c48143bfa9ba887da64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void bitToHexa</definition>
+        <argsstring>(block_t monBloc, char *nbHexa)</argsstring>
+        <name>bitToHexa</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref></type>
+          <declname>monBloc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>nbHexa</declname>
+        </param>
+        <briefdescription>
+<para>prend un tableau de 4 octets (char) et le transforme en Hexadecimal </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>block_t (Contient le tableau de bits) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>char* (Caractere dans lequel on met l&apos;hexa) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>: void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trash.c" line="11" column="1" bodyfile="trash.c" bodystart="11" bodyend="40"/>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+      </memberdef>
+      <memberdef kind="function" id="trash_8c_1a1fc20a5afdea4eec626e52a499ff46cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void octetsToHexa</definition>
+        <argsstring>(block_t monBloc, char *nbHexa)</argsstring>
+        <name>octetsToHexa</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref></type>
+          <declname>monBloc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>nbHexa</declname>
+        </param>
+        <briefdescription>
+<para>prend un tableau de 4 octets (char) et le transforme en Hexadecimal assert(monBloc[i]&lt;256); </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>block_t (Contient le tableau de bits) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>char* (Caractere dans lequel on met l&apos;hexa) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>: void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trash.c" line="42" column="1" bodyfile="trash.c" bodystart="42" bodyend="56"/>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <references refid="couche1_8c_1a7951420cc967a37ca46209305481727b" compoundref="couche1_8c" startline="207" endline="224">conversionHexa</references>
+      </memberdef>
+      <memberdef kind="function" id="trash_8c_1afd7857f9e20617aaaa8f148b23880152" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>while</definition>
+        <argsstring>((lecture=readdir(rep)))</argsstring>
+        <name>while</name>
+        <param>
+          <type>(<ref refid="trash_8c_1a526bedc4819858b14e925ad8c477d6bd" kindref="member">lecture</ref>=readdir(<ref refid="trash_8c_1a5db236caf6ff346c5084e3ca6c1a4d0b" kindref="member">rep</ref>))</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trash.c" line="104" column="1" bodyfile="trash.c" bodystart="104" bodyend="107"/>
+        <references refid="trash_8c_1aa4c8df49f5a01b1cd7b8ae95891828a9" compoundref="trash_8c" startline="100">nomFichiers</references>
+        <references refid="trash_8c_1aa84bf96622d78b0b6586f240fd760a86" compoundref="trash_8c" startline="101">nbDisk</references>
+        <references refid="trash_8c_1a526bedc4819858b14e925ad8c477d6bd" compoundref="trash_8c" startline="99">lecture</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Fichier<sp/>où<sp/>on<sp/>peut<sp/>mettre<sp/>des<sp/>idées<sp/>qu&apos;on<sp/>a<sp/>rejeté<sp/>mais<sp/>qu&apos;on<sp/>est<sp/>pas<sp/>sûr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>de<sp/>nous.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//DANS<sp/>COUCHE1.C</highlight></codeline>
+<codeline lineno="11" refid="trash_8c_1a218b1461a6308c48143bfa9ba887da64" refkind="member"><highlight class="comment"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trash_8c_1a218b1461a6308c48143bfa9ba887da64" kindref="member">bitToHexa</ref>(<ref refid="structblock__s" kindref="compound">block_t</ref><sp/>monBloc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>nbHexa){</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>nb<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(monBloc.<ref refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" kindref="member">data</ref>[<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>-1]){</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nb+=8;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(monBloc.<ref refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" kindref="member">data</ref>[<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>-2]){</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nb+=4;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(monBloc.<ref refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" kindref="member">data</ref>[<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>-3]){</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nb+=2;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(monBloc.<ref refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" kindref="member">data</ref>[<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>-4]){</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nb+=1;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(nb){</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>10<sp/>:<sp/>*nbHexa=</highlight><highlight class="charliteral">&apos;A&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>11:<sp/><sp/>*nbHexa=</highlight><highlight class="charliteral">&apos;B&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>12<sp/>:<sp/>*nbHexa=</highlight><highlight class="charliteral">&apos;C&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>13<sp/>:<sp/>*nbHexa=</highlight><highlight class="charliteral">&apos;D&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>14<sp/>:<sp/>*nbHexa=</highlight><highlight class="charliteral">&apos;E&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>15<sp/>:<sp/>*nbHexa=</highlight><highlight class="charliteral">&apos;F&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:<sp/><sp/>*nbHexa=nb+</highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="trash_8c_1a1fc20a5afdea4eec626e52a499ff46cd" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trash_8c_1a1fc20a5afdea4eec626e52a499ff46cd" kindref="member">octetsToHexa</ref>(<ref refid="structblock__s" kindref="compound">block_t</ref><sp/>monBloc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>nbHexa){</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>reste,<sp/>diviseur;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>;<sp/>i++){</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>diviseur<sp/>=<sp/>monBloc.<ref refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" kindref="member">data</ref>[i]<sp/>/<sp/>16;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>reste<sp/>=<sp/>monBloc.<ref refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" kindref="member">data</ref>[i]<sp/>%<sp/>16;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>nbHexa[(2*<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)-(2*i+1)]=<ref refid="couche1_8c_1a7951420cc967a37ca46209305481727b" kindref="member">conversionHexa</ref>(reste);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>nbHexa[(2*<ref refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kindref="member">BLOCK_SIZE</ref>)-(2*i+2)]=<ref refid="couche1_8c_1a7951420cc967a37ca46209305481727b" kindref="member">conversionHexa</ref>(diviseur);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>QUESTION:<sp/>Dans<sp/>quel<sp/>sens<sp/>on<sp/>ecrit<sp/>dans<sp/>le<sp/>tableau<sp/>d&apos;hexadecimal?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Comme<sp/>je<sp/>l&apos;ai<sp/>fait<sp/>ça<sp/>ecrit<sp/>dans<sp/>la<sp/>case<sp/>7<sp/>et<sp/>6<sp/>l&apos;hexadecimal<sp/>de<sp/>l&apos;octet</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>0,<sp/>5<sp/>et<sp/>4<sp/>l&apos;hexadecimal<sp/>de<sp/>l&apos;octet<sp/>1,<sp/>etc...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Comme<sp/>ça<sp/>quand<sp/>on<sp/>print<sp/>de<sp/>0<sp/>à<sp/>BLOCK_SIZE*2<sp/>(le<sp/>nombre<sp/>de<sp/>chiffre<sp/>en</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>hexadecimal<sp/>pour<sp/>ecrire<sp/>BLOCK_SIZE<sp/>octets)<sp/>ça<sp/>affiche<sp/>dans<sp/>le<sp/>sens<sp/>de</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>lecture.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="59"><highlight class="comment">char<sp/>*read_chunk(virtual_disk_t<sp/>*r5,<sp/>uint<sp/>start_block,<sp/>int<sp/>n){</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/>uint<sp/>nbBlocks<sp/>=<sp/>compute_nblock(n);</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/>unsigned<sp/>char<sp/>*buffer=malloc(sizeof(unsigned<sp/>char)*n);</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/>int<sp/>indice_buffer=0;</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/>int<sp/>current=start_block;</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/>block_t<sp/>*blc=malloc(sizeof(struct<sp/>block_s));</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/>buffer<sp/>=<sp/>(char*)malloc(sizeof(char)*n);</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/>char<sp/>nbHexa[BLOCK_SIZE*2];</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/>unsigned<sp/>char<sp/>shuffle;</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/>while((uint)<sp/>current&lt;=start_block+nbBlocks+nbBlocks/3-1){</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/>if((current-start_block)%r5-&gt;ndisk!=compute_parity_index(r5,(current-current%4)/4)){</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>if(current%4==0){</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>read_block(r5,blc,current,0);</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>else<sp/>if(current%4==1){</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>read_block(r5,blc,current-1,1);</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>else<sp/>if(current%4==2){</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>read_block(r5,blc,current-2,2);</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>else<sp/>if(current%4==3){</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>read_block(r5,blc,current-3,3);</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>octetsToHexa(*blc,<sp/>nbHexa);</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>for(int<sp/>i=0;<sp/>i&lt;BLOCK_SIZE*2;<sp/>i=i+2){</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>shuffle=conversionDec(nbHexa[i+1]);</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>shuffle=shuffle+16*conversionDec(nbHexa[i]);</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer[indice_buffer]=shuffle;</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>indice_buffer=indice_buffer+1;</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/>else{</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>//printf(&quot;Ligne<sp/>:<sp/>%d<sp/>,<sp/>parité<sp/>:<sp/>%d<sp/>,<sp/>numbloc<sp/>:<sp/>%d\n&quot;,(current-current%4)/4,compute_parity_index(r5,(current-current%4)/4),current-start_block);</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/>current=current+1;</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/>return<sp/>buffer;</highlight></codeline>
+<codeline lineno="96"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="97"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="trash_8c_1a526bedc4819858b14e925ad8c477d6bd" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">dirent<sp/>*<ref refid="trash_8c_1a526bedc4819858b14e925ad8c477d6bd" kindref="member">lecture</ref>;</highlight></codeline>
+<codeline lineno="100" refid="trash_8c_1aa4c8df49f5a01b1cd7b8ae95891828a9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="trash_8c_1aa4c8df49f5a01b1cd7b8ae95891828a9" kindref="member">nomFichiers</ref>;</highlight></codeline>
+<codeline lineno="101" refid="trash_8c_1aa84bf96622d78b0b6586f240fd760a86" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="trash_8c_1aa84bf96622d78b0b6586f240fd760a86" kindref="member">nbDisk</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><ref refid="trash_8c_1aa4c8df49f5a01b1cd7b8ae95891828a9" kindref="member">nomFichiers</ref><sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="trash_8c_1aa4c8df49f5a01b1cd7b8ae95891828a9" kindref="member">nomFichiers</ref>)*10);</highlight></codeline>
+<codeline lineno="103" refid="trash_8c_1a5db236caf6ff346c5084e3ca6c1a4d0b" refkind="member"><highlight class="normal"><ref refid="trash_8c_1a5db236caf6ff346c5084e3ca6c1a4d0b" kindref="member">rep</ref><sp/>=<sp/>opendir(nomRep);</highlight></codeline>
+<codeline lineno="104" refid="trash_8c_1afd7857f9e20617aaaa8f148b23880152" refkind="member"><highlight class="normal"></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">((<ref refid="trash_8c_1a526bedc4819858b14e925ad8c477d6bd" kindref="member">lecture</ref><sp/>=<sp/>readdir(<ref refid="trash_8c_1a5db236caf6ff346c5084e3ca6c1a4d0b" kindref="member">rep</ref>))){</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><ref refid="trash_8c_1aa4c8df49f5a01b1cd7b8ae95891828a9" kindref="member">nomFichiers</ref>[<ref refid="trash_8c_1aa84bf96622d78b0b6586f240fd760a86" kindref="member">nbDisk</ref>]<sp/>=<sp/><ref refid="trash_8c_1a526bedc4819858b14e925ad8c477d6bd" kindref="member">lecture</ref>-&gt;d_name;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><ref refid="trash_8c_1aa84bf96622d78b0b6586f240fd760a86" kindref="member">nbDisk</ref>+=1;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="108" refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" refkind="member"><highlight class="normal"><ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref><sp/>=<sp/>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref>*)malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref>));</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>DIR<sp/>*<ref refid="trash_8c_1a5db236caf6ff346c5084e3ca6c1a4d0b" kindref="member">rep</ref>;</highlight></codeline>
+    </programlisting>
+    <location file="trash.c"/>
+  </compounddef>
+</doxygen>

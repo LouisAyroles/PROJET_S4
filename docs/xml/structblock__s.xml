@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structblock__s" kind="struct" language="C++" prot="public">
+    <compoundname>block_s</compoundname>
+    <includes refid="raid__defines_8h" local="no">raid_defines.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" prot="public" static="no" mutable="no">
+        <type><ref refid="raid__defines_8h_1a65f85814a8290f9797005d3b28e7e5fc" kindref="member">uchar</ref></type>
+        <definition>uchar data[BLOCK_SIZE]</definition>
+        <argsstring>[BLOCK_SIZE]</argsstring>
+        <name>data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="raid_defines.h" line="24" column="1" bodyfile="raid_defines.h" bodystart="24" bodyend="-1"/>
+        <referencedby refid="couche1_8h_1adb4607cf11ffed5c89fc0f4682bf6079" compoundref="couche1_8c" startline="112" endline="118">write_block</referencedby>
+        <referencedby refid="couche1_8h_1a4ba30a1143e543d465725eb0f151c6a2" compoundref="couche1_8c" startline="130" endline="138">read_block</referencedby>
+        <referencedby refid="couche1_8h_1a69d295ba0ccd1a14fbc7ef4dd2c3a5c9" compoundref="couche1_8c" startline="141" endline="145">xorbl</referencedby>
+        <referencedby refid="couche1_8h_1a1fc20a5afdea4eec626e52a499ff46cd" compoundref="couche1_8c" startline="192" endline="200">octetsToHexa</referencedby>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+        <referencedby refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</referencedby>
+        <referencedby refid="couche2_8h_1a1868b67f893921ee137623a23e4b6dd8" compoundref="couche2_8c" startline="251" endline="275">read_chunk</referencedby>
+        <referencedby refid="trash_8c_1a218b1461a6308c48143bfa9ba887da64" compoundref="trash_8c" startline="11" endline="40">bitToHexa</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="raid_defines.h" line="23" column="1" bodyfile="raid_defines.h" bodystart="23" bodyend="25"/>
+    <listofallmembers>
+      <member refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" prot="public" virt="non-virtual"><scope>block_s</scope><name>data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

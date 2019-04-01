@@ -1,0 +1,267 @@
+.TH "couche3.c" 3 "Mon Apr 1 2019" "PROJET_S4" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+couche3.c \- Programme couche3 du raid5\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'couche3\&.h'\fP
+.br
+\fC#include 'couche2\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <dirent\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBread_super_block\fP (\fBvirtual_disk_t\fP *\fBr5Disk\fP, \fBsuper_block_t\fP *superblock)"
+.br
+.RI "Lecture du superbloc\&. "
+.ti -1c
+.RI "void \fBread_inodes_table\fP (\fBvirtual_disk_t\fP *\fBr5Disk\fP, \fBinode_table_t\fP *table)"
+.br
+.RI "Lecture de la table d'inodes\&. "
+.ti -1c
+.RI "void \fBwrite_inodes_table\fP (\fBvirtual_disk_t\fP *\fBr5Disk\fP, \fBinode_table_t\fP inode)"
+.br
+.RI "Ecriture de la table d'inodes\&. "
+.ti -1c
+.RI "void \fBdelete_inode\fP (\fBvirtual_disk_t\fP *\fBr5Disk\fP, int numInode)"
+.br
+.RI "Supression d'inode\&. "
+.ti -1c
+.RI "int \fBget_nb_files\fP (\fBinode_table_t\fP tab)"
+.br
+.RI "Retourne le nombre de fichiers dans la table d'inodes\&. "
+.ti -1c
+.RI "int \fBget_unused_inodes\fP (\fBinode_table_t\fP tab)"
+.br
+.RI "Retourne le nombre de fichiers inutilisés dans la table d'inodes\&. "
+.ti -1c
+.RI "\fBinode_t\fP \fBinit_inode\fP (char nomFichier[\fBFILENAME_MAX_SIZE\fP], \fBuint\fP taille, \fBuint\fP start)"
+.br
+.RI "Initialisation d'une inode\&. "
+.ti -1c
+.RI "void \fBcmd_dump_inode\fP (char *nomRep, \fBvirtual_disk_t\fP *\fBr5Disk\fP)"
+.br
+.ti -1c
+.RI "void \fBwrite_super_block\fP (\fBvirtual_disk_t\fP *\fBr5Disk\fP)"
+.br
+.RI "Ecriture du superbloc\&. "
+.ti -1c
+.RI "void \fBfirst_free_byte\fP (\fBvirtual_disk_t\fP *\fBr5Disk\fP)"
+.br
+.RI "Ecriture de la position du premier octet libre dans le r5Disk\&. "
+.ti -1c
+.RI "void \fBmain\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Programme couche3 du raid5\&. 
+
+
+.PP
+\fBAuthor:\fP
+.RS 4
+Groupe14 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.1 
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+01 avril 2019
+.RE
+.PP
+Programme de la couche 2 du raid5\&. 
+.PP
+Definition in file \fBcouche3\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void cmd_dump_inode (char * nomRep, \fBvirtual_disk_t\fP * r5Disk)"
+
+.PP
+Definition at line 249 of file couche3\&.c\&.
+.SS "void delete_inode (\fBvirtual_disk_t\fP * r5Disk, int numInode)"
+
+.PP
+Supression d'inode\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 192 of file couche3\&.c\&.
+.SS "void first_free_byte (\fBvirtual_disk_t\fP * r5Disk)"
+
+.PP
+Ecriture de la position du premier octet libre dans le r5Disk\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 320 of file couche3\&.c\&.
+.SS "int get_nb_files (\fBinode_table_t\fP tab)"
+
+.PP
+Retourne le nombre de fichiers dans la table d'inodes\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP inode_table_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Nombre de fichiers (int) 
+.RE
+.PP
+
+.PP
+Definition at line 208 of file couche3\&.c\&.
+.SS "int get_unused_inodes (\fBinode_table_t\fP tab)"
+
+.PP
+Retourne le nombre de fichiers inutilisés dans la table d'inodes\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP inode_table_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Nombre de fichiers (int) 
+.RE
+.PP
+
+.PP
+Definition at line 222 of file couche3\&.c\&.
+.SS "\fBinode_t\fP init_inode (char nomFichier[FILENAME_MAX_SIZE], \fBuint\fP taille, \fBuint\fP start)"
+
+.PP
+Initialisation d'une inode\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP nom_de_fichier (char *),taille (uint),debut (uint) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+inode_t 
+.RE
+.PP
+
+.PP
+Definition at line 237 of file couche3\&.c\&.
+.SS "void main ()"
+
+.PP
+Definition at line 332 of file couche3\&.c\&.
+.SS "void read_inodes_table (\fBvirtual_disk_t\fP * r5Disk, \fBinode_table_t\fP * table)"
+
+.PP
+Lecture de la table d'inodes\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t ,inode_table_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+: void 
+.RE
+.PP
+
+.PP
+Definition at line 57 of file couche3\&.c\&.
+.SS "void read_super_block (\fBvirtual_disk_t\fP * r5Disk, \fBsuper_block_t\fP * superblock)"
+
+.PP
+Lecture du superbloc\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t , super_block_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 25 of file couche3\&.c\&.
+.SS "void write_inodes_table (\fBvirtual_disk_t\fP * r5Disk, \fBinode_table_t\fP inode)"
+
+.PP
+Ecriture de la table d'inodes\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t ,inode_table_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+: void 
+.RE
+.PP
+
+.PP
+Definition at line 137 of file couche3\&.c\&.
+.SS "void write_super_block (\fBvirtual_disk_t\fP * r5Disk)"
+
+.PP
+Ecriture du superbloc\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 269 of file couche3\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PROJET_S4 from the source code\&.

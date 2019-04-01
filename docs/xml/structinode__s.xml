@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structinode__s" kind="struct" language="C++" prot="public">
+    <compoundname>inode_s</compoundname>
+    <includes refid="raid__defines_8h" local="no">raid_defines.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structinode__s_1a620f1f08587e3ad63c74a9fb90bb9be8" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char filename[FILENAME_MAX_SIZE]</definition>
+        <argsstring>[FILENAME_MAX_SIZE]</argsstring>
+        <name>filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="raid_defines.h" line="29" column="1" bodyfile="raid_defines.h" bodystart="29" bodyend="-1"/>
+        <referencedby refid="couche3_8h_1a5752b9deb83c0babc0443ca5c771e196" compoundref="couche3_8c" startline="237" endline="245">init_inode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structinode__s_1a22d26304a3b3aca97e6311f6939dd1bf" prot="public" static="no" mutable="no">
+        <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+        <definition>uint size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="raid_defines.h" line="30" column="1" bodyfile="raid_defines.h" bodystart="30" bodyend="-1"/>
+        <referencedby refid="couche3_8h_1a5752b9deb83c0babc0443ca5c771e196" compoundref="couche3_8c" startline="237" endline="245">init_inode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structinode__s_1afe7beb909cfc74858acbb6c26d5d0e00" prot="public" static="no" mutable="no">
+        <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+        <definition>uint nblock</definition>
+        <argsstring></argsstring>
+        <name>nblock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="raid_defines.h" line="31" column="1" bodyfile="raid_defines.h" bodystart="31" bodyend="-1"/>
+        <referencedby refid="couche3_8h_1a5752b9deb83c0babc0443ca5c771e196" compoundref="couche3_8c" startline="237" endline="245">init_inode</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structinode__s_1a4513cc558a2d925cd5b3023ea6b3ba62" prot="public" static="no" mutable="no">
+        <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+        <definition>uint first_byte</definition>
+        <argsstring></argsstring>
+        <name>first_byte</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="raid_defines.h" line="32" column="1" bodyfile="raid_defines.h" bodystart="32" bodyend="-1"/>
+        <referencedby refid="couche3_8h_1a5752b9deb83c0babc0443ca5c771e196" compoundref="couche3_8c" startline="237" endline="245">init_inode</referencedby>
+        <referencedby refid="couche3_8c_1acdef7a1fd863a6d3770c1268cb06add3" compoundref="couche3_8c" startline="332" endline="343">main</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="raid_defines.h" line="28" column="1" bodyfile="raid_defines.h" bodystart="28" bodyend="33"/>
+    <listofallmembers>
+      <member refid="structinode__s_1a620f1f08587e3ad63c74a9fb90bb9be8" prot="public" virt="non-virtual"><scope>inode_s</scope><name>filename</name></member>
+      <member refid="structinode__s_1a4513cc558a2d925cd5b3023ea6b3ba62" prot="public" virt="non-virtual"><scope>inode_s</scope><name>first_byte</name></member>
+      <member refid="structinode__s_1afe7beb909cfc74858acbb6c26d5d0e00" prot="public" virt="non-virtual"><scope>inode_s</scope><name>nblock</name></member>
+      <member refid="structinode__s_1a22d26304a3b3aca97e6311f6939dd1bf" prot="public" virt="non-virtual"><scope>inode_s</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -5,7 +5,23 @@
 #include <string.h>
 #include <dirent.h>
 
+/**
+ * \file couche3.c
+ * \brief Programme couche3 du raid5.
+ * \author Groupe14
+ * \version 0.1
+ * \date 01 avril 2019
+ *
+ * Programme de la couche 2 du raid5.
+ *
+ */
 
+
+ /** \brief
+   * Lecture du superbloc
+   * @param : virtual_disk_t , super_block_t
+   * @return void
+ **/
 void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
   printf("read_super_block\n");
   int nbBandes = SUPER_BLOCK_SIZE;
@@ -33,7 +49,11 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
 }
 
 
-
+/** \brief
+  * Lecture de la table d'inodes
+  * @param : virtual_disk_t ,inode_table_t
+  * @return : void
+**/
 void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
   printf("read_inodes_table\n");
   stripe_t **bandesLues;
@@ -109,6 +129,11 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
 }
 
 
+/** \brief
+  * Ecriture de la table d'inodes
+  * @param : virtual_disk_t ,inode_table_t
+  * @return : void
+**/
 void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
   printf("write_inodes_table\n");
   int noBande=0;
@@ -159,7 +184,11 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
   write_chunk(r5Disk, buffer, sizeof(inode_t)*INODE_TABLE_SIZE, noBande*r5Disk->ndisk+blockDebutInode);
 }
 
-
+/** \brief
+  * Supression d'inode
+  * @param : virtual_disk_t
+  * @return void
+**/
 void delete_inode(virtual_disk_t *r5Disk, int numInode){
   printf("delete_inode\n");
   if(numInode <= r5Disk->number_of_files){
@@ -171,6 +200,11 @@ void delete_inode(virtual_disk_t *r5Disk, int numInode){
   }
 }
 
+/** \brief
+  * Retourne le nombre de fichiers dans la table d'inodes
+  * @param : inode_table_t
+  * @return Nombre de fichiers (int)
+**/
 int get_nb_files(inode_table_t tab){
   printf("get_nb_files\n");
   int i = get_unused_inodes(tab);
@@ -180,6 +214,11 @@ int get_nb_files(inode_table_t tab){
   return i;
 }
 
+/** \brief
+  * Retourne le nombre de fichiers inutilisés dans la table d'inodes
+  * @param : inode_table_t
+  * @return Nombre de fichiers (int)
+**/
 int get_unused_inodes(inode_table_t tab){
   printf("get_unused_inodes\n");
   for (int i = 0; i < INODE_TABLE_SIZE; i++) {
@@ -187,9 +226,14 @@ int get_unused_inodes(inode_table_t tab){
       return i;
    }
   return -1;
+  }
 }
 
-}
+/** \brief
+  * Initialisation d'une inode
+  * @param : nom_de_fichier (char *),taille (uint),debut (uint)
+  * @return inode_t
+**/
 inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start){
   printf("init_inode\n");
   inode_t result;
@@ -217,7 +261,11 @@ void cmd_dump_inode(char *nomRep, virtual_disk_t *r5Disk){
 }
 
 
-
+/** \brief
+  * Ecriture du superbloc
+  * @param : virtual_disk_t
+  * @return void
+**/
 void write_super_block(virtual_disk_t *r5Disk){
   printf("write_super_block\n");
   int lastfirstbyte=0;
@@ -264,7 +312,11 @@ void write_super_block(virtual_disk_t *r5Disk){
     write_chunk(r5Disk, buffer, sizeof(super_block_t), 0);
 }
 
-
+/** \brief
+  * Ecriture de la position du premier octet libre dans le r5Disk
+  * @param : virtual_disk_t
+  * @return void
+**/
 void first_free_byte(virtual_disk_t *r5Disk){
   printf("first_free_byte\n");
   int lastfirstbyte=0, lastindice=0;

@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="structblock__s" kind="struct"><name>block_s</name>
+    <member refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" kind="variable"><name>data</name></member>
+  </compound>
+  <compound refid="structfile__s" kind="struct"><name>file_s</name>
+    <member refid="structfile__s_1a22d26304a3b3aca97e6311f6939dd1bf" kind="variable"><name>size</name></member>
+    <member refid="structfile__s_1a5f05d979f42df3908fb0f491f6c65256" kind="variable"><name>data</name></member>
+  </compound>
+  <compound refid="structinode__s" kind="struct"><name>inode_s</name>
+    <member refid="structinode__s_1a620f1f08587e3ad63c74a9fb90bb9be8" kind="variable"><name>filename</name></member>
+    <member refid="structinode__s_1a22d26304a3b3aca97e6311f6939dd1bf" kind="variable"><name>size</name></member>
+    <member refid="structinode__s_1afe7beb909cfc74858acbb6c26d5d0e00" kind="variable"><name>nblock</name></member>
+    <member refid="structinode__s_1a4513cc558a2d925cd5b3023ea6b3ba62" kind="variable"><name>first_byte</name></member>
+  </compound>
+  <compound refid="structstripe__s" kind="struct"><name>stripe_s</name>
+    <member refid="structstripe__s_1a076c8e8b7f7acccc46cd356bd8776b26" kind="variable"><name>nblocks</name></member>
+    <member refid="structstripe__s_1a16ff6d534dd4944c7fc544e4247e5ff1" kind="variable"><name>stripe</name></member>
+  </compound>
+  <compound refid="structsuper__block__s" kind="struct"><name>super_block_s</name>
+    <member refid="structsuper__block__s_1a531486677d7c826dad518c717abcd4ed" kind="variable"><name>raid_type</name></member>
+    <member refid="structsuper__block__s_1a471e84cd18cb41ccc12b4e188c003694" kind="variable"><name>nb_blocks_used</name></member>
+    <member refid="structsuper__block__s_1a8fcb4bf17f15b15d1e43aec5a7b22f3f" kind="variable"><name>first_free_byte</name></member>
+  </compound>
+  <compound refid="structvirtual__disk__s" kind="struct"><name>virtual_disk_s</name>
+    <member refid="structvirtual__disk__s_1a465d502eed9840aad6ec9f3a5a5d844c" kind="variable"><name>number_of_files</name></member>
+    <member refid="structvirtual__disk__s_1a32d9616143f7763451383a6c626038ca" kind="variable"><name>super_block</name></member>
+    <member refid="structvirtual__disk__s_1a1bcc97bff109cd0065249a564a71d5c8" kind="variable"><name>inodes</name></member>
+    <member refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" kind="variable"><name>ndisk</name></member>
+    <member refid="structvirtual__disk__s_1a207dd070642dde7ad48f8bb8b622f893" kind="variable"><name>raidmode</name></member>
+    <member refid="structvirtual__disk__s_1abed1c5c15dd8f784e7198b79f8973863" kind="variable"><name>storage</name></member>
+  </compound>
+  <compound refid="cmd__format_8c" kind="file"><name>cmd_format.c</name>
+    <member refid="cmd__format_8c_1a98689d86fdfbc9de409689e8f44240d2" kind="function"><name>format</name></member>
+    <member refid="cmd__format_8c_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="cmd__format_8h" kind="file"><name>cmd_format.h</name>
+  </compound>
+  <compound refid="couche1_8c" kind="file"><name>couche1.c</name>
+    <member refid="couche1_8c_1a4479ca3bf5ef9da255dc34dd3b954b04" kind="function"><name>add_finChemin</name></member>
+    <member refid="couche1_8c_1a745e214ead4cfa64503c1be97c30d25a" kind="function"><name>init_disk_raid5</name></member>
+    <member refid="couche1_8c_1a0f31c284e3b9461448ae2c5393a4c53f" kind="function"><name>turn_off_disk_raid5</name></member>
+    <member refid="couche1_8c_1a988f68f7bebc679f512c8eadaa391f16" kind="function"><name>info_disque</name></member>
+    <member refid="couche1_8c_1a9cd7d6dccecc07ca1b67fd05c7928ee3" kind="function"><name>compute_nblock</name></member>
+    <member refid="couche1_8c_1adb4607cf11ffed5c89fc0f4682bf6079" kind="function"><name>write_block</name></member>
+    <member refid="couche1_8c_1a4ba30a1143e543d465725eb0f151c6a2" kind="function"><name>read_block</name></member>
+    <member refid="couche1_8c_1a69d295ba0ccd1a14fbc7ef4dd2c3a5c9" kind="function"><name>xorbl</name></member>
+    <member refid="couche1_8c_1a2035024bc72d159d51a6ef54a8dc978a" kind="function"><name>block_repair</name></member>
+    <member refid="couche1_8c_1a1fc20a5afdea4eec626e52a499ff46cd" kind="function"><name>octetsToHexa</name></member>
+    <member refid="couche1_8c_1a7951420cc967a37ca46209305481727b" kind="function"><name>conversionHexa</name></member>
+    <member refid="couche1_8c_1a23fbb0c056aa4bfabd0cfd7b793591a3" kind="function"><name>conversionDec</name></member>
+    <member refid="couche1_8c_1ae6cedff3423d9b8afe126d3f298576ee" kind="function"><name>affichageBlockHexa</name></member>
+    <member refid="couche1_8c_1a1a6021fbd31ca2b308d61050416ab520" kind="function"><name>affichageBlockDecimal</name></member>
+    <member refid="couche1_8c_1a89f4e036d129f8952aa6711c9551ebc9" kind="function"><name>affichageDisque</name></member>
+    <member refid="couche1_8c_1a778282843931610565cf6a8353a633bc" kind="function"><name>couche1</name></member>
+  </compound>
+  <compound refid="couche1_8h" kind="file"><name>couche1.h</name>
+    <member refid="couche1_8h_1a4479ca3bf5ef9da255dc34dd3b954b04" kind="function"><name>add_finChemin</name></member>
+    <member refid="couche1_8h_1a745e214ead4cfa64503c1be97c30d25a" kind="function"><name>init_disk_raid5</name></member>
+    <member refid="couche1_8h_1a0f31c284e3b9461448ae2c5393a4c53f" kind="function"><name>turn_off_disk_raid5</name></member>
+    <member refid="couche1_8h_1a988f68f7bebc679f512c8eadaa391f16" kind="function"><name>info_disque</name></member>
+    <member refid="couche1_8h_1a9cd7d6dccecc07ca1b67fd05c7928ee3" kind="function"><name>compute_nblock</name></member>
+    <member refid="couche1_8h_1adb4607cf11ffed5c89fc0f4682bf6079" kind="function"><name>write_block</name></member>
+    <member refid="couche1_8h_1a4ba30a1143e543d465725eb0f151c6a2" kind="function"><name>read_block</name></member>
+    <member refid="couche1_8h_1a2035024bc72d159d51a6ef54a8dc978a" kind="function"><name>block_repair</name></member>
+    <member refid="couche1_8h_1a1fc20a5afdea4eec626e52a499ff46cd" kind="function"><name>octetsToHexa</name></member>
+    <member refid="couche1_8h_1ae6cedff3423d9b8afe126d3f298576ee" kind="function"><name>affichageBlockHexa</name></member>
+    <member refid="couche1_8h_1a1a6021fbd31ca2b308d61050416ab520" kind="function"><name>affichageBlockDecimal</name></member>
+    <member refid="couche1_8h_1a7951420cc967a37ca46209305481727b" kind="function"><name>conversionHexa</name></member>
+    <member refid="couche1_8h_1a69d295ba0ccd1a14fbc7ef4dd2c3a5c9" kind="function"><name>xorbl</name></member>
+    <member refid="couche1_8h_1a778282843931610565cf6a8353a633bc" kind="function"><name>couche1</name></member>
+    <member refid="couche1_8h_1a89f4e036d129f8952aa6711c9551ebc9" kind="function"><name>affichageDisque</name></member>
+    <member refid="couche1_8h_1a23fbb0c056aa4bfabd0cfd7b793591a3" kind="function"><name>conversionDec</name></member>
+  </compound>
+  <compound refid="couche2_8c" kind="file"><name>couche2.c</name>
+    <member refid="couche2_8c_1a3e5eab04f9ea03705105756c7b8c0782" kind="function"><name>compute_nstripe</name></member>
+    <member refid="couche2_8c_1a9e6de3169d502aae6d8117e1e6ab03a0" kind="function"><name>compute_parity</name></member>
+    <member refid="couche2_8c_1a70860f329dcd21100a6648089f864ed0" kind="function"><name>compute_parity_index</name></member>
+    <member refid="couche2_8c_1a5033c8eea4a4da6a76284e361f13240d" kind="function"><name>write_stripe</name></member>
+    <member refid="couche2_8c_1ab6170c9cc6975d296a0bccfea207d415" kind="function"><name>init_bande</name></member>
+    <member refid="couche2_8c_1adf66b9197c93775a6c1dba723ba92a07" kind="function"><name>delete_bande</name></member>
+    <member refid="couche2_8c_1a2fa67e5d44f8746a06cc56ef2876c45e" kind="function"><name>print_stripe</name></member>
+    <member refid="couche2_8c_1a7ba1127dd9f6b03cbef1c8974790d3c6" kind="function"><name>write_chunk</name></member>
+    <member refid="couche2_8c_1a37df3c8400bc0d4673471a52757d023a" kind="function"><name>afficher_raid_hexa</name></member>
+    <member refid="couche2_8c_1a5e216cfa058baf4a67b6fc96773fe095" kind="function"><name>afficher_raid_decimal</name></member>
+    <member refid="couche2_8c_1abc2b7fd9807ede9a34e0d2bea6e9521c" kind="function"><name>cmd_test1</name></member>
+    <member refid="couche2_8c_1aea9498cb46077bb21181922c96e8329f" kind="function"><name>read_stripe</name></member>
+    <member refid="couche2_8c_1a2c76b4c3607585f36f7e7653fb96d633" kind="function"><name>cmd_test2</name></member>
+    <member refid="couche2_8c_1a1365b1597af91528776b50b5bc418a08" kind="function"><name>compute_num_bande</name></member>
+    <member refid="couche2_8c_1a1868b67f893921ee137623a23e4b6dd8" kind="function"><name>read_chunk</name></member>
+    <member refid="couche2_8c_1a38818187df03f330b062dcc1b3cf78df" kind="function"><name>couche2</name></member>
+  </compound>
+  <compound refid="couche2_8h" kind="file"><name>couche2.h</name>
+    <member refid="couche2_8h_1a3e5eab04f9ea03705105756c7b8c0782" kind="function"><name>compute_nstripe</name></member>
+    <member refid="couche2_8h_1a9e6de3169d502aae6d8117e1e6ab03a0" kind="function"><name>compute_parity</name></member>
+    <member refid="couche2_8h_1a70860f329dcd21100a6648089f864ed0" kind="function"><name>compute_parity_index</name></member>
+    <member refid="couche2_8h_1a5033c8eea4a4da6a76284e361f13240d" kind="function"><name>write_stripe</name></member>
+    <member refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" kind="function"><name>write_chunk</name></member>
+    <member refid="couche2_8h_1a1868b67f893921ee137623a23e4b6dd8" kind="function"><name>read_chunk</name></member>
+    <member refid="couche2_8h_1adf66b9197c93775a6c1dba723ba92a07" kind="function"><name>delete_bande</name></member>
+    <member refid="couche2_8h_1ab6170c9cc6975d296a0bccfea207d415" kind="function"><name>init_bande</name></member>
+    <member refid="couche2_8h_1aea9498cb46077bb21181922c96e8329f" kind="function"><name>read_stripe</name></member>
+    <member refid="couche2_8h_1abc2b7fd9807ede9a34e0d2bea6e9521c" kind="function"><name>cmd_test1</name></member>
+    <member refid="couche2_8h_1a38818187df03f330b062dcc1b3cf78df" kind="function"><name>couche2</name></member>
+    <member refid="couche2_8h_1a2fa67e5d44f8746a06cc56ef2876c45e" kind="function"><name>print_stripe</name></member>
+  </compound>
+  <compound refid="couche3_8c" kind="file"><name>couche3.c</name>
+    <member refid="couche3_8c_1a846a550008b03ec52ba64c30d614d08b" kind="function"><name>read_super_block</name></member>
+    <member refid="couche3_8c_1a4655c5b4ff56a089ebb3d5436aa3109f" kind="function"><name>read_inodes_table</name></member>
+    <member refid="couche3_8c_1afb633869cb6423375c1b26936806d6e7" kind="function"><name>write_inodes_table</name></member>
+    <member refid="couche3_8c_1a6a398a72bff8e6d5c8d8974883356d4f" kind="function"><name>delete_inode</name></member>
+    <member refid="couche3_8c_1a86d9f9c0fd3952761a6879b691c30395" kind="function"><name>get_nb_files</name></member>
+    <member refid="couche3_8c_1aaaa754526fd451aaf44a805cc9f08d30" kind="function"><name>get_unused_inodes</name></member>
+    <member refid="couche3_8c_1a5752b9deb83c0babc0443ca5c771e196" kind="function"><name>init_inode</name></member>
+    <member refid="couche3_8c_1a8b166f8b0246d1f42f44204edb5f52a6" kind="function"><name>cmd_dump_inode</name></member>
+    <member refid="couche3_8c_1a380acc8c8a85a041ecae9a995cf0a490" kind="function"><name>write_super_block</name></member>
+    <member refid="couche3_8c_1a39f901f28789cfa88375d1e5c5e1e734" kind="function"><name>first_free_byte</name></member>
+    <member refid="couche3_8c_1acdef7a1fd863a6d3770c1268cb06add3" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="couche3_8h" kind="file"><name>couche3.h</name>
+    <member refid="couche3_8h_1a4655c5b4ff56a089ebb3d5436aa3109f" kind="function"><name>read_inodes_table</name></member>
+    <member refid="couche3_8h_1afb633869cb6423375c1b26936806d6e7" kind="function"><name>write_inodes_table</name></member>
+    <member refid="couche3_8h_1a6a398a72bff8e6d5c8d8974883356d4f" kind="function"><name>delete_inode</name></member>
+    <member refid="couche3_8h_1aaaa754526fd451aaf44a805cc9f08d30" kind="function"><name>get_unused_inodes</name></member>
+    <member refid="couche3_8h_1a86d9f9c0fd3952761a6879b691c30395" kind="function"><name>get_nb_files</name></member>
+    <member refid="couche3_8h_1a5752b9deb83c0babc0443ca5c771e196" kind="function"><name>init_inode</name></member>
+    <member refid="couche3_8h_1a8b166f8b0246d1f42f44204edb5f52a6" kind="function"><name>cmd_dump_inode</name></member>
+    <member refid="couche3_8h_1a380acc8c8a85a041ecae9a995cf0a490" kind="function"><name>write_super_block</name></member>
+    <member refid="couche3_8h_1a846a550008b03ec52ba64c30d614d08b" kind="function"><name>read_super_block</name></member>
+    <member refid="couche3_8h_1a9d3886eb485367603520334263bc9e13" kind="function"><name>first_free_byte</name></member>
+  </compound>
+  <compound refid="raid__defines_8h" kind="file"><name>raid_defines.h</name>
+    <member refid="raid__defines_8h_1a8a9dac7f648d09d16b17ff585c9f2efe" kind="define"><name>ERREUR</name></member>
+    <member refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" kind="define"><name>BLOCK_SIZE</name></member>
+    <member refid="raid__defines_8h_1a24c1405225e4ce27b24bcf4f32f4ff0e" kind="define"><name>FILENAME_MAX_SIZE</name></member>
+    <member refid="raid__defines_8h_1a649ad5274d988d17a275a3cead056746" kind="define"><name>MAX_FILE_SIZE</name></member>
+    <member refid="raid__defines_8h_1a6c041fac527c965e3db582c4c19c1ab4" kind="define"><name>INODE_TABLE_SIZE</name></member>
+    <member refid="raid__defines_8h_1aa24597a54a085c6c2c33b64138f09eff" kind="define"><name>MAX_MSG</name></member>
+    <member refid="raid__defines_8h_1a42178fcae46f09d3c91ca3da27188231" kind="define"><name>SUPER_BLOCK_SIZE</name></member>
+    <member refid="raid__defines_8h_1a1a1399be80da10bab823671e773453bb" kind="define"><name>INODES_START</name></member>
+    <member refid="raid__defines_8h_1a34a3a3e2e3a4bd30b993bce5b19f3d73" kind="define"><name>INODE_SIZE</name></member>
+    <member refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6e" kind="enum"><name>raid</name></member>
+    <member refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6eae117e3533122c80b262257b49b21cddf" kind="enumvalue"><name>ZERO</name></member>
+    <member refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6ea84d559f3e898f067d4529c5eb3ab5a61" kind="enumvalue"><name>UN</name></member>
+    <member refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6eae2996d8da47978a309deebde23aec4ab" kind="enumvalue"><name>CINQ</name></member>
+    <member refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6ea1b4aedfb0f4ef011d964bcf01befdeaa" kind="enumvalue"><name>ZERO_UN</name></member>
+    <member refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6eaee746b0b3b0072f79606f2bd004621cc" kind="enumvalue"><name>UN_ZERO</name></member>
+    <member refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6ea2226995f0db9d32c88c3c3bf7ba47482" kind="enumvalue"><name>CINQUANTE</name></member>
+    <member refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6eaf59ee3d128b9d3f5d89bc37bff97b5ab" kind="enumvalue"><name>CENT</name></member>
+    <member refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kind="typedef"><name>uint</name></member>
+    <member refid="raid__defines_8h_1a65f85814a8290f9797005d3b28e7e5fc" kind="typedef"><name>uchar</name></member>
+    <member refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kind="typedef"><name>block_t</name></member>
+    <member refid="raid__defines_8h_1aecc98d5532293d656a2a4f8c09b31af0" kind="typedef"><name>inode_t</name></member>
+    <member refid="raid__defines_8h_1a5521b19dad3852291fc7d603382e6b99" kind="typedef"><name>inode_table_t</name></member>
+    <member refid="raid__defines_8h_1a5b2244b463782d93e6dfc058790cb9eb" kind="typedef"><name>super_block_t</name></member>
+    <member refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kind="typedef"><name>virtual_disk_t</name></member>
+    <member refid="raid__defines_8h_1acfaa25ade17f36b058f738bded61819a" kind="typedef"><name>stripe_t</name></member>
+    <member refid="raid__defines_8h_1ab997eba9ca6001274a2916a7518ddca5" kind="typedef"><name>file_t</name></member>
+    <member refid="raid__defines_8h_1a81e4575effcb28213cd23fb585211aab" kind="variable"><name>nomRaid</name></member>
+  </compound>
+  <compound refid="_r_e_a_d_m_e_8md" kind="file"><name>README.md</name>
+  </compound>
+  <compound refid="trash_8c" kind="file"><name>trash.c</name>
+    <member refid="trash_8c_1a526bedc4819858b14e925ad8c477d6bd" kind="variable"><name>lecture</name></member>
+    <member refid="trash_8c_1aa4c8df49f5a01b1cd7b8ae95891828a9" kind="variable"><name>nomFichiers</name></member>
+    <member refid="trash_8c_1aa84bf96622d78b0b6586f240fd760a86" kind="variable"><name>nbDisk</name></member>
+    <member refid="trash_8c_1a5db236caf6ff346c5084e3ca6c1a4d0b" kind="variable"><name>rep</name></member>
+    <member refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kind="variable"><name>r5Disk</name></member>
+    <member refid="trash_8c_1a218b1461a6308c48143bfa9ba887da64" kind="function"><name>bitToHexa</name></member>
+    <member refid="trash_8c_1a1fc20a5afdea4eec626e52a499ff46cd" kind="function"><name>octetsToHexa</name></member>
+    <member refid="trash_8c_1afd7857f9e20617aaaa8f148b23880152" kind="function"><name>while</name></member>
+  </compound>
+  <compound refid="md__r_e_a_d_m_e" kind="page"><name>md_README</name>
+  </compound>
+</doxygenindex>

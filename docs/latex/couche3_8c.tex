@@ -1,0 +1,393 @@
+\hypertarget{couche3_8c}{}\section{couche3.\+c File Reference}
+\label{couche3_8c}\index{couche3.\+c@{couche3.\+c}}
+
+
+Programme couche3 du raid5.  
+
+
+{\ttfamily \#include \char`\"{}couche3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}couche2.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+Include dependency graph for couche3.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{couche3_8c_a846a550008b03ec52ba64c30d614d08b}{read\+\_\+super\+\_\+block} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$\hyperlink{trash_8c_aa32bee7663041ae13a36afeae68a3f14}{r5\+Disk}, \hyperlink{raid__defines_8h_a5b2244b463782d93e6dfc058790cb9eb}{super\+\_\+block\+\_\+t} $\ast$superblock)
+\begin{DoxyCompactList}\small\item\em Lecture du superbloc. \end{DoxyCompactList}\item 
+void \hyperlink{couche3_8c_a4655c5b4ff56a089ebb3d5436aa3109f}{read\+\_\+inodes\+\_\+table} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$\hyperlink{trash_8c_aa32bee7663041ae13a36afeae68a3f14}{r5\+Disk}, \hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t} $\ast$table)
+\begin{DoxyCompactList}\small\item\em Lecture de la table d\textquotesingle{}inodes. \end{DoxyCompactList}\item 
+void \hyperlink{couche3_8c_afb633869cb6423375c1b26936806d6e7}{write\+\_\+inodes\+\_\+table} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$\hyperlink{trash_8c_aa32bee7663041ae13a36afeae68a3f14}{r5\+Disk}, \hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t} inode)
+\begin{DoxyCompactList}\small\item\em Ecriture de la table d\textquotesingle{}inodes. \end{DoxyCompactList}\item 
+void \hyperlink{couche3_8c_a6a398a72bff8e6d5c8d8974883356d4f}{delete\+\_\+inode} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$\hyperlink{trash_8c_aa32bee7663041ae13a36afeae68a3f14}{r5\+Disk}, int num\+Inode)
+\begin{DoxyCompactList}\small\item\em Supression d\textquotesingle{}inode. \end{DoxyCompactList}\item 
+int \hyperlink{couche3_8c_a86d9f9c0fd3952761a6879b691c30395}{get\+\_\+nb\+\_\+files} (\hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t} tab)
+\begin{DoxyCompactList}\small\item\em Retourne le nombre de fichiers dans la table d\textquotesingle{}inodes. \end{DoxyCompactList}\item 
+int \hyperlink{couche3_8c_aaaa754526fd451aaf44a805cc9f08d30}{get\+\_\+unused\+\_\+inodes} (\hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t} tab)
+\begin{DoxyCompactList}\small\item\em Retourne le nombre de fichiers inutilisés dans la table d\textquotesingle{}inodes. \end{DoxyCompactList}\item 
+\hyperlink{raid__defines_8h_aecc98d5532293d656a2a4f8c09b31af0}{inode\+\_\+t} \hyperlink{couche3_8c_a5752b9deb83c0babc0443ca5c771e196}{init\+\_\+inode} (char nom\+Fichier\mbox{[}\hyperlink{raid__defines_8h_a24c1405225e4ce27b24bcf4f32f4ff0e}{F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE}\mbox{]}, \hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} taille, \hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} start)
+\begin{DoxyCompactList}\small\item\em Initialisation d\textquotesingle{}une inode. \end{DoxyCompactList}\item 
+void \hyperlink{couche3_8c_a8b166f8b0246d1f42f44204edb5f52a6}{cmd\+\_\+dump\+\_\+inode} (char $\ast$nom\+Rep, \hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$\hyperlink{trash_8c_aa32bee7663041ae13a36afeae68a3f14}{r5\+Disk})
+\item 
+void \hyperlink{couche3_8c_a380acc8c8a85a041ecae9a995cf0a490}{write\+\_\+super\+\_\+block} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$\hyperlink{trash_8c_aa32bee7663041ae13a36afeae68a3f14}{r5\+Disk})
+\begin{DoxyCompactList}\small\item\em Ecriture du superbloc. \end{DoxyCompactList}\item 
+void \hyperlink{couche3_8c_a39f901f28789cfa88375d1e5c5e1e734}{first\+\_\+free\+\_\+byte} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$\hyperlink{trash_8c_aa32bee7663041ae13a36afeae68a3f14}{r5\+Disk})
+\begin{DoxyCompactList}\small\item\em Ecriture de la position du premier octet libre dans le r5\+Disk. \end{DoxyCompactList}\item 
+void \hyperlink{couche3_8c_acdef7a1fd863a6d3770c1268cb06add3}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Programme couche3 du raid5. 
+
+\begin{DoxyAuthor}{Author}
+Groupe14 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+01 avril 2019
+\end{DoxyDate}
+Programme de la couche 2 du raid5. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{couche3_8c_a8b166f8b0246d1f42f44204edb5f52a6}\label{couche3_8c_a8b166f8b0246d1f42f44204edb5f52a6}} 
+\index{couche3.\+c@{couche3.\+c}!cmd\+\_\+dump\+\_\+inode@{cmd\+\_\+dump\+\_\+inode}}
+\index{cmd\+\_\+dump\+\_\+inode@{cmd\+\_\+dump\+\_\+inode}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{cmd\+\_\+dump\+\_\+inode()}{cmd\_dump\_inode()}}
+{\footnotesize\ttfamily void cmd\+\_\+dump\+\_\+inode (\begin{DoxyParamCaption}\item[{char $\ast$}]{nom\+Rep,  }\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5\+Disk }\end{DoxyParamCaption})}
+
+
+
+Definition at line 249 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_a8b166f8b0246d1f42f44204edb5f52a6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=247pt]{couche3_8c_a8b166f8b0246d1f42f44204edb5f52a6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_a6a398a72bff8e6d5c8d8974883356d4f}\label{couche3_8c_a6a398a72bff8e6d5c8d8974883356d4f}} 
+\index{couche3.\+c@{couche3.\+c}!delete\+\_\+inode@{delete\+\_\+inode}}
+\index{delete\+\_\+inode@{delete\+\_\+inode}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{delete\+\_\+inode()}{delete\_inode()}}
+{\footnotesize\ttfamily void delete\+\_\+inode (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5\+Disk,  }\item[{int}]{num\+Inode }\end{DoxyParamCaption})}
+
+
+
+Supression d\textquotesingle{}inode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 192 of file couche3.\+c.
+
+\mbox{\Hypertarget{couche3_8c_a39f901f28789cfa88375d1e5c5e1e734}\label{couche3_8c_a39f901f28789cfa88375d1e5c5e1e734}} 
+\index{couche3.\+c@{couche3.\+c}!first\+\_\+free\+\_\+byte@{first\+\_\+free\+\_\+byte}}
+\index{first\+\_\+free\+\_\+byte@{first\+\_\+free\+\_\+byte}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{first\+\_\+free\+\_\+byte()}{first\_free\_byte()}}
+{\footnotesize\ttfamily void first\+\_\+free\+\_\+byte (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5\+Disk }\end{DoxyParamCaption})}
+
+
+
+Ecriture de la position du premier octet libre dans le r5\+Disk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 320 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{couche3_8c_a39f901f28789cfa88375d1e5c5e1e734_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_a86d9f9c0fd3952761a6879b691c30395}\label{couche3_8c_a86d9f9c0fd3952761a6879b691c30395}} 
+\index{couche3.\+c@{couche3.\+c}!get\+\_\+nb\+\_\+files@{get\+\_\+nb\+\_\+files}}
+\index{get\+\_\+nb\+\_\+files@{get\+\_\+nb\+\_\+files}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+nb\+\_\+files()}{get\_nb\_files()}}
+{\footnotesize\ttfamily int get\+\_\+nb\+\_\+files (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t}}]{tab }\end{DoxyParamCaption})}
+
+
+
+Retourne le nombre de fichiers dans la table d\textquotesingle{}inodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & inode\+\_\+table\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nombre de fichiers (int) 
+\end{DoxyReturn}
+
+
+Definition at line 208 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{couche3_8c_a86d9f9c0fd3952761a6879b691c30395_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_a86d9f9c0fd3952761a6879b691c30395_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_aaaa754526fd451aaf44a805cc9f08d30}\label{couche3_8c_aaaa754526fd451aaf44a805cc9f08d30}} 
+\index{couche3.\+c@{couche3.\+c}!get\+\_\+unused\+\_\+inodes@{get\+\_\+unused\+\_\+inodes}}
+\index{get\+\_\+unused\+\_\+inodes@{get\+\_\+unused\+\_\+inodes}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+unused\+\_\+inodes()}{get\_unused\_inodes()}}
+{\footnotesize\ttfamily int get\+\_\+unused\+\_\+inodes (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t}}]{tab }\end{DoxyParamCaption})}
+
+
+
+Retourne le nombre de fichiers inutilisés dans la table d\textquotesingle{}inodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & inode\+\_\+table\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nombre de fichiers (int) 
+\end{DoxyReturn}
+
+
+Definition at line 222 of file couche3.\+c.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_aaaa754526fd451aaf44a805cc9f08d30_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_a5752b9deb83c0babc0443ca5c771e196}\label{couche3_8c_a5752b9deb83c0babc0443ca5c771e196}} 
+\index{couche3.\+c@{couche3.\+c}!init\+\_\+inode@{init\+\_\+inode}}
+\index{init\+\_\+inode@{init\+\_\+inode}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{init\+\_\+inode()}{init\_inode()}}
+{\footnotesize\ttfamily \hyperlink{raid__defines_8h_aecc98d5532293d656a2a4f8c09b31af0}{inode\+\_\+t} init\+\_\+inode (\begin{DoxyParamCaption}\item[{char}]{nom\+Fichier\mbox{[}\+F\+I\+L\+E\+N\+A\+M\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+Z\+E\mbox{]},  }\item[{\hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}]{taille,  }\item[{\hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}]{start }\end{DoxyParamCaption})}
+
+
+
+Initialisation d\textquotesingle{}une inode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & nom\+\_\+de\+\_\+fichier (char $\ast$),taille (uint),debut (uint) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+inode\+\_\+t 
+\end{DoxyReturn}
+
+
+Definition at line 237 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{couche3_8c_a5752b9deb83c0babc0443ca5c771e196_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_acdef7a1fd863a6d3770c1268cb06add3}\label{couche3_8c_acdef7a1fd863a6d3770c1268cb06add3}} 
+\index{couche3.\+c@{couche3.\+c}!main@{main}}
+\index{main@{main}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily void main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 332 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_acdef7a1fd863a6d3770c1268cb06add3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_a4655c5b4ff56a089ebb3d5436aa3109f}\label{couche3_8c_a4655c5b4ff56a089ebb3d5436aa3109f}} 
+\index{couche3.\+c@{couche3.\+c}!read\+\_\+inodes\+\_\+table@{read\+\_\+inodes\+\_\+table}}
+\index{read\+\_\+inodes\+\_\+table@{read\+\_\+inodes\+\_\+table}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{read\+\_\+inodes\+\_\+table()}{read\_inodes\_table()}}
+{\footnotesize\ttfamily void read\+\_\+inodes\+\_\+table (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5\+Disk,  }\item[{\hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t} $\ast$}]{table }\end{DoxyParamCaption})}
+
+
+
+Lecture de la table d\textquotesingle{}inodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t ,inode\+\_\+table\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: void 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_a4655c5b4ff56a089ebb3d5436aa3109f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_a4655c5b4ff56a089ebb3d5436aa3109f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_a846a550008b03ec52ba64c30d614d08b}\label{couche3_8c_a846a550008b03ec52ba64c30d614d08b}} 
+\index{couche3.\+c@{couche3.\+c}!read\+\_\+super\+\_\+block@{read\+\_\+super\+\_\+block}}
+\index{read\+\_\+super\+\_\+block@{read\+\_\+super\+\_\+block}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{read\+\_\+super\+\_\+block()}{read\_super\_block()}}
+{\footnotesize\ttfamily void read\+\_\+super\+\_\+block (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5\+Disk,  }\item[{\hyperlink{raid__defines_8h_a5b2244b463782d93e6dfc058790cb9eb}{super\+\_\+block\+\_\+t} $\ast$}]{superblock }\end{DoxyParamCaption})}
+
+
+
+Lecture du superbloc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t , super\+\_\+block\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 25 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_a846a550008b03ec52ba64c30d614d08b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_afb633869cb6423375c1b26936806d6e7}\label{couche3_8c_afb633869cb6423375c1b26936806d6e7}} 
+\index{couche3.\+c@{couche3.\+c}!write\+\_\+inodes\+\_\+table@{write\+\_\+inodes\+\_\+table}}
+\index{write\+\_\+inodes\+\_\+table@{write\+\_\+inodes\+\_\+table}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{write\+\_\+inodes\+\_\+table()}{write\_inodes\_table()}}
+{\footnotesize\ttfamily void write\+\_\+inodes\+\_\+table (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5\+Disk,  }\item[{\hyperlink{raid__defines_8h_a5521b19dad3852291fc7d603382e6b99}{inode\+\_\+table\+\_\+t}}]{inode }\end{DoxyParamCaption})}
+
+
+
+Ecriture de la table d\textquotesingle{}inodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t ,inode\+\_\+table\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: void 
+\end{DoxyReturn}
+
+
+Definition at line 137 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_afb633869cb6423375c1b26936806d6e7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{couche3_8c_afb633869cb6423375c1b26936806d6e7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche3_8c_a380acc8c8a85a041ecae9a995cf0a490}\label{couche3_8c_a380acc8c8a85a041ecae9a995cf0a490}} 
+\index{couche3.\+c@{couche3.\+c}!write\+\_\+super\+\_\+block@{write\+\_\+super\+\_\+block}}
+\index{write\+\_\+super\+\_\+block@{write\+\_\+super\+\_\+block}!couche3.\+c@{couche3.\+c}}
+\subsubsection{\texorpdfstring{write\+\_\+super\+\_\+block()}{write\_super\_block()}}
+{\footnotesize\ttfamily void write\+\_\+super\+\_\+block (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5\+Disk }\end{DoxyParamCaption})}
+
+
+
+Ecriture du superbloc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 269 of file couche3.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche3_8c_a380acc8c8a85a041ecae9a995cf0a490_cgraph}
+\end{center}
+\end{figure}

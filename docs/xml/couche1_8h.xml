@@ -1,0 +1,708 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="couche1_8h" kind="file" language="C++">
+    <compoundname>couche1.h</compoundname>
+    <includes refid="raid__defines_8h" local="yes">raid_defines.h</includes>
+    <includedby refid="couche1_8c" local="yes">couche1.c</includedby>
+    <includedby refid="couche2_8c" local="yes">couche2.c</includedby>
+    <includedby refid="couche2_8h" local="yes">couche2.h</includedby>
+    <incdepgraph>
+      <node id="20">
+        <label>raid_defines.h</label>
+        <link refid="raid__defines_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>couche1.h</label>
+        <link refid="couche1_8h"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="24">
+        <label>couche2.c</label>
+        <link refid="couche2_8c"/>
+      </node>
+      <node id="25">
+        <label>couche2.h</label>
+        <link refid="couche2_8h"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>couche3.c</label>
+        <link refid="couche3_8c"/>
+      </node>
+      <node id="26">
+        <label>couche3.h</label>
+        <link refid="couche3_8h"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>couche1.c</label>
+        <link refid="couche1_8c"/>
+      </node>
+      <node id="22">
+        <label>couche1.h</label>
+        <link refid="couche1_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="couche1_8h_1a4479ca3bf5ef9da255dc34dd3b954b04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void add_finChemin</definition>
+        <argsstring>(const char *repertoire, char *nomDisque, size_t lengthRep)</argsstring>
+        <name>add_finChemin</name>
+        <param>
+          <type>const char *</type>
+          <declname>repertoire</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>nomDisque</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>lengthRep</declname>
+        </param>
+        <briefdescription>
+<para>Copie la chaine &quot;repertoire&quot; dans nomDisque en y ajoutant &quot;/d0\0&quot;. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>chaine de char (repertoire) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>chaine de char (disk) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>size_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="6" column="1" bodyfile="couche1.c" bodystart="29" bodyend="35"/>
+        <referencedby refid="couche1_8h_1a745e214ead4cfa64503c1be97c30d25a" compoundref="couche1_8c" startline="44" endline="56">init_disk_raid5</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a745e214ead4cfa64503c1be97c30d25a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_disk_raid5</definition>
+        <argsstring>(const char *repertoire, virtual_disk_t *r5Disk)</argsstring>
+        <name>init_disk_raid5</name>
+        <param>
+          <type>const char *</type>
+          <declname>repertoire</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <briefdescription>
+<para>Initialise la variable globale r5Disk. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>chaine de char (repertoire cible) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="7" column="1" bodyfile="couche1.c" bodystart="44" bodyend="56"/>
+        <references refid="couche1_8c_1a4479ca3bf5ef9da255dc34dd3b954b04" compoundref="couche1_8c" startline="29" endline="35">add_finChemin</references>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="structvirtual__disk__s_1a207dd070642dde7ad48f8bb8b622f893" compoundref="raid__defines_8h" startline="51">virtual_disk_s::raidmode</references>
+        <references refid="raid__defines_8h_1a7a2279e0841d50aa8e976d3bb0eb3a6eae2996d8da47978a309deebde23aec4ab" compoundref="raid__defines_8h" startline="18">CINQ</references>
+        <references refid="structvirtual__disk__s_1abed1c5c15dd8f784e7198b79f8973863" compoundref="raid__defines_8h" startline="52">virtual_disk_s::storage</references>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+        <referencedby refid="couche2_8h_1a38818187df03f330b062dcc1b3cf78df" compoundref="couche2_8c" startline="278" endline="286">couche2</referencedby>
+        <referencedby refid="couche3_8c_1acdef7a1fd863a6d3770c1268cb06add3" compoundref="couche3_8c" startline="332" endline="343">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a0f31c284e3b9461448ae2c5393a4c53f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void turn_off_disk_raid5</definition>
+        <argsstring>(virtual_disk_t *r5Disk)</argsstring>
+        <name>turn_off_disk_raid5</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <briefdescription>
+<para>Ferme les fichiers ouverts et sauvegarde le super block? </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>chaine de char (repertoire cible) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="8" column="1" bodyfile="couche1.c" bodystart="66" bodyend="72"/>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="structvirtual__disk__s_1abed1c5c15dd8f784e7198b79f8973863" compoundref="raid__defines_8h" startline="52">virtual_disk_s::storage</references>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+        <referencedby refid="couche2_8c_1a2c76b4c3607585f36f7e7653fb96d633" compoundref="couche2_8c" startline="228" endline="234">cmd_test2</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a988f68f7bebc679f512c8eadaa391f16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void info_disque</definition>
+        <argsstring>(virtual_disk_t *r5Disk)</argsstring>
+        <name>info_disque</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>r5Disk</declname>
+        </param>
+        <briefdescription>
+<para>Affiche des infos sur les disques ouverts. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>: void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="9" column="1" bodyfile="couche1.c" bodystart="79" bodyend="86"/>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a9cd7d6dccecc07ca1b67fd05c7928ee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int compute_nblock</definition>
+        <argsstring>(int n)</argsstring>
+        <name>compute_nblock</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>calcule le nombre de blocs pour coder &quot;n&quot; octets </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>integer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>integer </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="10" column="1" bodyfile="couche1.c" bodystart="93" bodyend="102"/>
+        <referencedby refid="couche2_8h_1a7ba1127dd9f6b03cbef1c8974790d3c6" compoundref="couche2_8c" startline="112" endline="147">write_chunk</referencedby>
+        <referencedby refid="couche2_8h_1a1868b67f893921ee137623a23e4b6dd8" compoundref="couche2_8c" startline="251" endline="275">read_chunk</referencedby>
+        <referencedby refid="couche3_8h_1afb633869cb6423375c1b26936806d6e7" compoundref="couche3_8c" startline="137" endline="185">write_inodes_table</referencedby>
+        <referencedby refid="couche3_8h_1a5752b9deb83c0babc0443ca5c771e196" compoundref="couche3_8c" startline="237" endline="245">init_inode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1adb4607cf11ffed5c89fc0f4682bf6079" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void write_block</definition>
+        <argsstring>(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk)</argsstring>
+        <name>write_block</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>RAID5</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref> *</type>
+          <declname>entrant</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idDisk</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit un bloc à la position pos sur le disque. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>virtual_disk_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(à ecrire) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>uint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(position à laquelle on ecrit) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>integer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(n° disk) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="11" column="1" bodyfile="couche1.c" bodystart="112" bodyend="118"/>
+        <references refid="structvirtual__disk__s_1abed1c5c15dd8f784e7198b79f8973863" compoundref="raid__defines_8h" startline="52">virtual_disk_s::storage</references>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+        <referencedby refid="couche2_8h_1a5033c8eea4a4da6a76284e361f13240d" compoundref="couche2_8c" startline="63" endline="67">write_stripe</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a4ba30a1143e543d465725eb0f151c6a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int read_block</definition>
+        <argsstring>(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk)</argsstring>
+        <name>read_block</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>RAID5</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref> *</type>
+          <declname>recup</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idDisk</declname>
+        </param>
+        <briefdescription>
+<para>Lit un bloc à la position pos sur le disque. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>virtual_disk_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>block_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(à lire) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>uint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(position à laquelle on lit) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>integer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(n° disk) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>integer </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="12" column="1" bodyfile="couche1.c" bodystart="130" bodyend="138"/>
+        <references refid="structvirtual__disk__s_1abed1c5c15dd8f784e7198b79f8973863" compoundref="raid__defines_8h" startline="52">virtual_disk_s::storage</references>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <referencedby refid="couche1_8h_1a2035024bc72d159d51a6ef54a8dc978a" compoundref="couche1_8c" startline="163" endline="181">block_repair</referencedby>
+        <referencedby refid="couche1_8h_1ae6cedff3423d9b8afe126d3f298576ee" compoundref="couche1_8c" startline="274" endline="289">affichageBlockHexa</referencedby>
+        <referencedby refid="couche1_8h_1a1a6021fbd31ca2b308d61050416ab520" compoundref="couche1_8c" startline="291" endline="309">affichageBlockDecimal</referencedby>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+        <referencedby refid="couche2_8h_1aea9498cb46077bb21181922c96e8329f" compoundref="couche2_8c" startline="211" endline="221">read_stripe</referencedby>
+        <referencedby refid="couche2_8h_1a1868b67f893921ee137623a23e4b6dd8" compoundref="couche2_8c" startline="251" endline="275">read_chunk</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a2035024bc72d159d51a6ef54a8dc978a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void block_repair</definition>
+        <argsstring>(virtual_disk_t *RAID5, uint pos, int idDisk)</argsstring>
+        <name>block_repair</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>RAID5</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idDisk</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="13" column="1" bodyfile="couche1.c" bodystart="163" bodyend="181"/>
+        <references refid="structvirtual__disk__s_1a879b20de8088f4342835d5fb3feb1141" compoundref="raid__defines_8h" startline="50">virtual_disk_s::ndisk</references>
+        <references refid="couche1_8c_1a4ba30a1143e543d465725eb0f151c6a2" compoundref="couche1_8c" startline="130" endline="138">read_block</references>
+        <references refid="couche1_8c_1a69d295ba0ccd1a14fbc7ef4dd2c3a5c9" compoundref="couche1_8c" startline="141" endline="145">xorbl</references>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a1fc20a5afdea4eec626e52a499ff46cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void octetsToHexa</definition>
+        <argsstring>(block_t monBloc, char *nbHexa)</argsstring>
+        <name>octetsToHexa</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref></type>
+          <declname>monBloc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>nbHexa</declname>
+        </param>
+        <briefdescription>
+<para>prend un tableau de 4 octets (char) et le transforme en Hexadecimal assert(monBloc[i]&lt;256); </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>block_t (Contient le tableau de bits) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>char* (Caractere dans lequel on met l&apos;hexa) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>: void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="14" column="1" bodyfile="couche1.c" bodystart="192" bodyend="200"/>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <references refid="couche1_8c_1a7951420cc967a37ca46209305481727b" compoundref="couche1_8c" startline="207" endline="224">conversionHexa</references>
+        <referencedby refid="couche1_8h_1ae6cedff3423d9b8afe126d3f298576ee" compoundref="couche1_8c" startline="274" endline="289">affichageBlockHexa</referencedby>
+        <referencedby refid="couche1_8h_1a1a6021fbd31ca2b308d61050416ab520" compoundref="couche1_8c" startline="291" endline="309">affichageBlockDecimal</referencedby>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+        <referencedby refid="couche2_8h_1a2fa67e5d44f8746a06cc56ef2876c45e" compoundref="couche2_8c" startline="93" endline="105">print_stripe</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1ae6cedff3423d9b8afe126d3f298576ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int affichageBlockHexa</definition>
+        <argsstring>(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output)</argsstring>
+        <name>affichageBlockHexa</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>RAID5</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idDisk</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+<para>affiche un bloc de donnees en hexadecimal </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>virtual_disk_t </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>integer (n° disk) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>integer (posit° de ce qu&apos;on veut afficher) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>: void </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="15" column="1" bodyfile="couche1.c" bodystart="274" bodyend="289"/>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="couche1_8c_1a4ba30a1143e543d465725eb0f151c6a2" compoundref="couche1_8c" startline="130" endline="138">read_block</references>
+        <references refid="couche1_8c_1a1fc20a5afdea4eec626e52a499ff46cd" compoundref="couche1_8c" startline="192" endline="200">octetsToHexa</references>
+        <referencedby refid="couche1_8h_1a89f4e036d129f8952aa6711c9551ebc9" compoundref="couche1_8c" startline="311" endline="317">affichageDisque</referencedby>
+        <referencedby refid="couche2_8c_1a37df3c8400bc0d4673471a52757d023a" compoundref="couche2_8c" startline="150" endline="165">afficher_raid_hexa</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a1a6021fbd31ca2b308d61050416ab520" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int affichageBlockDecimal</definition>
+        <argsstring>(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output)</argsstring>
+        <name>affichageBlockDecimal</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>RAID5</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idDisk</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="16" column="1" bodyfile="couche1.c" bodystart="291" bodyend="309"/>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="couche1_8c_1a4ba30a1143e543d465725eb0f151c6a2" compoundref="couche1_8c" startline="130" endline="138">read_block</references>
+        <references refid="couche1_8c_1a1fc20a5afdea4eec626e52a499ff46cd" compoundref="couche1_8c" startline="192" endline="200">octetsToHexa</references>
+        <references refid="couche1_8c_1a23fbb0c056aa4bfabd0cfd7b793591a3" compoundref="couche1_8c" startline="226" endline="263">conversionDec</references>
+        <referencedby refid="couche2_8c_1a5e216cfa058baf4a67b6fc96773fe095" compoundref="couche2_8c" startline="172" endline="187">afficher_raid_decimal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a7951420cc967a37ca46209305481727b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>char conversionHexa</definition>
+        <argsstring>(char nb4bits)</argsstring>
+        <name>conversionHexa</name>
+        <param>
+          <type>char</type>
+          <declname>nb4bits</declname>
+        </param>
+        <briefdescription>
+<para>transforme un nombre en son chiffre en hexa </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>nb4bits, la valeur de 4 bits en entier </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>: le chiffre en hexadecimal </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="17" column="1" bodyfile="couche1.c" bodystart="207" bodyend="224"/>
+        <referencedby refid="couche1_8h_1a1fc20a5afdea4eec626e52a499ff46cd" compoundref="couche1_8c" startline="192" endline="200">octetsToHexa</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a69d295ba0ccd1a14fbc7ef4dd2c3a5c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xorbl</definition>
+        <argsstring>(block_t *xa, block_t *xb, block_t *destination)</argsstring>
+        <name>xorbl</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref> *</type>
+          <declname>xa</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref> *</type>
+          <declname>xb</declname>
+        </param>
+        <param>
+          <type><ref refid="raid__defines_8h_1a9497df9c1d65b018066a9760da7be4e6" kindref="member">block_t</ref> *</type>
+          <declname>destination</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="18" column="1" bodyfile="couche1.c" bodystart="141" bodyend="145"/>
+        <references refid="raid__defines_8h_1ad51ded0bbd705f02f73fc60c0b721ced" compoundref="raid__defines_8h" startline="7">BLOCK_SIZE</references>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <referencedby refid="couche1_8h_1a2035024bc72d159d51a6ef54a8dc978a" compoundref="couche1_8c" startline="163" endline="181">block_repair</referencedby>
+        <referencedby refid="couche2_8h_1a9e6de3169d502aae6d8117e1e6ab03a0" compoundref="couche2_8c" startline="35" endline="43">compute_parity</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a778282843931610565cf6a8353a633bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int couche1</definition>
+        <argsstring>(void)</argsstring>
+        <name>couche1</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="19" column="1" bodyfile="couche1.c" bodystart="319" bodyend="345"/>
+        <references refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" compoundref="trash_8c" startline="108">r5Disk</references>
+        <references refid="couche1_8c_1a745e214ead4cfa64503c1be97c30d25a" compoundref="couche1_8c" startline="44" endline="56">init_disk_raid5</references>
+        <references refid="couche1_8c_1a988f68f7bebc679f512c8eadaa391f16" compoundref="couche1_8c" startline="79" endline="86">info_disque</references>
+        <references refid="structblock__s_1aeb657a9749b851021c3ef39acaf7b252" compoundref="raid__defines_8h" startline="24">block_s::data</references>
+        <references refid="couche1_8c_1adb4607cf11ffed5c89fc0f4682bf6079" compoundref="couche1_8c" startline="112" endline="118">write_block</references>
+        <references refid="couche1_8c_1a4ba30a1143e543d465725eb0f151c6a2" compoundref="couche1_8c" startline="130" endline="138">read_block</references>
+        <references refid="couche1_8c_1a1fc20a5afdea4eec626e52a499ff46cd" compoundref="couche1_8c" startline="192" endline="200">octetsToHexa</references>
+        <references refid="couche1_8c_1a89f4e036d129f8952aa6711c9551ebc9" compoundref="couche1_8c" startline="311" endline="317">affichageDisque</references>
+        <references refid="couche1_8c_1a0f31c284e3b9461448ae2c5393a4c53f" compoundref="couche1_8c" startline="66" endline="72">turn_off_disk_raid5</references>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a89f4e036d129f8952aa6711c9551ebc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void affichageDisque</definition>
+        <argsstring>(virtual_disk_t *RAID5, int idDisk, FILE *output)</argsstring>
+        <name>affichageDisque</name>
+        <param>
+          <type><ref refid="raid__defines_8h_1ab22cb9a2c3c081d95bd06c65d6716686" kindref="member">virtual_disk_t</ref> *</type>
+          <declname>RAID5</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idDisk</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="20" column="1" bodyfile="couche1.c" bodystart="311" bodyend="317"/>
+        <references refid="couche1_8c_1ae6cedff3423d9b8afe126d3f298576ee" compoundref="couche1_8c" startline="274" endline="289">affichageBlockHexa</references>
+        <referencedby refid="couche1_8h_1a778282843931610565cf6a8353a633bc" compoundref="couche1_8c" startline="319" endline="345">couche1</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="couche1_8h_1a23fbb0c056aa4bfabd0cfd7b793591a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int conversionDec</definition>
+        <argsstring>(int nb4bits)</argsstring>
+        <name>conversionDec</name>
+        <param>
+          <type>int</type>
+          <declname>nb4bits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="couche1.h" line="21" column="1" bodyfile="couche1.c" bodystart="226" bodyend="263"/>
+        <referencedby refid="couche1_8h_1a1a6021fbd31ca2b308d61050416ab520" compoundref="couche1_8c" startline="291" endline="309">affichageBlockDecimal</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>COUCHE1_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>COUCHE1_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="raid__defines_8h" kindref="compound">raid_defines.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a4479ca3bf5ef9da255dc34dd3b954b04" kindref="member">add_finChemin</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>repertoire,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>nomDisque,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>lengthRep);</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a745e214ead4cfa64503c1be97c30d25a" kindref="member">init_disk_raid5</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>repertoire,<sp/><ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>);</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a0f31c284e3b9461448ae2c5393a4c53f" kindref="member">turn_off_disk_raid5</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>);</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a988f68f7bebc679f512c8eadaa391f16" kindref="member">info_disque</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*<ref refid="trash_8c_1aa32bee7663041ae13a36afeae68a3f14" kindref="member">r5Disk</ref>);</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a9cd7d6dccecc07ca1b67fd05c7928ee3" kindref="member">compute_nblock</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1adb4607cf11ffed5c89fc0f4682bf6079" kindref="member">write_block</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*RAID5,<sp/><ref refid="structblock__s" kindref="compound">block_t</ref><sp/>*entrant,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>pos,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idDisk);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a4ba30a1143e543d465725eb0f151c6a2" kindref="member">read_block</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*RAID5,<sp/><ref refid="structblock__s" kindref="compound">block_t</ref><sp/>*recup,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>pos,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idDisk);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a2035024bc72d159d51a6ef54a8dc978a" kindref="member">block_repair</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*RAID5,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>pos,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idDisk);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a1fc20a5afdea4eec626e52a499ff46cd" kindref="member">octetsToHexa</ref>(<ref refid="structblock__s" kindref="compound">block_t</ref><sp/>monBloc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>nbHexa);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1ae6cedff3423d9b8afe126d3f298576ee" kindref="member">affichageBlockHexa</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*RAID5,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idDisk,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>pos,<sp/>FILE<sp/>*output);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a1a6021fbd31ca2b308d61050416ab520" kindref="member">affichageBlockDecimal</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*RAID5,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idDisk,<sp/><ref refid="raid__defines_8h_1a91ad9478d81a7aaf2593e8d9c3d06a14" kindref="member">uint</ref><sp/>pos,<sp/>FILE<sp/>*output);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a7951420cc967a37ca46209305481727b" kindref="member">conversionHexa</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>nb4bits);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a69d295ba0ccd1a14fbc7ef4dd2c3a5c9" kindref="member">xorbl</ref>(<ref refid="structblock__s" kindref="compound">block_t</ref><sp/>*xa,<ref refid="structblock__s" kindref="compound">block_t</ref><sp/>*xb,<ref refid="structblock__s" kindref="compound">block_t</ref><sp/>*destination);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a778282843931610565cf6a8353a633bc" kindref="member">couche1</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a89f4e036d129f8952aa6711c9551ebc9" kindref="member">affichageDisque</ref>(<ref refid="structvirtual__disk__s" kindref="compound">virtual_disk_t</ref><sp/>*RAID5,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>idDisk,FILE<sp/>*output);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="couche1_8h_1a23fbb0c056aa4bfabd0cfd7b793591a3" kindref="member">conversionDec</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nb4bits);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="couche1.h"/>
+  </compounddef>
+</doxygen>

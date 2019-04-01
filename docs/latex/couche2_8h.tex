@@ -1,0 +1,430 @@
+\hypertarget{couche2_8h}{}\section{couche2.\+h File Reference}
+\label{couche2_8h}\index{couche2.\+h@{couche2.\+h}}
+{\ttfamily \#include \char`\"{}couche1.\+h\char`\"{}}\newline
+Include dependency graph for couche2.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{couche2_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{couche2_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{couche2_8h_a3e5eab04f9ea03705105756c7b8c0782}{compute\+\_\+nstripe} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$\hyperlink{trash_8c_aa32bee7663041ae13a36afeae68a3f14}{r5\+Disk}, int nblocks)
+\begin{DoxyCompactList}\small\item\em Retourne le nombre de bandes necessaires pour écrire n blocs. \end{DoxyCompactList}\item 
+\hyperlink{raid__defines_8h_a9497df9c1d65b018066a9760da7be4e6}{block\+\_\+t} \hyperlink{couche2_8h_a9e6de3169d502aae6d8117e1e6ab03a0}{compute\+\_\+parity} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5, \hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$tocompute, int indice\+\_\+parite)
+\begin{DoxyCompactList}\small\item\em Calcule le bloc de parité d\textquotesingle{}une stripe. \end{DoxyCompactList}\item 
+int \hyperlink{couche2_8h_a70860f329dcd21100a6648089f864ed0}{compute\+\_\+parity\+\_\+index} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5, int numbd)
+\begin{DoxyCompactList}\small\item\em Calcule la position du block de parité d\textquotesingle{}une stripe. \end{DoxyCompactList}\item 
+void \hyperlink{couche2_8h_a5033c8eea4a4da6a76284e361f13240d}{write\+\_\+stripe} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5, \hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$ecrire, \hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} pos)
+\begin{DoxyCompactList}\small\item\em Ecrit une stripe a la position passée en argument sur le raid passé en argument. \end{DoxyCompactList}\item 
+void \hyperlink{couche2_8h_a7ba1127dd9f6b03cbef1c8974790d3c6}{write\+\_\+chunk} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5, char $\ast$buffer, int n, \hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} start\+Block)
+\begin{DoxyCompactList}\small\item\em Ecrit une stripe a la position passée en argument sur le raid passé en argument. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{couche2_8h_a1868b67f893921ee137623a23e4b6dd8}{read\+\_\+chunk} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5, \hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} start\+\_\+block, int n)
+\begin{DoxyCompactList}\small\item\em Fonction de lecture de tableau de char. \end{DoxyCompactList}\item 
+void \hyperlink{couche2_8h_adf66b9197c93775a6c1dba723ba92a07}{delete\+\_\+bande} (\hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$$\ast$bande)
+\begin{DoxyCompactList}\small\item\em Libere la mémoir réservée par une bande. \end{DoxyCompactList}\item 
+\hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$ \hyperlink{couche2_8h_ab6170c9cc6975d296a0bccfea207d415}{init\+\_\+bande} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5)
+\item 
+int \hyperlink{couche2_8h_aea9498cb46077bb21181922c96e8329f}{read\+\_\+stripe} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5, \hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$lire, \hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} pos)
+\begin{DoxyCompactList}\small\item\em Lis une bande a partir de la position passée en parametre. \end{DoxyCompactList}\item 
+void \hyperlink{couche2_8h_abc2b7fd9807ede9a34e0d2bea6e9521c}{cmd\+\_\+test1} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5)
+\begin{DoxyCompactList}\small\item\em fonction de test pour write\+\_\+chunk \end{DoxyCompactList}\item 
+int \hyperlink{couche2_8h_a38818187df03f330b062dcc1b3cf78df}{couche2} (void)
+\item 
+void \hyperlink{couche2_8h_a2fa67e5d44f8746a06cc56ef2876c45e}{print\+\_\+stripe} (\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$r5, \hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$stripe)
+\begin{DoxyCompactList}\small\item\em Affiche une bande. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{couche2_8h_abc2b7fd9807ede9a34e0d2bea6e9521c}\label{couche2_8h_abc2b7fd9807ede9a34e0d2bea6e9521c}} 
+\index{couche2.\+h@{couche2.\+h}!cmd\+\_\+test1@{cmd\+\_\+test1}}
+\index{cmd\+\_\+test1@{cmd\+\_\+test1}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{cmd\+\_\+test1()}{cmd\_test1()}}
+{\footnotesize\ttfamily void cmd\+\_\+test1 (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5 }\end{DoxyParamCaption})}
+
+
+
+fonction de test pour write\+\_\+chunk 
+
+
+\begin{DoxyParams}{Parameters}
+{\em virtual\+\_\+disk\+\_\+t} & $\ast$ \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 194 of file couche2.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_abc2b7fd9807ede9a34e0d2bea6e9521c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{couche2_8h_abc2b7fd9807ede9a34e0d2bea6e9521c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_a3e5eab04f9ea03705105756c7b8c0782}\label{couche2_8h_a3e5eab04f9ea03705105756c7b8c0782}} 
+\index{couche2.\+h@{couche2.\+h}!compute\+\_\+nstripe@{compute\+\_\+nstripe}}
+\index{compute\+\_\+nstripe@{compute\+\_\+nstripe}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{compute\+\_\+nstripe()}{compute\_nstripe()}}
+{\footnotesize\ttfamily int compute\+\_\+nstripe (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5\+Disk,  }\item[{int}]{nblocks }\end{DoxyParamCaption})}
+
+
+
+Retourne le nombre de bandes necessaires pour écrire n blocs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & Nombre de blocs (int) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nombre de bandes (int) 
+\end{DoxyReturn}
+
+
+Definition at line 23 of file couche2.\+c.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_a3e5eab04f9ea03705105756c7b8c0782_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_a9e6de3169d502aae6d8117e1e6ab03a0}\label{couche2_8h_a9e6de3169d502aae6d8117e1e6ab03a0}} 
+\index{couche2.\+h@{couche2.\+h}!compute\+\_\+parity@{compute\+\_\+parity}}
+\index{compute\+\_\+parity@{compute\+\_\+parity}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{compute\+\_\+parity()}{compute\_parity()}}
+{\footnotesize\ttfamily \hyperlink{raid__defines_8h_a9497df9c1d65b018066a9760da7be4e6}{block\+\_\+t} compute\+\_\+parity (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5,  }\item[{\hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$}]{tocompute,  }\item[{int}]{indice\+\_\+parite }\end{DoxyParamCaption})}
+
+
+
+Calcule le bloc de parité d\textquotesingle{}une stripe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t $\ast$, stripe\+\_\+t $\ast$,int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+block\+\_\+t 
+\end{DoxyReturn}
+
+
+Definition at line 35 of file couche2.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{couche2_8h_a9e6de3169d502aae6d8117e1e6ab03a0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_a9e6de3169d502aae6d8117e1e6ab03a0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_a70860f329dcd21100a6648089f864ed0}\label{couche2_8h_a70860f329dcd21100a6648089f864ed0}} 
+\index{couche2.\+h@{couche2.\+h}!compute\+\_\+parity\+\_\+index@{compute\+\_\+parity\+\_\+index}}
+\index{compute\+\_\+parity\+\_\+index@{compute\+\_\+parity\+\_\+index}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{compute\+\_\+parity\+\_\+index()}{compute\_parity\_index()}}
+{\footnotesize\ttfamily int compute\+\_\+parity\+\_\+index (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5,  }\item[{int}]{numbd }\end{DoxyParamCaption})}
+
+
+
+Calcule la position du block de parité d\textquotesingle{}une stripe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t , int numero de la bande dans la liste du raid \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+Definition at line 50 of file couche2.\+c.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_a70860f329dcd21100a6648089f864ed0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_a38818187df03f330b062dcc1b3cf78df}\label{couche2_8h_a38818187df03f330b062dcc1b3cf78df}} 
+\index{couche2.\+h@{couche2.\+h}!couche2@{couche2}}
+\index{couche2@{couche2}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{couche2()}{couche2()}}
+{\footnotesize\ttfamily int couche2 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 278 of file couche2.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_a38818187df03f330b062dcc1b3cf78df_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_adf66b9197c93775a6c1dba723ba92a07}\label{couche2_8h_adf66b9197c93775a6c1dba723ba92a07}} 
+\index{couche2.\+h@{couche2.\+h}!delete\+\_\+bande@{delete\+\_\+bande}}
+\index{delete\+\_\+bande@{delete\+\_\+bande}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{delete\+\_\+bande()}{delete\_bande()}}
+{\footnotesize\ttfamily void delete\+\_\+bande (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$$\ast$}]{bande }\end{DoxyParamCaption})}
+
+
+
+Libere la mémoir réservée par une bande. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & stripe\+\_\+t $\ast$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 82 of file couche2.\+c.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_adf66b9197c93775a6c1dba723ba92a07_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_ab6170c9cc6975d296a0bccfea207d415}\label{couche2_8h_ab6170c9cc6975d296a0bccfea207d415}} 
+\index{couche2.\+h@{couche2.\+h}!init\+\_\+bande@{init\+\_\+bande}}
+\index{init\+\_\+bande@{init\+\_\+bande}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{init\+\_\+bande()}{init\_bande()}}
+{\footnotesize\ttfamily \hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t}$\ast$ init\+\_\+bande (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5 }\end{DoxyParamCaption})}
+
+
+
+Definition at line 70 of file couche2.\+c.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_ab6170c9cc6975d296a0bccfea207d415_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_a2fa67e5d44f8746a06cc56ef2876c45e}\label{couche2_8h_a2fa67e5d44f8746a06cc56ef2876c45e}} 
+\index{couche2.\+h@{couche2.\+h}!print\+\_\+stripe@{print\+\_\+stripe}}
+\index{print\+\_\+stripe@{print\+\_\+stripe}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+stripe()}{print\_stripe()}}
+{\footnotesize\ttfamily void print\+\_\+stripe (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5,  }\item[{\hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$}]{stripe }\end{DoxyParamCaption})}
+
+
+
+Affiche une bande. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t ,stripe\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file couche2.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{couche2_8h_a2fa67e5d44f8746a06cc56ef2876c45e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_a1868b67f893921ee137623a23e4b6dd8}\label{couche2_8h_a1868b67f893921ee137623a23e4b6dd8}} 
+\index{couche2.\+h@{couche2.\+h}!read\+\_\+chunk@{read\+\_\+chunk}}
+\index{read\+\_\+chunk@{read\+\_\+chunk}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{read\+\_\+chunk()}{read\_chunk()}}
+{\footnotesize\ttfamily char$\ast$ read\+\_\+chunk (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5,  }\item[{\hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}]{start\+\_\+block,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Fonction de lecture de tableau de char. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t $\ast$ , uint , int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char $\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line 251 of file couche2.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{couche2_8h_a1868b67f893921ee137623a23e4b6dd8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{couche2_8h_a1868b67f893921ee137623a23e4b6dd8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_aea9498cb46077bb21181922c96e8329f}\label{couche2_8h_aea9498cb46077bb21181922c96e8329f}} 
+\index{couche2.\+h@{couche2.\+h}!read\+\_\+stripe@{read\+\_\+stripe}}
+\index{read\+\_\+stripe@{read\+\_\+stripe}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{read\+\_\+stripe()}{read\_stripe()}}
+{\footnotesize\ttfamily int read\+\_\+stripe (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5,  }\item[{\hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$}]{lire,  }\item[{\hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}]{pos }\end{DoxyParamCaption})}
+
+
+
+Lis une bande a partir de la position passée en parametre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t $\ast$,stripe\+\_\+t $\ast$, uint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+Definition at line 211 of file couche2.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{couche2_8h_aea9498cb46077bb21181922c96e8329f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_aea9498cb46077bb21181922c96e8329f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_a7ba1127dd9f6b03cbef1c8974790d3c6}\label{couche2_8h_a7ba1127dd9f6b03cbef1c8974790d3c6}} 
+\index{couche2.\+h@{couche2.\+h}!write\+\_\+chunk@{write\+\_\+chunk}}
+\index{write\+\_\+chunk@{write\+\_\+chunk}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+chunk()}{write\_chunk()}}
+{\footnotesize\ttfamily void write\+\_\+chunk (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5,  }\item[{char $\ast$}]{buffer,  }\item[{int}]{n,  }\item[{\hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}]{start\+Block }\end{DoxyParamCaption})}
+
+
+
+Ecrit une stripe a la position passée en argument sur le raid passé en argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t ,stripe\+\_\+t ,int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 112 of file couche2.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_a7ba1127dd9f6b03cbef1c8974790d3c6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_a7ba1127dd9f6b03cbef1c8974790d3c6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{couche2_8h_a5033c8eea4a4da6a76284e361f13240d}\label{couche2_8h_a5033c8eea4a4da6a76284e361f13240d}} 
+\index{couche2.\+h@{couche2.\+h}!write\+\_\+stripe@{write\+\_\+stripe}}
+\index{write\+\_\+stripe@{write\+\_\+stripe}!couche2.\+h@{couche2.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+stripe()}{write\_stripe()}}
+{\footnotesize\ttfamily void write\+\_\+stripe (\begin{DoxyParamCaption}\item[{\hyperlink{raid__defines_8h_ab22cb9a2c3c081d95bd06c65d6716686}{virtual\+\_\+disk\+\_\+t} $\ast$}]{r5,  }\item[{\hyperlink{raid__defines_8h_acfaa25ade17f36b058f738bded61819a}{stripe\+\_\+t} $\ast$}]{ecrire,  }\item[{\hyperlink{raid__defines_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}]{pos }\end{DoxyParamCaption})}
+
+
+
+Ecrit une stripe a la position passée en argument sur le raid passé en argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & virtual\+\_\+disk\+\_\+t ,stripe\+\_\+t ,int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 63 of file couche2.\+c.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{couche2_8h_a5033c8eea4a4da6a76284e361f13240d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{couche2_8h_a5033c8eea4a4da6a76284e361f13240d_icgraph}
+\end{center}
+\end{figure}

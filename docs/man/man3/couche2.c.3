@@ -1,0 +1,355 @@
+.TH "couche2.c" 3 "Mon Apr 1 2019" "PROJET_S4" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+couche2.c \- Programme couche2 du raid5\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'couche1\&.h'\fP
+.br
+\fC#include 'couche2\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBcompute_nstripe\fP (\fBvirtual_disk_t\fP *\fBr5Disk\fP, int nblocks)"
+.br
+.RI "Retourne le nombre de bandes necessaires pour écrire n blocs\&. "
+.ti -1c
+.RI "\fBblock_t\fP \fBcompute_parity\fP (\fBvirtual_disk_t\fP *r5, \fBstripe_t\fP *tocompute, int indice_parite)"
+.br
+.RI "Calcule le bloc de parité d'une stripe\&. "
+.ti -1c
+.RI "int \fBcompute_parity_index\fP (\fBvirtual_disk_t\fP *r5, int numbd)"
+.br
+.RI "Calcule la position du block de parité d'une stripe\&. "
+.ti -1c
+.RI "void \fBwrite_stripe\fP (\fBvirtual_disk_t\fP *r5, \fBstripe_t\fP *ecrire, \fBuint\fP pos)"
+.br
+.RI "Ecrit une stripe a la position passée en argument sur le raid passé en argument\&. "
+.ti -1c
+.RI "\fBstripe_t\fP * \fBinit_bande\fP (\fBvirtual_disk_t\fP *r5)"
+.br
+.ti -1c
+.RI "void \fBdelete_bande\fP (\fBstripe_t\fP **bande)"
+.br
+.RI "Libere la mémoir réservée par une bande\&. "
+.ti -1c
+.RI "void \fBprint_stripe\fP (\fBvirtual_disk_t\fP *r5, \fBstripe_t\fP *stripe)"
+.br
+.RI "Affiche une bande\&. "
+.ti -1c
+.RI "void \fBwrite_chunk\fP (\fBvirtual_disk_t\fP *r5, char *buffer, int n, \fBuint\fP startBlock)"
+.br
+.RI "Ecrit une stripe a la position passée en argument sur le raid passé en argument\&. "
+.ti -1c
+.RI "int \fBafficher_raid_hexa\fP (\fBvirtual_disk_t\fP *r5)"
+.br
+.ti -1c
+.RI "int \fBafficher_raid_decimal\fP (\fBvirtual_disk_t\fP *r5)"
+.br
+.RI "affiche les disques du raid en valeurs décimales "
+.ti -1c
+.RI "void \fBcmd_test1\fP (\fBvirtual_disk_t\fP *r5)"
+.br
+.RI "fonction de test pour write_chunk "
+.ti -1c
+.RI "int \fBread_stripe\fP (\fBvirtual_disk_t\fP *r5, \fBstripe_t\fP *lire, \fBuint\fP pos)"
+.br
+.RI "Lis une bande a partir de la position passée en parametre\&. "
+.ti -1c
+.RI "void \fBcmd_test2\fP (\fBvirtual_disk_t\fP *r5)"
+.br
+.RI "Fonction de test pour read_chunk\&. "
+.ti -1c
+.RI "int \fBcompute_num_bande\fP (\fBvirtual_disk_t\fP *r5, int nbloc)"
+.br
+.RI "Fonction retournant le num de la bande actuelle\&. "
+.ti -1c
+.RI "char * \fBread_chunk\fP (\fBvirtual_disk_t\fP *r5, \fBuint\fP start_block, int n)"
+.br
+.RI "Fonction de lecture de tableau de char\&. "
+.ti -1c
+.RI "int \fBcouche2\fP (void)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Programme couche2 du raid5\&. 
+
+
+.PP
+\fBAuthor:\fP
+.RS 4
+Groupe14 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+0\&.1 
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+24 fevrier 2019
+.RE
+.PP
+Programme de la couche 2 du raid5\&. 
+.PP
+Definition in file \fBcouche2\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int afficher_raid_decimal (\fBvirtual_disk_t\fP * r5)"
+
+.PP
+affiche les disques du raid en valeurs décimales 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t * 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
+Definition at line 172 of file couche2\&.c\&.
+.SS "int afficher_raid_hexa (\fBvirtual_disk_t\fP * r5)"
+
+.PP
+Definition at line 150 of file couche2\&.c\&.
+.SS "void cmd_test1 (\fBvirtual_disk_t\fP * r5)"
+
+.PP
+fonction de test pour write_chunk 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIvirtual_disk_t\fP * 
+.RE
+.PP
+
+.PP
+Definition at line 194 of file couche2\&.c\&.
+.SS "void cmd_test2 (\fBvirtual_disk_t\fP * r5)"
+
+.PP
+Fonction de test pour read_chunk\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t * 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 228 of file couche2\&.c\&.
+.SS "int compute_nstripe (\fBvirtual_disk_t\fP * r5Disk, int nblocks)"
+
+.PP
+Retourne le nombre de bandes necessaires pour écrire n blocs\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP Nombre de blocs (int) 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Nombre de bandes (int) 
+.RE
+.PP
+
+.PP
+Definition at line 23 of file couche2\&.c\&.
+.SS "int compute_num_bande (\fBvirtual_disk_t\fP * r5, int nbloc)"
+
+.PP
+Fonction retournant le num de la bande actuelle\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t * le systeme 
+.br
+\fI\fP int le numéro du block actuel 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+: int le numero de la bande 
+.RE
+.PP
+
+.PP
+Definition at line 242 of file couche2\&.c\&.
+.SS "\fBblock_t\fP compute_parity (\fBvirtual_disk_t\fP * r5, \fBstripe_t\fP * tocompute, int indice_parite)"
+
+.PP
+Calcule le bloc de parité d'une stripe\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t *, stripe_t *,int 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+block_t 
+.RE
+.PP
+
+.PP
+Definition at line 35 of file couche2\&.c\&.
+.SS "int compute_parity_index (\fBvirtual_disk_t\fP * r5, int numbd)"
+
+.PP
+Calcule la position du block de parité d'une stripe\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t , int numero de la bande dans la liste du raid 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
+Definition at line 50 of file couche2\&.c\&.
+.SS "int couche2 (void)"
+
+.PP
+Definition at line 278 of file couche2\&.c\&.
+.SS "void delete_bande (\fBstripe_t\fP ** bande)"
+
+.PP
+Libere la mémoir réservée par une bande\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP stripe_t * 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 82 of file couche2\&.c\&.
+.SS "\fBstripe_t\fP* init_bande (\fBvirtual_disk_t\fP * r5)"
+
+.PP
+Definition at line 70 of file couche2\&.c\&.
+.SS "void print_stripe (\fBvirtual_disk_t\fP * r5, \fBstripe_t\fP * stripe)"
+
+.PP
+Affiche une bande\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t ,stripe_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 93 of file couche2\&.c\&.
+.SS "char* read_chunk (\fBvirtual_disk_t\fP * r5, \fBuint\fP start_block, int n)"
+
+.PP
+Fonction de lecture de tableau de char\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t * , uint , int 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+char * 
+.RE
+.PP
+
+.PP
+Definition at line 251 of file couche2\&.c\&.
+.SS "int read_stripe (\fBvirtual_disk_t\fP * r5, \fBstripe_t\fP * lire, \fBuint\fP pos)"
+
+.PP
+Lis une bande a partir de la position passée en parametre\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t *,stripe_t *, uint 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
+Definition at line 211 of file couche2\&.c\&.
+.SS "void write_chunk (\fBvirtual_disk_t\fP * r5, char * buffer, int n, \fBuint\fP startBlock)"
+
+.PP
+Ecrit une stripe a la position passée en argument sur le raid passé en argument\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t ,stripe_t ,int 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 112 of file couche2\&.c\&.
+.SS "void write_stripe (\fBvirtual_disk_t\fP * r5, \fBstripe_t\fP * ecrire, \fBuint\fP pos)"
+
+.PP
+Ecrit une stripe a la position passée en argument sur le raid passé en argument\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI\fP virtual_disk_t ,stripe_t ,int 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 63 of file couche2\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PROJET_S4 from the source code\&.

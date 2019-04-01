@@ -1,0 +1,10 @@
+<map id="init_bande" name="init_bande">
+<area shape="rect" id="node2" href="$couche2_8h.html#a7ba1127dd9f6b03cbef1c8974790d3c6" title="Ecrit une stripe a la position passée en argument sur le raid passé en argument. " alt="" coords="152,56,244,83"/>
+<area shape="rect" id="node8" href="$couche3_8h.html#a4655c5b4ff56a089ebb3d5436aa3109f" title="Lecture de la table d&#39;inodes. " alt="" coords="135,107,261,133"/>
+<area shape="rect" id="node3" href="$couche2_8h.html#abc2b7fd9807ede9a34e0d2bea6e9521c" title="fonction de test pour write_chunk " alt="" coords="333,5,416,32"/>
+<area shape="rect" id="node5" href="$couche3_8h.html#afb633869cb6423375c1b26936806d6e7" title="Ecriture de la table d&#39;inodes. " alt="" coords="309,56,440,83"/>
+<area shape="rect" id="node7" href="$couche3_8h.html#a380acc8c8a85a041ecae9a995cf0a490" title="Ecriture du superbloc. " alt="" coords="311,107,438,133"/>
+<area shape="rect" id="node4" href="$couche2_8h.html#a38818187df03f330b062dcc1b3cf78df" title="couche2" alt="" coords="488,5,559,32"/>
+<area shape="rect" id="node6" href="$couche3_8c.html#acdef7a1fd863a6d3770c1268cb06add3" title="main" alt="" coords="498,107,549,133"/>
+<area shape="rect" id="node9" href="$couche3_8h.html#a8b166f8b0246d1f42f44204edb5f52a6" title="cmd_dump_inode" alt="" coords="313,157,437,184"/>
+</map>
