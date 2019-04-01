@@ -45,29 +45,27 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
   for(int i = 0; i<nbBandes; i++){
     bandesLues[i] = init_bande(r5Disk);
   }
- for (int i = 0; i<INODE_TABLE_SIZE; i++){
-   printf("OOF\n");
+ for (int i = 0; i<INODE_TABLE_SIZE-1; i++){
     //Faire l'inode à chaque tour de i
     /* LECTURE DES BANDES CONSTITUANTS L'INODE */
     for (int j = 0; j<nbBandes; j++){ //Ici on lit toutes les bandes
       //BLOCK_SIZE*i*nbBandes*r5->ndisk = taille d'un inode sur disque * i
       //BLOCK_SIZE*j*r5Disk->ndisk = j * taille d'une bande
-      printf("ridrid\n");
       read_stripe(r5Disk, bandesLues[j], r5Disk->ndisk+(j*BLOCK_SIZE)+(BLOCK_SIZE*nbBandes*i));
     }
-    printf("outrid\n");
     /* RECUPERATION DES INFOS DEPUIS LES BANDES */
     //printf("Bande 1:\n");
     //print_stripe(r5Disk , bandesLues[0]);
     //printf("Bande 2:\n");
     //print_stripe(r5Disk , bandesLues[1]);
     //Recup du filename (pas de conversion)
-    for(k = 0; k < FILENAME_MAX_SIZE/4; k++){ //k allant de 0 à (2bandes/octets)-1
+    printf("DEBUG retour : contenu du filename n° %d: \n",i);
+    for(k = 0; k < FILENAME_MAX_SIZE; k++){ //k allant de 0 à (2bandes/octets)-1
                                                       //avec BLOCK_SIZE = 4 et ndisk =4; 0<=k<32
-      //printf("BandesLues = %d, stripe = %d, data = %d, ndisk=%d, k=%d, i = %d\n\n", k/(BLOCK_SIZE*r5Disk->ndisk), (k/BLOCK_SIZE)%r5Disk->ndisk, k%BLOCK_SIZE, r5Disk->ndisk, k, i);
+      printf("BandesLues = %d, stripe = %d, data = %d, ndisk=%d, k=%d, i = %d\n", k/(BLOCK_SIZE*r5Disk->ndisk), (k/BLOCK_SIZE)%r5Disk->ndisk, k%BLOCK_SIZE, r5Disk->ndisk, k, i);
       buffer[k] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%(r5Disk->ndisk)].data[k%BLOCK_SIZE];
+      printf("Modified\n");
       table[i]->filename[k] = buffer[k];
-      printf("iteration FSIZE\n");
       //table[i]->filename[k] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%(r5Disk->ndisk)].data[k%BLOCK_SIZE];
       //test->stripe = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%(r5Disk->ndisk)];
       //printf("file = bande ? %d\n\n", table[i]->filename[k] == bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%(r5Disk->ndisk)].data[k%BLOCK_SIZE]);
@@ -75,18 +73,15 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
       //(k/BLOCK_SIZE)%r5Disk->ndisk] = indice de block dans la bande (0-4)
       //k%BLOCK_SIZE = indice de l'octet dans le block (0-4)
     }
-    printf("contenu du filename n° %d: \n",i);
+    printf("\ncontenu du filename n° %d: \n",i);
     for(k = 0; k < FILENAME_MAX_SIZE; k++){
-      printf("Iterate\n");
       printf("|%d|",table[i]->filename[k]);
     }
     printf("OUT\n");
     //Recup de la size (conversion int)
     for (k = BLOCK_SIZE*r5Disk->ndisk*2; k < (BLOCK_SIZE*r5Disk->ndisk*2)+4; k++){
-      printf("loup\n");
       conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%r5Disk->ndisk].data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
     }
-    printf("memucypy1\n");
     memcpy(&(table[i]->size), conversion, sizeof(table[i]->size));
 
     //Ou memcpy(&(table[i]->size), bandesLues[BLOCK_SIZE*r5Disk->ndisk*2/(BLOCK_SIZE*r5Disk->ndisk)]->
@@ -97,23 +92,19 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
     for (k = (BLOCK_SIZE*r5Disk->ndisk*2)+4; k < (BLOCK_SIZE*r5Disk->ndisk*2)+8; k++){
       conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%r5Disk->ndisk].data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
     }
-    printf("memucypy2\n");
     memcpy(&(table[i]->nblock), conversion, sizeof(table[i]->nblock));
 
     //Recup du first_byte(conversion int)
     for (k = (BLOCK_SIZE*r5Disk->ndisk*2)+8; k < (BLOCK_SIZE*r5Disk->ndisk*2)+12; k++){
       conversion[k%BLOCK_SIZE] = bandesLues[k/(BLOCK_SIZE*r5Disk->ndisk)]->stripe[(k/BLOCK_SIZE)%r5Disk->ndisk].data[k%BLOCK_SIZE]; //Prob si on change BLOCK_SIZE
     }
-    printf("memucypy3\n");
     memcpy(&(table[i]->first_byte), conversion, sizeof(table[i]->first_byte));
     printf("memucypyOUT\n");
   }
   for(int i = 0; i<nbBandes; i++){
-    printf("Deleting bd\n");
     delete_bande(&bandesLues[i]);
   }
   free(bandesLues);
-  free(buffer);
   return;
 }
 
@@ -213,9 +204,9 @@ inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start){
 
 void cmd_dump_inode(char *nomRep, virtual_disk_t *r5Disk){
   printf("Dump_inode\n");
-  inode_table_t table;
-  read_inodes_table(r5Disk, &table);
-  r5Disk->number_of_files = get_nb_files(table);
+  inode_table_t *table=malloc(sizeof(inode_table_t));
+  read_inodes_table(r5Disk, table);
+  r5Disk->number_of_files = get_nb_files(*table);
   printf("Number of files : %d\n",r5Disk->number_of_files);
   for(int i = 0; i < (r5Disk->number_of_files); i++){
       printf("fichier n°%d :\n%s\n", i ,r5Disk->inodes[i].filename);
@@ -297,5 +288,4 @@ void main() {
   write_inodes_table(r5d, inodes);
   printf("\nCMD_DUMP_INODE\n");
   cmd_dump_inode("RAIDFILES", r5d);
-  printf("wololo\n");
 }
