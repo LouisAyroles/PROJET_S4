@@ -1,6 +1,0 @@
-<map id="afficher_raid_decimal" name="afficher_raid_decimal">
-<area shape="rect" id="node2" href="$couche1_8c.html#a1a6021fbd31ca2b308d61050416ab520" title="affichageBlockDecimal" alt="" coords="199,56,355,83"/>
-<area shape="rect" id="node3" href="$couche1_8c.html#a4ba30a1143e543d465725eb0f151c6a2" title="Lit un bloc à la position pos sur le disque. " alt="" coords="415,5,500,32"/>
-<area shape="rect" id="node4" href="$couche1_8c.html#a1fc20a5afdea4eec626e52a499ff46cd" title="prend un tableau de 4 octets (char) et le transforme en Hexadecimal assert(monBloc[i]&lt;256); ..." alt="" coords="405,56,509,83"/>
-<area shape="rect" id="node5" href="$couche1_8c.html#a23fbb0c056aa4bfabd0cfd7b793591a3" title="conversionDec" alt="" coords="403,107,512,133"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="read_stripe" name="read_stripe">
-<area shape="rect" id="node2" href="$couche3_8h.html#a846a550008b03ec52ba64c30d614d08b" title="Lecture du superbloc. " alt="" coords="141,5,265,32"/>
-<area shape="rect" id="node3" href="$couche3_8h.html#a4655c5b4ff56a089ebb3d5436aa3109f" title="Lecture de la table d&#39;inodes. " alt="" coords="140,56,267,83"/>
-<area shape="rect" id="node4" href="$couche3_8h.html#a8b166f8b0246d1f42f44204edb5f52a6" title="cmd_dump_inode" alt="" coords="316,31,440,57"/>
-<area shape="rect" id="node6" href="$couche3_8h.html#a380acc8c8a85a041ecae9a995cf0a490" title="Ecriture du superbloc. " alt="" coords="315,81,441,108"/>
-<area shape="rect" id="node5" href="$couche3_8c.html#acdef7a1fd863a6d3770c1268cb06add3" title="main" alt="" coords="489,31,540,57"/>
-</map>

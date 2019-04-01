@@ -1,7 +1,0 @@
-<map id="read_inodes_table" name="read_inodes_table">
-<area shape="rect" id="node2" href="$couche2_8c.html#a3e5eab04f9ea03705105756c7b8c0782" title="Retourne le nombre de bandes necessaires pour écrire n blocs. " alt="" coords="180,5,299,32"/>
-<area shape="rect" id="node3" href="$couche2_8c.html#ab6170c9cc6975d296a0bccfea207d415" title="init_bande" alt="" coords="199,56,280,83"/>
-<area shape="rect" id="node4" href="$couche2_8c.html#aea9498cb46077bb21181922c96e8329f" title="Lis une bande a partir de la position passée en parametre. " alt="" coords="196,107,283,133"/>
-<area shape="rect" id="node6" href="$couche2_8c.html#adf66b9197c93775a6c1dba723ba92a07" title="Libere la mémoir réservée par une bande. " alt="" coords="190,157,289,184"/>
-<area shape="rect" id="node5" href="$couche1_8c.html#a4ba30a1143e543d465725eb0f151c6a2" title="Lit un bloc à la position pos sur le disque. " alt="" coords="347,107,432,133"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="get_unused_inodes" name="get_unused_inodes">
-<area shape="rect" id="node2" href="$couche3_8h.html#a86d9f9c0fd3952761a6879b691c30395" title="Retourne le nombre de fichiers dans la table d&#39;inodes. " alt="" coords="205,5,297,32"/>
-<area shape="rect" id="node5" href="$couche3_8h.html#a380acc8c8a85a041ecae9a995cf0a490" title="Ecriture du superbloc. " alt="" coords="188,56,315,83"/>
-<area shape="rect" id="node6" href="$couche3_8c.html#a39f901f28789cfa88375d1e5c5e1e734" title="Ecriture de la position du premier octet libre dans le r5Disk. " alt="" coords="199,107,304,133"/>
-<area shape="rect" id="node3" href="$couche3_8h.html#a8b166f8b0246d1f42f44204edb5f52a6" title="cmd_dump_inode" alt="" coords="363,5,487,32"/>
-<area shape="rect" id="node4" href="$couche3_8c.html#acdef7a1fd863a6d3770c1268cb06add3" title="main" alt="" coords="535,5,585,32"/>
-</map>
