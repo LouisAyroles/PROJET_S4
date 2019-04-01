@@ -19,6 +19,7 @@
    * @param : Nombre de blocs (int)
    * @return Nombre de bandes (int)
  **/
+ //test
  int compute_nstripe(virtual_disk_t *r5Disk,int nblocks){
    //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques
    //une bande = n blocs, avec n-1 blocs de données et 1 bloc de parité
@@ -95,8 +96,8 @@ void print_stripe(virtual_disk_t *r5,stripe_t *stripe){
   for(int i=0;i<r5->ndisk;i++){
     current=stripe->stripe[i];
     octetsToHexa(current, nbHexa);
-    for(int j=0; j<BLOCK_SIZE*2; j++){
-      fprintf(stdout, "[%c]", nbHexa[j]);
+    for(int i=0; i<BLOCK_SIZE*2; i++){
+      fprintf(stdout, "[%c]", nbHexa[i]);
     }
     printf(" ");
   }
