@@ -30,44 +30,62 @@
      return 0;
    }
   /*Est ce que le fichier est present dans le systeme?*/
-   while ( (nbfiles > 0) && (inodes[i]->filename != nomFichier) ) {
+   while ( (nbfiles >= 0) && (r5Disk->inodes[i]->filename != nomFichier) ) {
      nbfiles--;
    }
    /*Le fichier n'est pas present dans le systeme*/
-   if (nbfiles == 0) {
+   if (nbfiles < 0) {
      uint start = r5Disk->super_block.first_free_byte;
-     int posInode = get_unused_inodes(r5Disk->inodes);
-     r5Disk->inodes[posInode]=init_inode(nomFichier, fichier->size, start);
-     write_inodes_table(r5Disk,)
-     r5Disk->number_of_files+=1;
-
+     inode_t inode = init_inode(nomFichier, fichier.size, start);
+     write_inodes_table(r5Disk, inode);
+     write_chunk(r5Disk,fichier.data,fichier.size,r5->super_block.first_free_byte);
    /*Le fichier est present dans le systeme*/
    }else{
      /*Le fichier est plus petit que le fichier present*/
      if (fichier.size <= r5Disk->inodes[nbfiles].size) {
        r5Disk->inodes[nbfiles].size = fichier.size;
-       //Mettre a jour les données
+       r5Disk->inodes[nbfiles].nblock = compute_nblock(fichier.size);
+       write_chunk(r5Disk,fichier.data,fichier.size,r5->super_block.first_free_byte);
 
      /*Le fichier est plus grand que le fichier present*/
      }else{
        delete_inode(r5Disk,nbfiles);
-       //identique au 1er if
+       uint start = r5Disk->super_block.first_free_byte;
+       inode_t inode = init_inode(nomFichier, fichier.size, start);
+       write_inodes_table(r5Disk, inode);
+       write_chunk(r5Disk,fichier.data,fichier.size,r5->super_block.first_free_byte);
      }
 
    }
+   r5Disk->number_of_files+=1;
+   return 1;
 }
 
 
 
  /** \brief
-   * Lit un fichier sur le systeme RAID et renvoie le contenu dans file_t
+   * Lit un fichier sur le systeme RAID et renvoie le contenu dans fichier
    * @param : virtual_disk_t
    * @param : chaine de char (nom du Fichier)
    * @param : file_t
    * @return int (1 si fichier present, 0 si fichier non present)
  **/
- int read_file(virtual_disk_t *r5Disk, char *NomFichier, file_t fichier){
+ int read_file(virtual_disk_t *r5Disk, char *nomFichier, file_t *fichier){
+   int nbfiles = get_nb_files(r5Disk->inodes)
+   /*Est ce que le fichier est present dans le systeme?*/
+   while ( (nbfiles >= 0) && (r5Disk->inodes[i]->filename != nomFichier) ) {
+     nbfiles--;
+   }
+   /*Le fichier n'est pas present sur le systeme*/
+   if (nbfiles < 0) {
+     return 0;
 
+   /*Le fichier est present sur le systeme*/
+   }else{
+     fichier.size = r5Disk->inodes[nbfiles].size;
+     fichier.data = read_chunk(r5Disk, r5Disk->inodes[nbfiles].first_byte, fichier.size);
+
+   return 1;
  }
 
 
@@ -79,7 +97,19 @@
    * @return int (1 si fichier supprimé, 0 si fichier non present)
  **/
  int delete_file(virtual_disk_t *r5Disk,char *NomFichier){
-
+   int nbfiles = get_nb_files(r5Disk->inodes)
+   /*Est ce que le fichier est present dans le systeme?*/
+   while ( (nbfiles >= 0) && (r5Disk->inodes[i]->filename != nomFichier) ) {
+     nbfiles--;
+   }
+   /*Le fichier n'est pas present sur le systeme*/
+   if (nbfiles < 0) {
+     return 0;
+   /*Le fichier est present sur le systeme*/
+   }else{
+     delete_inode(r5Disk,nbfiles);
+   }
+   return 1;
  }
 
  /** \brief
@@ -89,7 +119,7 @@
    * @return void
  **/
  void load_file_from_host(virtual_disk_t *r5Disk, char *NomFichier){
-
+   
  }
 
  /** \brief
