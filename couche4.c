@@ -38,7 +38,7 @@
      uint start = r5Disk->super_block.first_free_byte;
      int posInode = get_unused_inodes(r5Disk->inodes);
      r5Disk->inodes[posInode]=init_inode(nomFichier, fichier->size, start);
-     //ecrire le fichier Ici
+     write_inodes_table(r5Disk,)
      r5Disk->number_of_files+=1;
 
    /*Le fichier est present dans le systeme*/
