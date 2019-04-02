@@ -19,6 +19,7 @@
    * @param : Nombre de blocs (int)
    * @return Nombre de bandes (int)
  **/
+
  int compute_nstripe(virtual_disk_t *r5Disk,int nblocks){
    //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques
    //une bande = n blocs, avec n-1 blocs de données et 1 bloc de parité
@@ -144,6 +145,7 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
   } // Fin FOR i
   delete_bande(&bande);
 }
+/*pas pris en compte l'eventualité de commencer au milieu d'une bande*/
 
 int afficher_raid_hexa(virtual_disk_t *r5){
   int retour=0;
@@ -273,12 +275,12 @@ char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
 }
 
 
-
-void main(void){
+int couche2(void){
   //couche1();
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   init_disk_raid5("./RAIDFILES",r5d);
   cmd_test1(r5d);
   printf("\nCMD_TEST2\n");
   cmd_test2(r5d);
+  return 0;
 }
