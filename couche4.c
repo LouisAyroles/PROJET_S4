@@ -124,7 +124,6 @@
  **/
  void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
    FILE* fd;
-   int taille;
    file_t fichier;
    fd = fopen(nomFichier, "r+");
    if (fd == NULL){
