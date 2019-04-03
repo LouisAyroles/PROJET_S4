@@ -77,6 +77,7 @@
    * @return int (1 si fichier present, 0 si fichier non present)
  **/
  int read_file(virtual_disk_t *r5Disk, char *nomFichier, file_t *fichier){
+   char *buffer;
    int nbfiles = get_nb_files(r5Disk->inodes);
    /*Est ce que le fichier est present dans le systeme?*/
    while ( (nbfiles >= 0) && (r5Disk->inodes[nbfiles].filename != nomFichier) ) {
@@ -89,7 +90,10 @@
    /*Le fichier est present sur le systeme*/
    }else{
      fichier->size = r5Disk->inodes[nbfiles].size;
-     fichier->data = read_chunk(r5Disk, r5Disk->inodes[nbfiles].first_byte, fichier->size);
+     buffer = read_chunk(r5Disk, r5Disk->inodes[nbfiles].first_byte, fichier->size);
+     for (int i = 0; i < fichier->size; i++) {
+       fichier->data[i] = *buffer;
+     }
    }
    return 1;
  }
