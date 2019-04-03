@@ -47,6 +47,7 @@
        r5Disk->inodes[nbfiles].nblock = compute_nblock(fichier.size);
        write_chunk(r5Disk,fichier.data,fichier.size,r5->super_block.first_free_byte);
 
+
      /*Le fichier est plus grand que le fichier present*/
      }else{
        delete_inode(r5Disk,nbfiles);
@@ -57,6 +58,7 @@
      }
 
    }
+   first_free_byte(r5Disk);
    r5Disk->number_of_files+=1;
    return 1;
 }
@@ -84,7 +86,7 @@
    }else{
      fichier.size = r5Disk->inodes[nbfiles].size;
      fichier.data = read_chunk(r5Disk, r5Disk->inodes[nbfiles].first_byte, fichier.size);
-
+   }
    return 1;
  }
 
@@ -109,6 +111,8 @@
    }else{
      delete_inode(r5Disk,nbfiles);
    }
+   first_free_byte(r5Disk);
+   r5Disk->number_of_files-=1;
    return 1;
  }
 
@@ -119,7 +123,7 @@
    * @return void
  **/
  void load_file_from_host(virtual_disk_t *r5Disk, char *NomFichier){
-   
+
  }
 
  /** \brief
