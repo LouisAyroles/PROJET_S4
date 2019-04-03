@@ -23,29 +23,31 @@
    * @return int (1 si on a ecrit le fichier, 0 si plus de place ou echec)
  **/
  int write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
-
-   int nbfiles = get_nb_files(r5Disk->inodes)
+   inode_table_t inodes;
+   int nbfiles = get_nb_files(r5Disk->inodes);
    /*Il n'y a plus de places dans le systeme*/
    if (nbfiles==10) {
      return 0;
    }
   /*Est ce que le fichier est present dans le systeme?*/
-   while ( (nbfiles >= 0) && (r5Disk->inodes[i]->filename != nomFichier) ) {
+   while ( (nbfiles >= 0) && (r5Disk->inodes[nbfiles].filename != nomFichier) ) {
      nbfiles--;
    }
    /*Le fichier n'est pas present dans le systeme*/
    if (nbfiles < 0) {
      uint start = r5Disk->super_block.first_free_byte;
      inode_t inode = init_inode(nomFichier, fichier.size, start);
-     write_inodes_table(r5Disk, inode);
-     write_chunk(r5Disk,fichier.data,fichier.size,r5->super_block.first_free_byte);
+     read_inodes_table(r5Disk,&inodes);
+     r5Disk->inodes[get_unused_inodes(inodes)]=inode;
+     write_inodes_table(r5Disk, inodes);
+     write_chunk(r5Disk,fichier.data,fichier.size,r5Disk->super_block.first_free_byte);
    /*Le fichier est present dans le systeme*/
    }else{
      /*Le fichier est plus petit que le fichier present*/
      if (fichier.size <= r5Disk->inodes[nbfiles].size) {
        r5Disk->inodes[nbfiles].size = fichier.size;
        r5Disk->inodes[nbfiles].nblock = compute_nblock(fichier.size);
-       write_chunk(r5Disk,fichier.data,fichier.size,r5->super_block.first_free_byte);
+       write_chunk(r5Disk,fichier.data,fichier.size,r5Disk->super_block.first_free_byte);
 
 
      /*Le fichier est plus grand que le fichier present*/
@@ -53,8 +55,10 @@
        delete_inode(r5Disk,nbfiles);
        uint start = r5Disk->super_block.first_free_byte;
        inode_t inode = init_inode(nomFichier, fichier.size, start);
-       write_inodes_table(r5Disk, inode);
-       write_chunk(r5Disk,fichier.data,fichier.size,r5->super_block.first_free_byte);
+       read_inodes_table(r5Disk,&inodes);
+       r5Disk->inodes[get_unused_inodes(inodes)]=inode;
+       write_inodes_table(r5Disk, inodes);
+       write_chunk(r5Disk,fichier.data,fichier.size,r5Disk->super_block.first_free_byte);
      }
 
    }
@@ -73,9 +77,9 @@
    * @return int (1 si fichier present, 0 si fichier non present)
  **/
  int read_file(virtual_disk_t *r5Disk, char *nomFichier, file_t *fichier){
-   int nbfiles = get_nb_files(r5Disk->inodes)
+   int nbfiles = get_nb_files(r5Disk->inodes);
    /*Est ce que le fichier est present dans le systeme?*/
-   while ( (nbfiles >= 0) && (r5Disk->inodes[i]->filename != nomFichier) ) {
+   while ( (nbfiles >= 0) && (r5Disk->inodes[nbfiles].filename != nomFichier) ) {
      nbfiles--;
    }
    /*Le fichier n'est pas present sur le systeme*/
@@ -84,8 +88,8 @@
 
    /*Le fichier est present sur le systeme*/
    }else{
-     fichier.size = r5Disk->inodes[nbfiles].size;
-     fichier.data = read_chunk(r5Disk, r5Disk->inodes[nbfiles].first_byte, fichier.size);
+     fichier->size = r5Disk->inodes[nbfiles].size;
+     fichier->data = read_chunk(r5Disk, r5Disk->inodes[nbfiles].first_byte, fichier->size);
    }
    return 1;
  }
@@ -99,9 +103,9 @@
    * @return int (1 si fichier supprimé, 0 si fichier non present)
  **/
  int delete_file(virtual_disk_t *r5Disk,char *nomFichier){
-   int nbfiles = get_nb_files(r5Disk->inodes)
+   int nbfiles = get_nb_files(r5Disk->inodes);
    /*Est ce que le fichier est present dans le systeme?*/
-   while ( (nbfiles >= 0) && (r5Disk->inodes[i]->filename != nomFichier) ) {
+   while ( (nbfiles >= 0) && (r5Disk->inodes[nbfiles].filename != nomFichier) ) {
      nbfiles--;
    }
    /*Le fichier n'est pas present sur le systeme*/
@@ -109,6 +113,7 @@
      return 0;
    /*Le fichier est present sur le systeme*/
    }else{
+     r5Disk->inodes[nbfiles].first_byte = 0;
      delete_inode(r5Disk,nbfiles);
    }
    first_free_byte(r5Disk);
@@ -129,9 +134,9 @@
    if (fd == NULL){
      printf("Impossible d'ouvrir le fichier %s",nomFichier);
   }else{
-    fichier.size = fseek(fichier, 0, SEEK_END);
-    fseek(fichier,0,SEEK_SET);
-    fread(fichier.data, taille, 1, fd);
+    fichier.size = fseek(fd, 0, SEEK_END);
+    fseek(fd,0,SEEK_SET);
+    fread(fichier.data, fichier.size, 1, fd);
     fclose(fd);
   }
   write_file(r5Disk,nomFichier,fichier);

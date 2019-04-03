@@ -15,6 +15,9 @@ couche2: couche2.c couche2.h raid_defines.h couche1.c couche1.h
 couche3: couche3.c couche3.h raid_defines.h couche2.c couche2.h couche1.c couche1.h
 	$(CC) -o $@ $^ $(LDFLAGS)
 
+couche4: couche4.c couche4.h couche3.c couche3.h raid_defines.h couche2.c couche2.h couche1.c couche1.h
+		$(CC) -o $@ $^ $(LDFLAGS)
+
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
