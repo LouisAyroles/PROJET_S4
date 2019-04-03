@@ -98,7 +98,7 @@
    * @param : chaine de char (nom du Fichier)
    * @return int (1 si fichier supprimé, 0 si fichier non present)
  **/
- int delete_file(virtual_disk_t *r5Disk,char *NomFichier){
+ int delete_file(virtual_disk_t *r5Disk,char *nomFichier){
    int nbfiles = get_nb_files(r5Disk->inodes)
    /*Est ce que le fichier est present dans le systeme?*/
    while ( (nbfiles >= 0) && (r5Disk->inodes[i]->filename != nomFichier) ) {
@@ -122,9 +122,21 @@
    * @param : chaine de char (nom du Fichier)
    * @return void
  **/
- void load_file_from_host(virtual_disk_t *r5Disk, char *NomFichier){
-
- }
+ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
+   FILE* fd;
+   int taille;
+   file_t fichier;
+   fd = fopen(nomFichier, "r+");
+   if (fd == NULL){
+     printf("Impossible d'ouvrir le fichier %s",nomFichier);
+  }else{
+    fichier.size = fseek(fichier, 0, SEEK_END);
+    fseek(fichier,0,SEEK_SET);
+    fread(fichier.data, taille, 1, fd);
+    fclose(fd);
+  }
+  write_file(r5Disk,nomFichier,fichier);
+}
 
  /** \brief
    * Ecrit un fichier present (dans le systeme RAID) sur l'ordinateur (host)
@@ -132,4 +144,15 @@
    * @param : chaine de char (nom du Fichier)
    * @return void
  **/
- void store_file_to_host(virtual_disk_t *r5Disk, char *NomFichier);
+ void store_file_to_host(virtual_disk_t *r5Disk, char *nomFichier){
+   file_t fichier;
+   FILE* fd;
+   if ( read_file(r5Disk, nomFichier, &fichier) ) {
+     fd = fopen(nomFichier,"a");
+     if (fd == NULL) {
+       printf("Impossible de creer le fichier %s",nomFichier);
+     }else{
+       fwrite(fichier.data, fichier.size, 1, fd);
+     }
+  }
+}
