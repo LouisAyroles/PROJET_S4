@@ -10,7 +10,7 @@ void write_stripe(virtual_disk_t *r5, stripe_t *ecrire, uint pos);
 stripe_t *init_bande(virtual_disk_t *r5);
 void delete_bande(stripe_t **bande);
 void print_stripe(virtual_disk_t *r5,stripe_t *stripe);
-void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock);
+void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBytes);
 int afficher_raid_hexa(virtual_disk_t *r5);
 int afficher_raid_decimal(virtual_disk_t *r5);
 void cmd_test1(virtual_disk_t *r5);

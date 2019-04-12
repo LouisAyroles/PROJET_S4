@@ -94,8 +94,7 @@ int compute_nblock(int n)
 {
     int nbBlocks;
     nbBlocks = n/4;
-    if (n%4!=0)
-    {
+    if (n%4!=0){
         nbBlocks += 1;
     }
     return nbBlocks;
@@ -110,7 +109,7 @@ int compute_nblock(int n)
   * @return void
 **/
 void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
-  fseek(RAID5->storage[idDisk], (long)pos, SEEK_SET);
+  fseek(RAID5->storage[idDisk], (long)pos*BLOCK_SIZE, SEEK_SET);
   int retour=-1;
   retour=fwrite(entrant->data, 1, BLOCK_SIZE, RAID5->storage[idDisk]);
 }

@@ -29,7 +29,7 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
   char conversion[BLOCK_SIZE];
   bandesLues = (stripe_t *) malloc(sizeof(stripe_t)*nbBandes);
   for(int j = 0; j<nbBandes; j++){
-    read_stripe(r5Disk, &bandesLues[j], BLOCK_SIZE*j*r5Disk->ndisk);
+    read_stripe(r5Disk, &bandesLues[j], j);
   }
 
   for(int i = 0; i < sizeof(enum raid); i++){
@@ -65,13 +65,13 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
   for(int i = 0; i<nbBandes; i++){
     bandesLues[i] = init_bande(r5Disk);
   }
- for (int i = 0; i<INODE_TABLE_SIZE-1; i++){
+ for (int i = 0; i<INODE_TABLE_SIZE; i++){
     //Faire l'inode à chaque tour de i
     /* LECTURE DES BANDES CONSTITUANTS L'INODE */
     for (int j = 0; j<nbBandes; j++){ //Ici on lit toutes les bandes
       //BLOCK_SIZE*i*nbBandes*r5->ndisk = taille d'un inode sur disque * i
       //BLOCK_SIZE*j*r5Disk->ndisk = j * taille d'une bande
-      read_stripe(r5Disk, bandesLues[j], r5Disk->ndisk+(j*BLOCK_SIZE)+(BLOCK_SIZE*nbBandes*i));
+      read_stripe(r5Disk, bandesLues[j], j+nbBandes*i);
     }
     /* RECUPERATION DES INFOS DEPUIS LES BANDES */
     //printf("Bande 1:\n");
@@ -95,7 +95,7 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
     }
     printf("\ncontenu du filename n° %d: \n",i);
     for(k = 0; k < FILENAME_MAX_SIZE; k++){
-      printf("|%d|",table[i]->filename[k]);
+      printf("|%c|",table[i]->filename[k]);
     }
     printf("OUT\n");
     //Recup de la size (conversion int)
@@ -136,23 +136,17 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
 **/
 void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
   printf("write_inodes_table\n");
-  int noBande=0;
   char *buffer = (char *)malloc(sizeof(inode_t)*INODE_TABLE_SIZE);
   char temp[4];
-  int size, nblock, first_byte, poswrite;
-  int pos = BLOCK_SIZE*compute_nblock(sizeof(super_block_t));
-  int blockDebutInode = pos / BLOCK_SIZE;     /*= dernier block du SUPERBLOCK*/
-  if(blockDebutInode>=r5Disk->ndisk){         /*rajoute le bloc de parité*/
-    blockDebutInode++;
-  }
-  noBande = blockDebutInode/r5Disk->ndisk;
-  blockDebutInode = blockDebutInode%r5Disk->ndisk; /*= premier block de l'inode*/
-  if (blockDebutInode == compute_parity_index(r5Disk ,noBande)) {
-    blockDebutInode++;
+  int noBande,size, nblock, first_byte, poswrite;
+  if(r5Disk->ndisk < 3){         /*sur quelle bande commence la table d'inodes*/
+    noBande = 2;
+  }else{
+    noBande = 1;
   }
   /*construction du buffer*/
-  for (int i = 0; i < INODE_TABLE_SIZE; i++) {
 
+  for (int i = 0; i < INODE_TABLE_SIZE; i++) {
     /*ecriture du filename*/
     poswrite = i*sizeof(inode_t);
     for (int j = 0; j < FILENAME_MAX_SIZE; j++) {
@@ -181,7 +175,7 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
     buffer[poswrite] = inode[i].first_byte & 0xFF;
 
   }
-  write_chunk(r5Disk, buffer, sizeof(inode_t)*INODE_TABLE_SIZE, noBande*r5Disk->ndisk+blockDebutInode);
+  write_chunk(r5Disk, buffer, sizeof(inode_t)*INODE_TABLE_SIZE, noBande);
 }
 
 /** \brief
@@ -197,6 +191,7 @@ void delete_inode(virtual_disk_t *r5Disk, int numInode){
     }
     r5Disk->inodes[r5Disk->number_of_files-1].first_byte=0;
     r5Disk->number_of_files = r5Disk->number_of_files-1;
+    write_inodes_table(r5Disk,r5Disk->inodes);
   }
 }
 
@@ -327,9 +322,11 @@ void first_free_byte(virtual_disk_t *r5Disk){
     }
   }
   r5Disk->super_block.first_free_byte = lastfirstbyte + r5Disk->inodes[lastindice].size;
+  //printf("ici\n");
+  write_super_block(r5Disk);
 }
 
-void main() {
+void couche3() {
   //couche2();
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   inode_table_t inodes;

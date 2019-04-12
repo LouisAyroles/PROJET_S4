@@ -23,6 +23,7 @@
    * @return int (1 si on a ecrit le fichier, 0 si plus de place ou echec)
  **/
  int write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
+   printf("write_file\n");
    inode_table_t inodes;
    int nbfiles = get_nb_files(r5Disk->inodes);
    /*Il n'y a plus de places dans le systeme*/
@@ -40,13 +41,19 @@
      read_inodes_table(r5Disk,&inodes);
      r5Disk->inodes[get_unused_inodes(inodes)]=inode;
      write_inodes_table(r5Disk, inodes);
+     printf("ici\n\n\n");
+     first_free_byte(r5Disk);
+     printf("taille : %d Debut : %d\n", fichier.size,r5Disk->super_block.first_free_byte );
      write_chunk(r5Disk,fichier.data,fichier.size,r5Disk->super_block.first_free_byte);
+                  printf("ici\n");
    /*Le fichier est present dans le systeme*/
    }else{
      /*Le fichier est plus petit que le fichier present*/
      if (fichier.size <= r5Disk->inodes[nbfiles].size) {
-       r5Disk->inodes[nbfiles].size = fichier.size;
-       r5Disk->inodes[nbfiles].nblock = compute_nblock(fichier.size);
+       read_inodes_table(r5Disk,&inodes);
+       inodes[nbfiles].size = fichier.size;
+       inodes[nbfiles].nblock = compute_nblock(fichier.size);
+       write_inodes_table(r5Disk, inodes);
        write_chunk(r5Disk,fichier.data,fichier.size,r5Disk->super_block.first_free_byte);
 
 
@@ -77,6 +84,7 @@
    * @return int (1 si fichier present, 0 si fichier non present)
  **/
  int read_file(virtual_disk_t *r5Disk, char *nomFichier, file_t *fichier){
+   printf("read_file\n");
    char *buffer;
    int nbfiles = get_nb_files(r5Disk->inodes);
    /*Est ce que le fichier est present dans le systeme?*/
@@ -107,6 +115,7 @@
    * @return int (1 si fichier supprimé, 0 si fichier non present)
  **/
  int delete_file(virtual_disk_t *r5Disk,char *nomFichier){
+   printf("delete_file\n");
    int nbfiles = get_nb_files(r5Disk->inodes);
    /*Est ce que le fichier est present dans le systeme?*/
    while ( (nbfiles >= 0) && (r5Disk->inodes[nbfiles].filename != nomFichier) ) {
@@ -132,6 +141,7 @@
    * @return void
  **/
  void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
+   printf("load_file_from_host\n");
    FILE* fd;
    file_t fichier;
    fd = fopen(nomFichier, "r+");
@@ -153,6 +163,7 @@
    * @return void
  **/
  void store_file_to_host(virtual_disk_t *r5Disk, char *nomFichier){
+   printf("store_file_to_host\n");
    file_t fichier;
    FILE* fd;
    if ( read_file(r5Disk, nomFichier, &fichier) ) {
@@ -163,4 +174,13 @@
        fwrite(fichier.data, fichier.size, 1, fd);
      }
   }
+}
+
+
+int main(int argc, char const *argv[]) {
+  //couche3();
+  virtual_disk_t *r5Disk = malloc(sizeof(virtual_disk_t));
+  init_disk_raid5("./RAIDFILES",r5Disk);
+  load_file_from_host(r5Disk,"couche1.h");
+  return 0;
 }

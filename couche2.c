@@ -109,7 +109,7 @@ void print_stripe(virtual_disk_t *r5,stripe_t *stripe){
   * @param : virtual_disk_t ,stripe_t ,int
   * @return void
 **/
-void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
+void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBytes){
   int nbBlocks = compute_nblock(n);
   int nbBandes = compute_nstripe(r5,nbBlocks);
   int pos = 0;
@@ -140,12 +140,11 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
         }
     } // Fin FOR j
     bande->stripe[pos] = compute_parity(r5, bande, pos);
-    write_stripe(r5, bande, startBlock*4); // ecriture de la bande sur disque
-    startBlock+=1;  // Decalage du block de depart de un block
+    write_stripe(r5, bande, startBytes); // ecriture de la bande sur disque
+    startBytes+=1;  // Decalage du block de depart de un block
   } // Fin FOR i
   delete_bande(&bande);
 }
-/*pas pris en compte l'eventualité de commencer au milieu d'une bande*/
 
 int afficher_raid_hexa(virtual_disk_t *r5){
   int retour=0;
@@ -249,28 +248,24 @@ int compute_num_bande(virtual_disk_t *r5,int nbloc){
   * @return char *
 **/
 char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
-  uint nbBlocks = compute_nblock(n);
   unsigned char *buffer=malloc(sizeof(unsigned char)*n);
-  int indice_buffer=0;
+  int indice_buffer,i=0;
   int current=start_block;
-  int nbBlocksLus = 0;              /*Nombre de Blocks effectivement lus (sans lire les blocs de parité)*/
-  block_t *blc=malloc(sizeof(struct block_s));
-  printf("Lecture de chunk : [start]:%d ,[end]:%d ,[size]:%d\n",start_block,start_block+n,compute_nblock(n));
-  while((uint) nbBlocksLus<nbBlocks){
-    printf("\nCurrent block :%d\n",current);
-    if(current%(r5->ndisk)!=compute_parity_index(r5, compute_num_bande(r5,current))){
-      printf("Reading position %d at disk %d\n",(current/4)*4,current%r5->ndisk);
-      read_block(r5,blc,(current/4)*4,current%r5->ndisk);
-      for(int i=0; i<BLOCK_SIZE; i++){
-        buffer[indice_buffer]=blc->data[i];
-        printf("%d ",blc->data[i]);
-        indice_buffer=indice_buffer+1;
+  stripe_t *mystripe = init_bande(r5);
+  while(indice_buffer < n){
+    read_stripe(r5,mystripe, current);
+    for (int j = 0; j < r5->ndisk; j++) {
+      if (compute_parity_index(r5,current) == j) {
+        i=0;
+        while ( i<BLOCK_SIZE && indice_buffer < n){
+          buffer[indice_buffer]=mystripe[j].stripe->data[i];
+          indice_buffer=indice_buffer+1;
+        }
       }
-      nbBlocksLus++;
     }
     current++;
   }
-  free(blc);
+  delete_bande(&mystripe);
   return buffer;
 }
 
