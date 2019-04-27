@@ -171,8 +171,6 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
       buffer[poswrite+j] = bufferConversion[j];
     }
 
-
-
     /*ecriture du nblock*/
     poswrite+=4;
     int_To_uChar(inode[i].nblock,bufferConversion);
@@ -189,7 +187,6 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
     write_chunk(r5Disk, buffer, sizeof(inode_t), noBande);
     noBande+=compute_nstripe(r5Disk ,compute_nblock(sizeof(inode_t)));
   }
-  //write_chunk(r5Disk, buffer, sizeof(inode_t)*INODE_TABLE_SIZE, noBande);
 }
 
 /** \brief
@@ -289,40 +286,31 @@ void cmd_dump_inode(char *nomRep, virtual_disk_t *r5Disk){
   * @param : virtual_disk_t
   * @return void
 **/
-void write_super_block(virtual_disk_t *r5Disk){
+void write_super_block(virtual_disk_t *r5Disk, super_block_t sb){
   printf("write_super_block\n");
   inode_table_t inodes;
-  int lastfirstbyte=0;
-  int lastindice=0;
   int poswrite=0;
   char *buffer = (char *)malloc(sizeof(char)*sizeof(super_block_t));
+  char *bufferConversion = (char *)malloc(sizeof(char)*sizeof(int));
 
 
-  printf("ici2, R5DISK = %d\n\n______________\n", r5Disk->ndisk);
-  read_inodes_table(r5Disk, &inodes);
-  r5Disk->super_block.nb_blocks_used=0;
-  //first_free_byte(r5Disk);
-  r5Disk->super_block.raid_type = r5Disk->raidmode;
-  printf("Ouallez !! %d %d\n", r5Disk->super_block.first_free_byte, r5Disk->inodes[lastindice].size);
+  int_To_uChar(sb.raid_type, bufferConversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = bufferConversion[i];
+  }
 
+  poswrite += 4;
+  int_To_uChar(sb.nb_blocks_used, bufferConversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = bufferConversion[i];
+  }
 
-    buffer[0] = ((char*)&(r5Disk->super_block.raid_type))[0];
-    buffer[1] = ((char*)&(r5Disk->super_block.raid_type))[1];
-    buffer[2] = ((char*)&(r5Disk->super_block.raid_type))[2];
-    buffer[3] = ((char*)&(r5Disk->super_block.raid_type))[3];
-
-
-    buffer[4] = ((char*)&(r5Disk->super_block.nb_blocks_used))[0];
-    buffer[5] = ((char*)&(r5Disk->super_block.nb_blocks_used))[1];
-    buffer[6] = ((char*)&(r5Disk->super_block.nb_blocks_used))[2];
-    buffer[7] = ((char*)&(r5Disk->super_block.nb_blocks_used))[3];
-
-
-    buffer[8] = ((char*)&(r5Disk->super_block.first_free_byte))[0];
-    buffer[9] = ((char*)&(r5Disk->super_block.first_free_byte))[1];
-    buffer[10] = ((char*)&(r5Disk->super_block.first_free_byte))[2];
-    buffer[11] = ((char*)&(r5Disk->super_block.first_free_byte))[3];
-
+  /*Ecriture du First free Byte*/
+  poswrite += 4;
+  int_To_uChar(sb.first_free_byte, bufferConversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = bufferConversion[i];
+  }
 
     write_chunk(r5Disk, buffer, sizeof(super_block_t), 0);
     printf("ici\n");
