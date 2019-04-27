@@ -262,3 +262,34 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBytes){
   } // Fin FOR i
   delete_bande(&bande);
 }
+
+
+
+/** \brief
+  * Fonction de lecture de tableau de char
+  * @param : virtual_disk_t * , uint , int
+  * @return char *
+**/
+char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
+  unsigned char *buffer=malloc(sizeof(unsigned char)*n);
+  int indice_buffer = 0,i=0;
+  int current=start_block;
+  stripe_t *mystripe = init_bande(r5);
+  while(indice_buffer < n){
+    read_stripe(r5,mystripe, current);
+    for (int j = 0; j < r5->ndisk; j++) {
+      int par = compute_parity_index(r5,current);
+      if (par != j) {
+        i=0;
+        while ( i<BLOCK_SIZE && indice_buffer < n){
+          buffer[indice_buffer]=mystripe->stripe[j].data[i];
+          indice_buffer=indice_buffer+1;
+          i++;
+        }
+      }
+    }
+    current++;
+  }
+  delete_bande(&mystripe);
+  return buffer;
+}
