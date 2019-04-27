@@ -17,5 +17,6 @@ void cmd_test2(virtual_disk_t *r5);
 int compute_num_bande(virtual_disk_t *r5,int nbloc);
 void read_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBande);
 void dump_stripe(stripe_t bande);
+void affichageSysteme(virtual_disk_t *RAID5);
 
 #endif

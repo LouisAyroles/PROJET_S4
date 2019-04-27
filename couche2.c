@@ -105,6 +105,23 @@ void print_stripe(virtual_disk_t *r5,stripe_t *stripe){
 }
 
 /** \brief
+  * Fonction d'affichage du syteme par Bande
+  * @param : virtual_disk_t
+  * @return void
+**/
+void affichageSysteme(virtual_disk_t *RAID5){
+  stripe_t *stripe = init_bande(RAID5);
+  printf("    Disque 0                Disque 1                Disque 2                Disque 3\n");
+  for (int i = 0; i < 42; i++) {
+    read_stripe(RAID5,stripe,i);
+    printf("%-3d",i);
+    dump_stripe(*stripe);
+    printf("\n");
+  }
+}
+
+
+/** \brief
   * Ecrit n bytes du buffer a partir de StartBandes le raid passé en argument
   * @param : virtual_disk_t ,buffer* ,int, int
   * @return void
@@ -141,10 +158,12 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBande){
 **/
 void dump_stripe(stripe_t bande){
   for(int i = 0; i<bande.nblocks; i++){
+    printf("[ ");
     for(int j = 0; j < BLOCK_SIZE; j++){
-      printf("%d ", bande.stripe[i].data[j]);
+      printf("%-3d ", bande.stripe[i].data[j]);
     }
-    printf("\n");
+
+    printf("]   ");
   }
 }
 
