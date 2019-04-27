@@ -133,6 +133,12 @@ void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBande){
   delete_bande(&stripe);
 }
 
+
+/** \brief
+  * Affiche une bande
+  * @param : stripe_t
+  * @return void
+**/
 void dump_stripe(stripe_t bande){
   for(int i = 0; i<bande.nblocks; i++){
     for(int j = 0; j < BLOCK_SIZE; j++){
