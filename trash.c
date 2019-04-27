@@ -293,3 +293,25 @@ char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
   delete_bande(&mystripe);
   return buffer;
 }
+
+
+
+buffer[poswrite] = ((char*)&(inode[i].size))[0];
+buffer[poswrite+3] = (inode[i].size>>24) & 0xFF;
+buffer[poswrite+2] = (inode[i].size>>16) & 0xFF;
+buffer[poswrite+1] = (inode[i].size>>8) & 0xFF;
+buffer[poswrite] = inode[i].size & 0xFF;
+
+/*ecriture du nblock*/
+poswrite+=4;
+buffer[poswrite+3] = (inode[i].nblock>>24) & 0xFF;
+buffer[poswrite+2] = (inode[i].nblock>>16) & 0xFF;
+buffer[poswrite+1] = (inode[i].nblock>>8) & 0xFF;
+buffer[poswrite] = inode[i].nblock & 0xFF;
+
+/*ecriture du first_byte*/
+poswrite+=4;
+buffer[poswrite+3] = (inode[i].first_byte>>24) & 0xFF;
+buffer[poswrite+2] = (inode[i].first_byte>>16) & 0xFF;
+buffer[poswrite+1] = (inode[i].first_byte>>8) & 0xFF;
+buffer[poswrite] = inode[i].first_byte & 0xFF;

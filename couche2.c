@@ -243,7 +243,7 @@ void cmd_test2(virtual_disk_t *r5){
 }
 
 
-int main(void){
+void couche2(void){
   //couche1();
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   init_disk_raid5("./RAIDFILES",r5d);
@@ -251,5 +251,4 @@ int main(void){
   printf("\nCMD_TEST2\n");
   cmd_test2(r5d);
   turn_off_disk_raid5(r5d);
-  return 0;
 }

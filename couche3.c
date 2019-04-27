@@ -64,12 +64,12 @@ void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
   printf("read_inodes_table\n");
   int nbBandes = compute_nstripe(r5Disk, INODE_SIZE), k, debutTable = startTable(r5Disk);
   char conversion[4];
-  char *bufferInode;
+  char *bufferInode = (char*)malloc(sizeof(char)*sizeof(inode_table_t));
 
   for (int i = 0; i<INODE_TABLE_SIZE; i++){
     /* LECTURE DES BANDES CONSTITUANTS L'INODE */
     printf("Indice de lecture : %d, nbBandes = %d\n", debutTable+i*nbBandes, nbBandes);
-    bufferInode=read_chunk(r5Disk, debutTable+i*nbBandes, INODE_OCT);
+    read_chunk(r5Disk, bufferInode, debutTable+i*nbBandes, INODE_OCT);
     printf("On est passe !!\n");
     for(k = 0; k < FILENAME_MAX_SIZE; k++){ //k allant de 0 à (2bandes/octets)-1
       table[i]->filename[k] = bufferInode[k];
@@ -120,24 +120,24 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
 
     /*ecriture de la size*/
     poswrite += FILENAME_MAX_SIZE;
-    buffer[poswrite+3] = (inode[i].size>>24) & 0xFF;
-    buffer[poswrite+2] = (inode[i].size>>16) & 0xFF;
-    buffer[poswrite+1] = (inode[i].size>>8) & 0xFF;
-    buffer[poswrite] = inode[i].size & 0xFF;
+    buffer[poswrite] = ((char*)&(inode[i].size))[0];
+    buffer[poswrite+1] = ((char*)&(inode[i].size))[1];
+    buffer[poswrite+2] = ((char*)&(inode[i].size))[2];
+    buffer[poswrite+3] = ((char*)&(inode[i].size))[3];
 
     /*ecriture du nblock*/
     poswrite+=4;
-    buffer[poswrite+3] = (inode[i].nblock>>24) & 0xFF;
-    buffer[poswrite+2] = (inode[i].nblock>>16) & 0xFF;
-    buffer[poswrite+1] = (inode[i].nblock>>8) & 0xFF;
-    buffer[poswrite] = inode[i].nblock & 0xFF;
+    buffer[poswrite] = ((char*)&(inode[i].nblock))[0];
+    buffer[poswrite+1] = ((char*)&(inode[i].nblock))[1];
+    buffer[poswrite+2] = ((char*)&(inode[i].nblock))[2];
+    buffer[poswrite+3] = ((char*)&(inode[i].nblock))[3];
 
     /*ecriture du first_byte*/
     poswrite+=4;
-    buffer[poswrite+3] = (inode[i].first_byte>>24) & 0xFF;
-    buffer[poswrite+2] = (inode[i].first_byte>>16) & 0xFF;
-    buffer[poswrite+1] = (inode[i].first_byte>>8) & 0xFF;
-    buffer[poswrite] = inode[i].first_byte & 0xFF;
+    buffer[poswrite] = ((char*)&(inode[i].first_byte))[0];
+    buffer[poswrite+1] = ((char*)&(inode[i].first_byte))[1];
+    buffer[poswrite+2] = ((char*)&(inode[i].first_byte))[2];
+    buffer[poswrite+3] = ((char*)&(inode[i].first_byte))[3];
 
   }
   write_chunk(r5Disk, buffer, sizeof(inode_t)*INODE_TABLE_SIZE, noBande);
@@ -293,7 +293,7 @@ void first_free_byte(virtual_disk_t *r5Disk){
 
 
 
-void couche3() {
+int main(int argc, char const *argv[]) {
   //couche2();
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   inode_table_t inodes;
@@ -301,6 +301,7 @@ void couche3() {
     inodes[i].first_byte = 0;
   }
   init_disk_raid5("./RAIDFILES",r5d);
+  write_super_block(r5d);
   write_inodes_table(r5d, inodes);
   printf("\nCMD_DUMP_INODE\n");
   cmd_dump_inode("RAIDFILES", r5d);
