@@ -298,7 +298,7 @@ void write_super_block(virtual_disk_t *r5Disk){
   char *buffer = (char *)malloc(sizeof(char)*sizeof(super_block_t));
 
 
-  printf("ici2, R5DISK = %d\n\n\n\n\n\n______________\n", r5Disk->ndisk);
+  printf("ici2, R5DISK = %d\n\n______________\n", r5Disk->ndisk);
   read_inodes_table(r5Disk, &inodes);
   r5Disk->super_block.nb_blocks_used=0;
   //first_free_byte(r5Disk);
@@ -326,14 +326,14 @@ void write_super_block(virtual_disk_t *r5Disk){
 
     write_chunk(r5Disk, buffer, sizeof(super_block_t), 0);
     printf("ici\n");
-}*/
+}
 
 /** \brief
   * Ecriture de la position du premier octet libre dans le r5Disk
   * @param : virtual_disk_t
   * @return void
 **/
-/*void first_free_byte(virtual_disk_t *r5Disk){
+void first_free_byte(virtual_disk_t *r5Disk){
   printf("\n");
   int lastfirstbyte=0, lastindice=0;
   for (int i = 0; i < INODE_TABLE_SIZE; i++) {
@@ -347,11 +347,11 @@ void write_super_block(virtual_disk_t *r5Disk){
     }
   }
   r5Disk->super_block.first_free_byte = lastfirstbyte + compute_nstripe(r5Disk, (r5Disk->inodes[lastindice].size/4));
-  printf("ici3, R5DISK = %d\n\n\n\n\n\n______________\n", r5Disk->ndisk);
+  printf("ici3, R5DISK = %d\n\n______________\n", r5Disk->ndisk);
 }
 
 
-int main(int argc, char const *argv[]) {
+int couche3(int argc, char const *argv[]) {
   //couche2();
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   init_disk_raid5("./RAIDFILES",r5d);
@@ -371,7 +371,7 @@ int main(int argc, char const *argv[]) {
   printf("Avant : %d\n", inodes[0].first_byte);
   read_inodes_table(r5d, &inodes);
   printf("Apres : %d\n", inodes[0].first_byte);
-  /*for (int i = 0; i < INODE_TABLE_SIZE; i++) {
+  for (int i = 0; i < INODE_TABLE_SIZE; i++) {
     printf("\ninode n°%d\n",i);
     printf("first_byte : %d  ",inodes[i].first_byte );
     printf("size : %d  ", inodes[i].size);

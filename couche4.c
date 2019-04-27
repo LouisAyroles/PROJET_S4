@@ -99,7 +99,7 @@
    /*Le fichier est present sur le systeme*/
    }else{
      fichier->size = r5Disk->inodes[nbfiles].size;
-     buffer = read_chunk(r5Disk, r5Disk->inodes[nbfiles].first_byte, fichier->size);
+     read_chunk(r5Disk, buffer ,r5Disk->inodes[nbfiles].first_byte, fichier->size);
      for (int i = 0; i < fichier->size; i++) {
        fichier->data[i] = *buffer;
      }first_free_byte(r5Disk);
@@ -181,9 +181,32 @@
 
 int main(int argc, char const *argv[]) {
   //couche3();
-  virtual_disk_t *r5Disk = malloc(sizeof(virtual_disk_t));
-  init_disk_raid5("./RAIDFILES",r5Disk);
-  load_file_from_host(r5Disk,"test.txt");
+  virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
+  init_disk_raid5("./RAIDFILES",r5d);
+  inode_table_t inodes;
+  for(int i = 0; i<INODE_TABLE_SIZE; i++){
+    inodes[i].first_byte = 1;
+    inodes[i].size = 2;
+    inodes[i].nblock = 3;
+    for (int j = 0; j < FILENAME_MAX_SIZE-1; j++) {
+      inodes[i].filename[j] = 49;
+    }
+    inodes[i].filename[FILENAME_MAX_SIZE-1] = '\0';
+  }
+
+  write_inodes_table(r5d, inodes);
+  affichageSysteme(r5d);
+  printf("Avant : %d\n", inodes[0].first_byte);
+  read_inodes_table(r5d, &inodes);
+  printf("Apres : %d\n", inodes[0].first_byte);
+  for (int i = 0; i < INODE_TABLE_SIZE; i++) {
+    printf("\ninode n°%d\n",i);
+    printf("first_byte : %d  ",inodes[i].first_byte );
+    printf("size : %d  ", inodes[i].size);
+    printf("nblock : %d  ", inodes[i].nblock);
+  }
+  printf("hre\n");
+  //load_file_from_host(r5d,"test.txt");
   printf("coucou\n");
-  return 0;
+  exit(0);
 }

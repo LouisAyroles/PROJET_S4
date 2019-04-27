@@ -19,7 +19,6 @@ typedef unsigned char uchar; // 8 bits = octet
 enum raid {ZERO,UN,CINQ,ZERO_UN,UN_ZERO,CINQUANTE,CENT};
 static char nomRaid[7][10] = {"ZERO","UN","CINQ","ZERO_UN","UN_ZERO","CINQUANTE","CENT"};
 
-
 /* Type of a block of data */
 typedef struct block_s{
     uchar data[BLOCK_SIZE]; // une case par octet
