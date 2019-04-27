@@ -24,28 +24,31 @@
  **/
 void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
   printf("read_super_block\n");
-  int nbBandes = SUPER_BLOCK_SIZE;
+  int noBande = compute_nstripe(r5Disk, SUPER_BLOCK_SIZE-1), posread = 0;
   stripe_t *bandesLues;
-  char conversion[BLOCK_SIZE];
-  bandesLues = (stripe_t *) malloc(sizeof(stripe_t)*nbBandes);
-  for(int j = 0; j<nbBandes; j++){
-    read_stripe(r5Disk, &bandesLues[j], j);
+  char *buffer = (char *)malloc(sizeof(char)*sizeof(super_block_t));
+  char *bufferConversion = (char *)malloc(sizeof(char)*sizeof(int));
+
+  for(int j = 0; j<noBande; j++){
+    read_chunk(r5Disk, buffer, sizeof(super_block_t), j);
   }
 
   for(int i = 0; i < sizeof(enum raid); i++){
-    conversion[i%BLOCK_SIZE] = bandesLues[i/(BLOCK_SIZE*r5Disk->ndisk)].stripe[(i/BLOCK_SIZE)%r5Disk->ndisk].data[i%BLOCK_SIZE];
+    bufferConversion[i]=buffer[i];
   }
-  memcpy(&(superblock->raid_type), conversion, sizeof(superblock->raid_type));
+  superblock->raid_type = uChar_To_Int(bufferConversion,sizeof(enum raid));
 
-  for(int i = sizeof(enum raid); i < sizeof(enum raid)+sizeof(int); i++){
-    conversion[i%BLOCK_SIZE] = bandesLues[i/(BLOCK_SIZE*r5Disk->ndisk)].stripe[(i/BLOCK_SIZE)%r5Disk->ndisk].data[i%BLOCK_SIZE];
+  posread+=sizeof(enum raid);
+  for(int i = 0; i < sizeof(int); i++){
+    bufferConversion[i]=buffer[posread+i];
   }
-  memcpy(&(superblock->nb_blocks_used), conversion, sizeof(superblock->nb_blocks_used));
+  superblock->nb_blocks_used = uChar_To_Int(bufferConversion,sizeof(int));
 
-  for(int i = sizeof(enum raid)+sizeof(int); i < sizeof(enum raid)+(sizeof(int)*2); i++){
-    conversion[i%BLOCK_SIZE] = bandesLues[i/(BLOCK_SIZE*r5Disk->ndisk)].stripe[(i/BLOCK_SIZE)%r5Disk->ndisk].data[i%BLOCK_SIZE];
+  posread+=sizeof(int);
+  for(int i = 0; i < (sizeof(int)); i++){
+    bufferConversion[i]=buffer[posread+i];
   }
-  memcpy(&(superblock->first_free_byte), conversion, sizeof(superblock->first_free_byte));
+  superblock->first_free_byte = uChar_To_Int(bufferConversion,sizeof(int));
 }
 
 

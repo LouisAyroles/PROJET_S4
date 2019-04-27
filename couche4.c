@@ -184,7 +184,7 @@ int main(int argc, char const *argv[]) {
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   init_disk_raid5("./RAIDFILES",r5d);
   inode_table_t inodes;
-  super_block_t sb;
+  super_block_t sb, sbd;
   for(int i = 0; i<INODE_TABLE_SIZE; i++){
     inodes[i].first_byte = 1;
     inodes[i].size = 2;
@@ -212,7 +212,10 @@ int main(int argc, char const *argv[]) {
   sb.first_free_byte = 43;
   write_super_block(r5d, sb);
   affichageSysteme(r5d);
-
+  read_super_block(r5d,&sbd);
+  printf("Affichage du SB :\n");
+  printf("Raid type : %d\n NbBlocksUsed : %d\n FirstFreeByte : %d",sbd.raid_type, sbd.nb_blocks_used, sbd.first_free_byte);
+  printf("sb : %d\n", sizeof(super_block_t));
   turn_off_disk_raid5(r5d);
   exit(0);
 }
