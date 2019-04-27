@@ -41,8 +41,8 @@
      read_inodes_table(r5Disk,&inodes);
      r5Disk->inodes[get_unused_inodes(inodes)]=inode;
      write_inodes_table(r5Disk, inodes);
-     printf("ici\n\n\n");
-     first_free_byte(r5Disk);
+     printf("ici6, R5DISK = %d\n\n\n\n\n\n______________\n", r5Disk->ndisk);
+     write_super_block(r5Disk);
      printf("taille : %d Debut : %d\n", fichier.size,r5Disk->super_block.first_free_byte );
      write_chunk(r5Disk,fichier.data,fichier.size,r5Disk->super_block.first_free_byte);
                   printf("ici\n");
@@ -69,8 +69,9 @@
      }
 
    }
-   first_free_byte(r5Disk);
+   write_super_block(r5Disk);
    r5Disk->number_of_files+=1;
+   printf("je sors\n");
    return 1;
 }
 
@@ -101,7 +102,7 @@
      buffer = read_chunk(r5Disk, r5Disk->inodes[nbfiles].first_byte, fichier->size);
      for (int i = 0; i < fichier->size; i++) {
        fichier->data[i] = *buffer;
-     }
+     }first_free_byte(r5Disk);
    }
    return 1;
  }
@@ -129,7 +130,7 @@
      r5Disk->inodes[nbfiles].first_byte = 0;
      delete_inode(r5Disk,nbfiles);
    }
-   first_free_byte(r5Disk);
+   write_super_block(r5Disk);
    r5Disk->number_of_files-=1;
    return 1;
  }
@@ -154,6 +155,7 @@
     fclose(fd);
   }
   write_file(r5Disk,nomFichier,fichier);
+  printf("je sors aussi d'ici tabernak!!!!!!!\n");
 }
 
  /** \brief
@@ -181,6 +183,7 @@ int main(int argc, char const *argv[]) {
   //couche3();
   virtual_disk_t *r5Disk = malloc(sizeof(virtual_disk_t));
   init_disk_raid5("./RAIDFILES",r5Disk);
-  load_file_from_host(r5Disk,"couche1.h");
+  load_file_from_host(r5Disk,"test.txt");
+  printf("coucou\n");
   return 0;
 }

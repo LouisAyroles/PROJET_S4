@@ -12,6 +12,6 @@ inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start);
 void cmd_dump_inode(char *nomRep, virtual_disk_t *r5Disk);
 void write_super_block(virtual_disk_t *r5Disk);
 void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock);
-void first_free_byte();
+void first_free_byte(virtual_disk_t *r5Disk);
 
 #endif
