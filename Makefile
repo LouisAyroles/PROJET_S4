@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-W -Wall -pedantic
+CFLAGS=-Q -v -g -W -Wall -pedantic
 LDFLAGS=
 EXEC = couche4\
 			 cmd_format
