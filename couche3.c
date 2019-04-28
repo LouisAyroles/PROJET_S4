@@ -102,25 +102,27 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
     printf("read_inodes_table\n");
     int nbBandes = compute_nstripe(r5Disk, INODE_SIZE),k, debutTable = startTable(r5Disk);
     int posread=0;
-    char *bufferConversion = (char*)malloc(sizeof(char)*sizeof(int));
-    char *bufferInode = (char*)malloc(sizeof(char)*sizeof(inode_table_t));
+    char *bufferConversion = malloc(sizeof(char)*sizeof(int));
+    char *bufferInode = malloc(sizeof(char)*sizeof(inode_table_t));
 
     read_chunk(r5Disk, bufferInode, sizeof(inode_table_t),  debutTable);
 
-
     for (int i = 0; i<INODE_TABLE_SIZE; i++){
       /* LECTURE DES BANDES CONSTITUANTS L'INODE */
-
-
+      printf("Pos %d at bufferinode[%d] with size %d. Writing a block of size %d\n",i,posread,sizeof(char)*sizeof(inode_table_t),sizeof(inode_t));
       for(k = 0; k < FILENAME_MAX_SIZE; k++){ //k allant de 0 à (2bandes/octets)-1
+        printf("%c ",bufferInode[k+posread]);
         table[i]->filename[k] = bufferInode[k+posread];
+
       }
+      printf("\t k filename\n");
       posread+=FILENAME_MAX_SIZE;
 
 
       for (k = 0; k < sizeof(int); k++){
         bufferConversion[k] = bufferInode[k+posread];
       }
+      printf("\t k size\n");
       table[i]->size = uChar_To_Int(bufferConversion, sizeof(int));
       posread+= sizeof(int);
 
@@ -129,6 +131,7 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
         bufferConversion[k] = bufferInode[k+posread];
       }
       table[i]->nblock = uChar_To_Int(bufferConversion, sizeof(int));
+      printf("\t k nblocks\n");
       posread+= sizeof(int);
 
 
@@ -136,12 +139,10 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
         bufferConversion[k] = bufferInode[k+posread];
       }
       table[i]->first_byte = uChar_To_Int(bufferConversion, BLOCK_SIZE);
+      printf("\t k first_byte\n");
       posread+= sizeof(int)*2;
     }
-      printf("\n\nL'inode n°1 vaut ici : \n");
-      printf("first_byte : %d  ",table[1]->first_byte );
-      printf("size : %d  ", table[1]->size);
-      printf("nblock : %d  \n\n", table[1]->nblock);
+    free(bufferConversion);free(bufferInode);
   }
 
 /** \brief
