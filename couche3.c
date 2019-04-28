@@ -103,11 +103,11 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
     int nbBandes = compute_nstripe(r5Disk, INODE_SIZE),k, debutTable = startTable(r5Disk);
     int posread=0;
     char *bufferConversion = malloc(sizeof(char)*sizeof(int));
-    char *bufferInode = malloc(sizeof(char)*(sizeof(inode_table_t)+10));
+    char *bufferInode = malloc(sizeof(char)*(sizeof(inode_t)*INODE_TABLE_SIZE*BLOCK_SIZE*r5Disk->ndisk));
 
-    read_chunk(r5Disk, bufferInode, sizeof(inode_table_t)+10,  debutTable);
+    read_chunk(r5Disk, bufferInode, sizeof(inode_t)*INODE_TABLE_SIZE*BLOCK_SIZE*r5Disk->ndisk,  debutTable);
     printf("Affichage du bufferInode\n");
-    for (int i = 0; i < sizeof(inode_table_t); i++) {
+    for (int i = 0; i < ((sizeof(inode_table_t)+3)/4)+9; i++) {
       printf("buffer[%d] = %d \n", 4*i, uChar_To_Int(bufferInode+4*i, 4));
     }
 
