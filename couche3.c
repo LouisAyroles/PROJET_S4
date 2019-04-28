@@ -103,12 +103,19 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
     int nbBandes = compute_nstripe(r5Disk, INODE_SIZE),k, debutTable = startTable(r5Disk);
     int posread=0;
     char *bufferConversion = malloc(sizeof(char)*sizeof(int));
-    char *bufferInode = malloc(sizeof(char)*sizeof(inode_table_t));
+    char *bufferInode = malloc(sizeof(char)*(sizeof(inode_table_t)+10));
 
-    read_chunk(r5Disk, bufferInode, sizeof(inode_table_t),  debutTable);
+    read_chunk(r5Disk, bufferInode, sizeof(inode_table_t)+10,  debutTable);
+    printf("Affichage du bufferInode\n");
+    for (int i = 0; i < sizeof(inode_table_t); i++) {
+      printf("buffer[%d] = %d \n", 4*i, uChar_To_Int(bufferInode+4*i, 4));
+    }
+
 
     for (int i = 0; i<INODE_TABLE_SIZE; i++){
       /* LECTURE DES BANDES CONSTITUANTS L'INODE */
+      posread = i*(INODE_OCT +sizeof(int));
+      printf("%d : ", posread);
       printf("Pos %d at bufferinode[%d] with size %d. Writing a block of size %d\n",i,posread,sizeof(char)*sizeof(inode_table_t),sizeof(inode_t));
       for(k = 0; k < FILENAME_MAX_SIZE; k++){ //k allant de 0 à (2bandes/octets)-1
         printf("%c ",bufferInode[k+posread]);
@@ -140,7 +147,12 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
       }
       table[i]->first_byte = uChar_To_Int(bufferConversion, BLOCK_SIZE);
       printf("\t k first_byte\n");
-      posread+= sizeof(int)*2;
+    }
+    for (int i = 0; i < INODE_TABLE_SIZE; i++) {
+      printf("\ninode n°%d\n",i);
+      printf("first_byte : %d  ",table[i]->first_byte );
+      printf("size : %d  ", table[i]->size);
+      printf("nblock : %d  ", table[i]->nblock);
     }
     free(bufferConversion);free(bufferInode);
   }

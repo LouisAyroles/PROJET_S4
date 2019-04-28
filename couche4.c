@@ -184,7 +184,7 @@ int main(int argc, char const *argv[]) {
   virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
   init_disk_raid5("./RAIDFILES",r5d);
   inode_table_t inodes;
-  inode_table_t *table = malloc(sizeof(inode_t)*11);
+  inode_table_t *table = malloc(sizeof(inode_t)*(INODE_TABLE_SIZE+1));
 
   for(int i = 0; i<INODE_TABLE_SIZE; i++){
     inodes[i].first_byte = 1;
@@ -199,10 +199,10 @@ int main(int argc, char const *argv[]) {
   write_inodes_table(r5d, inodes);
   //affichageSysteme(r5d);
   read_inodes_table(r5d, table);
-  printf("\n\nL'inode n°1 vaut ici : \n");
-  printf("first_byte : %d  ",table[1]->first_byte );
-  printf("size : %d  ", table[1]->size);
-  printf("nblock : %d  \n\n", table[1]->nblock);
+  printf("\n\nL'inode n°9 vaut ici : \n");
+  printf("first_byte : %d  ",table[9]->first_byte );
+  printf("size : %d  ", table[9]->size);
+  printf("nblock : %d  \n\n", table[9]->nblock);
   for (int i = 0; i < INODE_TABLE_SIZE; i++) {
     printf("\ninode n°%d\n",i);
     printf("first_byte : %d  ",table[i]->first_byte );
@@ -217,7 +217,7 @@ int main(int argc, char const *argv[]) {
   }
   sb.first_free_byte = 43;
   write_super_block(r5d, sb);
-  //affichageSysteme(r5d);
+  affichageSysteme(r5d);
   read_super_block(r5d,&sbd);
   printf("Affichage du SB qu'on vient de lire :\n");
   printf("Raid type : %d\n NbBlocksUsed : %d\n FirstFreeByte : %d\n",sbd.raid_type, sbd.nb_blocks_used, sbd.first_free_byte);

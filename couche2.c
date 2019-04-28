@@ -2,6 +2,7 @@
 #include "couche2.h"
 #include <stdlib.h>
 #include <math.h>
+#define couleur(param) printf("\033[%sm",param)
 
 /**
  * \file couche2.c
@@ -111,10 +112,10 @@ void print_stripe(virtual_disk_t *r5,stripe_t *stripe){
 **/
 void affichageSysteme(virtual_disk_t *RAID5){
   stripe_t *stripe = init_bande(RAID5);
-  printf("    Disque 0                Disque 1                Disque 2                Disque 3\n");
+  printf("\033[31;49m    Disque 0                Disque 1                Disque 2                Disque 3\n\033[39;49m");
   for (int i = 0; i < 42; i++) {
     read_stripe(RAID5,stripe,i);
-    printf("%-3d",i);
+    printf("\033[34;49m %-3d\033[39;49m",i);
     dump_stripe(*stripe);
     printf("\n");
   }
