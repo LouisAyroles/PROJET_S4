@@ -17,6 +17,45 @@
  */
 
 
+
+ /** \brief
+   * Transforme un entier en un tableau de 4 char
+   * @param : int ,uchar*
+   * @return : void
+ **/
+ uchar *int_To_uChar(int nb, uchar *buffer){
+   for (int i = 0; i < sizeof(int); i++) {
+     buffer[i] = ((uchar*)&nb)[i];
+   }
+   return buffer;
+ }
+
+ /** \brief
+   * Transforme un tableau de sz char en un int
+   * @param : int ,uchar*
+   * @return : int
+ **/
+ int uChar_To_Int(uchar *buf,int sz){
+   int nb = 0;
+   for (int i=0;i<sz;i++){
+     ((uchar*)&nb)[i] = buf[i];
+   }
+   return nb;
+ }
+
+ /** \brief
+   * Renvoie le numero de bande ou la table d'inode commence
+   * @param : virtual_disk_t
+   * @return : void
+ **/
+ int startTable(virtual_disk_t *r5Disk){
+   if(r5Disk->ndisk >=4){
+     return 1;
+   }
+   return 2;
+ }
+
+
  /** \brief
    * Lecture du superbloc
    * @param : virtual_disk_t , super_block_t
@@ -52,55 +91,7 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
 }
 
 
-/** \brief
-  * Renvoie le numero de bande ou la table d'inode commence
-  * @param : virtual_disk_t
-  * @return : void
-**/
-int startTable(virtual_disk_t *r5Disk){
-  if(r5Disk->ndisk >=4){
-    return 1;
-  }
-  return 2;
-}
 
-/** \brief
-  * Transforme un entier en un tableau de 4 char
-  * @param : int ,uchar*
-  * @return : void
-**/
-uchar *int_To_uChar(int nb, uchar *buffer){
-  for (int i = 0; i < sizeof(int); i++) {
-    buffer[i] = ((uchar*)&nb)[i];
-  }
-  return buffer;
-}
-
-/** \brief
-  * Transforme un tableau de sz char en un int
-  * @param : int ,uchar*
-  * @return : int
-**/
-int uChar_To_Int(uchar *buf,int sz){
-  int nb = 0;
-  for (int i=0;i<sz;i++){
-    ((uchar*)&nb)[i] = buf[i];
-  }
-  return nb;
-}
-
-
-void testEndian(){
-  int j = 2;
-  uchar buf[4];
-  int_To_uChar(j, buf);
-  printf("le tableau :\n");
-  for(int i = 0; i < 4; i++){
-    printf("%d ", buf[i]);
-  }
-  printf("\nresultat : %d\n", uChar_To_Int(buf, 4));
-
-}
 
 /** \brief
   * Lecture de la table d'inodes
@@ -109,42 +100,48 @@ void testEndian(){
 **/
   void read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table){
     printf("read_inodes_table\n");
-    int nbBandes = compute_nstripe(r5Disk, INODE_SIZE), k, debutTable = startTable(r5Disk);
-    char conversion[4];
+    int nbBandes = compute_nstripe(r5Disk, INODE_SIZE),k, debutTable = startTable(r5Disk);
+    int posread=0;
+    char *bufferConversion = (char*)malloc(sizeof(char)*sizeof(int));
     char *bufferInode = (char*)malloc(sizeof(char)*sizeof(inode_table_t));
+
+    read_chunk(r5Disk, bufferInode, sizeof(inode_table_t),  debutTable);
+
 
     for (int i = 0; i<INODE_TABLE_SIZE; i++){
       /* LECTURE DES BANDES CONSTITUANTS L'INODE */
-      printf("Indice de lecture : %d, nbBandes = %d\n", debutTable+i*nbBandes, nbBandes);
-      read_chunk(r5Disk, bufferInode, INODE_OCT,  debutTable+i*nbBandes);
-      printf("Affichage du Buffer de l'inode %d : \n",i);
-      for(int z = 0; z < INODE_OCT; z++){
-        printf("%d ", bufferInode[z]);
-      }
-      printf("\n");
+
+
       for(k = 0; k < FILENAME_MAX_SIZE; k++){ //k allant de 0 à (2bandes/octets)-1
-        table[i]->filename[k] = bufferInode[k];
+        table[i]->filename[k] = bufferInode[k+posread];
       }
-
-      for (k = FILENAME_MAX_SIZE; k < FILENAME_MAX_SIZE+sizeof(int); k++){
-        conversion[k%BLOCK_SIZE] = bufferInode[k];
-      }
-      table[i]->size = uChar_To_Int(conversion, BLOCK_SIZE);
+      posread+=FILENAME_MAX_SIZE;
 
 
-      for (k = FILENAME_MAX_SIZE+sizeof(int); k < FILENAME_MAX_SIZE+sizeof(int)+sizeof(int); k++){
-        conversion[k%BLOCK_SIZE] = bufferInode[k];
+      for (k = 0; k < sizeof(int); k++){
+        bufferConversion[k] = bufferInode[k+posread];
       }
-      table[i]->nblock = uChar_To_Int(conversion, BLOCK_SIZE);
+      table[i]->size = uChar_To_Int(bufferConversion, sizeof(int));
+      posread+= sizeof(int);
 
-      //Recup du first_byte(conversion int)
-      for (k = FILENAME_MAX_SIZE+sizeof(int)*2; k < FILENAME_MAX_SIZE+sizeof(int)*3; k++){
-        conversion[k%BLOCK_SIZE] = bufferInode[k];
+
+      for (k = 0; k < sizeof(int); k++){
+        bufferConversion[k] = bufferInode[k+posread];
       }
-      table[i]->first_byte = uChar_To_Int(conversion, BLOCK_SIZE);
-      printf("memucypyOUT\n");
+      table[i]->nblock = uChar_To_Int(bufferConversion, sizeof(int));
+      posread+= sizeof(int);
+
+
+      for (k = 0; k < sizeof(int); k++){
+        bufferConversion[k] = bufferInode[k+posread];
+      }
+      table[i]->first_byte = uChar_To_Int(bufferConversion, BLOCK_SIZE);
+      posread+= sizeof(int)*2;
     }
-    printf("On Sort.\n");
+      printf("\n\nL'inode n°1 vaut ici : \n");
+      printf("first_byte : %d  ",table[1]->first_byte );
+      printf("size : %d  ", table[1]->size);
+      printf("nblock : %d  \n\n", table[1]->nblock);
   }
 
 /** \brief
