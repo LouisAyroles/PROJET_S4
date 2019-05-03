@@ -61,51 +61,48 @@
    * @return void
  **/
 void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
-  printf("read_super_block\n");
-  int noBande = compute_nstripe(r5Disk, SUPER_BLOCK_SIZE-1), posread = 0;
-  stripe_t *bandesLues;
-  char *buffer = (char *)malloc(sizeof(char)*sizeof(super_block_t));
-  char *bufferConversion = (char *)malloc(sizeof(char)*sizeof(int));
+  int posread = 0;
+  char buffer[sizeof(super_block_t)];
+  char bufferConversion[sizeof(int)];
 
-  for(int j = 0; j<noBande; j++){
-    read_chunk(r5Disk, buffer, sizeof(super_block_t), j);
-  }
+  read_chunk(r5Disk, buffer, sizeof(super_block_t),0);
 
   for(int i = 0; i < sizeof(enum raid); i++){
     bufferConversion[i]=buffer[i];
   }
   superblock->raid_type = uChar_To_Int(bufferConversion);
-
   posread+=sizeof(enum raid);
+
+
   for(int i = 0; i < sizeof(int); i++){
     bufferConversion[i]=buffer[posread+i];
   }
   superblock->nb_blocks_used = uChar_To_Int(bufferConversion);
-
   posread+=sizeof(int);
+
   for(int i = 0; i < (sizeof(int)); i++){
     bufferConversion[i]=buffer[posread+i];
   }
   superblock->first_free_byte = uChar_To_Int(bufferConversion);
-  free(buffer);
-  free(bufferConversion);
 }
 
 
 /** \brief
   * Supression d'inode
-  * @param : virtual_disk_t
+  * @param : virtual_disk_t, num de l'inode
   * @return void
 **/
 void delete_inode(virtual_disk_t *r5Disk, int numInode){
-  printf("delete_inode\n");
-  if(numInode <= r5Disk->number_of_files){
-    for (int i = numInode+1; i < (r5Disk->number_of_files); i++) {
-        r5Disk->inodes[i-1]=r5Disk->inodes[i];
+  inode_t maTable[10];
+  int i=0;
+  read_inodes_table(r5Disk,maTable);
+  if (get_nb_files(r5Disk) >= numInode) {
+    while (maTable[i].first_byte != 0 && i < INODE_TABLE_SIZE-1) {
+        maTable[i] = maTable[i+1];
+        i++;
     }
-    r5Disk->inodes[r5Disk->number_of_files-1].first_byte=0;
-    r5Disk->number_of_files = r5Disk->number_of_files-1;
-    write_inodes_table(r5Disk,r5Disk->inodes);
+    maTable[i] = init_inode("",0,0);
+    write_inodes_table(r5Disk, maTable);
   }
 }
 
@@ -114,16 +111,12 @@ void delete_inode(virtual_disk_t *r5Disk, int numInode){
   * @param : inode_table_t
   * @return Nombre de fichiers (int)
 **/
-int get_nb_files(inode_table_t tab){
-  printf("get_nb_files\n");
+int get_nb_files(virtual_disk_t *r5d){
+  inode_t tab[10];
+  read_inodes_table(r5d,tab);
   int nbfiles = 0;
-  printf("Affichage dans get_nb_files\n");
-  for(int i = 0; i<INODE_TABLE_SIZE; i++){
-      printf("first_byte de l'inode n°%d= %d\n",i,tab[i].first_byte);
-  }
   for (int i = 0; i < INODE_TABLE_SIZE; i++) {
     if (tab[i].first_byte != 0) {
-      printf("first_byte = %d",tab[i].first_byte);
       nbfiles+=1;
     }
   }
@@ -135,25 +128,31 @@ int get_nb_files(inode_table_t tab){
   * @param : inode_table_t
   * @return Nombre de fichiers (int)
 **/
-int get_unused_inodes(inode_table_t tab){
-  printf("get_unused_inodes\n");
+int get_unused_inodes(virtual_disk_t *r5d){
+  inode_t tab[10];
+  read_inodes_table(r5d,tab);
   for (int i = 0; i < INODE_TABLE_SIZE; i++) {
-    printf("i = %d\n", i);
     if (tab[i].first_byte == 0) {
-      printf("On sort ici! \n");
       return i;
     }
   }
-  printf("On sort !\n");
   return -1;
 }
 
+
+/** \brief
+  * Ajout d'une inode
+  * @param : virtual_disk_t* nom_de_fichier (char *),taille (uint),debut (uint)
+  * @return void
+**/
 void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size, int startBande){
-  printf("add_inode\n");
-  if(get_nb_files(r5Disk->inodes) != 10){
+  inode_t maTable[10];
+  read_inodes_table(r5Disk,maTable);
+  if(get_nb_files(r5Disk) < INODE_TABLE_SIZE){
     inode_t in = init_inode(nomFICHIER,size,startBande);
-    r5Disk->inodes[get_unused_inodes(r5Disk->inodes)] = in;
+    maTable[get_unused_inodes(r5Disk)] = in;
     r5Disk->number_of_files+=1;
+    write_inodes_table(r5Disk,maTable);
   }else{
     fprintf(stderr, "%s non ecrit, nb de fichier max atteint.\n", nomFICHIER);
   }
@@ -165,9 +164,16 @@ void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size, int startB
   * @return inode_t
 **/
 inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start){
-  printf("init_inode\n");
   inode_t result;
-  strcpy(result.filename, nomFichier); // ==32octets
+  int i = 0;
+  for (int i = 0; i < FILENAME_MAX_SIZE; i++) {
+    result.filename[i] = 0;
+  }
+  while(i < FILENAME_MAX_SIZE && nomFichier[i] != '\0'){
+    result.filename[i] = nomFichier[i];
+    i++;
+  }
+  result.filename[i] = '\0';
   result.size = taille; // == 4octets
   result.nblock = compute_nblock(result.size); // == 4octets
   result.first_byte = start; // == 4 octets
@@ -197,35 +203,33 @@ void cmd_dump_inode(char *nomRep, virtual_disk_t *r5Disk){
   * @return void
 **/
 void write_super_block(virtual_disk_t *r5Disk, super_block_t sb){
-  printf("write_super_block\n");
   inode_table_t inodes;
   int poswrite=0;
   //char *buffer = (char *)malloc(sizeof(char)*sizeof(super_block_t));
   //char *bufferConversion = (char *)malloc(sizeof(char)*sizeof(int));
-  char buffer[sizeof(char)*sizeof(super_block_t)];
-  char bufferConversion[sizeof(char)*sizeof(int)];
+  char buffer[sizeof(super_block_t)];
+  char bufferConversion[sizeof(int)];
 
 
-  int_To_uChar(sb.raid_type, bufferConversion);
+  int_To_uChar(sb.raid_type, &bufferConversion);
   for (int i = 0; i < sizeof(int); i++) {
     buffer[poswrite+i] = bufferConversion[i];
   }
+  poswrite += sizeof(enum raid);
 
-  poswrite += 4;
-  int_To_uChar(sb.nb_blocks_used, bufferConversion);
+
+  int_To_uChar(sb.nb_blocks_used, &bufferConversion);
   for (int i = 0; i < sizeof(int); i++) {
     buffer[poswrite+i] = bufferConversion[i];
   }
+  poswrite += sizeof(int);
 
   /*Ecriture du First free Byte*/
-  poswrite += 4;
-  int_To_uChar(sb.first_free_byte, bufferConversion);
+  int_To_uChar(sb.first_free_byte, &bufferConversion);
   for (int i = 0; i < sizeof(int); i++) {
     buffer[poswrite+i] = bufferConversion[i];
   }
-
-    write_chunk(r5Disk, buffer, sizeof(super_block_t), 0);
-    //free(buffer);free(bufferConversion);
+  write_chunk(r5Disk, buffer, sizeof(super_block_t), 0);
 }
 
 /** \brief
@@ -234,24 +238,20 @@ void write_super_block(virtual_disk_t *r5Disk, super_block_t sb){
   * @return void
 **/
 void first_free_byte(virtual_disk_t *r5Disk){
-  inode_table_t inodes;
+  inode_t table[INODE_TABLE_SIZE];
   super_block_t sb;
-  // read_inodes_table(r5Disk, &inodes);
+  read_inodes_table(r5Disk, &table);
   read_super_block(r5Disk,&sb);
   int lastfirstbyte=0, lastindice=0, i=0;
-  if (inodes[0].first_byte == 0) {
-    printf("No files\n");
-    sb.first_free_byte = compute_nstripe(r5Disk, compute_nblock(sizeof(inode_t)))*INODE_TABLE_SIZE+startTable(r5Disk)+1;
+  if (table[0].first_byte == 0) {
+    sb.first_free_byte = compute_nstripe(r5Disk, compute_nblock(sizeof(inode_t)))*INODE_TABLE_SIZE+startTable(r5Disk);
   }else{
-    while(inodes[i].first_byte != 0) {
-      if (inodes[i].first_byte > lastfirstbyte) {
-          lastfirstbyte = inodes[i].first_byte;
-          lastindice=i;
-      }
-      i++;
+    int firstfree = get_unused_inodes(r5Disk);
+    if (firstfree == -1) {
+      sb.first_free_byte = -1;
+    }else{
+      sb.first_free_byte = table[firstfree-1].first_byte + compute_nstripe(r5Disk,table[firstfree-1].nblock );
     }
-    printf("lastfirstbyte : %d\n",lastindice );
-    sb.first_free_byte = lastfirstbyte + compute_nstripe(r5Disk, (r5Disk->inodes[lastindice].nblock));
   }
   write_super_block(r5Disk,sb);
 }
@@ -272,9 +272,14 @@ void first_free_byte(virtual_disk_t *r5Disk){
       maTable[i].size = Ino.size;
       maTable[i].nblock = Ino.nblock;
     }
-    printf("\n\n__%d__\n\n", maTable[3].first_byte);
   }
 
+
+/** \brief
+  * Lecture de l'inode indice
+  * @param : virtual_disk_t* ,inode_t*, indice
+  * @return : void
+**/
 void read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice){
   int depart = startTable(r5Disk), posread = 0, k;
   uchar buffer[50];
@@ -283,15 +288,16 @@ void read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice){
   for(k = 0; k<FILENAME_MAX_SIZE; k++){
     Ino->filename[k] = buffer[k];
   }
-  printf("\n");
   posread+=FILENAME_MAX_SIZE;
+
+
   for (k = posread; k < posread+sizeof(int); k++){
     conversion[k-posread] = buffer[k];
   }
   Ino->size = uChar_To_Int(conversion);
-  printf("--%d--\n", uChar_To_Int(conversion));
-
   posread+= sizeof(int);
+
+
   for (k = posread; k < posread+sizeof(int); k++){
     conversion[k-posread] = buffer[k];
   }
@@ -305,85 +311,79 @@ void read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice){
 }
 
 /** \brief
+  * Ecriture de l'inode indice
+  * @param : virtual_disk_t ,inode_t, indice
+  * @return : void
+**/
+void write_inode_table_i(virtual_disk_t *r5Disk, inode_t Ino, int indice){
+  int depart = startTable(r5Disk), poswrite = 0;
+  uchar buffer[50];
+  uchar conversion[4];
+  for (int i = 0; i < FILENAME_MAX_SIZE; i++) {
+    buffer[i]= Ino.filename[i];
+  }
+  poswrite+=FILENAME_MAX_SIZE;
+
+
+  int_To_uChar(Ino.size,&conversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = conversion[i];
+  }
+  poswrite+=sizeof(int);
+
+
+  int_To_uChar(Ino.nblock, &conversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = conversion[i];
+  }
+  poswrite+=sizeof(int);
+
+
+  int_To_uChar(Ino.first_byte, &conversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = conversion[i];
+  }
+  write_chunk(r5Disk,buffer, 44, depart+(indice*4));
+}
+
+/** \brief
   * Ecriture de la table d'inodes
   * @param : virtual_disk_t ,inode_table_t
   * @return : void
 **/
-void write_inodes_table(virtual_disk_t *r5Disk, inode_table_t inode){
-  printf("write_inodes_table\n");
-  char *buffer = (char *)malloc(sizeof(inode_t)*INODE_TABLE_SIZE);
-  char *bufferConversion = (char *)malloc(sizeof(char)*4);
-  int noBande,size, nblock, first_byte, poswrite;
-  noBande = startTable(r5Disk);
-  /*construction du buffer*/
-
-  for (int i = 0; i < INODE_TABLE_SIZE; i++) {
-    /*ecriture du filename*/
-    poswrite = i*sizeof(inode_t);
-    for (int j = 0; j < FILENAME_MAX_SIZE; j++) {
-        buffer[poswrite+j]=inode[i].filename[j];
+void write_inodes_table(virtual_disk_t *r5Disk, inode_t maTable[INODE_TABLE_SIZE]){
+  inode_t Ino;
+  for(int i = 0; i < INODE_TABLE_SIZE; i++){
+    for(int j = 0; j < FILENAME_MAX_SIZE; j++){
+      Ino.filename[j] = maTable[i].filename[j];
     }
-
-    /*ecriture de la size*/
-    poswrite += FILENAME_MAX_SIZE;
-    int_To_uChar(inode[i].size,bufferConversion);
-    for (int j = 0; j < 4; j++) {
-      buffer[poswrite+j] = bufferConversion[j];
-    }
-
-    /*ecriture du nblock */
-    poswrite+=4;
-    int_To_uChar(inode[i].nblock,bufferConversion);
-    for (int j = 0; j < 4; j++) {
-      buffer[poswrite+j] = bufferConversion[j];
-    }
-
-    /*ecriture du first_byte*/
-    poswrite+=4;
-    int_To_uChar(inode[i].first_byte,bufferConversion);
-    for (int j = 0; j < 4; j++) {
-      buffer[poswrite+j] = bufferConversion[j];
-    }
-    write_chunk(r5Disk, buffer, sizeof(inode_t), noBande);
-    noBande+=compute_nstripe(r5Disk ,compute_nblock(sizeof(inode_t)));
-  }
-  for(int i=0;i<INODE_TABLE_SIZE-1;i++){
-    r5Disk->inodes[i]=inode[i];
+    Ino.first_byte = maTable[i].first_byte;
+    Ino.size = maTable[i].size;
+    Ino.nblock = maTable[i].nblock;
+    write_inode_table_i(r5Disk, Ino, i);
   }
 }
 
 int main(int argc, char const *argv[]) {
   //couche2();
-  printf("todo : read_inodes_table\n");
   virtual_disk_t *r5d=init_disk_raid5("./RAIDFILES");
-  stripe_t *bande = init_bande(r5d);
+  super_block_t sb, sbd;
   inode_t table[10];
-  inode_t Ino;
-  for(int i = 0; i < r5d->ndisk; i++){
-    for(int j = 0; j < BLOCK_SIZE; j++){
-      if(j == 0){
-        bande->stripe[i].data[j] = 2;
-      }else{
-        bande->stripe[i].data[j] = 0;
-      }
-    }
+  read_inodes_table(r5d,table);
+  sb.raid_type = r5d->raidmode;
+  sb.nb_blocks_used = 0;
+  for (int i = 0; i < INODE_TABLE_SIZE; i++) {
+    sb.nb_blocks_used += table[i].nblock;
   }
-  for(int i = 0; i < r5d->ndisk; i++){
-    printf("[ ");
-    for(int j = 0; j < BLOCK_SIZE; j++){
-      printf("%d, ", bande->stripe[i].data[j]);
-    }
-    printf("]\n");
-  }
-  for(int i = 0; i < 42; i++){
-    write_stripe(r5d, bande, i);
-  }
-  read_inodes_table(r5d, table);
-  printf("\ntest : %d--\n", table[3].first_byte);
-  // for(int i = 0; i< 10; i++){
-  //   read_inode_table_i(r5d, &Ino, 0);
-  // }
-  delete_bande(&bande);
+  sb.first_free_byte = 15;
+  write_super_block(r5d,sb);
+
+  delete_inode(r5d,5);
+  add_inode(r5d,"Test.txt", 24, 85);
+  first_free_byte(r5d);
+  read_super_block(r5d,&sbd);
+  affichageSysteme(r5d);
+  printf("LECTURE DU SUPER_BLOCK : \n type RAID : %d\n nbBlockUsed : %d\n first_free_byte : %d\n",sb.raid_type, sb.nb_blocks_used, sb.first_free_byte);
 
   turn_off_disk_raid5(r5d);
   return 0;

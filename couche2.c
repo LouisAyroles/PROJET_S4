@@ -119,6 +119,7 @@ void affichageSysteme(virtual_disk_t *RAID5){
     dump_stripe(*stripe);
     printf("\n");
   }
+  delete_bande(&stripe);
 }
 
 

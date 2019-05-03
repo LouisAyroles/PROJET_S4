@@ -50,7 +50,7 @@ virtual_disk_t* init_disk_raid5(const char * repertoire){
     r5Disk->storage=malloc(r5Disk->ndisk*sizeof(FILE *));
     for (int i = 0; i < r5Disk->ndisk; i++){
         nomDisque[lengthRep+2] = i + '0';         /*Transforme le i en caractere et le met dans le "/di"*/
-        r5Disk->storage[i]=fopen(nomDisque,"r+w");  /*Ouvre le fichier "disque" EN READ/WRITE*/
+        r5Disk->storage[i]=fopen(nomDisque,"r+b");  /*Ouvre le fichier "disque" EN READ/WRITE*/
     }
     free(nomDisque);
     return r5Disk;
