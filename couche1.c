@@ -5,7 +5,6 @@
 #include <string.h>
 #include <fts.h>
 #include <errno.h>
-#include <time.h>
 #include <stdbool.h>
 
 /**
@@ -41,11 +40,11 @@ void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
   * @param : virtual_disk_t
   * @return void
 **/
-void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
+virtual_disk_t* init_disk_raid5(const char * repertoire){
     size_t lengthRep = strlen(repertoire);
-    char *nomDisque = malloc(sizeof(char)*lengthRep+10);  /*Creation d'une chaine pouvant contenir [repertoire]+10 caracteres*/
+    char *nomDisque = malloc(sizeof(char)*(lengthRep+10));  /*Creation d'une chaine pouvant contenir [repertoire]+10 caracteres*/
     add_finChemin(repertoire, nomDisque, lengthRep);
-    //r5Disk=malloc(sizeof(virtual_disk_t));
+    virtual_disk_t* r5Disk=malloc(sizeof(virtual_disk_t));
     r5Disk->ndisk=4;
     r5Disk->raidmode=CINQ;
     r5Disk->storage=malloc(r5Disk->ndisk*sizeof(FILE *));
@@ -53,6 +52,8 @@ void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
         nomDisque[lengthRep+2] = i + '0';         /*Transforme le i en caractere et le met dans le "/di"*/
         r5Disk->storage[i]=fopen(nomDisque,"r+w");  /*Ouvre le fichier "disque" EN READ/WRITE*/
     }
+    free(nomDisque);
+    return r5Disk;
 }
 
 
@@ -243,11 +244,9 @@ void affichageDisque(virtual_disk_t *RAID5, int idDisk){
 
 
 void couche1(void) {
-  virtual_disk_t *r5Disk;
+  virtual_disk_t *r5Disk =init_disk_raid5("./RAIDFILES");
   char hexa[10];
-  r5Disk=malloc(sizeof(virtual_disk_t));
-  srand(time(NULL));
-	init_disk_raid5("./RAIDFILES", r5Disk);
+
 	info_disque(r5Disk);
   block_t ecrire, lire;
 

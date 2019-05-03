@@ -4,7 +4,7 @@
 #include "raid_defines.h"
 
 void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep);
-void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk);
+virtual_disk_t* init_disk_raid5(const char * repertoire);
 void turn_off_disk_raid5(virtual_disk_t *r5Disk);
 void info_disque(virtual_disk_t *r5Disk);
 int compute_nblock(int n);

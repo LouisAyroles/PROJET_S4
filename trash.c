@@ -315,3 +315,57 @@ buffer[poswrite+3] = (inode[i].first_byte>>24) & 0xFF;
 buffer[poswrite+2] = (inode[i].first_byte>>16) & 0xFF;
 buffer[poswrite+1] = (inode[i].first_byte>>8) & 0xFF;
 buffer[poswrite] = inode[i].first_byte & 0xFF;
+
+
+
+printf("read_inodes_table\n");
+int nbBandes = compute_nstripe(r5Disk, INODE_SIZE),k, debutTable = startTable(r5Disk);
+int posread=0;
+//char *bufferConversion = malloc(sizeof(char)*sizeof(int));
+//printf("Adresse de bufferConversion apres le malloc : %d\n",bufferConversion);
+//char *bufferInode = malloc(sizeof(char)*(sizeof(inode_t)));
+//printf("Adresse de bufferInode apres le malloc : %d\n", bufferInode);
+char bufferConversion[4];
+char bufferInode[INODE_OCT];
+
+
+for (int i = 0; i<INODE_TABLE_SIZE; i++){
+  read_chunk(r5Disk, bufferInode, sizeof(inode_t), debutTable+(i*compute_nstripe(r5Disk, compute_nblock(sizeof(inode_t)))));
+  /* LECTURE DES BANDES CONSTITUANTS L'INODE */
+  //posread = i*(INODE_OCT +sizeof(int));
+  posread = 0;
+  for(k = 0; k < FILENAME_MAX_SIZE; k++){ //k allant de 0 à (2bandes/octets)-1
+    printf("k = %d\tAdresse de table[%d]->filename : %d\n",k,i, table[i]->filename);
+    table[i]->filename[k] = bufferInode[k];
+  }
+  posread+=FILENAME_MAX_SIZE;
+
+  for (k = posread; k < posread+sizeof(int); k++){
+    bufferConversion[k-posread] = bufferInode[k];
+  }
+
+  printf("i : %d\n",i);
+  table[i]->size = uChar_To_Int(bufferConversion);
+  posread+= sizeof(int);
+  for (k = posread; k < posread+sizeof(int); k++){
+    bufferConversion[k-posread] = bufferInode[k];
+  }
+  table[i]->nblock = uChar_To_Int(bufferConversion);
+  posread+= sizeof(int);
+
+
+  for (k = posread; k < posread+sizeof(int); k++){
+    bufferConversion[k-posread] = bufferInode[k];
+  }
+  table[i]->first_byte = uChar_To_Int(bufferConversion);
+  posread+=sizeof(int);
+}
+
+for(int z=0;z<INODE_TABLE_SIZE;z++){
+  r5Disk->inodes[z]=*(table[z]);
+}
+printf("Adresse de bufferConversion avant le free : %d\n",bufferConversion);
+//free(bufferConversion);
+printf("Adresse de bufferInode avant le free : %d\n",bufferInode);
+//free(bufferInode);
+printf("Coucou\n");
