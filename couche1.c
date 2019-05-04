@@ -5,7 +5,6 @@
 #include <string.h>
 #include <fts.h>
 #include <errno.h>
-#include <time.h>
 #include <stdbool.h>
 
 /**
@@ -27,7 +26,7 @@
   * @return void
 **/
 void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
-    strcpy(nomDisque, repertoire);    // strcpy: fonction copiant la chaine repertoire dans nomDisque
+    strcpy(nomDisque, repertoire);    /*strcpy: fonction copiant la chaine repertoire dans nomDisque*/
     nomDisque[lengthRep] = '/';
     nomDisque[lengthRep+1] = 'd';
     nomDisque[lengthRep+2] = '0';
@@ -41,18 +40,20 @@ void add_finChemin(const char * repertoire, char * nomDisque, size_t lengthRep){
   * @param : virtual_disk_t
   * @return void
 **/
-void init_disk_raid5(const char * repertoire, virtual_disk_t *r5Disk){
+virtual_disk_t* init_disk_raid5(const char * repertoire){
     size_t lengthRep = strlen(repertoire);
-    char *nomDisque = malloc(sizeof(char)*lengthRep+10);  //Creation d'une chaine pouvant contenir [repertoire]+10 caracteres
+    char *nomDisque = malloc(sizeof(char)*(lengthRep+10));  /*Creation d'une chaine pouvant contenir [repertoire]+10 caracteres*/
     add_finChemin(repertoire, nomDisque, lengthRep);
-    //r5Disk=malloc(sizeof(virtual_disk_t));
+    virtual_disk_t* r5Disk=malloc(sizeof(virtual_disk_t));
     r5Disk->ndisk=4;
     r5Disk->raidmode=CINQ;
     r5Disk->storage=malloc(r5Disk->ndisk*sizeof(FILE *));
     for (int i = 0; i < r5Disk->ndisk; i++){
-        nomDisque[lengthRep+2] = i + '0';         //Transforme le i en caractere et le met dans le "/di"
-        r5Disk->storage[i]=fopen(nomDisque,"r+w");  //Ouvre le fichier "disque" EN READ/WRITE
+        nomDisque[lengthRep+2] = i + '0';         /*Transforme le i en caractere et le met dans le "/di"*/
+        r5Disk->storage[i]=fopen(nomDisque,"r+b");  /*Ouvre le fichier "disque" EN READ/WRITE*/
     }
+    free(nomDisque);
+    return r5Disk;
 }
 
 
@@ -94,8 +95,7 @@ int compute_nblock(int n)
 {
     int nbBlocks;
     nbBlocks = n/4;
-    if (n%4!=0)
-    {
+    if (n%4!=0){
         nbBlocks += 1;
     }
     return nbBlocks;
@@ -110,11 +110,8 @@ int compute_nblock(int n)
   * @return void
 **/
 void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
-  fseek(RAID5->storage[idDisk], (long)pos, SEEK_SET);
-  int retour=-1;
-  retour=fwrite(entrant->data, 1, BLOCK_SIZE, RAID5->storage[idDisk]);
-  //perror("Debugging fwrite:");
-  //printf("written:%d elements\n",retour);
+  fseek(RAID5->storage[idDisk], (long)pos*BLOCK_SIZE, SEEK_SET);
+  int retour = fwrite(entrant->data, 1, BLOCK_SIZE, RAID5->storage[idDisk]);
 }
 
 
@@ -128,16 +125,19 @@ void write_block(virtual_disk_t *RAID5, block_t *entrant, uint pos, int idDisk){
   * @return integer
 **/
 int read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk){
-  fseek(RAID5->storage[idDisk], (long) pos, SEEK_SET);
-  size_t lu = fread(recup->data, 1, 4, RAID5->storage[idDisk]);
-  //perror("Debugging read:");
+  fseek(RAID5->storage[idDisk], (long) pos*BLOCK_SIZE, SEEK_SET);
+  size_t lu = fread(recup->data, 1, BLOCK_SIZE, RAID5->storage[idDisk]);
   if (lu != sizeof(block_t)) {
     return 1;
   }
   return 0;
 }
 
-
+/** \brief
+  * Fait un xor entre 2 block et renvoie le resultat dans destination
+  * @param : block_t, block_t, block_t
+  * @return void
+**/
 void xorbl(block_t *xa,block_t *xb,block_t *destination){
   for(int i=0;i<BLOCK_SIZE;i++){
     destination->data[i]=(xa->data[i])^(xb->data[i]);
@@ -145,21 +145,11 @@ void xorbl(block_t *xa,block_t *xb,block_t *destination){
 }
 
 
-/*
-void block_repair(virtual_disk_t *RAID5, uint pos, int idDisk){
-  //convertir l'hexa en bits ou recuperer les bits de chaque bloc directement
-  //creer un tableau de taille nbdisk qui recevra les iemes bits de chaque disk
-  //creer un tableau de 32 cases qui va recevoir les bits reparés
-  for(int i = 0; i < 32; i++)
-  {
-    for(int j = 0; j < RAID5->ndisk; j++)
-    {
-      // ieme[j]=  bit du disk j
-    }
-    //repare[i]=xor(RAID5,ieme)
-  }
-}
-*/
+/** \brief
+  * Fonction de reparation d'un block
+  * @param : virtual_disk_t * , uint , int
+  * @return void
+**/
 void block_repair(virtual_disk_t *RAID5,uint pos,int idDisk){
   uint iterateur=0;
   bool initialisation=false;
@@ -223,123 +213,66 @@ char conversionHexa(char nb4bits){
   }
 }
 
-int conversionDec(int nb4bits){
-  switch(nb4bits){
-    case 48:
-      return 0;
-    case 49:
-      return 1;
-    case 50:
-      return 2;
-    case 51:
-      return 3;
-    case 52:
-      return 4;
-    case 53:
-      return 5;
-    case 54:
-      return 6;
-    case 55:
-      return 7;
-    case 56:
-      return 8;
-    case 57:
-      return 9;
-    case 65:
-      return 10;
-    case 66:
-      return 11;
-    case 67:
-      return 12;
-    case 68:
-      return 13;
-    case 69:
-      return 14;
-    case 70:
-      return 15;
-    default:
-      return nb4bits+'0';
+void affichageNoConversion(virtual_disk_t *RAID5, int idDisk, int n){
+  int nbBlocs = compute_nblock(n);
+  block_t lectoure;
+  for(int i = 0; i < nbBlocs; i++){
+    if(i!=0 && i%4 == 0){
+      printf("\n");
+    }
+    read_block(RAID5, &lectoure, i, idDisk);
+    printf("[");
+    for(int j = 0; j < BLOCK_SIZE; j++){
+      printf(" %-4d", lectoure.data[j]);
+    }
+    printf(" ]");
   }
+  printf("\n");
 }
-
-
 
 /** \brief
-  * affiche un bloc de donnees en hexadecimal
-  * @param : virtual_disk_t
-  * @param : integer (n° disk)
-  * @param : integer (posit° de ce qu'on veut afficher)
-  * @return : void
+  * Fonction d'affichage du contenu du disk idDisk sur output
+  * @param : virtual_disk_t * , int , FILE *
+  * @return void
 **/
-int affichageBlockHexa(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
-  block_t monBloc;
-  char nbHexa[BLOCK_SIZE*2];
-  int retour;
-  retour=read_block(RAID5, &monBloc, pos, idDisk);
-  if(retour!=1){
-    octetsToHexa(monBloc, nbHexa);
-    for(int i=0; i<BLOCK_SIZE*2; i++){
-      fprintf(output, "[%c]", nbHexa[i]);
-    }
-    return 0;
-  }
-  else{
-    return 1;
-  }
+void affichageDisque(virtual_disk_t *RAID5, int idDisk){
+  fseek(RAID5->storage[idDisk], 0, SEEK_END);
+  int taille = (int)ftell(RAID5->storage[idDisk]);
+  printf("Affichage disque %d:\n", idDisk);
+  affichageNoConversion(RAID5, idDisk, taille);
 }
 
-int affichageBlockDecimal(virtual_disk_t *RAID5, int idDisk, uint pos, FILE *output){
-  block_t monBloc;
-  char nbHexa[BLOCK_SIZE*2];
-  int retour;
-  retour=read_block(RAID5, &monBloc, pos, idDisk);
-  unsigned char shuffle;
-  if(retour!=1){
-    octetsToHexa(monBloc, nbHexa);
-    for(int i=0; i<BLOCK_SIZE*2; i=i+2){
-      shuffle=conversionDec(nbHexa[i+1]);
-      shuffle=shuffle+16*conversionDec(nbHexa[i]);
-      fprintf(output, "[%d]", shuffle);
-    }
-    return 0;
-  }
-  else{
-    return 1;
-  }
-}
 
-void affichageDisque(virtual_disk_t *RAID5, int idDisk,FILE *output){
-  for(int i=0;i<=16;i=i+4){
-    affichageBlockHexa(RAID5,idDisk,i,stdout);
-    printf("\n");
-  }
-  printf("\n");
-}
-
-int couche1(void){
-  virtual_disk_t *r5Disk;
+void couche1(void) {
+  virtual_disk_t *r5Disk =init_disk_raid5("./RAIDFILES");
   char hexa[10];
-  r5Disk=malloc(sizeof(virtual_disk_t));
-  srand(time(NULL));
-	init_disk_raid5("./RAIDFILES", r5Disk);
+
 	info_disque(r5Disk);
   block_t ecrire, lire;
-  ecrire.data[0] = 42;
+
+
+  ecrire.data[0] = 131;
+  ecrire.data[1] = 39;
+  ecrire.data[2] = 140;
+  ecrire.data[3] = 42;
+  /*ecrire.data[0] = 42;
   ecrire.data[1] = 140;
   ecrire.data[2] = 39;
-  ecrire.data[3] = 131;
+  ecrire.data[3] = 131;*/
+  write_block(r5Disk, &ecrire, 0, 0);
   write_block(r5Disk, &ecrire, 4, 0);
+  write_block(r5Disk, &ecrire, 8, 0);
+  ecrire.data[0] = 0;
+  ecrire.data[1] = 0;
+  ecrire.data[2] = 0;
+  ecrire.data[3] = 0;
+  write_block(r5Disk, &ecrire, 8, 0);
   read_block(r5Disk, &lire, 4, 0);
-  octetsToHexa(lire, hexa);
-  for(int i = 0; i<8; i++){
-    printf("%c", hexa[i]); // resultat attendu: 2A 8C 27 83
-  }
   printf("\n");
-  //affichageBlockHexa(r5Disk,0,4,stdout);
-  affichageDisque(r5Disk,0,stdout);
-  //affichageDisque(r5Disk,1,stdout);
-  //affichageDisque(r5Disk,2,stdout);
-  //affichageDisque(r5Disk,3,stdout);
+  for(int i = 0; i<r5Disk->ndisk; i++){
+    affichageDisque(r5Disk,i);
+    printf("\n");
+  }
+
   turn_off_disk_raid5(r5Disk);
-	return 0;
 }

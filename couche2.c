@@ -2,6 +2,7 @@
 #include "couche2.h"
 #include <stdlib.h>
 #include <math.h>
+#define couleur(param) printf("\033[%sm",param)
 
 /**
  * \file couche2.c
@@ -24,7 +25,7 @@
    //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques
    //une bande = n blocs, avec n-1 blocs de données et 1 bloc de parité
    //Une bande contient donc n-1 bloc des n blocs de données à stocker
-   return ((nblocks/((r5Disk->ndisk)-1))+(nblocks%((r5Disk->ndisk)-1) == 0));
+   return ((nblocks/((r5Disk->ndisk)-1))+(nblocks%((r5Disk->ndisk)-1) != 0));
  }
 
 /** \brief
@@ -105,101 +106,67 @@ void print_stripe(virtual_disk_t *r5,stripe_t *stripe){
 }
 
 /** \brief
-  * Ecrit une stripe a la position passée en argument sur le raid passé en argument
-  * @param : virtual_disk_t ,stripe_t ,int
+  * Fonction d'affichage du syteme par Bande
+  * @param : virtual_disk_t
   * @return void
 **/
-void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBlock){
+void affichageSysteme(virtual_disk_t *RAID5){
+  stripe_t *stripe = init_bande(RAID5);
+  printf("\033[31;49m    Disque 0                Disque 1                Disque 2                Disque 3\n\033[39;49m");
+  for (int i = 0; i < 42; i++) {
+    read_stripe(RAID5,stripe,i);
+    printf("\033[34;49m %-3d\033[39;49m",i);
+    dump_stripe(*stripe);
+    printf("\n");
+  }
+  delete_bande(&stripe);
+}
+
+
+/** \brief
+  * Ecrit n bytes du buffer a partir de StartBandes le raid passé en argument
+  * @param : virtual_disk_t ,buffer* ,int, int
+  * @return void
+**/
+void write_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBande){
   int nbBlocks = compute_nblock(n);
   int nbBandes = compute_nstripe(r5,nbBlocks);
-  int pos = 0;
-  block_t bloc[nbBlocks];
-  for(int i = 0; i<nbBlocks; i++){
-    for(int j = 0; j<BLOCK_SIZE; j++){
-      if (pos<n){
-        bloc[i].data[j] = buffer[pos];
-        pos++;
-      }
-      else{
-        bloc[i].data[j] = 0;
-      }
-    }
-  }
-  //Pos sert maintenant de numdeParité pour les bandes.
-  pos = 0;
-  stripe_t *bande=init_bande(r5);
-  for(int i = 0; i <= nbBandes; i++){   //On parcourt le nbBandes
-    pos = compute_parity_index(r5, i); //On recupere l'indice de parite
-    int x=0;
-    for(int j = 0; j <= r5->ndisk - 1 ; j++){ //On ajoute à la bande les blocs
-        if (j != pos){
-          bande->stripe[j]=bloc[(i*(r5->ndisk - 1))+j-x]; // ajout de bloc de donnees
-        } // Fin IF
-        else{
-          x=1;
+  stripe_t *stripe = init_bande(r5);
+  int indice_data = 0;
+  int parity_index;
+  for (int i = 0; i < nbBandes; i++){
+    parity_index = compute_parity_index(r5, startBande+i);
+    for(int j = 0; j < r5->ndisk; j++){
+      for(int k = 0; k < BLOCK_SIZE; k++){
+        if(indice_data < n && j != parity_index){
+          stripe->stripe[j].data[k] = buffer[indice_data];
+          indice_data+=1;
+        }else{
+          stripe->stripe[j].data[k] = 0;
         }
-    } // Fin FOR j
-    bande->stripe[pos] = compute_parity(r5, bande, pos);
-    write_stripe(r5, bande, startBlock*4); // ecriture de la bande sur disque
-    startBlock+=1;  // Decalage du block de depart de un block
-  } // Fin FOR i
-  delete_bande(&bande);
-}
-/*pas pris en compte l'eventualité de commencer au milieu d'une bande*/
-
-int afficher_raid_hexa(virtual_disk_t *r5){
-  int retour=0;
-  int z=0;
-  while(retour!=1){
-    for(int i=0;i<r5->ndisk;i++){
-      retour=affichageBlockHexa(r5,i,z,stdout);
-      if(retour){
-        return(retour);
       }
-      printf(" ");
     }
-    printf("\n");
-    z=z+4;
+    stripe->stripe[parity_index] = compute_parity(r5, stripe, parity_index);
+    write_stripe(r5, stripe, startBande+i);
   }
-  return 0;
-}
-
-/** \brief
-  * affiche les disques du raid en valeurs décimales
-  * @param : virtual_disk_t *
-  * @return int
-**/
-int afficher_raid_decimal(virtual_disk_t *r5){
-  int retour=0;
-  int z=0;
-  while(retour!=1){
-    for(int i=0;i<r5->ndisk;i++){
-      retour=affichageBlockDecimal(r5,i,z,stdout);
-      if(retour){
-        return(retour);
-      }
-      printf(" ");
-    }
-    printf("\n");
-    z=z+4;
-  }
-  return 0;
+  delete_bande(&stripe);
 }
 
 
 /** \brief
-  * fonction de test pour write_chunk
-  * @param virtual_disk_t *
+  * Affiche une bande
+  * @param : stripe_t
+  * @return void
 **/
-void cmd_test1(virtual_disk_t *r5){
-  unsigned char buffer[256];
-  afficher_raid_decimal(r5);
-  for(int i=0;i<256;i++){
-    buffer[i]=i;
+void dump_stripe(stripe_t bande){
+  for(int i = 0; i<bande.nblocks; i++){
+    printf("[ ");
+    for(int j = 0; j < BLOCK_SIZE; j++){
+      printf("%-3d ", bande.stripe[i].data[j]);
+    }
+
+    printf("]   ");
   }
-  write_chunk(r5,buffer,256,0);
-  printf("\n\n");
-  afficher_raid_hexa(r5);
 }
 
 
@@ -220,18 +187,7 @@ int read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos){
   return 0;
 }
 
-/** \brief
-  * Fonction de test pour read_chunk
-  * @param : virtual_disk_t *
-  * @return void
-**/
-void cmd_test2(virtual_disk_t *r5){
-  unsigned char buffer[256];
-  afficher_raid_hexa(r5);
-  read_chunk(r5,0,48);
-  printf("\n\n");
-  turn_off_disk_raid5(r5);
-}
+
 
 /** \brief
   * Fonction retournant le num de la bande actuelle
@@ -243,44 +199,76 @@ int compute_num_bande(virtual_disk_t *r5,int nbloc){
   return nbloc/r5->ndisk;
 }
 
+
 /** \brief
-  * Fonction de lecture de tableau de char
-  * @param : virtual_disk_t * , uint , int
-  * @return char *
+  * Lit n bytes a partir de StartBandes sur le raid passé en argument et les renvoie
+  *dans le buffer
+  * @param : virtual_disk_t ,stripe_t ,int
+  * @return void
 **/
-char *read_chunk(virtual_disk_t *r5, uint start_block, int n){
-  uint nbBlocks = compute_nblock(n);
-  unsigned char *buffer=malloc(sizeof(unsigned char)*n);
-  int indice_buffer=0;
-  int current=start_block;
-  int nbBlocksLus = 0;              /*Nombre de Blocks effectivement lus (sans lire les blocs de parité)*/
-  block_t *blc=malloc(sizeof(struct block_s));
-  printf("Lecture de chunk : [start]:%d ,[end]:%d ,[size]:%d\n",start_block,start_block+n,compute_nblock(n));
-  while((uint) nbBlocksLus<nbBlocks){
-    printf("\nCurrent block :%d\n",current);
-    if(current%(r5->ndisk)!=compute_parity_index(r5, compute_num_bande(r5,current))){
-      printf("Reading position %d at disk %d\n",(current/4)*4,current%r5->ndisk);
-      read_block(r5,blc,(current/4)*4,current%r5->ndisk);
-      for(int i=0; i<BLOCK_SIZE; i++){
-        buffer[indice_buffer]=blc->data[i];
-        printf("%d ",blc->data[i]);
-        indice_buffer=indice_buffer+1;
+void read_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBande){
+  int nbBlocks = compute_nblock(n);
+  int nbBandes = compute_nstripe(r5,nbBlocks);
+  int parity_index;
+  int indice_data = 0;
+  stripe_t *mystripe = init_bande(r5);
+  for (int i = 0; i < nbBandes; i++) {
+    read_stripe(r5, mystripe, startBande + i);
+    parity_index = compute_parity_index(r5,startBande + i);
+    for (int j = 0; j < r5->ndisk; j++) {
+        for (int k = 0; k < BLOCK_SIZE; k++) {
+          if (indice_data < n && j != parity_index) {
+            buffer[indice_data] = mystripe->stripe[j].data[k];
+            indice_data+=1;
+          }
+        }
       }
-      nbBlocksLus++;
     }
-    current++;
-  }
-  free(blc);
-  return buffer;
+  delete_bande(&mystripe);
 }
 
 
-int couche2(void){
+
+/** \brief
+  * fonction de test pour write_chunk
+  * @param virtual_disk_t *
+**/
+void cmd_test1(virtual_disk_t *r5){
+  unsigned char buffer[256];
+  for(int i = 0; i<r5->ndisk; i++){
+    affichageDisque(r5, i);
+  }
+  for(int i=0;i<256;i++){
+    buffer[i]=i;
+  }
+  write_chunk(r5,buffer,256,0);
+  printf("\n\n");
+  for(int i = 0; i<r5->ndisk; i++){
+    affichageDisque(r5, i);
+  }
+}
+
+
+/** \brief
+  * Fonction de test pour read_chunk
+  * @param : virtual_disk_t *
+  * @return void
+**/
+void cmd_test2(virtual_disk_t *r5){
+  unsigned char buffer[256];
+  read_chunk(r5,buffer,256,0);
+  printf("\nAffichage du Buffer :\n\n");
+  for (int i = 0; i < 256; i++) {
+    printf("%d ", buffer[i]);
+  }
+}
+
+
+void couche2(void){
   //couche1();
-  virtual_disk_t *r5d=malloc(sizeof(virtual_disk_t));
-  init_disk_raid5("./RAIDFILES",r5d);
+  virtual_disk_t *r5d=init_disk_raid5("./RAIDFILES");
   cmd_test1(r5d);
   printf("\nCMD_TEST2\n");
   cmd_test2(r5d);
-  return 0;
+  turn_off_disk_raid5(r5d);
 }
