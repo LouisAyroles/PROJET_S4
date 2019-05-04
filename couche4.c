@@ -86,7 +86,6 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
    /*Le fichier est present sur le systeme*/
    }else{
      fichier->size = inodes[nbfiles].size;
-     printf("__File size in read: %d__\n\n", fichier->size);
      read_chunk(r5Disk, buffer, fichier->size, inodes[nbfiles].first_byte);
      for (int i = 0; i < fichier->size; i++) {
        fichier->data[i] = buffer[i];
@@ -141,7 +140,6 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
    }else{
      fseek(fd, 0, SEEK_END);
      fichier.size = ftell(fd);
-     printf("__File size in load: %d__\n\n", fichier.size);
      fseek(fd,0,SEEK_SET);
      fread(fichier.data, fichier.size, 1, fd);
      fclose(fd);

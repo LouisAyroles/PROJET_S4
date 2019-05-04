@@ -22,7 +22,6 @@
    * @return : void
  **/
 void inode_table_dump(inode_table_t t){
-  printf("Inode table\n");
   for(int i=0;i<INODE_TABLE_SIZE;i++){
     inode_dump(t[i]);
   }
@@ -47,6 +46,8 @@ void super_block_dump(super_block_t s){
   printf("Superbloc\n");
   printf("\tRaid type : %d |nb_blocks_used : %d | first_free_byte : %d\n",s.raid_type,s.nb_blocks_used,s.first_free_byte);
 }
+
+
  /** \brief
    * Transforme un entier en un tableau de 4 char
    * @param : int ,uchar*
