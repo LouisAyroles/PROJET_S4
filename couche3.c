@@ -130,7 +130,7 @@ void delete_inode(virtual_disk_t *r5Disk, int numInode){
   inode_t maTable[10];
   int i=numInode;
   read_inodes_table(r5Disk,maTable);
-  if (get_nb_files(r5Disk) >= numInode) {
+  if (get_nb_files(r5Disk) > numInode) {
     while (maTable[i].first_byte != 0 && i < INODE_TABLE_SIZE-1) {
         maTable[i] = maTable[i+1];
         i++;
@@ -419,6 +419,11 @@ void update_super_block(virtual_disk_t* r5Disk){
     sb.nb_blocks_used += table[i].nblock;
     i++;
   }
+  // if(i != 0){
+  //   r5Disk->number_of_files = i-1;
+  // }else{
+  //   r5Disk->number_of_files = i;
+  // }
   r5Disk->super_block.nb_blocks_used = sb.nb_blocks_used;
   sb.first_free_byte = r5Disk->super_block.first_free_byte = first_free_byte(r5Disk);
   write_super_block(r5Disk, sb);

@@ -41,21 +41,24 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
    if (nbfiles < 0) {
      inode_t inode = init_inode(nomFichier, fichier.size, first_free_byte(r5Disk));
      inodes[get_unused_inodes(r5Disk)]=inode;
-     write_inodes_table(r5Disk, inodes);
      write_chunk(r5Disk,fichier.data,fichier.size,inode.first_byte);
+    r5Disk->number_of_files+=1;
     //Le fichier est present dans le systeme
    }else{
     //Le fichier passé en parametre est plus petit que le fichier présent
     int start = inodes[nbfiles].first_byte;
     if (inodes[nbfiles].size >= fichier.size){
       write_chunk(r5Disk, fichier.data, fichier.size, inodes[nbfiles].first_byte);
+      inodes[nbfiles].size = fichier.size;
     }else{
       delete_file(r5Disk,nomFichier);
       add_inode(r5Disk, nomFichier, fichier.size);
+      read_inodes_table(r5Disk,(inode_t *) inodes);
     }
   }
-   r5Disk->number_of_files+=1;
-   update_super_block(r5Disk);
+  update_super_block(r5Disk);
+  write_inodes_table(r5Disk, inodes);
+  affichageSysteme(r5Disk);
 }
 
 
@@ -87,8 +90,10 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
      for (int i = 0; i < fichier->size; i++) {
        fichier->data[i] = buffer[i];
      }
+     fichier->data[fichier->size] = '\0';
      update_super_block(r5Disk);
    }
+   printf("__File size in read: %d__\n\n", fichier->size);
    free(buffer);
    return 1;
  }
@@ -136,6 +141,7 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
    }else{
      fseek(fd, 0, SEEK_END);
      fichier.size = ftell(fd);
+     printf("__File size in load: %d__\n\n", fichier.size);
      fseek(fd,0,SEEK_SET);
      fread(fichier.data, fichier.size, 1, fd);
      fclose(fd);
@@ -174,9 +180,7 @@ int main(int argc, char const *argv[]) {
   read_inodes_table(r5d, maTable);
   printf("INODE AJOUTEE : \n Filename : %s\t Size : %d\t Nblock :%d\t First_Byte : %d\n",maTable[0].filename,maTable[0].size,maTable[0].nblock, maTable[0].first_byte);
   read_file(r5d,"Test.txt",&f2);
-  printf("%s\n", f2.data);
-  //printf("LECTURE DU FICHIER :\nSize : %d\nContenu du fichier : %s\n",f2.size, f2.data);
-
+  printf("LECTURE DU FICHIER :\nSize : %d\nContenu du fichier : %s\n",f2.size, f2.data);
   turn_off_disk_raid5(r5d);
   exit(0);
 }
