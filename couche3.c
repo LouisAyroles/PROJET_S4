@@ -16,8 +16,37 @@
  *
  */
 
+ /** \brief
+   * Affichage de la table d'inodes
+   * @param : inode_table_t
+   * @return : void
+ **/
+void inode_table_dump(inode_table_t t){
+  printf("Inode table\n");
+  for(int i=0;i<INODE_TABLE_SIZE;i++){
+    inode_dump(t[i]);
+  }
+}
 
+/** \brief
+  * Affichage d'une inode
+  * @param : inode_t
+  * @return : void
+**/
+void inode_dump(inode_t i){
+  printf("\tFilename : %s\n",i.filename);
+  printf("\t Size : %d |NBlocks : %d |First_Byte : %d \n",i.size,i.nblock,i.first_byte);
+}
 
+/** \brief
+  * Affichage d'un superblock
+  * @param : inode_t
+  * @return : void
+**/
+void super_block_dump(super_block_t s){
+  printf("Superbloc\n");
+  printf("\tRaid type : %d |nb_blocks_used : %d | first_free_byte : %d\n",s.raid_type,s.nb_blocks_used,s.first_free_byte);
+}
  /** \brief
    * Transforme un entier en un tableau de 4 char
    * @param : int ,uchar*
@@ -71,6 +100,7 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
     bufferConversion[i]=buffer[i];
   }
   superblock->raid_type = uChar_To_Int(bufferConversion);
+  r5Disk->super_block.raid_type=uChar_To_Int(bufferConversion);
   posread+=sizeof(enum raid);
 
 
@@ -78,12 +108,14 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
     bufferConversion[i]=buffer[posread+i];
   }
   superblock->nb_blocks_used = uChar_To_Int(bufferConversion);
+  r5Disk->super_block.nb_blocks_used=uChar_To_Int(bufferConversion);
   posread+=sizeof(int);
 
   for(int i = 0; i < (sizeof(int)); i++){
     bufferConversion[i]=buffer[posread+i];
   }
   superblock->first_free_byte = uChar_To_Int(bufferConversion);
+  r5Disk->super_block.first_free_byte=uChar_To_Int(bufferConversion);
   free(buffer);
   free(bufferConversion);
 }
@@ -96,14 +128,14 @@ void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock){
 **/
 void delete_inode(virtual_disk_t *r5Disk, int numInode){
   inode_t maTable[10];
-  int i=0;
+  int i=numInode;
   read_inodes_table(r5Disk,maTable);
   if (get_nb_files(r5Disk) >= numInode) {
     while (maTable[i].first_byte != 0 && i < INODE_TABLE_SIZE-1) {
         maTable[i] = maTable[i+1];
         i++;
     }
-    maTable[i] = init_inode("",0,0);
+    maTable[i] = init_inode("",2,0);
     write_inodes_table(r5Disk, maTable);
   }
 }
@@ -265,7 +297,7 @@ void first_free_byte(virtual_disk_t *r5Disk){
 **/
   void read_inodes_table(virtual_disk_t *r5Disk, inode_t maTable[INODE_TABLE_SIZE]){
     inode_t Ino;
-    for(int i = 0; i< 10; i++){
+    for(int i = 0; i< INODE_TABLE_SIZE; i++){
       read_inode_table_i(r5Disk, &Ino, i);
       for(int j = 0; j < FILENAME_MAX_SIZE; j++){
         maTable[i].filename[j] = Ino.filename[j];
@@ -273,6 +305,8 @@ void first_free_byte(virtual_disk_t *r5Disk){
       maTable[i].first_byte = Ino.first_byte;
       maTable[i].size = Ino.size;
       maTable[i].nblock = Ino.nblock;
+      //
+      r5Disk->inodes[i]=maTable[i];
     }
   }
 
@@ -370,7 +404,7 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_t maTable[INODE_TABLE_SIZE
   }
 }
 
-int main(int argc, char const *argv[]) {
+int couche3(int argc, char const *argv[]) {
   //couche2();
   virtual_disk_t *r5d=init_disk_raid5("./RAIDFILES");
   super_block_t sb, sbd;

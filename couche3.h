@@ -14,5 +14,8 @@ void write_super_block(virtual_disk_t *r5Disk, super_block_t superblock);
 void read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock);
 void first_free_byte(virtual_disk_t *r5Disk);
 void read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice);
+void inode_table_dump(inode_table_t t);
+void inode_dump(inode_t i);
+void super_block_dump(super_block_t s);
 
 #endif
