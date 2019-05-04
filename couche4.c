@@ -58,7 +58,6 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
   }
   update_super_block(r5Disk);
   write_inodes_table(r5Disk, inodes);
-  affichageSysteme(r5Disk);
 }
 
 
@@ -81,11 +80,13 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
    }
    /*Le fichier n'est pas present sur le systeme*/
    if (nbfiles < 0) {
+     free(buffer);
      return 0;
 
    /*Le fichier est present sur le systeme*/
    }else{
      fichier->size = inodes[nbfiles].size;
+     printf("__File size in read: %d__\n\n", fichier->size);
      read_chunk(r5Disk, buffer, fichier->size, inodes[nbfiles].first_byte);
      for (int i = 0; i < fichier->size; i++) {
        fichier->data[i] = buffer[i];
@@ -93,7 +94,6 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
      fichier->data[fichier->size] = '\0';
      update_super_block(r5Disk);
    }
-   printf("__File size in read: %d__\n\n", fichier->size);
    free(buffer);
    return 1;
  }
@@ -174,7 +174,7 @@ int main(int argc, char const *argv[]) {
   virtual_disk_t *r5d=init_disk_raid5("./RAIDFILES");
   file_t fichier,f2;
   inode_t maTable[INODE_TABLE_SIZE];
-  //reinit_systeme(r5d);
+  reinit_systeme(r5d);
   load_file_from_host(r5d,"Test.txt");
   affichageSysteme(r5d);
   read_inodes_table(r5d, maTable);
