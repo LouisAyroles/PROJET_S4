@@ -135,9 +135,12 @@ void delete_inode(virtual_disk_t *r5Disk, int numInode){
         maTable[i] = maTable[i+1];
         i++;
     }
-    maTable[i] = init_inode("",2,0);
+    if (i == INODE_TABLE_SIZE-1) {
+        maTable[i] = init_inode("",0,0);
+    }
     write_inodes_table(r5Disk, maTable);
   }
+  update_super_block(r5Disk);
 }
 
 /** \brief
@@ -179,11 +182,11 @@ int get_unused_inodes(virtual_disk_t *r5d){
   * @param : virtual_disk_t* nom_de_fichier (char *),taille (uint),debut (uint)
   * @return void
 **/
-void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size, int startBande){
+void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size){
   inode_t maTable[10];
   read_inodes_table(r5Disk,maTable);
   if(get_nb_files(r5Disk) < INODE_TABLE_SIZE){
-    inode_t in = init_inode(nomFICHIER,size,startBande);
+    inode_t in = init_inode(nomFICHIER,size, first_free_byte(r5Disk));
     maTable[get_unused_inodes(r5Disk)] = in;
     r5Disk->number_of_files+=1;
     write_inodes_table(r5Disk,maTable);
@@ -269,25 +272,22 @@ void write_super_block(virtual_disk_t *r5Disk, super_block_t sb){
 /** \brief
   * Ecriture de la position du premier octet libre dans le r5Disk
   * @param : virtual_disk_t
-  * @return void
+  * @return int
 **/
-void first_free_byte(virtual_disk_t *r5Disk){
+int first_free_byte(virtual_disk_t *r5Disk){
   inode_t table[INODE_TABLE_SIZE];
-  super_block_t sb;
   read_inodes_table(r5Disk, table);
-  read_super_block(r5Disk,&sb);
   int lastfirstbyte=0, lastindice=0, i=0;
   if (table[0].first_byte == 0) {
-    sb.first_free_byte = compute_nstripe(r5Disk, compute_nblock(sizeof(inode_t)))*INODE_TABLE_SIZE+startTable(r5Disk);
+    return compute_nstripe(r5Disk, compute_nblock(sizeof(inode_t)))*INODE_TABLE_SIZE+startTable(r5Disk);
   }else{
     int firstfree = get_unused_inodes(r5Disk);
     if (firstfree == -1) {
-      sb.first_free_byte = -1;
+      return -1;
     }else{
-      sb.first_free_byte = table[firstfree-1].first_byte + compute_nstripe(r5Disk,table[firstfree-1].nblock );
+      return table[firstfree-1].first_byte + compute_nstripe(r5Disk,table[firstfree-1].nblock );
     }
   }
-  write_super_block(r5Disk,sb);
 }
 
 /** \brief
@@ -403,28 +403,60 @@ void write_inodes_table(virtual_disk_t *r5Disk, inode_t maTable[INODE_TABLE_SIZE
     write_inode_table_i(r5Disk, Ino, i);
   }
 }
+/*briefiles
+* Fonction de mise à jour du Superbloc
+* @param : virtual_disk_t*
+* @return : void
+*/
+void update_super_block(virtual_disk_t* r5Disk){
+  inode_t table[INODE_TABLE_SIZE];
+  super_block_t sb;
+  int i=0;
+  sb.raid_type = r5Disk->super_block.raid_type =  r5Disk->raidmode;
+  sb.nb_blocks_used = r5Disk->super_block.nb_blocks_used =  0;
+  read_inodes_table(r5Disk,table);
+  while (table[i].first_byte != 0 && i < INODE_TABLE_SIZE) {
+    sb.nb_blocks_used += table[i].nblock;
+    i++;
+  }
+  r5Disk->super_block.nb_blocks_used = sb.nb_blocks_used;
+  sb.first_free_byte = r5Disk->super_block.first_free_byte = first_free_byte(r5Disk);
+  write_super_block(r5Disk, sb);
+
+}
+
+/*brief
+* Fonction de remise à zero du Systeme
+* @param
+* @return : void
+*/
+void reinit_systeme(virtual_disk_t* r5Disk){
+  stripe_t *bande = init_bande(r5Disk);
+  for(int i = 0; i < r5Disk->ndisk; i++){
+    for(int j = 0; j < BLOCK_SIZE; j++){
+      bande->stripe[i].data[j] = 0;
+    }
+  }
+  for(int i = 0; i < 42; i++){
+    write_stripe(r5Disk, bande, i);
+  }
+  delete_bande(&bande);
+}
+
 
 int couche3(int argc, char const *argv[]) {
   //couche2();
   virtual_disk_t *r5d=init_disk_raid5("./RAIDFILES");
   super_block_t sb, sbd;
-  inode_t table[10];
-  read_inodes_table(r5d,table);
-  sb.raid_type = r5d->raidmode;
-  sb.nb_blocks_used = 0;
-  for (int i = 0; i < INODE_TABLE_SIZE; i++) {
-    sb.nb_blocks_used += table[i].nblock;
-  }
-  sb.first_free_byte = 15;
-  write_super_block(r5d,sb);
 
-  delete_inode(r5d,5);
-  add_inode(r5d,"Test.txt", 24, 85);
-  first_free_byte(r5d);
+
+
+  //add_inode(r5d,"test",48);
+  //delete_inode(r5d,0);
+  update_super_block(r5d);
   read_super_block(r5d,&sbd);
   affichageSysteme(r5d);
-  printf("LECTURE DU SUPER_BLOCK : \n type RAID : %d\n nbBlockUsed : %d\n first_free_byte : %d\n",sb.raid_type, sb.nb_blocks_used, sb.first_free_byte);
-
+  printf("LECTURE DU SUPER_BLOCK : \n type RAID : %d\n nbBlockUsed : %d\n first_free_byte : %d\n",sbd.raid_type, sbd.nb_blocks_used, sbd.first_free_byte);
   turn_off_disk_raid5(r5d);
   return 0;
 }

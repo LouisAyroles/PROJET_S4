@@ -369,3 +369,166 @@ printf("Adresse de bufferConversion avant le free : %d\n",bufferConversion);
 printf("Adresse de bufferInode avant le free : %d\n",bufferInode);
 //free(bufferInode);
 printf("Coucou\n");
+
+
+/** \brief
+  * Lecture de la table d'inodes
+  * @param : virtual_disk_t ,inode_table_t
+  * @return : void
+**/
+  void read_inodes_table(virtual_disk_t *r5Disk, inode_t maTable[INODE_TABLE_SIZE]){
+    inode_t Ino;
+    for(int i = 0; i< 10; i++){
+      read_inode_table_i(r5Disk, &Ino, i);
+      for(int j = 0; j < FILENAME_MAX_SIZE; j++){
+        maTable[i].filename[j] = Ino.filename[j];
+      }
+      maTable[i].first_byte = Ino.first_byte;
+      maTable[i].size = Ino.size;
+      maTable[i].nblock = Ino.nblock;
+    }
+    printf("\n\n__%d__\n\n", maTable[3].first_byte);
+  }
+
+void read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice){
+  int depart = startTable(r5Disk), posread = 0, k;
+  uchar buffer[50];
+  uchar conversion[4];
+  read_chunk(r5Disk, buffer, 44, depart+(indice*4));
+  for(k = 0; k<FILENAME_MAX_SIZE; k++){
+    Ino->filename[k] = buffer[k];
+  }
+  printf("\n");
+  posread+=FILENAME_MAX_SIZE;
+  for (k = posread; k < posread+sizeof(int); k++){
+    conversion[k-posread] = buffer[k];
+  }
+  Ino->size = uChar_To_Int(conversion);
+  printf("--%d--\n", uChar_To_Int(conversion));
+
+  posread+= sizeof(int);
+  for (k = posread; k < posread+sizeof(int); k++){
+    conversion[k-posread] = buffer[k];
+  }
+  Ino->nblock = uChar_To_Int(conversion);
+  posread+= sizeof(int);
+
+  for (k = posread; k < posread+sizeof(int); k++){
+    conversion[k-posread] = buffer[k];
+  }
+  Ino->first_byte = uChar_To_Int(conversion);
+}
+
+
+void write_inode_table_i(virtual_disk_t *r5Disk, inode_t Ino, int indice){
+  int depart = startTable(r5Disk), poswrite = 0;
+  uchar buffer[50];
+  uchar conversion[4];
+
+  printf("AFFICHAGE INODE:\nIno.filename = %s\n", Ino.filename);
+  printf("Ino.size = %d\n", Ino.size);
+  printf("Ino.nblock = %d\n", Ino.nblock);
+  printf("Ino.first_byte = %d\n", Ino.first_byte);
+  for (int i = 0; i < FILENAME_MAX_SIZE; i++) {
+    buffer[i]= Ino.filename[i];
+  }
+  poswrite+=FILENAME_MAX_SIZE;
+
+
+  int_To_uChar(Ino.size,&conversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = conversion[i];
+  }
+  poswrite+=sizeof(int);
+
+
+  int_To_uChar(Ino.nblock, &conversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = conversion[i];
+  }
+  poswrite+=sizeof(int);
+
+
+  int_To_uChar(Ino.first_byte, &conversion);
+  for (int i = 0; i < sizeof(int); i++) {
+    buffer[poswrite+i] = conversion[i];
+  }
+  printf("poswrite = %d && |_%d_|\n", poswrite, depart+(indice*4));
+  write_chunk(r5Disk,buffer, 44, depart+(indice*4));
+}
+
+/**********************************TEST COUCHE 3 *************************/
+stripe_t *bande = init_bande(r5d);
+inode_t table[10];
+inode_t Ino;
+char test[FILENAME_MAX_SIZE];
+for(int i = 0; i < r5d->ndisk; i++){
+  for(int j = 0; j < BLOCK_SIZE; j++){
+    if(j == 0){
+      bande->stripe[i].data[j] = 2;
+    }else{
+      bande->stripe[i].data[j] = 0;
+    }
+  }
+}
+for(int i = 0; i < r5d->ndisk; i++){
+  printf("[ ");
+  for(int j = 0; j < BLOCK_SIZE; j++){
+    printf("%d, ", bande->stripe[i].data[j]);
+  }
+  printf("]\n");
+}
+for(int i = 0; i < 42; i++){
+  write_stripe(r5d, bande, i);
+}
+read_inodes_table(r5d, table);
+printf("\ntest : %d--\n", table[3].first_byte);
+test[0] = 'T';
+test[1] = 'e';
+test[2] = 'x';
+test[3] = 't';
+test[4] = 'e';
+test[5] = '\0';
+Ino = init_inode(test,54,42);
+printf("\ntest : %s--\n", Ino.filename);
+for (int i = 0; i < 10; i++) {
+  table[i] = Ino;
+}
+table[3].size = 42314;
+write_inodes_table(r5d,table);
+affichageSysteme(r5d);
+// for(int i = 0; i< 10; i++){
+//   read_inode_table_i(r5d, &Ino, 0);
+// }
+delete_bande(&bande);
+/*****************************************************************************/
+
+
+void read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice){
+  int depart = startTable(r5Disk), posread = 0, k;
+  uchar buffer[50];
+  uchar conversion[4];
+  read_chunk(r5Disk, buffer, 44, depart+(indice*4));
+  for(k = 0; k<FILENAME_MAX_SIZE; k++){
+    Ino->filename[k] = buffer[k];
+  }
+  printf("\n");
+  posread+=FILENAME_MAX_SIZE;
+  for (k = posread; k < posread+sizeof(int); k++){
+    conversion[k-posread] = buffer[k];
+  }
+  Ino->size = uChar_To_Int(conversion);
+  printf("--%d--\n", uChar_To_Int(conversion));
+
+  posread+= sizeof(int);
+  for (k = posread; k < posread+sizeof(int); k++){
+    conversion[k-posread] = buffer[k];
+  }
+  Ino->nblock = uChar_To_Int(conversion);
+  posread+= sizeof(int);
+
+  for (k = posread; k < posread+sizeof(int); k++){
+    conversion[k-posread] = buffer[k];
+  }
+  Ino->first_byte = uChar_To_Int(conversion);
+}
