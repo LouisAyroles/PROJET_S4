@@ -13,6 +13,20 @@
 #define INODES_START SUPER_BLOCK_SIZE*BLOCK_SIZE+1 // en octets
 #define INODE_SIZE 11 // en blocks avec parité
 #define INODE_OCT 44 // en octets
+#define CMD_MAX_SIZE FILENAME_MAX_SIZE+10
+
+//code commande interpreteur
+#define LS 1
+#define CAT 2
+#define RM 3
+#define CREATE 4
+#define EDIT 5
+#define LOAD 6
+#define STORE 7
+#define QUIT 8
+#define RESET 9
+#define HELP 11
+#define FIN 10
 
 typedef unsigned int uint; // même taille que int
 typedef unsigned char uchar; // 8 bits = octet

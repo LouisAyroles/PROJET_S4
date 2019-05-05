@@ -22,9 +22,6 @@
  **/
 
  int compute_nstripe(virtual_disk_t *r5Disk,int nblocks){
-   //Dans le cas du raid5 , une bande = n-1 blocs avec n le nombre de disques
-   //une bande = n blocs, avec n-1 blocs de données et 1 bloc de parité
-   //Une bande contient donc n-1 bloc des n blocs de données à stocker
    return ((nblocks/((r5Disk->ndisk)-1))+(nblocks%((r5Disk->ndisk)-1) != 0));
  }
 
@@ -53,7 +50,6 @@ int compute_parity_index(virtual_disk_t *r5,int numbd){
     return r5->ndisk-1;
   }
   return ((r5->ndisk-1)-(numbd%r5->ndisk));
-  //return abs(((r5->ndisk)-numbd-1)%(r5->ndisk));
 }
 
 /** \brief
@@ -67,7 +63,11 @@ void write_stripe(virtual_disk_t *r5, stripe_t *ecrire, uint pos){
   }
 }
 
-
+/** \brief
+  * Init une bande
+  * @param : virtual_disk_t*
+  * @return stripe_t*
+**/
 stripe_t *init_bande(virtual_disk_t *r5){
   stripe_t *bande = malloc(sizeof(stripe_t));
   bande->nblocks = r5->ndisk;
@@ -112,12 +112,17 @@ void print_stripe(virtual_disk_t *r5,stripe_t *stripe){
 **/
 void affichageSysteme(virtual_disk_t *RAID5){
   stripe_t *stripe = init_bande(RAID5);
-  printf("\033[31;49m    Disque 0                Disque 1                Disque 2                Disque 3\n\033[39;49m");
-  for (int i = 0; i < 42; i++) {
+  for (int i = 0; i < RAID5->ndisk; i++) {
+    printf("\033[31;49m      Disque %d       ",i);
+  }
+  printf("\n\033[39;49m");
+  int i=0;
+  while (i<80) {
     read_stripe(RAID5,stripe,i);
     printf("\033[34;49m %-3d\033[39;49m",i);
     dump_stripe(*stripe);
     printf("\n");
+    i++;
   }
   delete_bande(&stripe);
 }
@@ -164,7 +169,6 @@ void dump_stripe(stripe_t bande){
     for(int j = 0; j < BLOCK_SIZE; j++){
       printf("%-3d ", bande.stripe[i].data[j]);
     }
-
     printf("]   ");
   }
 }
@@ -261,14 +265,4 @@ void cmd_test2(virtual_disk_t *r5){
   for (int i = 0; i < 256; i++) {
     printf("%d ", buffer[i]);
   }
-}
-
-
-void couche2(void){
-  //couche1();
-  virtual_disk_t *r5d=init_disk_raid5("./RAIDFILES");
-  cmd_test1(r5d);
-  printf("\nCMD_TEST2\n");
-  cmd_test2(r5d);
-  turn_off_disk_raid5(r5d);
 }

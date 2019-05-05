@@ -532,3 +532,108 @@ void read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice){
   }
   Ino->first_byte = uChar_To_Int(conversion);
 }
+
+
+
+/************************************************************************************/
+file_t fichier;
+int nboctets=0;
+read_file(r5Disk, argument, &fichier);
+char buffer[MAX_FILE_SIZE];
+for (int i = 0; i < fichier.size; i++) {
+  printf("%c",fichier.data[i]);
+}
+do {
+  fgets(buffer,MAX_FILE_SIZE-fichier.size,stdin);
+  nboctets = strlen(buffer);
+  for (int i = 0; i < nboctets; i++) {
+    fichier.data[fichier.size] = buffer[i];
+    fichier.size+=1;
+  }
+} while(buffer[0] != '\n');
+write_file(r5Disk,argument,fichier);
+return 0;
+
+
+/**************************************************************************/
+
+if (argument[0] == '\0') {
+  return -1;
+}else{
+  file_t fichier;
+  int nboctets=0, nblignes = 0, noligne;
+  char buffer[MAX_FILE_SIZE];
+  read_file(r5Disk, argument, &fichier);
+  char cmd[50];
+  char ligne[200];
+  printEditionfichier();
+  printf("Voulez vous rentrer en mode insertion ou suppresion?[i -> insertion / s-> suppresion] : ");
+  lecture(cmd, 50);
+  while(cmd[0] != 'i' && cmd[0] != 's'){
+    printf("\nSaisie invalide![i -> insertion / s-> suppresion] : ");
+    lecture(cmd,50);
+  }
+  // Mode INSERTION
+  if (cmd[0] == 'i' ) {
+    nboctets=0;
+    printFichier(fichier, argument);
+    do {
+      fgets(buffer,MAX_FILE_SIZE-fichier.size,stdin);
+      nboctets = strlen(buffer);
+      for (int i = 0; i < nboctets; i++) {
+        fichier.data[fichier.size] = buffer[i];
+        fichier.size+=1;
+      }
+    } while(buffer[0] != '\n');
+    write_file(r5Disk,argument,fichier);
+    //Mode SUPRESSION
+    }else{
+      //On calcule le nombre de ligne du fichier
+      for (int i = 0; i < fichier.size; i++) {
+        if (fichier.data[i] == '\n') {
+          nblignes+=1;
+        }
+      }
+      nblignes+=1;
+      printf("\nQuelle ligne voulez vous supprimer? [1-%d]",nblignes);
+      fscanf(stdin, "%d", &noligne);
+      while(noligne < 0 || noligne > nblignes){
+        printf("\nSaisie invalide! Quelle ligne voulez vous supprimer? [1-%d] : ", nblignes);
+        fscanf(stdin, "%d", &noligne);
+      }
+      fichier = supprimerLignei(fichier, noligne);
+      printFichier(fichier, argument);
+      write_file(r5Disk, argument, fichier);
+    }
+  }
+
+
+  /********************************************************************/
+  /** \brief
+    * Fonction Auxiliaire qui affiche un cartouche pour l'edition
+    * @param :
+    * @return void
+  **/
+  void printEditionfichier(){
+    printf(" ________________________________________\n");
+    printf("|                                        |\n");
+    printf("|                                        |\n");
+    printf("|");
+    printf("\033[31;49m           Edition de fichier\033[39;49m");
+    printf("           |\n");
+    printf("|                                        |\n");
+    printf("|                                        |\n");
+    printf("------------------------------------------\n");
+  }
+
+  /** \brief
+    * Fonction Auxiliaire qui affiche le nom et le contenu d'un fichier
+    * @param :
+    * @return void
+  **/
+  void printFichier(file_t fichier, char nomFichier[]){
+    printf("\n\n\n\t\t\t\033[31;49m %s\033[39;49m\n", nomFichier);
+    for (int i = 0; i < fichier.size; i++) {
+      printf("%c",fichier.data[i]);
+    }
+  }

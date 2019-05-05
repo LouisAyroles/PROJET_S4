@@ -192,7 +192,7 @@ void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size){
     r5Disk->number_of_files+=1;
     write_inodes_table(r5Disk,maTable);
   }else{
-    fprintf(stderr, "%s non ecrit, nb de fichier max atteint.\n", nomFICHIER);
+    fprintf(stderr, "\033[31;49m%s non ecrit, nombre de fichier max atteint.\033[39;49m\n", nomFICHIER);
   }
 }
 
@@ -212,18 +212,16 @@ inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start){
     i++;
   }
   result.filename[i] = '\0';
-  result.size = taille; // == 4octets
-  result.nblock = compute_nblock(result.size); // == 4octets
-  result.first_byte = start; // == 4 octets
+  result.size = taille;
+  result.nblock = compute_nblock(result.size);
+  result.first_byte = start;
   return result;
 }
-// 1 block = 4 octets  -->  un Inode = (32+4*3)/4 blocks
-// ---> Inode = 11 blocks
 
 void cmd_dump_inode(char *nomRep, virtual_disk_t *r5Disk){
   printf("Dump_inode\n");
   inode_table_t table;
-  // read_inodes_table(r5Disk, &table);
+  read_inodes_table(r5Disk, (inode_t*)table);
   r5Disk->number_of_files = get_nb_files(r5Disk);
   printf("Number of files : %d\n",r5Disk->number_of_files);
   for(int i = 0; i < (r5Disk->number_of_files); i++){
@@ -260,7 +258,7 @@ void write_super_block(virtual_disk_t *r5Disk, super_block_t sb){
   }
   poswrite += sizeof(int);
 
-  /*Ecriture du First free Byte*/
+
   int_To_uChar(sb.first_free_byte, bufferConversion);
   for (int i = 0; i < sizeof(int); i++) {
     buffer[poswrite+i] = bufferConversion[i];
@@ -306,7 +304,6 @@ int first_free_byte(virtual_disk_t *r5Disk){
       maTable[i].first_byte = Ino.first_byte;
       maTable[i].size = Ino.size;
       maTable[i].nblock = Ino.nblock;
-      //
       r5Disk->inodes[i]=maTable[i];
     }
   }
@@ -321,7 +318,7 @@ void read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice){
   int depart = startTable(r5Disk), posread = 0, k;
   uchar *buffer = (uchar *)malloc(sizeof(char)*sizeof(inode_t));
   uchar *conversion = (uchar *)malloc(sizeof(char)*sizeof(int));
-  read_chunk(r5Disk, buffer, 44, depart+(indice*4));
+  read_chunk(r5Disk, buffer, INODE_SIZE*BLOCK_SIZE, depart+(indice*compute_nstripe(r5Disk, INODE_SIZE)));
   for(k = 0; k<FILENAME_MAX_SIZE; k++){
     Ino->filename[k] = buffer[k];
   }
@@ -382,7 +379,7 @@ void write_inode_table_i(virtual_disk_t *r5Disk, inode_t Ino, int indice){
   for (int i = 0; i < sizeof(int); i++) {
     buffer[poswrite+i] = conversion[i];
   }
-  write_chunk(r5Disk,buffer, 44, depart+(indice*4));
+  write_chunk(r5Disk,buffer, INODE_SIZE*BLOCK_SIZE, depart+(indice*compute_nstripe(r5Disk, INODE_SIZE)));
   free(buffer);
   free(conversion);
 }
@@ -420,11 +417,6 @@ void update_super_block(virtual_disk_t* r5Disk){
     sb.nb_blocks_used += table[i].nblock;
     i++;
   }
-  // if(i != 0){
-  //   r5Disk->number_of_files = i-1;
-  // }else{
-  //   r5Disk->number_of_files = i;
-  // }
   r5Disk->super_block.nb_blocks_used = sb.nb_blocks_used;
   sb.first_free_byte = r5Disk->super_block.first_free_byte = first_free_byte(r5Disk);
   write_super_block(r5Disk, sb);
@@ -437,32 +429,16 @@ void update_super_block(virtual_disk_t* r5Disk){
 * @return : void
 */
 void reinit_systeme(virtual_disk_t* r5Disk){
+  inode_t maTable[10];
+  read_inodes_table(r5Disk, maTable);
   stripe_t *bande = init_bande(r5Disk);
   for(int i = 0; i < r5Disk->ndisk; i++){
     for(int j = 0; j < BLOCK_SIZE; j++){
       bande->stripe[i].data[j] = 0;
     }
   }
-  for(int i = 0; i < 42; i++){
+  for(int i = 0; i < compute_nstripe(r5Disk,INODE_SIZE)*INODE_TABLE_SIZE+compute_nstripe(r5Disk, SUPER_BLOCK_SIZE-1); i++){
     write_stripe(r5Disk, bande, i);
   }
   delete_bande(&bande);
-}
-
-
-int couche3(int argc, char const *argv[]) {
-  //couche2();
-  virtual_disk_t *r5d=init_disk_raid5("./RAIDFILES");
-  super_block_t sb, sbd;
-
-
-
-  //add_inode(r5d,"test",48);
-  //delete_inode(r5d,0);
-  update_super_block(r5d);
-  read_super_block(r5d,&sbd);
-  affichageSysteme(r5d);
-  printf("LECTURE DU SUPER_BLOCK : \n type RAID : %d\n nbBlockUsed : %d\n first_free_byte : %d\n",sbd.raid_type, sbd.nb_blocks_used, sbd.first_free_byte);
-  turn_off_disk_raid5(r5d);
-  return 0;
 }

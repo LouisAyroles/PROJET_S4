@@ -25,39 +25,46 @@
    * @return int (1 si on a ecrit le fichier, 0 si plus de place ou echec)
  **/
 void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
-   inode_table_t inodes;
-   super_block_t sup;
-   read_inodes_table(r5Disk,(inode_t *) inodes);
-   int nbfiles = get_nb_files(r5Disk);
-   //Il n'y a plus de places dans le systeme
-   if (nbfiles==10) {
-     return;
-   }
-  //Est ce que le fichier est present dans le systeme?
-   while ( (nbfiles >= 0) && strcmp(inodes[nbfiles].filename,nomFichier) ) {
-     nbfiles--;
-   }
-   //Le fichier n'est pas present dans le systeme
-   if (nbfiles < 0) {
-     inode_t inode = init_inode(nomFichier, fichier.size, first_free_byte(r5Disk));
-     inodes[get_unused_inodes(r5Disk)]=inode;
-     write_chunk(r5Disk,fichier.data,fichier.size,inode.first_byte);
-    r5Disk->number_of_files+=1;
-    //Le fichier est present dans le systeme
-   }else{
-    //Le fichier passé en parametre est plus petit que le fichier présent
-    int start = inodes[nbfiles].first_byte;
-    if (inodes[nbfiles].size >= fichier.size){
-      write_chunk(r5Disk, fichier.data, fichier.size, inodes[nbfiles].first_byte);
-      inodes[nbfiles].size = fichier.size;
-    }else{
-      delete_file(r5Disk,nomFichier);
-      add_inode(r5Disk, nomFichier, fichier.size);
-      read_inodes_table(r5Disk,(inode_t *) inodes);
+  if(fichier.size < MAX_FILE_SIZE){
+     inode_table_t inodes;
+     super_block_t sup;
+     read_inodes_table(r5Disk,(inode_t *) inodes);
+     int nbfiles = get_nb_files(r5Disk);
+     //Il n'y a plus de places dans le systeme
+     if (nbfiles==10) {
+       return;
+     }
+    //Est ce que le fichier est present dans le systeme?
+     while ( (nbfiles >= 0) && strcmp(inodes[nbfiles].filename,nomFichier) ) {
+       nbfiles--;
+     }
+     //Le fichier n'est pas present dans le systeme
+     if (nbfiles < 0) {
+       inode_t inode = init_inode(nomFichier, fichier.size, first_free_byte(r5Disk));
+       inodes[get_unused_inodes(r5Disk)]=inode;
+       write_chunk(r5Disk,fichier.data,fichier.size,inode.first_byte);
+       r5Disk->number_of_files+=1;
+       write_inodes_table(r5Disk, inodes);
+      //Le fichier est present dans le systeme
+     }else{
+      //Le fichier passé en parametre est plus petit que le fichier présent
+      int start = inodes[nbfiles].first_byte;
+      if (inodes[nbfiles].size >= fichier.size){
+        write_chunk(r5Disk, fichier.data, fichier.size, inodes[nbfiles].first_byte);
+        inodes[nbfiles].size = fichier.size;
+      }else{
+        delete_file(r5Disk,nomFichier);
+        int ffb = first_free_byte(r5Disk);
+        add_inode(r5Disk, nomFichier, fichier.size);
+        write_chunk(r5Disk,fichier.data,fichier.size,ffb);
+        read_inodes_table(r5Disk,(inode_t *) inodes);
+      }
     }
+    update_super_block(r5Disk);
+    write_inodes_table(r5Disk, inodes);
+  } else{
+      printf("\033[31;49mFichier trop volumineux. \033[39;49m Taille maximale : %d.\n", MAX_FILE_SIZE);
   }
-  update_super_block(r5Disk);
-  write_inodes_table(r5Disk, inodes);
 }
 
 
@@ -134,17 +141,25 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
 void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
     FILE* fd;
     file_t fichier;
+    char buffer[MAX_FILE_SIZE];
     fd = fopen(nomFichier, "r");
     if (fd == NULL){
-      printf("Impossible d'ouvrir le fichier %s",nomFichier);
+      printf("\033[31;49mImpossible d'ouvrir le fichier %s\033[39;49m\n",nomFichier);
    }else{
      fseek(fd, 0, SEEK_END);
      fichier.size = ftell(fd);
      fseek(fd,0,SEEK_SET);
-     fread(fichier.data, fichier.size, 1, fd);
-     fclose(fd);
+     if(fichier.size < MAX_FILE_SIZE){
+       fread(fichier.data, fichier.size, 1, fd);
+       fclose(fd);
+       write_file(r5Disk,nomFichier,fichier);
+
+       update_super_block(r5Disk);
+     }else{
+       fclose(fd);
+       printf("\033[31;49mFichier trop volumineux. \033[39;49m Taille maximale : %d.\n", MAX_FILE_SIZE);
+     }
    }
-   write_file(r5Disk,nomFichier,fichier);
  }
 
  /** \brief
@@ -159,26 +174,12 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
    if ( read_file(r5Disk, nomFichier, &fichier) ) {
      fd = fopen(nomFichier,"w");
      if (fd == NULL) {
-       printf("Impossible de creer le fichier %s",nomFichier);
+       printf("\033[31;49mImpossible de creer le fichier %s.\033[39;49m",nomFichier);
      }else{
-       fwrite(fichier.data, fichier.size-1, 1, fd);
+       fwrite(fichier.data,1, fichier.size-1, fd);
+       fclose(fd);
      }
-  }
-}
-
-
-int main(int argc, char const *argv[]) {
-  //couche3();
-  virtual_disk_t *r5d=init_disk_raid5("./RAIDFILES");
-  file_t fichier,f2;
-  inode_t maTable[INODE_TABLE_SIZE];
-  reinit_systeme(r5d);
-  load_file_from_host(r5d,"Test.txt");
-  affichageSysteme(r5d);
-  read_inodes_table(r5d, maTable);
-  printf("INODE AJOUTEE : \n Filename : %s\t Size : %d\t Nblock :%d\t First_Byte : %d\n",maTable[0].filename,maTable[0].size,maTable[0].nblock, maTable[0].first_byte);
-  read_file(r5d,"Test.txt",&f2);
-  printf("LECTURE DU FICHIER :\nSize : %d\nContenu du fichier : %s\n",f2.size, f2.data);
-  turn_off_disk_raid5(r5d);
-  exit(0);
+   }else{
+     printf("\033[31;49mLe fichier %s n'est pas présent sur le systeme. \033[39;49m\n",nomFichier);
+   }
 }

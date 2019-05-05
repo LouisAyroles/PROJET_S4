@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-g -W -Wall -Werror -pedantic
 LDFLAGS=
-EXEC = couche4
+EXEC = couche5
 
 all: $(EXEC)
 
