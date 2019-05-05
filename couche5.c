@@ -144,15 +144,15 @@ int IsCommand(char commande[20]){
 
 int executerHELP(char arg[]){
   if (arg[0] == '\0') {
-    printf("\033[33;49m\tls [-l]\033[39;49m : liste le contenu du catalogue. Argument optionnel pour un affichage court ou long.\n");
-    printf("\033[33;49m\tcat <nom de fichier> \033[39;49m: affiche  l’ecran le contenu d’un fichier.\n");
-    printf("\033[33;49m\trm <nom de fichier> \033[39;49m: supprime un fichier du RAID\n");
-    printf("\033[33;49m\tcreate <nom de fichier> \033[39;49m: crée un nouveau fichier sur le RAID.\n");
-    printf("\033[33;49m\tedit <nom de fichier> \033[39;49m:  ́edite un fichier pour modifier son contenu.\n");
-    printf("\033[33;49m\tload <nom de fichier> \033[39;49m: copie le contenu d’un fichier du systeme ”hote” sur le RAID avec le meme nom.\n");
-    printf("\033[33;49m\tstore <nom  de  fichier> \033[39;49m: copie  le  contenu  d’un  fichier  du  systeme  RAID  sur  ”hote” avec  l'element.\n");
-    printf("\033[33;49m\tquit \033[39;49m: sort de l’interprete de commande et du programme\n");
-    printf("\033[33;49m\treset \033[39;49m: réinitialisation du systeme.\n");
+    printf("\033[33;49m\tls [-l]\033[39;49m : Liste le contenu du catalogue. Argument optionnel pour un affichage long.\n");
+    printf("\033[33;49m\tcat <nom de fichier> \033[39;49m: Affiche à l’ecran le contenu du fichier passé en argument.\n");
+    printf("\033[33;49m\trm <nom de fichier> \033[39;49m: Supprime le fichier passé en argumet du Systeme RAID.\n");
+    printf("\033[33;49m\tcreate <nom de fichier> \033[39;49m: Crée un nouveau fichier de nom l'argument sur le Systeme RAID.\n");
+    printf("\033[33;49m\tedit <nom de fichier> \033[39;49m:  ́Edite le fichier passé en argumet du Systeme RAID.\n");
+    printf("\033[33;49m\tload <nom de fichier> \033[39;49m: Copie le contenu du fichier dont le nom est passé en argumet du systeme ”hote” vers le systeme RAID.\n");
+    printf("\033[33;49m\tstore <nom  de  fichier> \033[39;49m: Copie le contenu du fichier dont le nom est passé en argumet du systeme RAID vers le systeme ”hote”.\n");
+    printf("\033[33;49m\tquit \033[39;49m: Quitte l’interprete de commande et met fin au programme.\n");
+    printf("\033[33;49m\treset \033[39;49m: Réinitialisation du systeme.\n");
     return 0;
   }else{
     printf("\033[31;49mCommande invalide. \033[39;49mUsage : help\n");
