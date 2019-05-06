@@ -436,7 +436,7 @@ void demo_repair(virtual_disk_t *r5,int idDisk){
 /** \brief
   * Repare le disque
   * @param : virtual_disk_t*, int
-  * @return int
+  * @return void
 **/
 void repair_disk(virtual_disk_t *r5,int idDisk){
   char cmd[100];cmd[0]='\0';
@@ -462,8 +462,8 @@ void repair_disk(virtual_disk_t *r5,int idDisk){
 
 /** \brief
   * Repare le disque
-  * @param : virtual_disk_t*, int
-  * @return int
+  * @param : virtual_disk_t*, int, int
+  * @return void
 **/
 void cmd_repair(const char *path,int idDisk, int nbDisque){
   virtual_disk_t *r5=init_disk_raid5(path, nbDisque);
@@ -490,7 +490,7 @@ void cmd_repair(const char *path,int idDisk, int nbDisque){
 
 /** \brief
   * Retourne -1 si tout les disques sont présents ou le numero du disque absent
-  * @param : virtual_disk_t*, int
+  * @param : virtual_disk_t*, char []
   * @return int
 **/
 int detect_missing_disk(virtual_disk_t *r5,char *repertoire){

@@ -20,5 +20,6 @@ void super_block_dump(super_block_t s);
 void update_super_block(virtual_disk_t* r5Disk);
 void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size);
 void reinit_systeme(virtual_disk_t* r5Disk);
+int startTable(virtual_disk_t *r5Disk);
 
 #endif

@@ -126,6 +126,7 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
    /*Le fichier est present sur le systeme*/
    }else{
      delete_inode(r5Disk,nbfiles);
+     defragmentation(r5Disk);
    }
    update_super_block(r5Disk);
    r5Disk->number_of_files-=1;
@@ -182,4 +183,28 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
    }else{
      printf("\033[31;49mLe fichier %s n'est pas présent sur le systeme. \033[39;49m\n",nomFichier);
    }
+}
+/** \brief
+  * Defragmente le systeme
+  * @param : virtual_disk_t
+  * @param : virtual_disk_t*
+  * @return void
+**/
+void defragmentation(virtual_disk_t* r5Disk){
+  inode_t maTable[10];
+  file_t fichier;
+  int departTable = startTable(r5Disk);
+  int departFichier = departTable +(INODE_TABLE_SIZE*compute_nstripe(r5Disk, INODE_SIZE));
+  read_inodes_table(r5Disk,maTable);
+  for (int i = 0; i < INODE_TABLE_SIZE; i++) {
+    if (maTable[i].first_byte !=0) {
+      if (maTable[i].first_byte != departFichier ) {
+        read_file(r5Disk, maTable[i].filename, &fichier);
+        write_chunk(r5Disk, fichier.data, fichier.size, departFichier);
+        maTable[i].first_byte = r5Disk->inodes[i].first_byte = departFichier;
+      }
+      departFichier += compute_nstripe(r5Disk,maTable[i].nblock);
+    }
+  }
+  write_inodes_table(r5Disk, maTable);
 }
