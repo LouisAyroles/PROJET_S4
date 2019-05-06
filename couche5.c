@@ -181,9 +181,9 @@ int executerLS(virtual_disk_t* r5Disk, char option[]){
   }else if (option[0] == '-' && option[1] == 'l') {
     for (int i = 0; i < get_nb_files(r5Disk); i++) {
       if (maTable[i].size == 0) {
-        printf("\033[34;49m%-20s\033[39;49m\t %-5d octets\t\t %-5d blocks\t\t  *eme Bande \n",maTable[i].filename, maTable[i].size, maTable[i].nblock);
+        printf("\033[34;49m%-32s\033[39;49m\t %-5d octets\t\t %-5d blocks\t\t  *eme Bande \n",maTable[i].filename, maTable[i].size, maTable[i].nblock);
       }else{
-        printf("\033[34;49m%-20s\033[39;49m\t %-5d octets\t\t %-5d blocks\t\t %deme Bande\n",maTable[i].filename, maTable[i].size, maTable[i].nblock, maTable[i].first_byte);
+        printf("\033[34;49m%-32s\033[39;49m\t %-5d octets\t\t %-5d blocks\t\t %deme Bande\n",maTable[i].filename, maTable[i].size, maTable[i].nblock, maTable[i].first_byte);
       }
     }
     return 0;

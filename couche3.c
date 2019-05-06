@@ -204,6 +204,7 @@ void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size){
 inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start){
   inode_t result;
   int i = 0;
+  //int taille = strlen(nomFichier);
   for (int i = 0; i < FILENAME_MAX_SIZE; i++) {
     result.filename[i] = 0;
   }
@@ -211,7 +212,7 @@ inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start){
     result.filename[i] = nomFichier[i];
     i++;
   }
-  result.filename[i] = '\0';
+  //result.filename[i] = '\0';
   result.size = taille;
   result.nblock = compute_nblock(result.size);
   result.first_byte = start;
