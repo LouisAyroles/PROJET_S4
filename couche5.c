@@ -210,7 +210,6 @@ int executerCAT(virtual_disk_t* r5Disk, char argument[]){
   }else{
     //Le fichier n'est pas dans le systeme
     if (!read_file(r5Disk, argument, &fichier)) {
-      printf("\033[31;49mLe fichier %s n'est pas présent sur le systeme.\033[39;49m\n", argument);
       return -1;
     //Le fichier est présent
     }else{
