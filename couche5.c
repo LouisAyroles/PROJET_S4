@@ -214,7 +214,7 @@ int executerCAT(virtual_disk_t* r5Disk, char argument[]){
       return -1;
     //Le fichier est présent
     }else{
-      printf("%s",fichier.data);
+      printf("%s\n",fichier.data);
       return 0;
     }
   }
