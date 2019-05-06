@@ -171,7 +171,7 @@ int executerLS(virtual_disk_t* r5Disk, char option[]){
   //On execute LS
   if (option[0] == '\0'){
     for (int i = 0; i < get_nb_files(r5Disk); i++) {
-      printf("%s\t",maTable[i].filename);
+      printf("%s     ",maTable[i].filename);
       if (i == get_nb_files(r5Disk)-1) {
         printf("\n");
       }

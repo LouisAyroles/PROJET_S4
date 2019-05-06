@@ -146,14 +146,14 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
     FILE* fd;
     file_t fichier;
     char buffer[MAX_FILE_SIZE];
-    fd = fopen(nomFichier, "r");
     if(strlen(nomFichier)>FILENAME_MAX_SIZE){
-      fclose(fd);
       printf("\033[31;49mNom de fichier trop long. \033[39;49m Taille maximale : %d.\n", FILENAME_MAX_SIZE);
+      return;
     }
+    fd = fopen(nomFichier, "r");
     if (fd == NULL){
       printf("\033[31;49mImpossible d'ouvrir le fichier %s\033[39;49m\n",nomFichier);
-   }else{
+    }else{
      fseek(fd, 0, SEEK_END);
      fichier.size = ftell(fd);
      fseek(fd,0,SEEK_SET);
