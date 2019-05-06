@@ -413,7 +413,7 @@ void update_super_block(virtual_disk_t* r5Disk){
   sb.raid_type = r5Disk->super_block.raid_type =  r5Disk->raidmode;
   sb.nb_blocks_used = r5Disk->super_block.nb_blocks_used =  0;
   read_inodes_table(r5Disk,table);
-  while (table[i].first_byte != 0 && i < INODE_TABLE_SIZE) {
+  while (i < INODE_TABLE_SIZE && table[i].first_byte != 0) {
     sb.nb_blocks_used += table[i].nblock;
     i++;
   }
