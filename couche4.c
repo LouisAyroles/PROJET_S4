@@ -89,7 +89,6 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
    /*Le fichier n'est pas present sur le systeme*/
    if (nbfiles < 0) {
      free(buffer);
-     printf("\033[31;49mLe fichier %s n'est pas present dans le Systeme.\033[39;49m\n",nomFichier);
      return 0;
 
    /*Le fichier est present sur le systeme*/

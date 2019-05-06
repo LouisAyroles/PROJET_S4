@@ -186,6 +186,12 @@ int get_unused_inodes(virtual_disk_t *r5d){
 void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size){
   inode_t maTable[10];
   read_inodes_table(r5Disk,maTable);
+  for (int i = 0; i < get_nb_files(r5Disk); i++) {
+    if (!strcmp(nomFICHIER, maTable[i].filename)) {
+      fprintf(stderr, "\033[31;49mLe fichier %s est déjà dans le Syeteme.\033[39;49m\n", nomFICHIER);
+      return;
+    }
+  }
   if(get_nb_files(r5Disk) < INODE_TABLE_SIZE){
     inode_t in = init_inode(nomFICHIER,size, first_free_byte(r5Disk));
     maTable[get_unused_inodes(r5Disk)] = in;
@@ -204,7 +210,6 @@ void add_inode(virtual_disk_t *r5Disk, char nomFICHIER[50], int size){
 inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start){
   inode_t result;
   int i = 0;
-  //int taille = strlen(nomFichier);
   for (int i = 0; i < FILENAME_MAX_SIZE; i++) {
     result.filename[i] = 0;
   }
@@ -212,7 +217,7 @@ inode_t init_inode(char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start){
     result.filename[i] = nomFichier[i];
     i++;
   }
-  //result.filename[i] = '\0';
+  result.filename[i] = '\0';
   result.size = taille;
   result.nblock = compute_nblock(result.size);
   result.first_byte = start;
