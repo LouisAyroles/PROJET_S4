@@ -420,7 +420,6 @@ void update_super_block(virtual_disk_t* r5Disk){
   r5Disk->super_block.nb_blocks_used = sb.nb_blocks_used;
   sb.first_free_byte = r5Disk->super_block.first_free_byte = first_free_byte(r5Disk);
   write_super_block(r5Disk, sb);
-
 }
 
 /*brief

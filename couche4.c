@@ -32,6 +32,7 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
      int nbfiles = get_nb_files(r5Disk);
      //Il n'y a plus de places dans le systeme
      if (nbfiles==10) {
+       printf("\033[31;49mLe systeme est plein.\033[39;49m\n");
        return;
      }
     //Est ce que le fichier est present dans le systeme?
@@ -88,6 +89,7 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
    /*Le fichier n'est pas present sur le systeme*/
    if (nbfiles < 0) {
      free(buffer);
+    printf("\033[31;49mLe fichier %s n'est pas present dans le Systeme.\033[39;49m\n",nomFichier);
      return 0;
 
    /*Le fichier est present sur le systeme*/
@@ -122,6 +124,7 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
    }
    /*Le fichier n'est pas present sur le systeme*/
    if (nbfiles < 0) {
+     printf("\033[31;49mLe fichier %s n'est pas present dans le Systeme.\033[39;49m\n",nomFichier);
      return 0;
    /*Le fichier est present sur le systeme*/
    }else{
@@ -154,7 +157,6 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
        fread(fichier.data, fichier.size, 1, fd);
        fclose(fd);
        write_file(r5Disk,nomFichier,fichier);
-
        update_super_block(r5Disk);
      }else{
        fclose(fd);
