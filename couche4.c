@@ -89,7 +89,7 @@ void write_file(virtual_disk_t *r5Disk, char *nomFichier, file_t fichier){
    /*Le fichier n'est pas present sur le systeme*/
    if (nbfiles < 0) {
      free(buffer);
-    printf("\033[31;49mLe fichier %s n'est pas present dans le Systeme.\033[39;49m\n",nomFichier);
+     printf("\033[31;49mLe fichier %s n'est pas present dans le Systeme.\033[39;49m\n",nomFichier);
      return 0;
 
    /*Le fichier est present sur le systeme*/
@@ -147,6 +147,10 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
     file_t fichier;
     char buffer[MAX_FILE_SIZE];
     fd = fopen(nomFichier, "r");
+    if(strlen(nomFichier)>FILENAME_MAX_SIZE){
+      fclose(fd);
+      printf("\033[31;49mNom de fichier trop long. \033[39;49m Taille maximale : %d.\n", FILENAME_MAX_SIZE);
+    }
     if (fd == NULL){
       printf("\033[31;49mImpossible d'ouvrir le fichier %s\033[39;49m\n",nomFichier);
    }else{
@@ -179,16 +183,13 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
      if (fd == NULL) {
        printf("\033[31;49mImpossible de creer le fichier %s.\033[39;49m",nomFichier);
      }else{
-       fwrite(fichier.data,1, fichier.size-1, fd);
+       fwrite(fichier.data,1, fichier.size, fd);
        fclose(fd);
      }
-   }else{
-     printf("\033[31;49mLe fichier %s n'est pas présent sur le systeme. \033[39;49m\n",nomFichier);
    }
 }
 /** \brief
   * Defragmente le systeme
-  * @param : virtual_disk_t
   * @param : virtual_disk_t*
   * @return void
 **/
