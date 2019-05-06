@@ -182,7 +182,7 @@ void load_file_from_host(virtual_disk_t *r5Disk, char *nomFichier){
      if (fd == NULL) {
        printf("\033[31;49mImpossible de creer le fichier %s.\033[39;49m",nomFichier);
      }else{
-       fwrite(fichier.data,1, fichier.size, fd);
+       fwrite(fichier.data,1, fichier.size-1, fd);
        fclose(fd);
      }
    }
