@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Systeme RAID: couche2.c File Reference</title>
+<title>Projet_S4_Groupe_14: couche2.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Systeme RAID
+   <div id="projectname">Projet_S4_Groupe_14
    </div>
   </td>
  </tr>
@@ -68,8 +68,8 @@ $(function() {
 
 <p>Programme couche2 du raid5.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;couche1.h&quot;</code><br />
-<code>#include &quot;couche2.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="couche1_8h_source.html">couche1.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="couche2_8h_source.html">couche2.h</a>&quot;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -77,63 +77,62 @@ Include dependency graph for couche2.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="couche2_8c__incl.png" border="0" usemap="#couche2_8c" alt=""/></div>
 <map name="couche2_8c" id="couche2_8c">
-<area shape="rect" id="node2" href="couche1_8h_source.html" title="couche1.h" alt="" coords="15,155,98,181"/>
-<area shape="rect" id="node5" href="couche2_8h_source.html" title="couche2.h" alt="" coords="55,80,138,107"/>
-<area shape="rect" id="node3" href="raid__defines_8h_source.html" title="raid_defines.h" alt="" coords="5,229,108,256"/>
+<area shape="rect" id="node2" href="couche1_8h.html" title="couche1.h" alt="" coords="15,155,98,181"/>
+<area shape="rect" id="node5" href="couche2_8h.html" title="couche2.h" alt="" coords="55,80,138,107"/>
+<area shape="rect" id="node3" href="raid__defines_8h.html" title="raid_defines.h" alt="" coords="5,229,108,256"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aabcb2d6536b6c0ab41f99493c911489b"><td class="memItemLeft" align="right" valign="top"><a id="aabcb2d6536b6c0ab41f99493c911489b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>couleur</b>(param)&#160;&#160;&#160;printf(&quot;\033[%sm&quot;,param)</td></tr>
+<tr class="memitem:aabcb2d6536b6c0ab41f99493c911489b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#aabcb2d6536b6c0ab41f99493c911489b">couleur</a>(param)&#160;&#160;&#160;<a class="el" href="trash_8c.html#a8dcc74170a0162689f11bc2fc68e9c6d">printf</a>(&quot;\033[%sm&quot;,param)</td></tr>
 <tr class="separator:aabcb2d6536b6c0ab41f99493c911489b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3e5eab04f9ea03705105756c7b8c0782"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a3e5eab04f9ea03705105756c7b8c0782">compute_nstripe</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, int nblocks)</td></tr>
+<tr class="memitem:a3e5eab04f9ea03705105756c7b8c0782"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a3e5eab04f9ea03705105756c7b8c0782">compute_nstripe</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, int nblocks)</td></tr>
 <tr class="memdesc:a3e5eab04f9ea03705105756c7b8c0782"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le nombre de bandes necessaires pour écrire n blocs.  <a href="#a3e5eab04f9ea03705105756c7b8c0782">More...</a><br /></td></tr>
 <tr class="separator:a3e5eab04f9ea03705105756c7b8c0782"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e6de3169d502aae6d8117e1e6ab03a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structblock__s.html">block_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a9e6de3169d502aae6d8117e1e6ab03a0">compute_parity</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5, <a class="el" href="structstripe__s.html">stripe_t</a> *tocompute, int indice_parite)</td></tr>
+<tr class="memitem:a9e6de3169d502aae6d8117e1e6ab03a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="raid__defines_8h.html#a9497df9c1d65b018066a9760da7be4e6">block_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a9e6de3169d502aae6d8117e1e6ab03a0">compute_parity</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5, <a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *tocompute, int indice_parite)</td></tr>
 <tr class="memdesc:a9e6de3169d502aae6d8117e1e6ab03a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcule le bloc de parité d'une stripe.  <a href="#a9e6de3169d502aae6d8117e1e6ab03a0">More...</a><br /></td></tr>
 <tr class="separator:a9e6de3169d502aae6d8117e1e6ab03a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70860f329dcd21100a6648089f864ed0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a70860f329dcd21100a6648089f864ed0">compute_parity_index</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5, int numbd)</td></tr>
+<tr class="memitem:a70860f329dcd21100a6648089f864ed0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a70860f329dcd21100a6648089f864ed0">compute_parity_index</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5, int numbd)</td></tr>
 <tr class="memdesc:a70860f329dcd21100a6648089f864ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcule la position du block de parité d'une stripe.  <a href="#a70860f329dcd21100a6648089f864ed0">More...</a><br /></td></tr>
 <tr class="separator:a70860f329dcd21100a6648089f864ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5033c8eea4a4da6a76284e361f13240d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a5033c8eea4a4da6a76284e361f13240d">write_stripe</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5, <a class="el" href="structstripe__s.html">stripe_t</a> *ecrire, uint pos)</td></tr>
+<tr class="memitem:a5033c8eea4a4da6a76284e361f13240d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a5033c8eea4a4da6a76284e361f13240d">write_stripe</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5, <a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *ecrire, <a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> pos)</td></tr>
 <tr class="memdesc:a5033c8eea4a4da6a76284e361f13240d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecrit une stripe a la position passée en argument sur le raid passé en argument.  <a href="#a5033c8eea4a4da6a76284e361f13240d">More...</a><br /></td></tr>
 <tr class="separator:a5033c8eea4a4da6a76284e361f13240d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6170c9cc6975d296a0bccfea207d415"><td class="memItemLeft" align="right" valign="top"><a id="ab6170c9cc6975d296a0bccfea207d415"></a>
-<a class="el" href="structstripe__s.html">stripe_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>init_bande</b> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5)</td></tr>
+<tr class="memitem:ab6170c9cc6975d296a0bccfea207d415"><td class="memItemLeft" align="right" valign="top"><a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#ab6170c9cc6975d296a0bccfea207d415">init_bande</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5)</td></tr>
+<tr class="memdesc:ab6170c9cc6975d296a0bccfea207d415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init une bande.  <a href="#ab6170c9cc6975d296a0bccfea207d415">More...</a><br /></td></tr>
 <tr class="separator:ab6170c9cc6975d296a0bccfea207d415"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf66b9197c93775a6c1dba723ba92a07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#adf66b9197c93775a6c1dba723ba92a07">delete_bande</a> (<a class="el" href="structstripe__s.html">stripe_t</a> **bande)</td></tr>
+<tr class="memitem:adf66b9197c93775a6c1dba723ba92a07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#adf66b9197c93775a6c1dba723ba92a07">delete_bande</a> (<a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> **<a class="el" href="trash_8c.html#a2f0ad248e40fbc2ac11627064b283d42">bande</a>)</td></tr>
 <tr class="memdesc:adf66b9197c93775a6c1dba723ba92a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libere la mémoir réservée par une bande.  <a href="#adf66b9197c93775a6c1dba723ba92a07">More...</a><br /></td></tr>
 <tr class="separator:adf66b9197c93775a6c1dba723ba92a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fa67e5d44f8746a06cc56ef2876c45e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a2fa67e5d44f8746a06cc56ef2876c45e">print_stripe</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5, <a class="el" href="structstripe__s.html">stripe_t</a> *stripe)</td></tr>
+<tr class="memitem:a2fa67e5d44f8746a06cc56ef2876c45e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a2fa67e5d44f8746a06cc56ef2876c45e">print_stripe</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5, <a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *stripe)</td></tr>
 <tr class="memdesc:a2fa67e5d44f8746a06cc56ef2876c45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une bande.  <a href="#a2fa67e5d44f8746a06cc56ef2876c45e">More...</a><br /></td></tr>
 <tr class="separator:a2fa67e5d44f8746a06cc56ef2876c45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91e00ed4789101422ed3365646a1ac27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a91e00ed4789101422ed3365646a1ac27">affichageSysteme</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *RAID5)</td></tr>
+<tr class="memitem:a91e00ed4789101422ed3365646a1ac27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a91e00ed4789101422ed3365646a1ac27">affichageSysteme</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *RAID5)</td></tr>
 <tr class="memdesc:a91e00ed4789101422ed3365646a1ac27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage du syteme par Bande.  <a href="#a91e00ed4789101422ed3365646a1ac27">More...</a><br /></td></tr>
 <tr class="separator:a91e00ed4789101422ed3365646a1ac27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33da6bd1430115bbdaa57d27c38bc3aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a33da6bd1430115bbdaa57d27c38bc3aa">write_chunk</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5, char *buffer, int n, uint startBande)</td></tr>
+<tr class="memitem:a33da6bd1430115bbdaa57d27c38bc3aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a33da6bd1430115bbdaa57d27c38bc3aa">write_chunk</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5, char *<a class="el" href="trash_8c.html#aa7d73eb661843d3a4eeb35aeffd417b4">buffer</a>, int n, <a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> startBande)</td></tr>
 <tr class="memdesc:a33da6bd1430115bbdaa57d27c38bc3aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecrit n bytes du buffer a partir de StartBandes le raid passé en argument.  <a href="#a33da6bd1430115bbdaa57d27c38bc3aa">More...</a><br /></td></tr>
 <tr class="separator:a33da6bd1430115bbdaa57d27c38bc3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a817fcbf1f2ef3c3a73c3aaae4caf1527"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a817fcbf1f2ef3c3a73c3aaae4caf1527">dump_stripe</a> (<a class="el" href="structstripe__s.html">stripe_t</a> bande)</td></tr>
+<tr class="memitem:a817fcbf1f2ef3c3a73c3aaae4caf1527"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a817fcbf1f2ef3c3a73c3aaae4caf1527">dump_stripe</a> (<a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> <a class="el" href="trash_8c.html#a2f0ad248e40fbc2ac11627064b283d42">bande</a>)</td></tr>
 <tr class="memdesc:a817fcbf1f2ef3c3a73c3aaae4caf1527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une bande.  <a href="#a817fcbf1f2ef3c3a73c3aaae4caf1527">More...</a><br /></td></tr>
 <tr class="separator:a817fcbf1f2ef3c3a73c3aaae4caf1527"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea9498cb46077bb21181922c96e8329f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#aea9498cb46077bb21181922c96e8329f">read_stripe</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5, <a class="el" href="structstripe__s.html">stripe_t</a> *lire, uint pos)</td></tr>
+<tr class="memitem:aea9498cb46077bb21181922c96e8329f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#aea9498cb46077bb21181922c96e8329f">read_stripe</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5, <a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *lire, <a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> pos)</td></tr>
 <tr class="memdesc:aea9498cb46077bb21181922c96e8329f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lis une bande a partir de la position passée en parametre.  <a href="#aea9498cb46077bb21181922c96e8329f">More...</a><br /></td></tr>
 <tr class="separator:aea9498cb46077bb21181922c96e8329f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1365b1597af91528776b50b5bc418a08"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a1365b1597af91528776b50b5bc418a08">compute_num_bande</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5, int nbloc)</td></tr>
+<tr class="memitem:a1365b1597af91528776b50b5bc418a08"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a1365b1597af91528776b50b5bc418a08">compute_num_bande</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5, int nbloc)</td></tr>
 <tr class="memdesc:a1365b1597af91528776b50b5bc418a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction retournant le num de la bande actuelle.  <a href="#a1365b1597af91528776b50b5bc418a08">More...</a><br /></td></tr>
 <tr class="separator:a1365b1597af91528776b50b5bc418a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12cdd8a706982ca1babe7cfffea4b14f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a12cdd8a706982ca1babe7cfffea4b14f">read_chunk</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5, char *buffer, int n, uint startBande)</td></tr>
+<tr class="memitem:a12cdd8a706982ca1babe7cfffea4b14f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a12cdd8a706982ca1babe7cfffea4b14f">read_chunk</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5, char *<a class="el" href="trash_8c.html#aa7d73eb661843d3a4eeb35aeffd417b4">buffer</a>, int n, <a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> startBande)</td></tr>
 <tr class="memdesc:a12cdd8a706982ca1babe7cfffea4b14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit n bytes a partir de StartBandes sur le raid passé en argument et les renvoie dans le buffer.  <a href="#a12cdd8a706982ca1babe7cfffea4b14f">More...</a><br /></td></tr>
 <tr class="separator:a12cdd8a706982ca1babe7cfffea4b14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc2b7fd9807ede9a34e0d2bea6e9521c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#abc2b7fd9807ede9a34e0d2bea6e9521c">cmd_test1</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5)</td></tr>
+<tr class="memitem:abc2b7fd9807ede9a34e0d2bea6e9521c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#abc2b7fd9807ede9a34e0d2bea6e9521c">cmd_test1</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5)</td></tr>
 <tr class="memdesc:abc2b7fd9807ede9a34e0d2bea6e9521c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction de test pour write_chunk  <a href="#abc2b7fd9807ede9a34e0d2bea6e9521c">More...</a><br /></td></tr>
 <tr class="separator:abc2b7fd9807ede9a34e0d2bea6e9521c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c76b4c3607585f36f7e7653fb96d633"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a2c76b4c3607585f36f7e7653fb96d633">cmd_test2</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5)</td></tr>
+<tr class="memitem:a2c76b4c3607585f36f7e7653fb96d633"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche2_8c.html#a2c76b4c3607585f36f7e7653fb96d633">cmd_test2</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5)</td></tr>
 <tr class="memdesc:a2c76b4c3607585f36f7e7653fb96d633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de test pour read_chunk.  <a href="#a2c76b4c3607585f36f7e7653fb96d633">More...</a><br /></td></tr>
 <tr class="separator:a2c76b4c3607585f36f7e7653fb96d633"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -143,7 +142,26 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>24 fevrier 2019</dd></dl>
 <p>Programme de la couche 2 du raid5. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aabcb2d6536b6c0ab41f99493c911489b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabcb2d6536b6c0ab41f99493c911489b">&#9670;&nbsp;</a></span>couleur</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define couleur</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">param</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="trash_8c.html#a8dcc74170a0162689f11bc2fc68e9c6d">printf</a>(&quot;\033[%sm&quot;,param)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a91e00ed4789101422ed3365646a1ac27"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91e00ed4789101422ed3365646a1ac27">&#9670;&nbsp;</a></span>affichageSysteme()</h2>
 
@@ -153,7 +171,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void affichageSysteme </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>RAID5</em></td><td>)</td>
           <td></td>
         </tr>
@@ -168,7 +186,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<p>read_stripe(RAID5,stripe,i) </p>
 
 </div>
 </div>
@@ -181,7 +198,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cmd_test1 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em></td><td>)</td>
           <td></td>
         </tr>
@@ -207,7 +224,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void cmd_test2 </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em></td><td>)</td>
           <td></td>
         </tr>
@@ -234,7 +251,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int compute_nstripe </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
@@ -271,7 +288,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int compute_num_bande </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em>, </td>
         </tr>
         <tr>
@@ -307,15 +324,15 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structblock__s.html">block_t</a> compute_parity </td>
+          <td class="memname"><a class="el" href="raid__defines_8h.html#a9497df9c1d65b018066a9760da7be4e6">block_t</a> compute_parity </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structstripe__s.html">stripe_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *&#160;</td>
           <td class="paramname"><em>tocompute</em>, </td>
         </tr>
         <tr>
@@ -352,7 +369,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int compute_parity_index </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em>, </td>
         </tr>
         <tr>
@@ -389,7 +406,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void delete_bande </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structstripe__s.html">stripe_t</a> **&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> **&#160;</td>
           <td class="paramname"><em>bande</em></td><td>)</td>
           <td></td>
         </tr>
@@ -416,7 +433,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void dump_stripe </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structstripe__s.html">stripe_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a>&#160;</td>
           <td class="paramname"><em>bande</em></td><td>)</td>
           <td></td>
         </tr>
@@ -434,6 +451,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ab6170c9cc6975d296a0bccfea207d415"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6170c9cc6975d296a0bccfea207d415">&#9670;&nbsp;</a></span>init_bande()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a>* init_bande </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
+          <td class="paramname"><em>r5</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Init une bande. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"></td><td>virtual_disk_t* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>stripe_t* </dd></dl>
+
+</div>
+</div>
 <a id="a2fa67e5d44f8746a06cc56ef2876c45e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2fa67e5d44f8746a06cc56ef2876c45e">&#9670;&nbsp;</a></span>print_stripe()</h2>
 
@@ -443,13 +487,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void print_stripe </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structstripe__s.html">stripe_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *&#160;</td>
           <td class="paramname"><em>stripe</em>&#160;</td>
         </tr>
         <tr>
@@ -480,7 +524,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void read_chunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em>, </td>
         </tr>
         <tr>
@@ -498,7 +542,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td>
           <td class="paramname"><em>startBande</em>&#160;</td>
         </tr>
         <tr>
@@ -529,19 +573,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int read_stripe </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structstripe__s.html">stripe_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *&#160;</td>
           <td class="paramname"><em>lire</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td>
           <td class="paramname"><em>pos</em>&#160;</td>
         </tr>
         <tr>
@@ -572,7 +616,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void write_chunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em>, </td>
         </tr>
         <tr>
@@ -590,7 +634,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td>
           <td class="paramname"><em>startBande</em>&#160;</td>
         </tr>
         <tr>
@@ -621,19 +665,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void write_stripe </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structstripe__s.html">stripe_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#acfaa25ade17f36b058f738bded61819a">stripe_t</a> *&#160;</td>
           <td class="paramname"><em>ecrire</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td>
           <td class="paramname"><em>pos</em>&#160;</td>
         </tr>
         <tr>

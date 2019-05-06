@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['print_5fstripe',['print_stripe',['../couche2_8c.html#a2fa67e5d44f8746a06cc56ef2876c45e',1,'couche2.c']]]
+  ['octetstohexa',['octetsToHexa',['../couche1_8c.html#a1fc20a5afdea4eec626e52a499ff46cd',1,'octetsToHexa(block_t monBloc, char *nbHexa):&#160;couche1.c'],['../couche1_8h.html#a1fc20a5afdea4eec626e52a499ff46cd',1,'octetsToHexa(block_t monBloc, char *nbHexa):&#160;couche1.c']]]
 ];

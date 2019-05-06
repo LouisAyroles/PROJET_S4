@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Systeme RAID: couche3.c File Reference</title>
+<title>Projet_S4_Groupe_14: couche3.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Systeme RAID
+   <div id="projectname">Projet_S4_Groupe_14
    </div>
   </td>
  </tr>
@@ -67,8 +67,8 @@ $(function() {
 
 <p>Programme couche3 du raid5.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;couche3.h&quot;</code><br />
-<code>#include &quot;couche2.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="couche3_8h_source.html">couche3.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="couche2_8h_source.html">couche2.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
@@ -78,76 +78,73 @@ Include dependency graph for couche3.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="couche3_8c__incl.png" border="0" usemap="#couche3_8c" alt=""/></div>
 <map name="couche3_8c" id="couche3_8c">
-<area shape="rect" id="node2" href="couche3_8h_source.html" title="couche3.h" alt="" coords="5,80,88,107"/>
-<area shape="rect" id="node3" href="couche2_8h_source.html" title="couche2.h" alt="" coords="45,155,128,181"/>
-<area shape="rect" id="node4" href="couche1_8h_source.html" title="couche1.h" alt="" coords="45,229,128,256"/>
-<area shape="rect" id="node5" href="raid__defines_8h_source.html" title="raid_defines.h" alt="" coords="35,304,138,331"/>
+<area shape="rect" id="node2" href="couche3_8h.html" title="couche3.h" alt="" coords="5,80,88,107"/>
+<area shape="rect" id="node3" href="couche2_8h.html" title="couche2.h" alt="" coords="45,155,128,181"/>
+<area shape="rect" id="node4" href="couche1_8h.html" title="couche1.h" alt="" coords="45,229,128,256"/>
+<area shape="rect" id="node5" href="raid__defines_8h.html" title="raid_defines.h" alt="" coords="35,304,138,331"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5b8c4e2ec5f62c08b886d80e88366343"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a5b8c4e2ec5f62c08b886d80e88366343">inode_table_dump</a> (inode_table_t t)</td></tr>
+<tr class="memitem:a5b8c4e2ec5f62c08b886d80e88366343"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a5b8c4e2ec5f62c08b886d80e88366343">inode_table_dump</a> (<a class="el" href="raid__defines_8h.html#a5521b19dad3852291fc7d603382e6b99">inode_table_t</a> t)</td></tr>
 <tr class="memdesc:a5b8c4e2ec5f62c08b886d80e88366343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affichage de la table d'inodes.  <a href="#a5b8c4e2ec5f62c08b886d80e88366343">More...</a><br /></td></tr>
 <tr class="separator:a5b8c4e2ec5f62c08b886d80e88366343"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af908b4dfe5777d85200fbd17b68aa2c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#af908b4dfe5777d85200fbd17b68aa2c6">inode_dump</a> (<a class="el" href="structinode__s.html">inode_t</a> i)</td></tr>
+<tr class="memitem:af908b4dfe5777d85200fbd17b68aa2c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#af908b4dfe5777d85200fbd17b68aa2c6">inode_dump</a> (<a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a> i)</td></tr>
 <tr class="memdesc:af908b4dfe5777d85200fbd17b68aa2c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affichage d'une inode.  <a href="#af908b4dfe5777d85200fbd17b68aa2c6">More...</a><br /></td></tr>
 <tr class="separator:af908b4dfe5777d85200fbd17b68aa2c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74071b6e9c4a784aae76c60b5104423b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a74071b6e9c4a784aae76c60b5104423b">super_block_dump</a> (<a class="el" href="structsuper__block__s.html">super_block_t</a> s)</td></tr>
+<tr class="memitem:a74071b6e9c4a784aae76c60b5104423b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a74071b6e9c4a784aae76c60b5104423b">super_block_dump</a> (<a class="el" href="raid__defines_8h.html#a5b2244b463782d93e6dfc058790cb9eb">super_block_t</a> s)</td></tr>
 <tr class="memdesc:a74071b6e9c4a784aae76c60b5104423b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affichage d'un superblock.  <a href="#a74071b6e9c4a784aae76c60b5104423b">More...</a><br /></td></tr>
 <tr class="separator:a74071b6e9c4a784aae76c60b5104423b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac498bdd70c93b6dbc629577e5535116f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#ac498bdd70c93b6dbc629577e5535116f">int_To_uChar</a> (int nb, uchar *buffer)</td></tr>
+<tr class="memitem:ac498bdd70c93b6dbc629577e5535116f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#ac498bdd70c93b6dbc629577e5535116f">int_To_uChar</a> (int nb, <a class="el" href="raid__defines_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *<a class="el" href="trash_8c.html#aa7d73eb661843d3a4eeb35aeffd417b4">buffer</a>)</td></tr>
 <tr class="memdesc:ac498bdd70c93b6dbc629577e5535116f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforme un entier en un tableau de 4 char.  <a href="#ac498bdd70c93b6dbc629577e5535116f">More...</a><br /></td></tr>
 <tr class="separator:ac498bdd70c93b6dbc629577e5535116f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade177b1b3a72be4dbb549846272704c6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#ade177b1b3a72be4dbb549846272704c6">uChar_To_Int</a> (uchar *buf)</td></tr>
+<tr class="memitem:ade177b1b3a72be4dbb549846272704c6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#ade177b1b3a72be4dbb549846272704c6">uChar_To_Int</a> (<a class="el" href="raid__defines_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *buf)</td></tr>
 <tr class="memdesc:ade177b1b3a72be4dbb549846272704c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforme un tableau de sz char en un int.  <a href="#ade177b1b3a72be4dbb549846272704c6">More...</a><br /></td></tr>
 <tr class="separator:ade177b1b3a72be4dbb549846272704c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc9106e9d8b45ee55688050cf9e7e061"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#afc9106e9d8b45ee55688050cf9e7e061">startTable</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk)</td></tr>
+<tr class="memitem:afc9106e9d8b45ee55688050cf9e7e061"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#afc9106e9d8b45ee55688050cf9e7e061">startTable</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk)</td></tr>
 <tr class="memdesc:afc9106e9d8b45ee55688050cf9e7e061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie le numero de bande ou la table d'inode commence.  <a href="#afc9106e9d8b45ee55688050cf9e7e061">More...</a><br /></td></tr>
 <tr class="separator:afc9106e9d8b45ee55688050cf9e7e061"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a846a550008b03ec52ba64c30d614d08b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a846a550008b03ec52ba64c30d614d08b">read_super_block</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, <a class="el" href="structsuper__block__s.html">super_block_t</a> *superblock)</td></tr>
+<tr class="memitem:a846a550008b03ec52ba64c30d614d08b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a846a550008b03ec52ba64c30d614d08b">read_super_block</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, <a class="el" href="raid__defines_8h.html#a5b2244b463782d93e6dfc058790cb9eb">super_block_t</a> *superblock)</td></tr>
 <tr class="memdesc:a846a550008b03ec52ba64c30d614d08b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lecture du superbloc.  <a href="#a846a550008b03ec52ba64c30d614d08b">More...</a><br /></td></tr>
 <tr class="separator:a846a550008b03ec52ba64c30d614d08b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a398a72bff8e6d5c8d8974883356d4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a6a398a72bff8e6d5c8d8974883356d4f">delete_inode</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, int numInode)</td></tr>
+<tr class="memitem:a6a398a72bff8e6d5c8d8974883356d4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a6a398a72bff8e6d5c8d8974883356d4f">delete_inode</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, int numInode)</td></tr>
 <tr class="memdesc:a6a398a72bff8e6d5c8d8974883356d4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supression d'inode.  <a href="#a6a398a72bff8e6d5c8d8974883356d4f">More...</a><br /></td></tr>
 <tr class="separator:a6a398a72bff8e6d5c8d8974883356d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1b8543a274349592699659bad478c12"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#ad1b8543a274349592699659bad478c12">get_nb_files</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5d)</td></tr>
+<tr class="memitem:ad1b8543a274349592699659bad478c12"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#ad1b8543a274349592699659bad478c12">get_nb_files</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5d)</td></tr>
 <tr class="memdesc:ad1b8543a274349592699659bad478c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le nombre de fichiers dans la table d'inodes.  <a href="#ad1b8543a274349592699659bad478c12">More...</a><br /></td></tr>
 <tr class="separator:ad1b8543a274349592699659bad478c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0636729f5b8624d3bcee099057b62ffb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a0636729f5b8624d3bcee099057b62ffb">get_unused_inodes</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5d)</td></tr>
+<tr class="memitem:a0636729f5b8624d3bcee099057b62ffb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a0636729f5b8624d3bcee099057b62ffb">get_unused_inodes</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5d)</td></tr>
 <tr class="memdesc:a0636729f5b8624d3bcee099057b62ffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le nombre d'inodes inutilisés dans la table d'inodes.  <a href="#a0636729f5b8624d3bcee099057b62ffb">More...</a><br /></td></tr>
 <tr class="separator:a0636729f5b8624d3bcee099057b62ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e916c2643d4320c63d1e5467ccf667"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a64e916c2643d4320c63d1e5467ccf667">add_inode</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, char nomFICHIER[50], int size)</td></tr>
+<tr class="memitem:a64e916c2643d4320c63d1e5467ccf667"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a64e916c2643d4320c63d1e5467ccf667">add_inode</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, char nomFICHIER[50], int <a class="el" href="trash_8c.html#ad0b472ea397eab526a56253be5ad3c55">size</a>)</td></tr>
 <tr class="memdesc:a64e916c2643d4320c63d1e5467ccf667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajout d'une inode.  <a href="#a64e916c2643d4320c63d1e5467ccf667">More...</a><br /></td></tr>
 <tr class="separator:a64e916c2643d4320c63d1e5467ccf667"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5752b9deb83c0babc0443ca5c771e196"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structinode__s.html">inode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a5752b9deb83c0babc0443ca5c771e196">init_inode</a> (char nomFichier[FILENAME_MAX_SIZE], uint taille, uint start)</td></tr>
+<tr class="memitem:a5752b9deb83c0babc0443ca5c771e196"><td class="memItemLeft" align="right" valign="top"><a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a5752b9deb83c0babc0443ca5c771e196">init_inode</a> (char nomFichier[<a class="el" href="raid__defines_8h.html#a24c1405225e4ce27b24bcf4f32f4ff0e">FILENAME_MAX_SIZE</a>], <a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> taille, <a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> start)</td></tr>
 <tr class="memdesc:a5752b9deb83c0babc0443ca5c771e196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisation d'une inode.  <a href="#a5752b9deb83c0babc0443ca5c771e196">More...</a><br /></td></tr>
 <tr class="separator:a5752b9deb83c0babc0443ca5c771e196"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b166f8b0246d1f42f44204edb5f52a6"><td class="memItemLeft" align="right" valign="top"><a id="a8b166f8b0246d1f42f44204edb5f52a6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>cmd_dump_inode</b> (char *nomRep, <a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk)</td></tr>
+<tr class="memitem:a8b166f8b0246d1f42f44204edb5f52a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a8b166f8b0246d1f42f44204edb5f52a6">cmd_dump_inode</a> (char *nomRep, <a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk)</td></tr>
 <tr class="separator:a8b166f8b0246d1f42f44204edb5f52a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a938b4fe5d96b1d8728ae48c66886a981"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a938b4fe5d96b1d8728ae48c66886a981">write_super_block</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, <a class="el" href="structsuper__block__s.html">super_block_t</a> sb)</td></tr>
+<tr class="memitem:a938b4fe5d96b1d8728ae48c66886a981"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a938b4fe5d96b1d8728ae48c66886a981">write_super_block</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, <a class="el" href="raid__defines_8h.html#a5b2244b463782d93e6dfc058790cb9eb">super_block_t</a> sb)</td></tr>
 <tr class="separator:a938b4fe5d96b1d8728ae48c66886a981"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2266f04dc08289486b29bb624773a6f2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a2266f04dc08289486b29bb624773a6f2">first_free_byte</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk)</td></tr>
+<tr class="memitem:a2266f04dc08289486b29bb624773a6f2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a2266f04dc08289486b29bb624773a6f2">first_free_byte</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk)</td></tr>
 <tr class="memdesc:a2266f04dc08289486b29bb624773a6f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecriture de la position du premier octet libre dans le r5Disk.  <a href="#a2266f04dc08289486b29bb624773a6f2">More...</a><br /></td></tr>
 <tr class="separator:a2266f04dc08289486b29bb624773a6f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefa9fdb0d6dc8517eeaebd579438a988"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#aefa9fdb0d6dc8517eeaebd579438a988">read_inodes_table</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, <a class="el" href="structinode__s.html">inode_t</a> maTable[INODE_TABLE_SIZE])</td></tr>
+<tr class="memitem:aefa9fdb0d6dc8517eeaebd579438a988"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#aefa9fdb0d6dc8517eeaebd579438a988">read_inodes_table</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, <a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a> maTable[<a class="el" href="raid__defines_8h.html#a6c041fac527c965e3db582c4c19c1ab4">INODE_TABLE_SIZE</a>])</td></tr>
 <tr class="memdesc:aefa9fdb0d6dc8517eeaebd579438a988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lecture de la table d'inodes.  <a href="#aefa9fdb0d6dc8517eeaebd579438a988">More...</a><br /></td></tr>
 <tr class="separator:aefa9fdb0d6dc8517eeaebd579438a988"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7412361239111e0e2a8c200506003cc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a7412361239111e0e2a8c200506003cc1">read_inode_table_i</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, <a class="el" href="structinode__s.html">inode_t</a> *Ino, int indice)</td></tr>
+<tr class="memitem:a7412361239111e0e2a8c200506003cc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#a7412361239111e0e2a8c200506003cc1">read_inode_table_i</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, <a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a> *<a class="el" href="trash_8c.html#a40c504e4bbf88e6cfbcf8af7dde61d29">Ino</a>, int indice)</td></tr>
 <tr class="memdesc:a7412361239111e0e2a8c200506003cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lecture de l'inode indice.  <a href="#a7412361239111e0e2a8c200506003cc1">More...</a><br /></td></tr>
 <tr class="separator:a7412361239111e0e2a8c200506003cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacc864588ea4f3b2db239398853e94cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#aacc864588ea4f3b2db239398853e94cf">write_inode_table_i</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, <a class="el" href="structinode__s.html">inode_t</a> Ino, int indice)</td></tr>
+<tr class="memitem:aacc864588ea4f3b2db239398853e94cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#aacc864588ea4f3b2db239398853e94cf">write_inode_table_i</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, <a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a> <a class="el" href="trash_8c.html#a40c504e4bbf88e6cfbcf8af7dde61d29">Ino</a>, int indice)</td></tr>
 <tr class="memdesc:aacc864588ea4f3b2db239398853e94cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecriture de l'inode indice.  <a href="#aacc864588ea4f3b2db239398853e94cf">More...</a><br /></td></tr>
 <tr class="separator:aacc864588ea4f3b2db239398853e94cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8fd93271c6a07db0a5e38d1efc62bc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#ab8fd93271c6a07db0a5e38d1efc62bc8">write_inodes_table</a> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk, <a class="el" href="structinode__s.html">inode_t</a> maTable[INODE_TABLE_SIZE])</td></tr>
+<tr class="memitem:ab8fd93271c6a07db0a5e38d1efc62bc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#ab8fd93271c6a07db0a5e38d1efc62bc8">write_inodes_table</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk, <a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a> maTable[<a class="el" href="raid__defines_8h.html#a6c041fac527c965e3db582c4c19c1ab4">INODE_TABLE_SIZE</a>])</td></tr>
 <tr class="memdesc:ab8fd93271c6a07db0a5e38d1efc62bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecriture de la table d'inodes.  <a href="#ab8fd93271c6a07db0a5e38d1efc62bc8">More...</a><br /></td></tr>
 <tr class="separator:ab8fd93271c6a07db0a5e38d1efc62bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaba091319ffe8efa124a7061b70b1d4e"><td class="memItemLeft" align="right" valign="top"><a id="aaba091319ffe8efa124a7061b70b1d4e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>update_super_block</b> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk)</td></tr>
+<tr class="memitem:aaba091319ffe8efa124a7061b70b1d4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#aaba091319ffe8efa124a7061b70b1d4e">update_super_block</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk)</td></tr>
 <tr class="separator:aaba091319ffe8efa124a7061b70b1d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abffafc7f91cba3ac0f9caa2c280dacd7"><td class="memItemLeft" align="right" valign="top"><a id="abffafc7f91cba3ac0f9caa2c280dacd7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *r5Disk)</td></tr>
+<tr class="memitem:abffafc7f91cba3ac0f9caa2c280dacd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="couche3_8c.html#abffafc7f91cba3ac0f9caa2c280dacd7">reinit_systeme</a> (<a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *r5Disk)</td></tr>
 <tr class="separator:abffafc7f91cba3ac0f9caa2c280dacd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -166,7 +163,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void add_inode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
@@ -200,6 +197,34 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
 
 </div>
 </div>
+<a id="a8b166f8b0246d1f42f44204edb5f52a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b166f8b0246d1f42f44204edb5f52a6">&#9670;&nbsp;</a></span>cmd_dump_inode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmd_dump_inode </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomRep</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
+          <td class="paramname"><em>r5Disk</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6a398a72bff8e6d5c8d8974883356d4f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a398a72bff8e6d5c8d8974883356d4f">&#9670;&nbsp;</a></span>delete_inode()</h2>
 
@@ -209,7 +234,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void delete_inode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
@@ -246,7 +271,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">int first_free_byte </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em></td><td>)</td>
           <td></td>
         </tr>
@@ -273,7 +298,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">int get_nb_files </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5d</em></td><td>)</td>
           <td></td>
         </tr>
@@ -300,7 +325,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">int get_unused_inodes </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5d</em></td><td>)</td>
           <td></td>
         </tr>
@@ -325,7 +350,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structinode__s.html">inode_t</a> init_inode </td>
+          <td class="memname"><a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a> init_inode </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
           <td class="paramname"><em>nomFichier</em>[FILENAME_MAX_SIZE], </td>
@@ -333,13 +358,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td>
           <td class="paramname"><em>taille</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td>
           <td class="paramname"><em>start</em>&#160;</td>
         </tr>
         <tr>
@@ -370,7 +395,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void inode_dump </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structinode__s.html">inode_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a>&#160;</td>
           <td class="paramname"><em>i</em></td><td>)</td>
           <td></td>
         </tr>
@@ -397,7 +422,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void inode_table_dump </td>
           <td>(</td>
-          <td class="paramtype">inode_table_t&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a5521b19dad3852291fc7d603382e6b99">inode_table_t</a>&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
@@ -430,7 +455,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uchar *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *&#160;</td>
           <td class="paramname"><em>buffer</em>&#160;</td>
         </tr>
         <tr>
@@ -461,13 +486,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void read_inode_table_i </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structinode__s.html">inode_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a> *&#160;</td>
           <td class="paramname"><em>Ino</em>, </td>
         </tr>
         <tr>
@@ -504,13 +529,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void read_inodes_table </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structinode__s.html">inode_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a>&#160;</td>
           <td class="paramname"><em>maTable</em>[INODE_TABLE_SIZE]&#160;</td>
         </tr>
         <tr>
@@ -541,13 +566,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void read_super_block </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structsuper__block__s.html">super_block_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a5b2244b463782d93e6dfc058790cb9eb">super_block_t</a> *&#160;</td>
           <td class="paramname"><em>superblock</em>&#160;</td>
         </tr>
         <tr>
@@ -569,6 +594,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
 
 </div>
 </div>
+<a id="abffafc7f91cba3ac0f9caa2c280dacd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abffafc7f91cba3ac0f9caa2c280dacd7">&#9670;&nbsp;</a></span>reinit_systeme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reinit_systeme </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
+          <td class="paramname"><em>r5Disk</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afc9106e9d8b45ee55688050cf9e7e061"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afc9106e9d8b45ee55688050cf9e7e061">&#9670;&nbsp;</a></span>startTable()</h2>
 
@@ -578,7 +621,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">int startTable </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em></td><td>)</td>
           <td></td>
         </tr>
@@ -605,7 +648,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void super_block_dump </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structsuper__block__s.html">super_block_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a5b2244b463782d93e6dfc058790cb9eb">super_block_t</a>&#160;</td>
           <td class="paramname"><em>s</em></td><td>)</td>
           <td></td>
         </tr>
@@ -632,7 +675,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">int uChar_To_Int </td>
           <td>(</td>
-          <td class="paramtype">uchar *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a65f85814a8290f9797005d3b28e7e5fc">uchar</a> *&#160;</td>
           <td class="paramname"><em>buf</em></td><td>)</td>
           <td></td>
         </tr>
@@ -650,6 +693,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
 
 </div>
 </div>
+<a id="aaba091319ffe8efa124a7061b70b1d4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaba091319ffe8efa124a7061b70b1d4e">&#9670;&nbsp;</a></span>update_super_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_super_block </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
+          <td class="paramname"><em>r5Disk</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aacc864588ea4f3b2db239398853e94cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aacc864588ea4f3b2db239398853e94cf">&#9670;&nbsp;</a></span>write_inode_table_i()</h2>
 
@@ -659,13 +720,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void write_inode_table_i </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structinode__s.html">inode_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a>&#160;</td>
           <td class="paramname"><em>Ino</em>, </td>
         </tr>
         <tr>
@@ -702,13 +763,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void write_inodes_table </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structinode__s.html">inode_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#aecc98d5532293d656a2a4f8c09b31af0">inode_t</a>&#160;</td>
           <td class="paramname"><em>maTable</em>[INODE_TABLE_SIZE]&#160;</td>
         </tr>
         <tr>
@@ -739,13 +800,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reinit_systeme</b> (<
         <tr>
           <td class="memname">void write_super_block </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structvirtual__disk__s.html">virtual_disk_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#ab22cb9a2c3c081d95bd06c65d6716686">virtual_disk_t</a> *&#160;</td>
           <td class="paramname"><em>r5Disk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structsuper__block__s.html">super_block_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="raid__defines_8h.html#a5b2244b463782d93e6dfc058790cb9eb">super_block_t</a>&#160;</td>
           <td class="paramname"><em>sb</em>&#160;</td>
         </tr>
         <tr>

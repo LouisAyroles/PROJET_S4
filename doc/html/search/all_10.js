@@ -1,10 +1,20 @@
 var searchData=
 [
-  ['write_5fblock',['write_block',['../couche1_8c.html#adb4607cf11ffed5c89fc0f4682bf6079',1,'couche1.c']]],
-  ['write_5fchunk',['write_chunk',['../couche2_8c.html#a33da6bd1430115bbdaa57d27c38bc3aa',1,'couche2.c']]],
-  ['write_5ffile',['write_file',['../couche4_8c.html#af6c8992bd705de44e2db84be4a0dcaa8',1,'couche4.c']]],
-  ['write_5finode_5ftable_5fi',['write_inode_table_i',['../couche3_8c.html#aacc864588ea4f3b2db239398853e94cf',1,'couche3.c']]],
-  ['write_5finodes_5ftable',['write_inodes_table',['../couche3_8c.html#ab8fd93271c6a07db0a5e38d1efc62bc8',1,'couche3.c']]],
-  ['write_5fstripe',['write_stripe',['../couche2_8c.html#a5033c8eea4a4da6a76284e361f13240d',1,'couche2.c']]],
-  ['write_5fsuper_5fblock',['write_super_block',['../couche3_8c.html#a938b4fe5d96b1d8728ae48c66886a981',1,'couche3.c']]]
+  ['raid',['raid',['../raid__defines_8h.html#a7a2279e0841d50aa8e976d3bb0eb3a6e',1,'raid_defines.h']]],
+  ['raid_5fdefines_2eh',['raid_defines.h',['../raid__defines_8h.html',1,'']]],
+  ['raid_5ftype',['raid_type',['../structsuper__block__s.html#a531486677d7c826dad518c717abcd4ed',1,'super_block_s']]],
+  ['raidmode',['raidmode',['../structvirtual__disk__s.html#a207dd070642dde7ad48f8bb8b622f893',1,'virtual_disk_s']]],
+  ['read_5fblock',['read_block',['../couche1_8c.html#a4ba30a1143e543d465725eb0f151c6a2',1,'read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk):&#160;couche1.c'],['../couche1_8h.html#a4ba30a1143e543d465725eb0f151c6a2',1,'read_block(virtual_disk_t *RAID5, block_t *recup, uint pos, int idDisk):&#160;couche1.c']]],
+  ['read_5fchunk',['read_chunk',['../couche2_8c.html#a12cdd8a706982ca1babe7cfffea4b14f',1,'read_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBande):&#160;couche2.c'],['../couche2_8h.html#a12cdd8a706982ca1babe7cfffea4b14f',1,'read_chunk(virtual_disk_t *r5, char *buffer, int n, uint startBande):&#160;couche2.c'],['../trash_8c.html#a1868b67f893921ee137623a23e4b6dd8',1,'read_chunk(virtual_disk_t *r5, uint start_block, int n):&#160;trash.c']]],
+  ['read_5ffile',['read_file',['../couche4_8c.html#a10830dd61b952f817cb695c559c8f408',1,'read_file(virtual_disk_t *r5Disk, char *nomFichier, file_t *fichier):&#160;couche4.c'],['../couche4_8h.html#a10830dd61b952f817cb695c559c8f408',1,'read_file(virtual_disk_t *r5Disk, char *nomFichier, file_t *fichier):&#160;couche4.c'],['../trash_8c.html#a74a24a3850d0f038418f1979e9e4fa8d',1,'read_file(r5Disk, argument, &amp;fichier):&#160;trash.c']]],
+  ['read_5finode_5ftable_5fi',['read_inode_table_i',['../couche3_8c.html#a7412361239111e0e2a8c200506003cc1',1,'read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice):&#160;couche3.c'],['../couche3_8h.html#a7412361239111e0e2a8c200506003cc1',1,'read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice):&#160;couche3.c'],['../trash_8c.html#a7412361239111e0e2a8c200506003cc1',1,'read_inode_table_i(virtual_disk_t *r5Disk, inode_t *Ino, int indice):&#160;trash.c']]],
+  ['read_5finodes_5ftable',['read_inodes_table',['../couche3_8c.html#aefa9fdb0d6dc8517eeaebd579438a988',1,'read_inodes_table(virtual_disk_t *r5Disk, inode_t maTable[INODE_TABLE_SIZE]):&#160;couche3.c'],['../couche3_8h.html#aa8ef1287b9db81d387c83318f6d3f4f1',1,'read_inodes_table(virtual_disk_t *r5Disk, inode_t maTable[10]):&#160;couche3.h'],['../trash_8c.html#a4655c5b4ff56a089ebb3d5436aa3109f',1,'read_inodes_table(virtual_disk_t *r5Disk, inode_table_t *table):&#160;trash.c'],['../trash_8c.html#aefa9fdb0d6dc8517eeaebd579438a988',1,'read_inodes_table(virtual_disk_t *r5Disk, inode_t maTable[INODE_TABLE_SIZE]):&#160;trash.c'],['../trash_8c.html#a9fbcdf6bd66c271a2b1f484ac76af0a4',1,'read_inodes_table(r5d, table):&#160;trash.c']]],
+  ['read_5fstripe',['read_stripe',['../couche2_8c.html#aea9498cb46077bb21181922c96e8329f',1,'read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos):&#160;couche2.c'],['../couche2_8h.html#aea9498cb46077bb21181922c96e8329f',1,'read_stripe(virtual_disk_t *r5, stripe_t *lire, uint pos):&#160;couche2.c']]],
+  ['read_5fsuper_5fblock',['read_super_block',['../couche3_8c.html#a846a550008b03ec52ba64c30d614d08b',1,'read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock):&#160;couche3.c'],['../couche3_8h.html#a846a550008b03ec52ba64c30d614d08b',1,'read_super_block(virtual_disk_t *r5Disk, super_block_t *superblock):&#160;couche3.c']]],
+  ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
+  ['reinit_5fsysteme',['reinit_systeme',['../couche3_8c.html#abffafc7f91cba3ac0f9caa2c280dacd7',1,'reinit_systeme(virtual_disk_t *r5Disk):&#160;couche3.c'],['../couche3_8h.html#abffafc7f91cba3ac0f9caa2c280dacd7',1,'reinit_systeme(virtual_disk_t *r5Disk):&#160;couche3.c']]],
+  ['repair_5fdisk',['repair_disk',['../couche5_8c.html#a33de807c4aac3d9b2f22cfa3f00f5385',1,'repair_disk(virtual_disk_t *r5, int idDisk):&#160;couche5.c'],['../couche5_8h.html#a33de807c4aac3d9b2f22cfa3f00f5385',1,'repair_disk(virtual_disk_t *r5, int idDisk):&#160;couche5.c']]],
+  ['reset',['RESET',['../raid__defines_8h.html#ab702106cf3b3e96750b6845ded4e0299',1,'raid_defines.h']]],
+  ['return',['return',['../trash_8c.html#a9717e7bbecb906637e86cef6da3d83c2',1,'trash.c']]],
+  ['rm',['RM',['../raid__defines_8h.html#a4608958cdf4c8b8ff0a6e301c4c23ae1',1,'raid_defines.h']]]
 ];

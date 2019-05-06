@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Systeme RAID: virtual_disk_s Struct Reference</title>
+<title>Projet_S4_Groupe_14: virtual_disk_s Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Systeme RAID
+   <div id="projectname">Projet_S4_Groupe_14
    </div>
   </td>
  </tr>
@@ -64,6 +64,8 @@ $(function() {
 <div class="title">virtual_disk_s Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="raid__defines_8h_source.html">raid_defines.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for virtual_disk_s:</div>
 <div class="dyncontent">
@@ -76,25 +78,104 @@ Collaboration diagram for virtual_disk_s:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a465d502eed9840aad6ec9f3a5a5d844c"><td class="memItemLeft" align="right" valign="top"><a id="a465d502eed9840aad6ec9f3a5a5d844c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_files</b></td></tr>
+<tr class="memitem:a465d502eed9840aad6ec9f3a5a5d844c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvirtual__disk__s.html#a465d502eed9840aad6ec9f3a5a5d844c">number_of_files</a></td></tr>
 <tr class="separator:a465d502eed9840aad6ec9f3a5a5d844c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32d9616143f7763451383a6c626038ca"><td class="memItemLeft" align="right" valign="top"><a id="a32d9616143f7763451383a6c626038ca"></a>
-<a class="el" href="structsuper__block__s.html">super_block_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>super_block</b></td></tr>
+<tr class="memitem:a32d9616143f7763451383a6c626038ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="raid__defines_8h.html#a5b2244b463782d93e6dfc058790cb9eb">super_block_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvirtual__disk__s.html#a32d9616143f7763451383a6c626038ca">super_block</a></td></tr>
 <tr class="separator:a32d9616143f7763451383a6c626038ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bcc97bff109cd0065249a564a71d5c8"><td class="memItemLeft" align="right" valign="top"><a id="a1bcc97bff109cd0065249a564a71d5c8"></a>
-inode_table_t&#160;</td><td class="memItemRight" valign="bottom"><b>inodes</b></td></tr>
+<tr class="memitem:a1bcc97bff109cd0065249a564a71d5c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="raid__defines_8h.html#a5521b19dad3852291fc7d603382e6b99">inode_table_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvirtual__disk__s.html#a1bcc97bff109cd0065249a564a71d5c8">inodes</a></td></tr>
 <tr class="separator:a1bcc97bff109cd0065249a564a71d5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a879b20de8088f4342835d5fb3feb1141"><td class="memItemLeft" align="right" valign="top"><a id="a879b20de8088f4342835d5fb3feb1141"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>ndisk</b></td></tr>
+<tr class="memitem:a879b20de8088f4342835d5fb3feb1141"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvirtual__disk__s.html#a879b20de8088f4342835d5fb3feb1141">ndisk</a></td></tr>
 <tr class="separator:a879b20de8088f4342835d5fb3feb1141"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a207dd070642dde7ad48f8bb8b622f893"><td class="memItemLeft" align="right" valign="top"><a id="a207dd070642dde7ad48f8bb8b622f893"></a>
-enum raid&#160;</td><td class="memItemRight" valign="bottom"><b>raidmode</b></td></tr>
+<tr class="memitem:a207dd070642dde7ad48f8bb8b622f893"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="raid__defines_8h.html#a7a2279e0841d50aa8e976d3bb0eb3a6e">raid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvirtual__disk__s.html#a207dd070642dde7ad48f8bb8b622f893">raidmode</a></td></tr>
 <tr class="separator:a207dd070642dde7ad48f8bb8b622f893"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abed1c5c15dd8f784e7198b79f8973863"><td class="memItemLeft" align="right" valign="top"><a id="abed1c5c15dd8f784e7198b79f8973863"></a>
-FILE **&#160;</td><td class="memItemRight" valign="bottom"><b>storage</b></td></tr>
+<tr class="memitem:abed1c5c15dd8f784e7198b79f8973863"><td class="memItemLeft" align="right" valign="top">FILE **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvirtual__disk__s.html#abed1c5c15dd8f784e7198b79f8973863">storage</a></td></tr>
 <tr class="separator:abed1c5c15dd8f784e7198b79f8973863"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="a1bcc97bff109cd0065249a564a71d5c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bcc97bff109cd0065249a564a71d5c8">&#9670;&nbsp;</a></span>inodes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="raid__defines_8h.html#a5521b19dad3852291fc7d603382e6b99">inode_table_t</a> inodes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a879b20de8088f4342835d5fb3feb1141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a879b20de8088f4342835d5fb3feb1141">&#9670;&nbsp;</a></span>ndisk</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ndisk</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a465d502eed9840aad6ec9f3a5a5d844c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a465d502eed9840aad6ec9f3a5a5d844c">&#9670;&nbsp;</a></span>number_of_files</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int number_of_files</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a207dd070642dde7ad48f8bb8b622f893"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a207dd070642dde7ad48f8bb8b622f893">&#9670;&nbsp;</a></span>raidmode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="raid__defines_8h.html#a7a2279e0841d50aa8e976d3bb0eb3a6e">raid</a> raidmode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abed1c5c15dd8f784e7198b79f8973863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abed1c5c15dd8f784e7198b79f8973863">&#9670;&nbsp;</a></span>storage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE** storage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32d9616143f7763451383a6c626038ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32d9616143f7763451383a6c626038ca">&#9670;&nbsp;</a></span>super_block</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="raid__defines_8h.html#a5b2244b463782d93e6dfc058790cb9eb">super_block_t</a> super_block</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="raid__defines_8h_source.html">raid_defines.h</a></li>
 </ul>
